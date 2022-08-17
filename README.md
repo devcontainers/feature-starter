@@ -108,19 +108,22 @@ Features are individually versioned by the `version` attribute in a feature's `d
 
 ### Publishing
 
-> NOTE: The Distribution spec can be [found here](https://containers.dev/implementors/features-distribution/) and is in its [finalization stage](https://github.com/devcontainers/spec/issues/70).
+> NOTE: The Distribution spec can be [found here](https://containers.dev/implementors/features-distribution/) and is in its [finalization stage](https://github.com/devcontainers/spec/issues/70).  
+>
+> While any registry [implementing the OCI Distribution spec](https://github.com/opencontainers/distribution-spec) can be used, this template will leverage GHCR (GitHub Container Registry) as the backing registry.
 
 Features are meant to be easily sharable units of dev container configuration and installation code.  
 
-This repo contains a GitHub Action [workflow](.github/workflows/release.yaml) that will publish each feature to GHCR.  By default, each feature will be prefixed with the `<owner/<repo>` names.  For example, the the two features in this repository can be referenced in a `devcontainer.json` with:
+This repo contains a GitHub Action [workflow](.github/workflows/release.yaml) that will publish each feature to GHCR.  By default, each feature will be prefixed with the `<owner/<repo>` namespace.  For example, the two features in this repository can be referenced in a `devcontainer.json` with:
 
 ```
 ghcr.io/devcontainers/feature-template/color:1
 ghcr.io/devcontainers/feature-template/hello:1
 ```
 
-'`devcontainers/feature-template`' is known as the feature collection namespace.
+The provided GitHub Action will also publish a third "metadata" package with just the namespace, eg: `ghcr.io/devcontainers/feature-template`.  This contains information useful for tools aiding in feature discovery.
 
+'`devcontainers/feature-template`' is known as the feature collection namespace.
 
 ### Marking Feature Public
 
