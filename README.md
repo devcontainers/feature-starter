@@ -124,4 +124,12 @@ ghcr.io/devcontainers/feature-template/hello:1
 
 ### Marking Feature Public
 
-Note that by default, GHCR packages are marked as `private`.  To stay within the free tier, features need to be marked as `public`.  
+Note that by default, GHCR packages are marked as `private`.  To stay within the free tier, features need to be marked as `public`.
+
+This can be done by navigating to the feature's "package settings" page in GHCR, and setting the visibility to 'public`.  The URL may look something like:
+
+```
+https://github.com/users/<owner>/packages/container/<repo>%2F<featureName>/settings
+```
+
+<img width="669" alt="image" src="https://user-images.githubusercontent.com/23246594/185244705-232cf86a-bd05-43cb-9c25-07b45b3f4b04.png">
