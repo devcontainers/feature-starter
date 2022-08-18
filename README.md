@@ -141,3 +141,34 @@ https://github.com/users/<owner>/packages/container/<repo>%2F<featureName>/setti
 ```
 
 <img width="669" alt="image" src="https://user-images.githubusercontent.com/23246594/185244705-232cf86a-bd05-43cb-9c25-07b45b3f4b04.png">
+
+#### Using private features in Codespaces
+
+For any features hosted in GHCR that are kept private, the `GITHUB_TOKEN` access token in your environment will need to have `package:read` and `contents:read` for the associated repository.
+
+Many implementing tools use a broadly scoped access token and will work automatically.  GitHub Codespaces uses repo-scoped tokens, and therefore you'll need to add the permissions in `devcontainer.json`
+
+An example `devcontainer.json` can be found below.
+
+```jsonc
+{
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+     "ghcr.io/my-org/private-features/hello:1": {
+            "greeting": "Hello"
+        }
+    },
+    "customizations": {
+        "codespaces": {
+            "repositories": {
+                "my-org/private-features": {
+                    "permissions": {
+                        "packages": "read",
+                        "contents": "read"
+                    }
+                }
+            }
+        }
+    }
+}
+```
