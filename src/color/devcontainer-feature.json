@@ -1,6 +1,6 @@
 {
     "id": "color",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "A feature to remind you of your favorite color",
     "options": {
         "favorite": {

@@ -16,9 +16,10 @@ Running `hello` inside the built container will print the greeting provided to i
 {
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
-        "ghcr.io/devcontainers/feature-template/hello:1" {
+        "ghcr.io/devcontainers/feature-template/hello:1": {
             "greeting": "Hello"
         }
+    }
 }
 ```
 
@@ -36,9 +37,10 @@ Running `color` inside the built container will print your favorite color to sta
 {
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
-        "ghcr.io/devcontainers/feature-template/color:1" {
+        "ghcr.io/devcontainers/feature-template/color:1": {
             "favorite": "green"
         }
+    }
 }
 ```
 
@@ -74,7 +76,9 @@ All available options for a feature should be declared in the `devcontainer-feat
 
 For example, the `color` feature provides an enum of three possible options (`red`, `gold`, `green`).  If no option is provided in a user's `devcontainer.json`, the value is set to "red".
 
-```json
+```jsonc
+{
+    // ...
     "options": {
         "favorite": {
             "type": "string",
@@ -87,6 +91,7 @@ For example, the `color` feature provides an enum of three possible options (`re
             "description": "Choose your favorite color."
         }
     }
+}
 ```
 
 Options are exported as feature-scoped environment variables.  The option name is captialized and sanitized according to [option resolution](https://containers.dev/implementors/features/#option-resolution).
