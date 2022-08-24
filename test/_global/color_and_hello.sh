@@ -16,11 +16,11 @@ set -e
 # Optional: Import test library bundled with the devcontainer CLI
 source dev-container-features-test-lib
 
-echo "The result of the 'color' command will be:\n"
+echo -e "The result of the 'color' command will be:\n"
 color
-echo "The result of the 'hello' command will be:\n"
+echo -e "The result of the 'hello' command will be:\n"
 hello
-echo "\n"
+echo -e "\n"
 
 # Feature-specific tests
 # The 'check' command comes from the dev-container-features-test-lib.
