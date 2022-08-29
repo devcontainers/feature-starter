@@ -1,7 +1,7 @@
 
-# A hello world feature (hello)
+# Hello, World! (hello)
 
-
+A hello world feature
 
 ## Example Usage
 
