@@ -94,7 +94,7 @@ For example, the `color` feature provides an enum of three possible options (`re
 }
 ```
 
-Options are exported as feature-scoped environment variables.  The option name is captialized and sanitized according to [option resolution](https://containers.dev/implementors/features/#option-resolution).
+Options are exported as feature-scoped environment variables.  The option name is capitalized and sanitized according to [option resolution](https://containers.dev/implementors/features/#option-resolution).
 
 ```bash
 #!/bin/bash
