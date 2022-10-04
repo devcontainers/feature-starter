@@ -1,6 +1,6 @@
 # Dev Container Features: Self Authoring Template
 
-> This repo provides a starting point and example for creating your own custom [dev container features](), hosted for free on GitHub Container Registry.  The example in this repository follows the [**proposed**  dev container feature distribution specification](https://containers.dev/implementors/features-distribution/).  
+> This repo provides a starting point and example for creating your own custom [dev container features](https://containers.dev/implementors/features/), hosted for free on GitHub Container Registry.  The example in this repository follows the [**proposed**  dev container feature distribution specification](https://containers.dev/implementors/features-distribution/).  
 >
 > The proposed specification is in its _finalization_ phase and is subject to change.  To provide feedback to the specification, please leave a comment [on spec issue #70](https://github.com/devcontainers/spec/issues/70).  For more broad feedback regarding dev container features, please see [spec issue #61](https://github.com/devcontainers/spec/issues/61).
 
