@@ -142,6 +142,16 @@ https://github.com/users/<owner>/packages/container/<repo>%2F<featureName>/setti
 
 <img width="669" alt="image" src="https://user-images.githubusercontent.com/23246594/185244705-232cf86a-bd05-43cb-9c25-07b45b3f4b04.png">
 
+### Adding Features to the Index
+
+If you'd like your Features to appear in our [public index](https://containers.dev/features) so that other community members can find them, you can do the following:
+
+* Go to [github.com/devcontainers/devcontainers.github.io](github.com/devcontainers/devcontainers.github.io)
+     * This is the GitHub repo backing the [containers.dev](https://containers.dev/) spec site
+* Open a PR to modify the [collection-index.yml](https://github.com/devcontainers/devcontainers.github.io/blob/gh-pages/_data/collection-index.yml) file
+
+This index is from where [supporting tools](https://containers.dev/supporting) like [VS Code Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) and [GitHub Codespaces](https://github.com/features/codespaces) surface Features for their dev container creation UI.
+
 #### Using private features in Codespaces
 
 For any features hosted in GHCR that are kept private, the `GITHUB_TOKEN` access token in your environment will need to have `package:read` and `contents:read` for the associated repository.
