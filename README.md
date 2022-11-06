@@ -146,7 +146,7 @@ https://github.com/users/<owner>/packages/container/<repo>%2F<featureName>/setti
 
 If you'd like your Features to appear in our [public index](https://containers.dev/features) so that other community members can find them, you can do the following:
 
-* Go to [github.com/devcontainers/devcontainers.github.io](github.com/devcontainers/devcontainers.github.io)
+* Go to [github.com/devcontainers/devcontainers.github.io](https://github.com/devcontainers/devcontainers.github.io)
      * This is the GitHub repo backing the [containers.dev](https://containers.dev/) spec site
 * Open a PR to modify the [collection-index.yml](https://github.com/devcontainers/devcontainers.github.io/blob/gh-pages/_data/collection-index.yml) file
 
