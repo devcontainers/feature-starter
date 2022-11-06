@@ -1,0 +1,17 @@
+{
+    "my_favorite_color_is_green": {
+        "image": "mcr.microsoft.com/devcontainers/base:focal",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils:1": {
+                "installZsh": false,
+                "installOhMyZsh": false,
+                "upgradePackages": false,
+                "username": "octocat"
+            },
+            "color": {
+                "favorite": "green"
+            }
+        },
+        "remoteUser": "octocat"
+    }
+}
