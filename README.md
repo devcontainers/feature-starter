@@ -16,7 +16,7 @@ Running `hello` inside the built container will print the greeting provided to i
 {
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
-        "ghcr.io/devcontainers/feature-template/hello:1": {
+        "ghcr.io/devcontainers/feature-starter/hello:1": {
             "greeting": "Hello"
         }
     }
@@ -37,7 +37,7 @@ Running `color` inside the built container will print your favorite color to sta
 {
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
-        "ghcr.io/devcontainers/feature-template/color:1": {
+        "ghcr.io/devcontainers/feature-starter/color:1": {
             "favorite": "green"
         }
     }
@@ -122,13 +122,13 @@ Features are meant to be easily sharable units of dev container configuration an
 This repo contains a GitHub Action [workflow](.github/workflows/release.yaml) that will publish each feature to GHCR.  By default, each Feature will be prefixed with the `<owner/<repo>` namespace.  For example, the two Features in this repository can be referenced in a `devcontainer.json` with:
 
 ```
-ghcr.io/devcontainers/feature-template/color:1
-ghcr.io/devcontainers/feature-template/hello:1
+ghcr.io/devcontainers/feature-starter/color:1
+ghcr.io/devcontainers/feature-starter/hello:1
 ```
 
-The provided GitHub Action will also publish a third "metadata" package with just the namespace, eg: `ghcr.io/devcontainers/feature-template`.  This contains information useful for tools aiding in Feature discovery.
+The provided GitHub Action will also publish a third "metadata" package with just the namespace, eg: `ghcr.io/devcontainers/feature-starter`.  This contains information useful for tools aiding in Feature discovery.
 
-'`devcontainers/feature-template`' is known as the feature collection namespace.
+'`devcontainers/feature-starter`' is known as the feature collection namespace.
 
 ### Marking Feature Public
 
