@@ -1,0 +1,15 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:0-18",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "mads-hartmann.bash-ide-vscode"
+            ]
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:1": {}
+    },
+    "remoteUser": "node",
+    "postCreateCommand": "npm install -g @devcontainers/cli"
+}
