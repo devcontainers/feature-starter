@@ -24,8 +24,8 @@ echo -e "\n"
 
 # Feature-specific tests
 # The 'check' command comes from the dev-container-features-test-lib.
-check "check purple is my favorite color" color | grep 'my favorite color is purple'
-check "check I am greeting with 'Greetings'" hello | grep 'Greetings, root'
+check "check purple is my favorite color" bash -c "color | grep 'my favorite color is purple'"
+check "check I am greeting with 'Greetings'" bash -c "hello | grep 'Greetings, $(whoami)'"
 
 
 # Report result
