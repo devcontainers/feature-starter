@@ -8,7 +8,7 @@
         }
     },
     "green": {
-        "image": "debian:stable-slim",
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
         "features": {
             "color": {
                 "favorite": "green"
