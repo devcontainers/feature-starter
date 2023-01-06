@@ -1,0 +1,10 @@
+{
+    "hello": {
+        "image": "debian:stable-slim",
+        "features": {
+            "hello": {
+                "greeting": "hello"
+            }
+        }
+    }
+}

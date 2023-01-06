@@ -1,0 +1,18 @@
+{
+    "gold": {
+        "image": "debian:stable-slim",
+        "features": {
+            "color": {
+                "favorite": "gold"
+            }
+        }
+    },
+    "green": {
+        "image": "debian:stable-slim",
+        "features": {
+            "color": {
+                "favorite": "green"
+            }
+        }
+    }
+}
