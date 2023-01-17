@@ -38,6 +38,7 @@ source dev-container-features-test-lib
 
 # Feature-specific tests
 # The 'check' command comes from the dev-container-features-test-lib.
+
 check "validate favorite color" color | grep 'my favorite color is red'
 
 # Report result

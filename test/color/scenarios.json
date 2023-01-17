@@ -13,5 +13,21 @@
             }
         },
         "remoteUser": "octocat"
+    },
+    "gold": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "color": {
+                "favorite": "gold"
+            }
+        }
+    },
+    "green": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "color": {
+                "favorite": "green"
+            }
+        }
     }
 }
