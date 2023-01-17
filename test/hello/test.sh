@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This test file will be executed against an auto-generated devcontainer.json that
 # includes the 'hello' Feature with no options.
@@ -38,7 +38,7 @@ source dev-container-features-test-lib
 
 # Feature-specific tests
 # The 'check' command comes from the dev-container-features-test-lib.
-check "version" bash -c "hello | grep 'hey, $(whoami)!'"
+check "execute command" bash -c "hello | grep 'hey, $(whoami)!'"
 
 # Report results
 # If any of the checks above exited with a non-zero exit code, the test will fail.
