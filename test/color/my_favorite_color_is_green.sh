@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This test file will be executed against after building a container with the
 # 'my_favorite_color_is_green' scenario in 'test/test/color/scenarios.json'.
