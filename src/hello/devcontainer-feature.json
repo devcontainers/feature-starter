@@ -15,5 +15,8 @@
             "default": "hey",
             "description": "Select a pre-made greeting, or enter your own"
         }
-    }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
 }

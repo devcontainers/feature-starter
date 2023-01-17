@@ -14,5 +14,8 @@
             "default": "red",
             "description": "Choose your favorite color."
         }
-    }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
 }
