@@ -119,9 +119,9 @@ Features are individually versioned by the `version` attribute in a Feature's `d
 
 Features are meant to be easily sharable units of dev container configuration and installation code.  
 
-This repo contains a GitHub Action [workflow](.github/workflows/release.yaml) that will publish each feature to GHCR. 
+This repo contains a **GitHub Action** [workflow](.github/workflows/release.yaml) that will publish each feature to GHCR. 
 
-The default Action auto generates a README.md about feature (mergining in NOTES.md if one exists) and commits it to repo. **Allow GitHub Actions to create and approve pull requests** should be enabled in the repo's Settings > Actions > General > Workflow permissions.
+*Allow GitHub Actions to create and approve pull requests* should be enabled in the repo's `Settings > Actions > General > Workflow permissions` for auto generation of `src/<feature>/README.md` per feature (merging in existing `src/<feature>/NOTES.md`).
 
 By default, each Feature will be prefixed with the `<owner/<repo>` namespace.  For example, the two Features in this repository can be referenced in a `devcontainer.json` with:
 
