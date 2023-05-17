@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+#shellcheck shell=bash
+script="$1"
+command="$2"
+scriptsRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)/src/scripts"
+source "$scriptsRoot/setup/set-env-vars.sh"
+"$DEVCONTAINER_FEATURES_SCRIPTS_ROOT/$script.sh" "$command"
