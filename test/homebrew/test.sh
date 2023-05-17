@@ -23,7 +23,7 @@ check_packages() {
             echo "Running apt-get update..."
             apt-get update -y
         fi
-        apt-get -y install --no-install-recommends "$@"
+        apt-get -y install "$@"
     fi
 }
 
