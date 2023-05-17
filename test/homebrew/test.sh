@@ -7,7 +7,7 @@ set -e
 source /etc/os-release
 
 notroot='Script must be run as non-root user.'
-leanup() {
+cleanup() {
   case "${ID}" in
     debian|ubuntu)
       echo "Cleaning up apt cache..."
