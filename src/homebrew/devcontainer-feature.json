@@ -1,0 +1,12 @@
+{
+    "name": "Homebrew",
+    "id": "homebrew",
+    "version": "2.0.3",
+    "description": "Installs Homebrew",
+    "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/homebrew",
+    "options": {},
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/meaningful-ooo/devcontainer-features/fish"
+    ]
+}

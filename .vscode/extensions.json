@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+      "editorconfig.editorconfig",
+      "gitHub.codespaces",
+      "gitHub.vscode-pull-request-github",
+      "gitHub.remotehub",
+      "gitHub.copilot-nightly",
+      "gitHub.copilot-labs",
+      "github.vscode-github-actions",
+      "hilleer.yaml-plus-json"
+    ]
+}
