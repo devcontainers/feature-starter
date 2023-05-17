@@ -7,7 +7,7 @@ A hello world feature
 
 ```json
 "features": {
-    "ghcr.io/AlephZ-ai/devcontainer-features-new/hello:1": {}
+    "ghcr.io/AlephZ-ai/devcontainer-features/hello:1": {}
 }
 ```
 
@@ -21,4 +21,4 @@ A hello world feature
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/AlephZ-ai/devcontainer-features-new/blob/main/src/hello/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/AlephZ-ai/devcontainer-features/blob/main/src/hello/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
