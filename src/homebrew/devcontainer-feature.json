@@ -12,6 +12,7 @@
         }
     },
     "installsAfter": [
-        "ghcr.io/devcontainers/features/common-utils"
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/rocker-org/devcontainer-features/apt-packages"
     ]
 }
