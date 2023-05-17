@@ -6,6 +6,12 @@ set -e
 
 source /etc/os-release
 
+mustroot='Script must be run as root user.'
+if [ "$(id -u)" -ne 0 ]; then
+    echo -e "$mustroot"
+    exit 1
+fi
+
 cleanup() {
   case "${ID}" in
     debian|ubuntu)
@@ -14,27 +20,8 @@ cleanup() {
   esac
 }
 
-notroot='Script must be run as non-root user.'
-if [ "$(id -u)" -eq 0 ]; then
-    echo -e "$notroot"
-    exit 1
-fi
-
 # Clean up
 cleanup
-
-NON_ROOT_USER=""
-POSSIBLE_USERS=("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
-for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
-  if id -u ${CURRENT_USER} >/dev/null 2>&1; then
-    NON_ROOT_USER=${CURRENT_USER}
-    break
-  fi
-done
-if [ "${NON_ROOT_USER}" = "" ]; then
-    echo -e "$notroot"
-    exit 1
-fi
 
 check_packages git
 
@@ -42,8 +29,8 @@ check_packages git
 source dev-container-features-test-lib
 
 # Feature-specific tests
-echo "Testing with user: ${NON_ROOT_USER}"
-check "homebrew" su "${NON_ROOT_USER}" -c 'brew --version'
+echo "Testing homebrew..."
+check "brew --version"
 
 # Report result
 reportResults
