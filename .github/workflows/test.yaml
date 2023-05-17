@@ -15,6 +15,7 @@ jobs:
         features:
           - color
           - hello
+          - homebrew
         baseImage:
           - debian:latest
           - ubuntu:latest
@@ -36,6 +37,7 @@ jobs:
         features:
           - color
           - hello
+          - homebrew
     steps:
       - uses: actions/checkout@v3
 
