@@ -6,5 +6,5 @@ command="${2-null}"
 DEVCONTAINER_DIRECTORY=.devcontainer
 DEVCONTAINER_FEATURES_DEVCONTAINER_SCRIPTS_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)/$DEVCONTAINER_DIRECTORY/src"
 source "$DEVCONTAINER_FEATURES_DEVCONTAINER_SCRIPTS_ROOT/setup/set-env-vars.sh"
-scriptsRoot="$DEVCONTAINER_FEATURES_SCRIPTS_ROOT"
+scriptsRoot="$DEVCONTAINER_FEATURES_DEVCONTAINER_SCRIPTS_ROOT"
 "$scriptsRoot/$script.sh" "$command"
