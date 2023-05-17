@@ -8,11 +8,10 @@
         "brews": {
             "type": "string",
             "default": "",
-            "description": "Brews to install after installing homebrew"
+            "description": "Space seperated list of Brews to install after installing homebrew"
         }
     },
     "installsAfter": [
-        "ghcr.io/devcontainers/features/common-utils",
-        "ghcr.io/meaningful-ooo/devcontainer-features/fish"
+        "ghcr.io/devcontainers/features/common-utils"
     ]
 }
