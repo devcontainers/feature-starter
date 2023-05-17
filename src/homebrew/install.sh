@@ -24,7 +24,7 @@ cleanup() {
   source /etc/os-release
   case "${ID}" in
     debian|ubuntu)
-      sudo rm -rf /var/lib/apt/lists/*
+      rm -rf /var/lib/apt/lists/*
     ;;
   esac
 }
@@ -34,9 +34,9 @@ check_packages() {
     if ! dpkg -s "$@" > /dev/null 2>&1; then
         if [ "$(find /var/lib/apt/lists/* | wc -l)" = "0" ]; then
             echo "Running apt-get update..."
-            sudo apt-get update -y
+            apt-get update -y
         fi
-        sudo apt-get -y install --no-install-recommends "$@"
+        apt-get -y install --no-install-recommends "$@"
     fi
 }
 
