@@ -5,7 +5,6 @@
 #example=https://github.com/devcontainers/features/blob/main/src/azure-cli/install.sh
 #example=https://github.com/meaningful-ooo/devcontainer-features/tree/main/src/homebrew
 mustroot='Script must be run as root user.'
-notroot='Script must be run as non-root user.'
 if [ "$(id -u)" -ne 0 ]; then
     echo -e "$mustroot"
     exit 1
@@ -68,25 +67,6 @@ check_packages \
   tzdata \
   uuid-runtime
   
-# Determine the appropriate non-root user
-if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
-  USERNAME=""
-  POSSIBLE_USERS=("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
-  for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
-    if id -u "${CURRENT_USER}" > /dev/null 2>&1; then
-      USERNAME=${CURRENT_USER}
-      break
-    fi
-  done
-  if [ "${USERNAME}" = "" ]; then
-    echo -e "$notroot"
-    exit 1
-  fi
-elif [ "${USERNAME}" = "none" ] || ! id -u "${USERNAME}" > /dev/null 2>&1; then
-  echo -e "$notroot"
-  exit 1
-fi
-
 # Install Homebrew package manager
 if [ -e "${BREW_PREFIX}" ]; then
   echo "Homebrew already installed at ${BREW_PREFIX}"
