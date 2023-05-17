@@ -8,6 +8,7 @@
 BREW_PREFIX="${BREW_PREFIX:-"/home/linuxbrew/.linuxbrew"}"
 USERNAME="${USERNAME:-"automatic"}"
 BREWS="${BREWS}"
+FORCEED_BREWS="${FORCEED_BREWS}"
 
 mustroot='Script must be run as root user.'
 if [ "$(id -u)" -ne 0 ]; then
@@ -105,6 +106,13 @@ if [ -z "$BREWS" ]; then
 else
   echo "Installing brews: $BREWS..."
   brew install $BREWS
+fi
+
+if [ -z "$FORCED_BREWS" ]; then
+  echo "No forced brews to install"
+else
+  echo "Installing forced brews: $FORCED_BREWS..."
+  brew install --force $FORCED_BREWS
 fi
 
 # Clean up

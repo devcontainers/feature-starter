@@ -7,5 +7,14 @@
                 "brews": "mkcert"
             }
         }
+    },
+    "install_forced_brews": {
+        "image": "mcr.microsoft.com/devcontainers/base:jammy",
+        "user": "vscode",
+        "features": {
+            "homebrew": {
+                "forced_brews": "libpq"
+            }
+        }
     }
 }
