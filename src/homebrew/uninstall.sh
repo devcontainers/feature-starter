@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-notroot='Script must be run as non-root user.'
+mustroot='Script must be run as root user.'
 if [ "$(id -u)" -ne 0 ]; then
-    echo -e "$notroot"
+    echo -e "$mustroot"
     exit 1
 fi
 

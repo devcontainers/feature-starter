@@ -4,9 +4,10 @@
 #shellcheck disable=SC2181
 #example=https://github.com/devcontainers/features/blob/main/src/azure-cli/install.sh
 #example=https://github.com/meaningful-ooo/devcontainer-features/tree/main/src/homebrew
+mustroot='Script must be run as root user.'
 notroot='Script must be run as non-root user.'
 if [ "$(id -u)" -ne 0 ]; then
-    echo -e "$notroot"
+    echo -e "$mustroot"
     exit 1
 fi
 
