@@ -27,7 +27,6 @@ check_packages() {
             else
               sudo apt-get update -y
             fi
-            apt-get update -y
         fi
           if $isroot; then
             apt-get -y install --no-install-recommends "$@"
