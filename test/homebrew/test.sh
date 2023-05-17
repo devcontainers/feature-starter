@@ -15,6 +15,7 @@ fi
 cleanup() {
   case "${ID}" in
     debian|ubuntu)
+      echo "Cleaning up apt cache..."
       rm -rf /var/lib/apt/lists/*
     ;;
   esac
@@ -34,9 +35,11 @@ check_packages() {
 # Clean up
 cleanup
 
+echo "Installing dependencies..."
 check_packages git
 
 # Optional: Import test library bundled with the devcontainer CLI
+echo "Installing test library..."
 source dev-container-features-test-lib
 
 # Feature-specific tests
@@ -44,4 +47,5 @@ echo "Testing homebrew..."
 check "brew --version"
 
 # Report result
+echo "All tests passed!"
 reportResults
