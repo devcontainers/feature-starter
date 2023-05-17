@@ -80,6 +80,9 @@ else
   eval "$("$BREW_PREFIX/bin/brew" shellenv)"
   # Check Homebrew was installed correctly and accessable
   brew --version
+  # Update Homebrew
+  brew update
+  brew upgrade
   # Setup bash for Homebrew
   echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
   echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
