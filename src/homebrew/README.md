@@ -15,7 +15,7 @@ Installs Homebrew
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| brews | Brews to install after installing homebrew | string | - |
+| brews | Space seperated list of Brews to install after installing homebrew | string | - |
 
 
 
