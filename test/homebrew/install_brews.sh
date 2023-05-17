@@ -9,7 +9,7 @@ source dev-container-features-test-lib
 check "user is vscode" whoami | grep vscode
 
 # Extension-specific tests
-check "mkcert" mkcert --version
+check "mkcert" brew list --formula mkcert
 
 # Report result
 reportResults
