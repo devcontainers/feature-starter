@@ -7,10 +7,7 @@ set -e
 source /etc/os-release
 
 notroot='Script must be run as non-root user.'
-if [ "$(id -u)" -eq 0 ]; then
-    echo -e "$mustroot"
-    exit 1
-fi
+isroot=[ "$(id -u)" -eq 0 ]
 
 cleanup() {
   case "${ID}" in
@@ -26,9 +23,18 @@ check_packages() {
     if ! dpkg -s "$@" > /dev/null 2>&1; then
         if [ "$(find /var/lib/apt/lists/* | wc -l)" = "0" ]; then
             echo "Running apt-get update..."
+            if $isroot; then
+              apt-get update -y
+            else
+              sudo apt-get update -y
+            fi
             apt-get update -y
         fi
-        apt-get -y install --no-install-recommends "$@"
+          if $isroot; then
+            apt-get -y install --no-install-recommends "$@"
+          else
+            sudo apt-get -y install --no-install-recommends "$@"
+          fi
     fi
 }
 
