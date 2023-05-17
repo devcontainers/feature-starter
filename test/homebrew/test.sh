@@ -7,8 +7,7 @@ set -e
 source /etc/os-release
 
 notroot='Script must be run as non-root user.'
-isroot="$(id -u)" -eq 0
-
+isroot="$(if [ "$(id -u)" -eq 0 ]; then true; else false; fi)"
 cleanup() {
   case "${ID}" in
     debian|ubuntu)
