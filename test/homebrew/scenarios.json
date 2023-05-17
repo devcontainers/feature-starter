@@ -1,0 +1,11 @@
+{
+    "install_brews": {
+        "image": "mcr.microsoft.com/devcontainers/base:jammy",
+        "user": "vscode",
+        "features": {
+            "homebrew": {
+                "brews": "mkcert"
+            }
+        }
+    }
+}
