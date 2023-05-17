@@ -22,6 +22,8 @@ jobs:
 
       - name: Create a PR for Documentation
         id: push_image_info
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
           set -e
           echo "Start."
