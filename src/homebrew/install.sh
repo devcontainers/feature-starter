@@ -105,14 +105,14 @@ if [ -z "$BREWS" ]; then
   echo "No brews to install"
 else
   echo "Installing brews: $BREWS..."
-  brew install $BREWS
+  brew install --include-test $BREWS
 fi
 
 if [ -z "$FORCED_BREWS" ]; then
   echo "No forced brews to install"
 else
   echo "Installing forced brews: $FORCED_BREWS..."
-  brew install --force $FORCED_BREWS
+  brew install --include-test --force $FORCED_BREWS
 fi
 
 # Clean up
