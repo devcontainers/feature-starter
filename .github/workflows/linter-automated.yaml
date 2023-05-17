@@ -1,0 +1,21 @@
+#example=https://github.com/devcontainers/features/blob/main/.github/workflows/linter-automated.yaml
+name: "CI - Shell Script Linter"
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  shellchecker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Shell Linter
+      uses: azohra/shell-linter@v0.6.0
+      with:
+        path: "src/**/*.sh"
+        severity: "error" # [style, info, warning, error]
+      env:
+        SHELLCHECK_OPTS: -e SC2072 # Acceptable use of decimal comparison

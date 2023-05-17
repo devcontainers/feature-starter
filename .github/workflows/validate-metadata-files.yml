@@ -1,3 +1,4 @@
+#example=https://github.com/devcontainers/features/blob/main/.github/workflows/validate-metadata-files.yml
 name: "Validate devcontainer-feature.json files"
 on:
   workflow_dispatch:
@@ -8,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
+      
       - name: "Validate devcontainer-feature.json files"
         uses: devcontainers/action@v1
         with:
