@@ -44,3 +44,4 @@ check "brew --version"
 # Report result
 echo "All tests passed!"
 reportResults
+# Testing
