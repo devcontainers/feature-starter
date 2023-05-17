@@ -4,9 +4,9 @@
 #shellcheck disable=SC2181
 #example=https://github.com/devcontainers/features/blob/main/src/azure-cli/install.sh
 #example=https://github.com/meaningful-ooo/devcontainer-features/tree/main/src/homebrew
-mostrunasroot='Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
-if [ "$(id -u)" -ne 0 ]; then
-    echo -e "$mostrunasroot"
+notroot='Script must be run as non-root user.'
+if [ "$(id -u)" -eq 0 ]; then
+    echo -e "$notroot"
     exit 1
 fi
 
@@ -23,7 +23,7 @@ cleanup() {
   source /etc/os-release
   case "${ID}" in
     debian|ubuntu)
-      rm -rf /var/lib/apt/lists/*
+      sudo rm -rf /var/lib/apt/lists/*
     ;;
   esac
 }
@@ -33,9 +33,9 @@ check_packages() {
     if ! dpkg -s "$@" > /dev/null 2>&1; then
         if [ "$(find /var/lib/apt/lists/* | wc -l)" = "0" ]; then
             echo "Running apt-get update..."
-            apt-get update -y
+            sudo apt-get update -y
         fi
-        apt-get -y install --no-install-recommends "$@"
+        sudo apt-get -y install --no-install-recommends "$@"
     fi
 }
 
@@ -67,11 +67,6 @@ check_packages \
   tzdata \
   uuid-runtime
   
-# Ensure that login shells get the correct path if the user updated the PATH using ENV.
-rm -f /etc/profile.d/00-restore-env.sh
-echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
-chmod +x /etc/profile.d/00-restore-env.sh
-
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
   USERNAME=""
@@ -83,11 +78,11 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     fi
   done
   if [ "${USERNAME}" = "" ]; then
-    echo -e "$mostrunasroot"
+    echo -e "$notroot"
     exit 1
   fi
 elif [ "${USERNAME}" = "none" ] || ! id -u "${USERNAME}" > /dev/null 2>&1; then
-  echo -e "$mostrunasroot"
+  echo -e "$notroot"
   exit 1
 fi
 
@@ -121,4 +116,3 @@ brew doctor
 cleanup
 
 echo "Done!"
-# Testing
