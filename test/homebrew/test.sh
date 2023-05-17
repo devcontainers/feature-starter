@@ -9,14 +9,14 @@ source /etc/os-release
 cleanup() {
   case "${ID}" in
     debian|ubuntu)
-      rm -rf /var/lib/apt/lists/*
+      sudo rm -rf /var/lib/apt/lists/*
     ;;
   esac
 }
 
-mostrunasroot='Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
-if [ "$(id -u)" -ne 0 ]; then
-    echo -e "$mostrunasroot"
+notroot='Script must be run as non-root user.'
+if [ "$(id -u)" -eq 0 ]; then
+    echo -e "$notroot"
     exit 1
 fi
 
@@ -32,7 +32,7 @@ for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
   fi
 done
 if [ "${NON_ROOT_USER}" = "" ]; then
-    echo -e "$mostrunasroot"
+    echo -e "$notroot"
     exit 1
 fi
 
