@@ -70,7 +70,7 @@ check_packages \
   
 # Install Homebrew package manager
 # chown -R "${USERNAME}" "${BREW_PREFIX}"
-BREW_PREFIX="$BREW_PREFIX" BREWS="$BREWS" FORCED_BREWS="$FORCED_BREWS" su "$USERNAME" ./usermode.sh
+sudo -u "$USERNAME" BREW_PREFIX="$BREW_PREFIX" BREWS="$BREWS" FORCED_BREWS="$FORCED_BREWS" ./usermode.sh
 
 # Clean up
 cleanup

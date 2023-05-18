@@ -36,10 +36,7 @@ jobs:
         run: npm install -g @devcontainers/cli
 
       - name: "Run common-utils"
-        run: pushd .devcontainer/dependencies/devcontainers/features/src/common-utils; sudo INSTALL_ZSH=false INSTALL_OH_MY_ZSH=false UPGRADE_PACKAGES=false USERNAME=runner USER_UID=1001 USER_GID=123 ./install.sh; popd
-      
-      - name: "Run useer check"
-        run: cat /etc/passwd
+        run: sudo INSTALL_ZSH=false INSTALL_OH_MY_ZSH=false UPGRADE_PACKAGES=false USERNAME=vscode USER_UID=1002 USER_GID=1002 ./rund -id devcontainers/features common-utils install
       
       - name: "Generating tests for '${{ matrix.features }}' against '${{ matrix.baseImage }}'"
         run: devcontainer features test --skip-scenarios -f ${{ matrix.features }} -i ${{ matrix.baseImage }} .
@@ -62,9 +59,6 @@ jobs:
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
 
-      - name: "Run common-utils"
-        run: pushd .devcontainer/dependencies/devcontainers/features/src/common-utils; sudo INSTALL_ZSH=false INSTALL_OH_MY_ZSH=false UPGRADE_PACKAGES=false USERNAME=runner USER_UID=1001 USER_GID=123 ./install.sh; popd
-      
       - name: "Run useer check"
         run: cat /etc/passwd
       
@@ -83,10 +77,7 @@ jobs:
         run: npm install -g @devcontainers/cli
 
       - name: "Run common-utils"
-        run: pushd .devcontainer/dependencies/devcontainers/features/src/common-utils; sudo INSTALL_ZSH=false INSTALL_OH_MY_ZSH=false UPGRADE_PACKAGES=false USERNAME=runner USER_UID=1001 USER_GID=123 ./install.sh; popd
-      
-      - name: "Run useer check"
-        run: cat /etc/passwd
+        run: sudo INSTALL_ZSH=false INSTALL_OH_MY_ZSH=false UPGRADE_PACKAGES=false USERNAME=vscode USER_UID=1002 USER_GID=1002 ./rund -id devcontainers/features common-utils install
       
       - name: "Testing global scenarios"
         run: devcontainer features test --global-scenarios-only .
