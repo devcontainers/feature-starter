@@ -7,31 +7,6 @@
 #example=https://github.com/meaningful-ooo/devcontainer-features/tree/main/src/homebrew
 set -e
 BREW_PREFIX="${BREW_PREFIX:-"/home/linuxbrew/.linuxbrew"}"
-USERNAME=${USERNAME:-"automatic"}
-
-# If in automatic mode, determine if a user already exists, if not use vscode
-if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
-    if [ "${_REMOTE_USER}" != "root" ]; then
-        USERNAME="${_REMOTE_USER}"
-    else
-        USERNAME=""
-        POSSIBLE_USERS=("devcontainer" "vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
-        for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
-            if id -u "${CURRENT_USER}" > /dev/null 2>&1; then
-                USERNAME="${CURRENT_USER}"
-                break
-            fi
-        done
-        if [ "${USERNAME}" = "" ]; then
-            echo -e "ERROR: Could not determine a non-root user to use."
-            return 1
-        fi
-    fi
-elif [ "${USERNAME}" = "none" ]; then
-  echo -e "ERROR: Could not determine a non-root user to use."
-  return 1
-fi
-
 
 cleanup() {
   source /etc/os-release

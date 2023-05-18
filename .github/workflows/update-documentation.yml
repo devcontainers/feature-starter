@@ -18,7 +18,7 @@ jobs:
         uses: devcontainers/action@v1
         with:
           generate-docs: "true"
-          base-path-to-features: "./src"
+          base-path-to-features: "./.devcontainer/features/src"
 
       - name: Create a PR for Documentation
         id: push_image_info

@@ -108,7 +108,6 @@
     },
     // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
     "./features/src/homebrew": {
-      "username": "vscode",
       "brews": "bash zsh mkcert chezmoi libpq sigstore/tap/gitsign"
     },
     // https://github.com/devcontainers/features/tree/main/src/dotnet
