@@ -15,7 +15,6 @@ Installs Homebrew
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| username | Username for installing brew | string | vscode |
 | brews | Space seperated list of Brews to install after installing homebrew | string | - |
 | forced_brews | Space seperated list of Brews to install after installing homebrew and force add them to PATH | string | - |
 
@@ -23,4 +22,4 @@ Installs Homebrew
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/AlephZ-ai/devcontainer-features/blob/main/src/homebrew/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/AlephZ-ai/devcontainer-features/blob/main/.devcontainer/features/src/homebrew/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
