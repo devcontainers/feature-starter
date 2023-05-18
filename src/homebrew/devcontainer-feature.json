@@ -1,7 +1,7 @@
 {
     "name": "Homebrew",
     "id": "homebrew",
-    "version": "2.1.4",
+    "version": "2.1.5",
     "description": "Installs Homebrew",
     "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/homebrew",
     "options": {
