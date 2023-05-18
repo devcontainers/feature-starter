@@ -1,9 +1,0 @@
-[submodule ".devcontainer/dependencies/devcontainers/features"]
-	path = .devcontainer/dependencies/devcontainers/features
-	url = https://github.com/AlephZ-ai/devcontainers_features
-[submodule ".devcontainer/dependencies/devcontainers-contrib/features"]
-	path = .devcontainer/dependencies/devcontainers-contrib/features
-	url = https://github.com/AlephZ-ai/devcontainers-contrib_features
-[submodule ".devcontainer/dependencies/rocker-org/devcontainer-features"]
-	path = .devcontainer/dependencies/rocker-org/devcontainer-features
-	url = https://github.com/AlephZ-ai/rocker-org_devcontainer-features
