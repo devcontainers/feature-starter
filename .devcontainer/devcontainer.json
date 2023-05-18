@@ -97,8 +97,8 @@
       "configureZshAsDefaultShell": "true",
       "installOhMyZsh": "true",
       "username": "vscode",
-      "userUid": "1000",
-      "userGid": "1000",
+      "userUid": "1007",
+      "userGid": "1007",
       "nonFreePackages": "true"
     },
     // https://github.com/devcontainers/features/tree/main/src/powershell
