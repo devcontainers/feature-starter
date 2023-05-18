@@ -65,12 +65,12 @@ check_packages \
   patch \
   sudo \
   tzdata \
-  uuid-runtime \
-  build-essential
-  
+  uuid-runtime #\
+#  build-essential
+
 # Install Homebrew package manager
 # chown -R "${USERNAME}" "${BREW_PREFIX}"
-sudo -u "$USERNAME" BREW_PREFIX="$BREW_PREFIX" BREWS="$BREWS" FORCED_BREWS="$FORCED_BREWS" ./usermode.sh
+BREW_PREFIX="$BREW_PREFIX" BREWS="$BREWS" FORCED_BREWS="$FORCED_BREWS" ./usermode.sh
 
 # Clean up
 cleanup

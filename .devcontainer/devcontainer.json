@@ -97,8 +97,8 @@
       "configureZshAsDefaultShell": "true",
       "installOhMyZsh": "true",
       "username": "vscode",
-      "userUid": "1007",
-      "userGid": "1007",
+      "userUid": "1000",
+      "userGid": "1000",
       "nonFreePackages": "true"
     },
     // https://github.com/devcontainers/features/tree/main/src/powershell
@@ -107,7 +107,7 @@
       "modules": ""
     },
     // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
-    "ghcr.io/alephz-ai/devcontainer-features/homebrew:2": {
+    "../src/homebrew": {
       "brews": "bash zsh mkcert chezmoi libpq sigstore/tap/gitsign"
     },
     // https://github.com/devcontainers/features/tree/main/src/dotnet
