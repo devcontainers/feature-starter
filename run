@@ -20,5 +20,7 @@ if [ "$script" = "-h" ] || [ "$script" = "--help" ]; then
   echo "        sudo BREWS=git ./run homebrew/install"
   echo "        ./run homebrew/uninstall"
 else
-    "$featureSourceRoot/$script.sh" "$command"
+  pushd "$featureSourceRoot"
+  sudo "$script.sh" "$command"
+  popd
 fi

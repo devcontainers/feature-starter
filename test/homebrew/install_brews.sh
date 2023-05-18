@@ -1,10 +1,12 @@
 #!/bin/bash
-
+#shellcheck source=/dev/null
 set -e
 
-# Add Homebrew to PATH
-BREW_PREFIX="${BREW_PREFIX:-"/home/linuxbrew/.linuxbrew"}"
-eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+mustroot='Script must be run as root user.'
+if [ "$(id -u)" -ne 0 ]; then
+    echo -e "$mustroot"
+    exit 1
+fi
 
 # Import test library for `check` command
 source dev-container-features-test-lib

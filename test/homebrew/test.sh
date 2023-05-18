@@ -4,9 +4,14 @@
 #example=https://github.com/meaningful-ooo/devcontainer-features/blob/main/test/homebrew/test.sh
 set -e
 
+mustroot='Script must be run as root user.'
+if [ "$(id -u)" -ne 0 ]; then
+    echo -e "$mustroot"
+    exit 1
+fi
+
 source /etc/os-release
 
-notroot='Script must be run as non-root user.'
 cleanup() {
   case "${ID}" in
     debian|ubuntu)

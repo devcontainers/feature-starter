@@ -2,17 +2,18 @@
     "recommendations": [
       "editorconfig.editorconfig",
       "ms-azuretools.vscode-docker",
-      "gitHub.codespaces",
-      "gitHub.vscode-pull-request-github",
-      "gitHub.remotehub",
-      "gitHub.copilot-nightly",
-      "gitHub.copilot-labs",
+      "github.codespaces",
+      "github.vscode-pull-request-github",
+      "github.remotehub",
+      "github.copilot-nightly",
+      "github.copilot-labs",
       "github.vscode-github-actions",
       "hilleer.yaml-plus-json",
       "ms-vscode-remote.remote-containers",
       "rogalmic.zsh-debug",
       "rogalmic.bash-debug",
       "shakram02.bash-beautify",
-      "lizebang.bash-extension-pack"
-  ]
+      "lizebang.bash-extension-pack",
+      "donjayamanne.githistory"
+    ]
 }

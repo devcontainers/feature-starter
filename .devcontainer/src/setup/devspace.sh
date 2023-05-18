@@ -4,13 +4,7 @@
 #shellcheck disable=SC1090
 #shellcheck disable=SC2016
 set -e
-# Fix issue with homebrew feature installer
-sudo chown -R "$(whoami)" /home/linuxbrew/.linuxbrew/Cellar
 # Setup PATH
-# Homebrew
-# Add Homebrew to PATH
-BREW_PREFIX="${BREW_PREFIX:-"/home/linuxbrew/.linuxbrew"}"
-eval "$("$BREW_PREFIX/bin/brew" shellenv)"
 # PostgreSQL client psql
 PATH="/home/linuxbrew/.linuxbrew/opt/libpq/bin:$PATH"
 # dotnet cli tools

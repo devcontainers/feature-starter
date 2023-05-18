@@ -96,11 +96,11 @@
       "userGid": "1000",
       "nonFreePackages": "true"
     },
-		// https://github.com/devcontainers/features/tree/main/src/powershell
-		"ghcr.io/devcontainers/features/powershell:1": {
-			"version": "latest",
-			"modules": ""
-		},
+    // https://github.com/devcontainers/features/tree/main/src/powershell
+    "ghcr.io/devcontainers/features/powershell:1": {
+      "version": "latest",
+      "modules": ""
+    },
     // https://github.com/rocker-org/devcontainer-features/tree/main/src/apt-packages
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
       "packages": "bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,postgresql-client,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps",
@@ -112,16 +112,16 @@
     },
     // https://github.com/devcontainers/features/tree/main/src/dotnet
     "ghcr.io/devcontainers/features/dotnet:1": {
-			"version": "latest",
-			"runtimeOnly": "false",
-			"installUsingApt": "true"
-		},
-		// https://github.com/devcontainers/features/tree/main/src/node
-		"ghcr.io/devcontainers/features/node:1": {
-			"version": "node",
-			"nodeGypDependencies": "true",
-			"nvmVersion": "0.39.3"
-		},
+      "version": "latest",
+      "runtimeOnly": "false",
+      "installUsingApt": "true"
+    },
+    // https://github.com/devcontainers/features/tree/main/src/node
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "node",
+      "nodeGypDependencies": "true",
+      "nvmVersion": "0.39.3"
+    },
     // https://github.com/devcontainers/features/tree/main/src/docker-in-docker
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "version": "latest",
@@ -131,23 +131,31 @@
       "enableNonRootDocker": "true",
       "installDockerBuildx": "true"
     },
-		// https://github.com/devcontainers/features/tree/main/src/git-lfs
-		"ghcr.io/devcontainers/features/git-lfs:1": {
-			"version": "latest",
-			"autoPull": true
-		},
-		// https://github.com/devcontainers/features/tree/main/src/github-cli
-		"ghcr.io/devcontainers/features/github-cli:1": {
-			"version": "latest",
-			"installDirectlyFromGitHubRelease": "true"
-		},
-		// https://github.com/devcontainers/features/tree/main/src/desktop-lite
-		"ghcr.io/devcontainers/features/desktop-lite:1": {
-			"version": "latest",
-			"noVncVersion": "1.2.0",
-			"password": "vscode",
-			"webPort": 11080,
-			"vncPort": 11901
-		}
+    // https://github.com/devcontainers/features/tree/main/src/git-lfs
+    "ghcr.io/devcontainers/features/git-lfs:1": {
+      "version": "latest",
+      "autoPull": true
+    },
+    // https://github.com/devcontainers/features/tree/main/src/github-cli
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest",
+      "installDirectlyFromGitHubRelease": "true"
+    },
+    // https://github.com/devcontainers-contrib/features/tree/main/src/gitsign
+    "ghcr.io/devcontainers-contrib/features/gitsign:1": {
+      "version": "latest"
+    },
+    // https://github.com/devcontainers-contrib/features/tree/main/src/gitsign-credential-cache
+    "ghcr.io/devcontainers-contrib/features/gitsign-credential-cache:1": {
+      "version": "latest"
+    },
+    // https://github.com/devcontainers/features/tree/main/src/desktop-lite
+    "ghcr.io/devcontainers/features/desktop-lite:1": {
+      "version": "latest",
+      "noVncVersion": "1.2.0",
+      "password": "vscode",
+      "webPort": 11080,
+      "vncPort": 11901
+    }
   }
 }

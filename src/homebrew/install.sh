@@ -7,8 +7,6 @@
 
 BREW_PREFIX="${BREW_PREFIX:-"/home/linuxbrew/.linuxbrew"}"
 USERNAME="${USERNAME:-"automatic"}"
-BREWS="${BREWS}"
-FORCEED_BREWS="${FORCEED_BREWS}"
 
 mustroot='Script must be run as root user.'
 if [ "$(id -u)" -ne 0 ]; then
@@ -79,6 +77,10 @@ else
   while ! NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; do echo "Retrying Homebrew install..."; done
   # No need to restart after Homebrew install
   eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+  "${BREW_PREFIX}/Homebrew/bin/brew" config
+  mkdir "${BREW_PREFIX}/bin"
+  ln -s "${BREW_PREFIX}/Homebrew/bin/brew" "${BREW_PREFIX}/bin"
+  chown -R "${USERNAME}:${USERNAME}" "${BREW_PREFIX}"
   # Check Homebrew was installed correctly and accessable
   brew --version
   # Update Homebrew
@@ -105,14 +107,14 @@ if [ -z "$BREWS" ]; then
   echo "No brews to install"
 else
   echo "Installing brews: $BREWS..."
-  brew install --include-test $BREWS
+  brew install --include-test "$BREWS"
 fi
 
 if [ -z "$FORCED_BREWS" ]; then
   echo "No forced brews to install"
 else
   echo "Installing forced brews: $FORCED_BREWS..."
-  brew install --include-test --force $FORCED_BREWS
+  brew install --include-test --force "$FORCED_BREWS"
 fi
 
 # Clean up

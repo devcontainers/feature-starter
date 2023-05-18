@@ -2,10 +2,18 @@
 #shellcheck shell=bash
 #shellcheck source=/dev/null
 set -e
-script="${1-"-h"}"
-command="${2-}"
+if [ "$1" = "-id" ] || [ "$1" = "--in-dependency" ]; then
+  dependency="$2"
+  script="$3"
+  command="${4-}"
+else
+  script="${1-"-h"}"
+  command="${2-}"
+fi
 projectRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"
-devcontainerSourceRoot="$projectRoot/.devcontainer/src"
+devcontainerRoot="$projectRoot/.devcontainer"
+devcontainerSourceRoot="$devcontainerRoot/src"
+dependencySourceRoot="$devcontainerRoot/dependencies/$dependency/src"
 source "$devcontainerSourceRoot/setup/set-env-vars.sh"
 if [ "$script" = "-h" ] || [ "$script" = "--help" ]; then
   echo "Run will run a script from in the src directory with the correct env variables setup."
@@ -19,5 +27,11 @@ if [ "$script" = "-h" ] || [ "$script" = "--help" ]; then
 #   echo "        sudo BREWS=git ./run homebrew/install"
 #   echo "        ./run homebrew/uninstall"
 else
-    "$devcontainerSourceRoot/$script.sh" "$command"
+    executionRoot="$devcontainerSourceRoot"
+    if [ "$dependency" != "" ]; then
+        executionRoot="$dependencySourceRoot"
+    fi
+    pushd "$executionRoot"
+    "$script.sh" "$command"
+    popd
 fi
