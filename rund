@@ -3,7 +3,7 @@
 #shellcheck source=/dev/null
 set -e
 script="${1-"-h"}"
-command="${2-null}"
+command="${2-}"
 projectRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"
 devcontainerSourceRoot="$projectRoot/.devcontainer/src"
 source "$devcontainerSourceRoot/setup/set-env-vars.sh"

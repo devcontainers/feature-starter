@@ -86,9 +86,6 @@
     }
   },
   "features": {
-    "overrideFeatureInstallOrder": [
-      // "ghcr.io/devcontainers/features/common-utils"
-    ],
     // https://github.com/devcontainers/features/tree/main/src/common-utils
     "ghcr.io/devcontainers/features/common-utils:2": {
       "installZsh": "true",
