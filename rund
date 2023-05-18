@@ -8,8 +8,9 @@ if [ "$1" = "-id" ] || [ "$1" = "--in-dependency" ]; then
   script="$4"
   command="${5-}"
 else
-  script="${1-"-h"}"
-  command="${2-}"
+  scriptPath="${1-"-h"}"
+  script="${2}"
+  command="${3-}"
 fi
 projectRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"
 devcontainerRoot="$projectRoot/.devcontainer"
@@ -34,7 +35,6 @@ else
     fi
     executionRoot="$executionRoot/$scriptPath"
     pushd "$executionRoot"
-    echo $PWD
     "./$script.sh" "$command"
     popd
 fi
