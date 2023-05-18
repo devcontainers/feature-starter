@@ -1,23 +1,11 @@
 #!/usr/bin/env bash
-#shellcheck disable=SC1091
+#shellcheck source=/dev/null
 #shellcheck disable=SC2089
 #shellcheck disable=SC2181
 #example=https://github.com/devcontainers/features/blob/main/src/azure-cli/install.sh
 #example=https://github.com/meaningful-ooo/devcontainer-features/tree/main/src/homebrew
 set -e
 BREW_PREFIX="${BREW_PREFIX:-"/home/linuxbrew/.linuxbrew"}"
-
-mustroot='Script must be run as root user.'
-if [ "$(id -u)" -ne 0 ]; then
-    echo -e "$mustroot"
-    exit 1
-fi
-
-ARCHITECTURE="$(dpkg --print-architecture)"
-if [ "${ARCHITECTURE}" != "amd64" ] && [ "${ARCHITECTURE}" != "x86_64" ]; then
-  echo "(!) Architecture $ARCHITECTURE unsupported"
-  exit 1
-fi
 
 cleanup() {
   source /etc/os-release
@@ -69,8 +57,44 @@ check_packages \
 #  build-essential
 
 # Install Homebrew package manager
-# chown -R "${USERNAME}" "${BREW_PREFIX}"
-BREW_PREFIX="$BREW_PREFIX" BREWS="$BREWS" FORCED_BREWS="$FORCED_BREWS" ./usermode.sh
+set -e
+# Install Homebrew package manager
+if [ -e "${BREW_PREFIX}" ]; then
+  echo "Homebrew already installed at ${BREW_PREFIX}"
+else
+  echo "Installing Homebrew..."
+  . /etc/os-release
+  while ! NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; do echo "Retrying"; done
+fi
+
+# No need to restart after Homebrew install
+export PATH="$PATH:$BREW_PREFIX/bin"
+eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+# Check Homebrew was installed correctly and accessable
+brew --version
+# Update Homebrew
+brew config
+brew update
+brew upgrade
+# Setup recommended gcc
+brew install gcc
+
+# Run Brew doctor to check for errors
+brew doctor
+
+if [ -z "$BREWS" ]; then
+  echo "No brews to install"
+else
+  echo "Installing brews: $BREWS..."
+  brew install --include-test "$BREWS"
+fi
+
+if [ -z "$FORCED_BREWS" ]; then
+  echo "No forced brews to install"
+else
+  echo "Installing forced brews: $FORCED_BREWS..."
+  brew install --include-test --force "$FORCED_BREWS"
+fi
 
 # Clean up
 cleanup
