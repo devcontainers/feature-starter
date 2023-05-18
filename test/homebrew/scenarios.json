@@ -4,6 +4,7 @@
         "user": "vscode",
         "features": {
             "homebrew": {
+                "username": "runner",
                 "brews": "mkcert"
             }
         }
@@ -13,6 +14,7 @@
         "user": "vscode",
         "features": {
             "homebrew": {
+                "username": "runner",
                 "forced_brews": "libpq"
             }
         }
