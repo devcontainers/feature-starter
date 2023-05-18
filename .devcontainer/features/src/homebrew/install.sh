@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #shellcheck source=/dev/null
+#shellcheck disable=SC2086
 #shellcheck disable=SC2089
 #shellcheck disable=SC2181
 #example=https://github.com/devcontainers/features/blob/main/src/azure-cli/install.sh
@@ -43,13 +44,13 @@ cleanup() {
 
 # Checks if packages are installed and installs them if not
 check_packages() {
-    if ! dpkg -s "$@" > /dev/null 2>&1; then
-        if [ "$(find /var/lib/apt/lists/* | wc -l)" = "0" ]; then
-            echo "Running apt-get update..."
-            apt-get update -y
-        fi
-        apt-get -y install "$@"
-    fi
+  if ! dpkg -s "$@" > /dev/null 2>&1; then
+      if [ "$(find /var/lib/apt/lists/* | wc -l)" = "0" ]; then
+          echo "Running apt-get update..."
+          apt-get update -y
+      fi
+      apt-get -y install "$@"
+  fi;
 }
 
 export DEBIAN_FRONTEND=noninteractive
@@ -61,7 +62,7 @@ echo "(*) Installing Homebrew..."
 cleanup
 
 # Install dependencies if missing
-check_packages \
+while ! check_packages \
   bzip2 \
   ca-certificates \
   curl \
@@ -79,7 +80,7 @@ check_packages \
   sudo \
   tzdata \
   uuid-runtime \
-  build-essential
+  build-essential; do echo "Retrying"; done
 
 # Install Homebrew package manager
 if [ -e "${BREW_PREFIX}" ]; then
@@ -100,7 +101,7 @@ brew config
 brew update
 brew upgrade
 # Setup recommended gcc
-brew install gcc
+while ! brew install gcc; do echo "Retrying"; done
 
 # Run Brew doctor to check for errors
 brew doctor
@@ -109,14 +110,14 @@ if [ -z "$BREWS" ]; then
   echo "No brews to install"
 else
   echo "Installing brews: $BREWS..."
-  brew install --include-test $BREWS
+  while ! brew install --include-test $BREWS; do echo "Retrying"; done
 fi
 
 if [ -z "$FORCED_BREWS" ]; then
   echo "No forced brews to install"
 else
   echo "Installing forced brews: $FORCED_BREWS..."
-  brew install --include-test --force $FORCED_BREWS
+  while ! brew install --include-test --force $FORCED_BREWS; do echo "Retrying"; done
 fi
 
 # Clean up
