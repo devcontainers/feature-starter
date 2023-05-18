@@ -1,10 +1,23 @@
 #!/usr/bin/env zsh
 #shellcheck shell=bash
 #shellcheck source=/dev/null
-script="$1"
+script="${1-"-h"}"
 command="${2-null}"
-DEVCONTAINER_DIRECTORY=.devcontainer
-DEVCONTAINER_FEATURES_DEVCONTAINER_SCRIPTS_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)/$DEVCONTAINER_DIRECTORY/src"
-source "$DEVCONTAINER_FEATURES_DEVCONTAINER_SCRIPTS_ROOT/setup/set-env-vars.sh"
-scriptsRoot="$DEVCONTAINER_FEATURES_SCRIPTS_ROOT"
-"$scriptsRoot/$script.sh" "$command"
+projectRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"
+featureSourceRoot="$projectRoot/src"
+devcontainerSourceRoot="$projectRoot/.devcontainer/src"
+source "$devcontainerSourceRoot/setup/set-env-vars.sh"
+if [ "$script" = "-h" ] || [ "$script" = "--help" ]; then
+  echo "Run will run a script from in the src directory with the correct env variables setup."
+  echo "Usage: ./run <script> <command>"
+  echo "DevContainer Feature Scripts:"
+  echo "    Color:"
+  echo "        sudo FAVORITE=blue ./run color/install"
+  echo "    Hello:"
+  echo "        sudo GREETING=Hello ./run hello/install"
+  echo "    Homebrew:"
+  echo "        sudo BREWS=git ./run homebrew/install"
+  echo "        ./run homebrew/uninstall"
+else
+    "$featureSourceRoot/$script.sh" "$command"
+fi

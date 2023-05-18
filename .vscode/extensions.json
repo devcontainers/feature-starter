@@ -1,12 +1,18 @@
 {
     "recommendations": [
       "editorconfig.editorconfig",
+      "ms-azuretools.vscode-docker",
       "gitHub.codespaces",
       "gitHub.vscode-pull-request-github",
       "gitHub.remotehub",
       "gitHub.copilot-nightly",
       "gitHub.copilot-labs",
       "github.vscode-github-actions",
-      "hilleer.yaml-plus-json"
-    ]
+      "hilleer.yaml-plus-json",
+      "ms-vscode-remote.remote-containers",
+      "rogalmic.zsh-debug",
+      "rogalmic.bash-debug",
+      "shakram02.bash-beautify",
+      "lizebang.bash-extension-pack"
+  ]
 }

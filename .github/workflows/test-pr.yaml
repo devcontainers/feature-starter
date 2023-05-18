@@ -14,7 +14,6 @@ jobs:
           filters: |
             color: ./**/color/**
             hello: ./**/hello/**
-            azure-cli: ./**/azure-cli/**
             homebrew: ./**/homebrew/**
 
   test:

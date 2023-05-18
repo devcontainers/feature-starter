@@ -1,32 +1,160 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/javascript-node:0-18",
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "json.schemas": [
-                    {
-                        "fileMatch": [
-                            "*/devcontainer-feature.json"
-                        ],
-                        "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainerFeature.schema.json"
-                    }
-                ]
-            },
-            "extensions": [
-                "editorconfig.editorconfig",
-                "gitHub.codespaces",
-                "gitHub.vscode-pull-request-github",
-                "gitHub.remotehub",
-                "gitHub.copilot-nightly",
-                "gitHub.copilot-labs",
-                "github.vscode-github-actions",
-                "hilleer.yaml-plus-json"
+  "name": "DevContainer Features",
+  "dockerComposeFile": "docker-compose.yaml",
+  "service": "devcontainer-features",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  // https://aka.ms/dev-containers-non-root.
+  "remoteUser": "vscode",
+  // https://code.visualstudio.com/remote/advancedcontainers/environment-variables
+  "userEnvProbe": "loginInteractiveShell",
+  "remoteEnv": {
+    // WSLg GUI Apps in Dev Space
+    // "TERM": "${localEnv:TERM}",
+    // "DISPLAY": "${localEnv:DISPLAY}",
+    // "WAYLAND_DISPLAY":  "${localEnv:WAYLAND_DISPLAY}",
+    // "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
+    // "WSL2_GUI_APPS_ENABLED": "${localEnv:WSL2_GUI_APPS_ENABLED}",
+    // "ALEPHZ_AI_ADMIN_GITHUB_TOKEN": "${localEnv:ALEPHZ_AI_ADMIN_GITHUB_TOKEN}"
+  },
+  "forwardPorts": [
+    11080,
+    11901
+  ],
+  "portsAttributes": {
+    "11080": {
+      "label": "Web Desktop",
+      "protocol": "http"
+    },
+    "11901": {
+      "label": "VNC",
+      "protocol": "http"
+    }
+  },
+  // https://code.visualstudio.com/remote/advancedcontainers/start-processes
+  // https://containers.dev/implementors/json_reference/#lifecycle-scripts
+  "onCreateCommand": [
+    "/bin/zsh",
+    "-l",
+    "-c",
+    "./rund events/on-create"
+  ],
+  // "postCreateCommand": [
+  //   "/bin/zsh",
+  //   "-l",
+  //   "-c",
+  //   "./run devspace/events/post-create"
+  // ],
+  // "postAttachCommand": "nohup bash -c './run devspace/events/post-attach &'",
+  // "updateContentCommand": "",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "zsh",
+            "args": [
+              "-l"
             ]
-        }
+          }
+        },
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "json.schemas": [
+          {
+            "fileMatch": [
+              "*/devcontainer-feature.json"
+            ],
+            "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainerFeature.schema.json"
+          }
+        ]
+      },
+      "extensions": [
+        "editorconfig.editorconfig",
+        "ms-azuretools.vscode-docker",
+        "gitHub.codespaces",
+        "gitHub.vscode-pull-request-github",
+        "gitHub.remotehub",
+        "gitHub.copilot-nightly",
+        "gitHub.copilot-labs",
+        "github.vscode-github-actions",
+        "hilleer.yaml-plus-json",
+        "ms-vscode-remote.remote-containers",
+        "rogalmic.zsh-debug",
+        "rogalmic.bash-debug",
+        "shakram02.bash-beautify",
+        "lizebang.bash-extension-pack"
+      ]
+    }
+  },
+  "features": {
+    "overrideFeatureInstallOrder": [
+      // "ghcr.io/devcontainers/features/common-utils"
+    ],
+    // https://github.com/devcontainers/features/tree/main/src/common-utils
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": "true",
+      "configureZshAsDefaultShell": "true",
+      "installOhMyZsh": "true",
+      "username": "vscode",
+      "userUid": "1000",
+      "userGid": "1000",
+      "nonFreePackages": "true"
     },
-    "features": {
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+		// https://github.com/devcontainers/features/tree/main/src/powershell
+		"ghcr.io/devcontainers/features/powershell:1": {
+			"version": "latest",
+			"modules": ""
+		},
+    // https://github.com/rocker-org/devcontainer-features/tree/main/src/apt-packages
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+      "packages": "bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,postgresql-client,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps",
+      "updatePackages": "true"
     },
-    "remoteUser": "node",
-    "updateContentCommand": "npm install -g @devcontainers/cli"
+    // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
+    "ghcr.io/alephz-ai/devcontainer-features/homebrew:2": {
+      "brews": "bash zsh mkcert chezmoi libpq"
+    },
+    // https://github.com/devcontainers/features/tree/main/src/dotnet
+    "ghcr.io/devcontainers/features/dotnet:1": {
+			"version": "latest",
+			"runtimeOnly": "false",
+			"installUsingApt": "true"
+		},
+		// https://github.com/devcontainers/features/tree/main/src/node
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "node",
+			"nodeGypDependencies": "true",
+			"nvmVersion": "0.39.3"
+		},
+    // https://github.com/devcontainers/features/tree/main/src/docker-in-docker
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "moby": "true",
+      "dockerDashComposeVersion": "v2",
+      "azureDnsAutoDetection": "true",
+      "enableNonRootDocker": "true",
+      "installDockerBuildx": "true"
+    },
+		// https://github.com/devcontainers/features/tree/main/src/git-lfs
+		"ghcr.io/devcontainers/features/git-lfs:1": {
+			"version": "latest",
+			"autoPull": true
+		},
+		// https://github.com/devcontainers-contrib/features/tree/main/src/gitsign-credential-cache
+		"ghcr.io/devcontainers-contrib/features/gitsign-credential-cache:1": {
+			"version": "latest"
+		},
+		// https://github.com/devcontainers/features/tree/main/src/github-cli
+		"ghcr.io/devcontainers/features/github-cli:1": {
+			"version": "latest",
+			"installDirectlyFromGitHubRelease": "true"
+		},
+		// https://github.com/devcontainers/features/tree/main/src/desktop-lite
+		"ghcr.io/devcontainers/features/desktop-lite:1": {
+			"version": "latest",
+			"noVncVersion": "1.2.0",
+			"password": "vscode",
+			"webPort": 11080,
+			"vncPort": 11901
+		}
+  }
 }

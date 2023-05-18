@@ -1,0 +1,25 @@
+# https://docs.docker.com/compose/compose-file/
+version: '3.8'
+
+services:
+  # Kind cluster
+  devcontainer-features:
+    image: "cr.alephz.ai/devcontainers/$DEVCONTAINER_PROJECT_NAME:latest"
+    container_name: $DEVCONTAINER_PROJECT_NAME-devspace
+    labels: ["ai.alephz.role=$DEVCONTAINER_FEATURES_PROJECT_NAME"]
+    env_file: .env
+    # https://docs.docker.com/compose/compose-file/build/#build-definition
+    # Includes https://github.com/devcontainers/features/tree/main/src/common-utils
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps
+        IMAGE: ubuntu:latest
+    networks:
+      - default
+    volumes:
+      - ../..:/workspaces:cached
+
+networks:
+  default:

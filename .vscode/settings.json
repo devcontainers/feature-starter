@@ -1,4 +1,25 @@
 {
+    "files.eol": "\n",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell"
+        }
+    },
+    "terminal.integrated.profiles.osx": {
+        "zsh": {
+            "path": "zsh",
+            "args": ["-l"]
+        }
+    },
+    "terminal.integrated.profiles.linux": {
+        "zsh": {
+            "path": "zsh",
+            "args": ["-l"]
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.defaultProfile.linux": "zsh",
     "githubPullRequests.ignoredPullRequestBranches": [
         "main"
     ]
