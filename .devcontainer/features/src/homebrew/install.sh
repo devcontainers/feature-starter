@@ -78,11 +78,9 @@ check_packages \
   patch \
   sudo \
   tzdata \
-  uuid-runtime #\
-#  build-essential
+  uuid-runtime \
+  build-essential
 
-# Install Homebrew package manager
-set -e
 # Install Homebrew package manager
 if [ -e "${BREW_PREFIX}" ]; then
   echo "Homebrew already installed at ${BREW_PREFIX}"

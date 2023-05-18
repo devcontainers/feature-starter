@@ -1,13 +1,13 @@
 {
     "name": "Homebrew",
     "id": "homebrew",
-    "version": "2.1.3",
+    "version": "2.1.4",
     "description": "Installs Homebrew",
     "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/homebrew",
     "options": {
         "username": {
             "type": "string",
-            "default": "vscode",
+            "default": "automatic",
             "description": "Username for installing brew"
         },
         "brews": {
