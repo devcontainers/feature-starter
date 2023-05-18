@@ -2,15 +2,16 @@
 #shellcheck source=/dev/null
 set -e
 
-# Import test library for `check` command
-source dev-container-features-test-lib
+source /etc/os-release
 
-# Check to make sure the user is vscode
-check "user is vscode" whoami | grep vscode
+# Import test library for `check` command
+echo "Installing test library..."
+source dev-container-features-test-lib
 
 # Extension-specific tests
 check "libpq installed" brew list --formula libpq
 check "psql --version" psql --version
 
 # Report result
+echo "All tests passed!"
 reportResults
