@@ -4,8 +4,9 @@
 set -e
 if [ "$1" = "-id" ] || [ "$1" = "--in-dependency" ]; then
   dependency="$2"
-  script="$3"
-  command="${4-}"
+  scriptPath="$3"
+  script="$4"
+  command="${5-}"
 else
   script="${1-"-h"}"
   command="${2-}"
@@ -31,7 +32,9 @@ else
     if [ "$dependency" != "" ]; then
         executionRoot="$dependencySourceRoot"
     fi
+    executionRoot="$executionRoot/$scriptPath"
     pushd "$executionRoot"
-    "$script.sh" "$command"
+    echo $PWD
+    "./$script.sh" "$command"
     popd
 fi

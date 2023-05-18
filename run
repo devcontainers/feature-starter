@@ -2,13 +2,14 @@
 #shellcheck shell=bash
 #shellcheck source=/dev/null
 set -e
-script="${1-"-h"}"
-command="${2-}"
+scriptPath="${1-"-h"}"
+script="${2}"
+command="${3-}"
 projectRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"
 featureSourceRoot="$projectRoot/src"
 devcontainerSourceRoot="$projectRoot/.devcontainer/src"
 source "$devcontainerSourceRoot/setup/set-env-vars.sh"
-if [ "$script" = "-h" ] || [ "$script" = "--help" ]; then
+if [ "$scriptPath" = "-h" ] || [ "$scriptPath" = "--help" ]; then
   echo "Run will run a script from in the src directory with the correct env variables setup."
   echo "Usage: ./run <script> <command>"
   echo "DevContainer Feature Scripts:"
@@ -20,7 +21,8 @@ if [ "$script" = "-h" ] || [ "$script" = "--help" ]; then
   echo "        sudo BREWS=git ./run homebrew/install"
   echo "        ./run homebrew/uninstall"
 else
-  pushd "$featureSourceRoot"
-  sudo "$script.sh" "$command"
+  executionRoot="$featureSourceRoot/$scriptPath"
+  pushd "$executionRoot"
+  sudo "./$script.sh" "$command"
   popd
 fi
