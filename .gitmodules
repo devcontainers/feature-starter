@@ -4,3 +4,6 @@
 [submodule ".devcontainer/dependencies/rocker-org/devcontainer-features"]
 	path = .devcontainer/dependencies/rocker-org/devcontainer-features
 	url = https://github.com/rocker-org/devcontainer-features
+[submodule ".devcontainer/dependencies/devcontainers/features"]
+	path = .devcontainer/dependencies/devcontainers/features
+	url = https://github.com/devcontainers/features

@@ -9,7 +9,7 @@ sudo apt install -y --fix-missing
 age --version
 age-keygen --version
 # Install oh-my-zsh
-(sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)") || true
+sudo INSTALLZSH=true CONFIGUREZSHASDEFAULTSHELL=true INSTALLOHMYZSH=true USERNAME="$(whoami)" USERUID="$UID" USERGID="$(id -g "$(whoami)")" NONFREEPACKAGES=true "$DEVCONTAINER_FEATURES_PROJECT_ROOT/rund" -id devcontainers/features common-utils install
 # Get Ubuntu version
 repo_version="$(lsb_release -r -s)"
 # Download Microsoft signing key and repository
@@ -99,7 +99,7 @@ brew upgrade
 sudo apt autoclean -y
 sudo apt autoremove -y
 # Continue with devspace setup
-"$DEVCONTAINER_SOURCE_ROOT/setup/devspace.sh"
+#"$DEVCONTAINER_SOURCE_ROOT/setup/devspace.sh"
 # Log into GitHub
 if ! gh auth status; then gh auth login; fi
 gh config set -h github.com git_protocol https

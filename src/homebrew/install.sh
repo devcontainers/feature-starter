@@ -6,7 +6,6 @@
 #example=https://github.com/meaningful-ooo/devcontainer-features/tree/main/src/homebrew
 
 BREW_PREFIX="${BREW_PREFIX:-"/home/linuxbrew/.linuxbrew"}"
-USERNAME="${USERNAME:-"automatic"}"
 
 mustroot='Script must be run as root user.'
 if [ "$(id -u)" -ne 0 ]; then
@@ -80,7 +79,7 @@ else
   "${BREW_PREFIX}/Homebrew/bin/brew" config
   mkdir "${BREW_PREFIX}/bin"
   ln -s "${BREW_PREFIX}/Homebrew/bin/brew" "${BREW_PREFIX}/bin"
-  chown -R "${USERNAME}:${USERNAME}" "${BREW_PREFIX}"
+  chown -R "$(whoami):$(whoamai)" "${BREW_PREFIX}"
   # Check Homebrew was installed correctly and accessable
   brew --version
   # Update Homebrew
