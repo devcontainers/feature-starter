@@ -30,4 +30,4 @@ jobs:
         run: sudo INSTALL_ZSH=false INSTALL_OH_MY_ZSH=false UPGRADE_PACKAGES=false USERNAME=vscode USER_UID=1002 USER_GID=1002 ./rund -id devcontainers/features common-utils install
       
       - name: "Testing '${{ github.event.inputs.features }}' against '${{ github.event.inputs.baseImage }}'"
-        run: devcontainer features test --features ${{ github.event.inputs.features }} --base-image ${{ github.event.inputs.baseImage }} --log-level ${{ github.event.inputs.logLevel }} .
+        run: sudo -u vscode devcontainer features test --features ${{ github.event.inputs.features }} --base-image ${{ github.event.inputs.baseImage }} --log-level ${{ github.event.inputs.logLevel }} .
