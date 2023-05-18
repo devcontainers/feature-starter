@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 #shellcheck shell=bash
+#shellcheck source=/dev/null
 #shellcheck disable=SC1090
 #shellcheck disable=SC2016
+set -e
 # Fix issue with homebrew feature installer
 sudo chown -R "$(whoami)" /home/linuxbrew/.linuxbrew/Cellar
 # Setup PATH
@@ -13,6 +15,10 @@ eval "$("$BREW_PREFIX/bin/brew" shellenv)"
 PATH="/home/linuxbrew/.linuxbrew/opt/libpq/bin:$PATH"
 # dotnet cli tools
 export PATH=$PATH:~/.dotnet/tools
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 # Setup ENV
 # Setup completions
 autoload -U +X compinit && compinit
@@ -35,7 +41,7 @@ brew --version
 age --version
 age-keygen --version
 mkcert --version
-chezmoi version
+chezmoi --version
 psql --version
 # dotnet zsh profile setup
 echo 'export PATH=$PATH:~/.dotnet/tools' >> ~/.zshrc
@@ -64,25 +70,22 @@ npm install -g "dotenv-cli"
 pwsh -command Install-Module Set-PsEnv -Force -AcceptLicense
 # Install Pester module
 pwsh -command Install-Module "Pester" -Force -AcceptLicense
+# TODO: Fix
 # Setup git credential manager
-git-credential-manager configure
-git-credential-manager diagnose
+git-credential-manager configure || true
+git-credential-manager diagnose || true
 # Install Chrome
-pushd /tmp || exit
-sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-sudo apt install --fix-broken -y
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-rm -rf google-chrome-stable_current_amd64.deb
-## Install Edge
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
+sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
+# TODO: Fix
+#sudo rm -rf /tmp/google-chrome-stable_current_amd64.deb
+# Install Edge
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /tmp/microsoft.gpg
+sudo install -o root -g root -m 644 /tmp/microsoft.gpg /usr/share/keyrings/
 sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
-sudo rm microsoft.gpg
+# TODO: Fix
+#sudo rm /tmp/microsoft.gpg
 sudo apt update
 sudo apt install microsoft-edge-dev
-popd || exit
-# Create kubefirst cluster
-while ! kubefirst k3d create; do k3d clusters start kubefirst; done
-kubefirst k3d root-credentials
-kubectl get pods -A
+sudo apt update
+sudo apt upgrade --fix-broken -y

@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 #shellcheck shell=bash
 #shellcheck source=/dev/null
+set -e
 script="${1-"-h"}"
 command="${2-null}"
 projectRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"

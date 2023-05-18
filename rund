@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 #shellcheck shell=bash
 #shellcheck source=/dev/null
+set -e
 script="${1-"-h"}"
 command="${2-null}"
 projectRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"
-featureSourceRoot="$projectRoot/src"
 devcontainerSourceRoot="$projectRoot/.devcontainer/src"
 source "$devcontainerSourceRoot/setup/set-env-vars.sh"
 if [ "$script" = "-h" ] || [ "$script" = "--help" ]; then
