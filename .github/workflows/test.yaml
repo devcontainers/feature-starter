@@ -32,9 +32,6 @@ jobs:
         with:
           submodules: recursive
 
-      - name: "Submodule Recursive Checkout"
-        run: git submodule update --init --recursive
-  
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
 
@@ -59,9 +56,6 @@ jobs:
         with:
           submodules: recursive
 
-      - name: "Submodule Recursive Checkout"
-        run: git submodule update --init --recursive
-
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
 
@@ -79,9 +73,6 @@ jobs:
         with:
           submodules: recursive
 
-      - name: "Submodule Recursive Checkout"
-        run: git submodule update --init --recursive
-  
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
 
