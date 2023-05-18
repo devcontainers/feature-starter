@@ -15,6 +15,7 @@ Installs Homebrew
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
+| username | Username for installing brew | string | vscode |
 | brews | Space seperated list of Brews to install after installing homebrew | string | - |
 | forced_brews | Space seperated list of Brews to install after installing homebrew and force add them to PATH | string | - |
 
