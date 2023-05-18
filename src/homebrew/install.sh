@@ -20,25 +20,6 @@ if [ "${ARCHITECTURE}" != "amd64" ] && [ "${ARCHITECTURE}" != "x86_64" ]; then
   exit 1
 fi
 
-# Determine the appropriate non-root user
-if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
-  USERNAME=""
-  POSSIBLE_USERS=("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
-  for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
-    if id -u "${CURRENT_USER}" > /dev/null 2>&1; then
-      USERNAME="${CURRENT_USER}"
-      break
-    fi
-  done
-  if [ "${USERNAME}" = "" ]; then
-    echo -e "(!) No existing user found to use as a non-root default user"
-    exit 1
-  fi
-elif [ "${USERNAME}" = "none" ] || ! id -u "${USERNAME}" > /dev/null 2>&1; then
-  echo -e "(!) No existing user found to use as a non-root default user"
-  exit 1
-fi
-
 cleanup() {
   source /etc/os-release
   case "${ID}" in
