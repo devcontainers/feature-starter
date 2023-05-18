@@ -6,7 +6,6 @@
 #example=https://github.com/meaningful-ooo/devcontainer-features/tree/main/src/homebrew
 set -e
 BREW_PREFIX="${BREW_PREFIX:-"/home/linuxbrew/.linuxbrew"}"
-USERNAME=${USERNAME:-"automatic"}
 
 mustroot='Script must be run as root user.'
 if [ "$(id -u)" -ne 0 ]; then
