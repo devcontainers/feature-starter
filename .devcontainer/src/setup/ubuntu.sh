@@ -2,14 +2,21 @@
 #shellcheck source=/dev/null
 #shellcheck disable=SC2016
 set -e
-# Install pre-requisite packages.
+# Get current user
+CURRENT_USER="$(whoami)"
+CURRENT_UID="$(id -u)"
+CURRENT_GID="$(id -g "$CURRENT_USER")"
+# Install pre-requisite apt packages.
 packages="bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,postgresql-client,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
-sudo PACKAGES="$packages" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/rund" -id rocker-org/devcontainer-features apt-packages install
 sudo apt install -y --fix-missing
 age --version
 age-keygen --version
-# Install oh-my-zsh
-sudo INSTALLZSH=true CONFIGUREZSHASDEFAULTSHELL=true INSTALLOHMYZSH=true USERNAME="$(whoami)" USERUID="$UID" USERGID="$(id -g "$(whoami)")" NONFREEPACKAGES=true "$DEVCONTAINER_FEATURES_PROJECT_ROOT/rund" -id devcontainers/features common-utils install
+# Install common-utils
+sudo INSTALLZSH=true CONFIGUREZSHASDEFAULTSHELL=true INSTALLOHMYZSH=true USERNAME="$CURRENT_USER" USERUID="$CURRENT_UID" USERGID="$CURRENT_GID" NONFREEPACKAGES=true "$DEVCONTAINER_FEATURES_PROJECT_ROOT/rund" -id devcontainers/features common-utils install
+sudo PACKAGES="$packages" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/rund" -id rocker-org/devcontainer-features apt-packages install
+zsh --version
+# Install Brew
+sudo USERNAME="$CURRENT_USER" BREWS="install bash zsh mkcert chezmoi libpq sigstore/tap/gitsign" "$DEVCONTAINER_FEATURES_SOURCE_ROOT/homebrew/install.sh"
 # Get Ubuntu version
 repo_version="$(lsb_release -r -s)"
 # Download Microsoft signing key and repository
@@ -63,8 +70,6 @@ npm version
 # Update npm packages
 npm i -g npm-check-updates && ncu -u && npm i
 cd ..
-# Install Brew
-sudo BREWS="install bash zsh mkcert chezmoi libpq sigstore/tap/gitsign" "$DEVCONTAINER_FEATURES_SOURCE_ROOT/homebrew/install.sh"
 # Install GitHub CLI
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
 && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \

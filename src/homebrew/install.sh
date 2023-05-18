@@ -4,7 +4,7 @@
 #shellcheck disable=SC2181
 #example=https://github.com/devcontainers/features/blob/main/src/azure-cli/install.sh
 #example=https://github.com/meaningful-ooo/devcontainer-features/tree/main/src/homebrew
-
+set -e
 BREW_PREFIX="${BREW_PREFIX:-"/home/linuxbrew/.linuxbrew"}"
 
 mustroot='Script must be run as root user.'
@@ -65,56 +65,12 @@ check_packages \
   patch \
   sudo \
   tzdata \
-  uuid-runtime
+  uuid-runtime \
+  build-essential
   
 # Install Homebrew package manager
-if [ -e "${BREW_PREFIX}" ]; then
-  echo "Homebrew already installed at ${BREW_PREFIX}"
-else
-  echo "Installing Homebrew..."
-  . /etc/os-release
-  while ! NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; do echo "Retrying Homebrew install..."; done
-  # No need to restart after Homebrew install
-  eval "$("$BREW_PREFIX/bin/brew" shellenv)"
-  "${BREW_PREFIX}/Homebrew/bin/brew" config
-  mkdir "${BREW_PREFIX}/bin"
-  ln -s "${BREW_PREFIX}/Homebrew/bin/brew" "${BREW_PREFIX}/bin"
-  chown -R "$(whoami):$(whoamai)" "${BREW_PREFIX}"
-  # Check Homebrew was installed correctly and accessable
-  brew --version
-  # Update Homebrew
-  brew update
-  brew upgrade
-  # Setup bash for Homebrew
-  echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
-  echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
-  echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
-  # Setup zsh for Homebrew
-  echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.zshenv
-  echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.zprofile
-  echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.zshrc
-  # Setup recommended gcc
-  brew install gcc
-fi
-
-# Brew config
-brew config
-# Run Brew doctor to check for errors
-brew doctor
-
-if [ -z "$BREWS" ]; then
-  echo "No brews to install"
-else
-  echo "Installing brews: $BREWS..."
-  brew install --include-test "$BREWS"
-fi
-
-if [ -z "$FORCED_BREWS" ]; then
-  echo "No forced brews to install"
-else
-  echo "Installing forced brews: $FORCED_BREWS..."
-  brew install --include-test --force "$FORCED_BREWS"
-fi
+# chown -R "${USERNAME}" "${BREW_PREFIX}"
+BREW_PREFIX="$BREW_PREFIX" BREWS="$BREWS" FORCED_BREWS="$FORCED_BREWS" su "$USERNAME" ./usermode.sh
 
 # Clean up
 cleanup
