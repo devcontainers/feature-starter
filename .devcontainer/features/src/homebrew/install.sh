@@ -8,14 +8,7 @@
 set -e
 BREW_PREFIX="${BREW_PREFIX:-"/home/linuxbrew/.linuxbrew"}"
 
-cleanup() {
-  source /etc/os-release
-  case "${ID}" in
-    debian|ubuntu)
-      rm -rf /var/lib/apt/lists/*
-    ;;
-  esac
-}
+source /etc/os-release
 
 # Checks if packages are installed and installs them if not
 check_packages() {
@@ -31,10 +24,6 @@ check_packages() {
 export DEBIAN_FRONTEND=noninteractive
 
 echo "(*) Installing Homebrew..."
-. /etc/os-release
-
-# Clean up
-cleanup
 
 # Install dependencies if missing
 while ! check_packages \
@@ -87,15 +76,5 @@ else
   echo "Installing brews: $BREWS..."
   while ! brew install --include-test $BREWS; do echo "Retrying"; done
 fi
-
-if [ -z "$FORCED_BREWS" ]; then
-  echo "No forced brews to install"
-else
-  echo "Installing forced brews: $FORCED_BREWS..."
-  while ! brew install --include-test --force $FORCED_BREWS; do echo "Retrying"; done
-fi
-
-# Clean up
-cleanup
 
 echo "Done!"

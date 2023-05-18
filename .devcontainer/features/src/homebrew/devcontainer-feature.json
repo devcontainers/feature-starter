@@ -9,11 +9,6 @@
             "type": "string",
             "default": "",
             "description": "Space seperated list of Brews to install after installing homebrew"
-        },
-        "forced_brews": {
-            "type": "string",
-            "default": "",
-            "description": "Space seperated list of Brews to install after installing homebrew and force add them to PATH"
         }
     },
     "installsAfter": [
