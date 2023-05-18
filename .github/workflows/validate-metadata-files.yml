@@ -14,4 +14,4 @@ jobs:
         uses: devcontainers/action@v1
         with:
           validate-only: "true"
-          base-path-to-features: "./.devcontainer/features/src"
+          base-path-to-features: "./src"

@@ -107,7 +107,7 @@
       "modules": ""
     },
     // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
-    "./features/src/homebrew": {
+    "./src/homebrew": {
       "brews": "bash zsh mkcert chezmoi libpq sigstore/tap/gitsign"
     },
     // https://github.com/devcontainers/features/tree/main/src/dotnet

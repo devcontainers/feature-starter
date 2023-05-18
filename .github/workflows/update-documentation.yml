@@ -18,7 +18,7 @@ jobs:
         uses: devcontainers/action@v1
         with:
           generate-docs: "true"
-          base-path-to-features: "./.devcontainer/features/src"
+          base-path-to-features: "./src"
 
       - name: Create a PR for Documentation
         id: push_image_info
@@ -38,7 +38,7 @@ jobs:
           message='Automated documentation update'
 
           # Add / update and commit
-          git add ./.devcontainer/**/README.md
+          git add */**/README.md
           git commit -m 'Automated documentation update [skip ci]' || export NO_UPDATES=true
 
           # Push

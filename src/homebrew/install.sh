@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #shellcheck source=/dev/null
+#shellcheck disable=SC2016
 #shellcheck disable=SC2086
 #shellcheck disable=SC2089
 #shellcheck disable=SC2181
@@ -58,6 +59,9 @@ fi
 # No need to restart after Homebrew install
 export PATH="$PATH:$BREW_PREFIX/bin"
 eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+echo 'eval "$("$BREW_PREFIX/bin/brew" shellenv)"' >> ~/.bashrc
+echo 'eval "$("$BREW_PREFIX/bin/brew" shellenv)"' >> ~/.zshrc
+
 # Check Homebrew was installed correctly and accessable
 brew --version
 # Update Homebrew

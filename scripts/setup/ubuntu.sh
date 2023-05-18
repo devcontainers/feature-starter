@@ -104,7 +104,7 @@ brew upgrade
 sudo apt autoclean -y
 sudo apt autoremove -y
 # Continue with devspace setup
-#"$DEVCONTAINER_SOURCE_ROOT/setup/devspace.sh"
+#"$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace.sh"
 # Log into GitHub
 if ! gh auth status; then gh auth login; fi
 gh config set -h github.com git_protocol https
