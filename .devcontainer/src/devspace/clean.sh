@@ -2,11 +2,11 @@
 #shellcheck shell=bash
 #shellcheck disable=SC2034
 for j in {1..5}; do
-    containerid=$(docker ps -q -f name="$DEVCONTAINER_FEATURES_PROJECT_ROOT-devspace")
+    containerid=$(docker ps -q -f name="$DEVCONTAINER_PROJECT_NAME-devspace")
     if [ -n "$containerid" ]; then
         docker rm -f "$containerid"
     fi
-    volumes=$(docker volume ls -q -f name=name="${DEVCONTAINER_FEATURES_PROJECT_ROOT}_devcontainer")
+    volumes=$(docker volume ls -q -f name=name="${DEVCONTAINER_PROJECT_NAME}_devcontainer")
     if [ -n "$volumes" ]; then
         echo "$volumes" | xargs docker volume rm -f
     fi

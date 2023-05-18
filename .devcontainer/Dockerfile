@@ -1,7 +1,7 @@
 # https://docs.docker.com/engine/reference/builder/
 # https://github.com/devcontainers/images/tree/main/src/base-debian
 # https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps
-ARG IMAGE=ubuntu:latest
+ARG IMAGE=mcr.microsoft.com/devcontainers/base:ubuntu
 FROM ${IMAGE}
 COPY src/docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
