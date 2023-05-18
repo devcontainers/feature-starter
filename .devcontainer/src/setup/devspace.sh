@@ -69,16 +69,14 @@ pwsh -command Install-Module "Pester" -Force -AcceptLicense
 git-credential-manager configure || true
 git-credential-manager diagnose || true
 # Install Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
+sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
-# TODO: Fix
-#sudo rm -rf /tmp/google-chrome-stable_current_amd64.deb
+sudo rm -rf /tmp/google-chrome-stable_current_amd64.deb
 # Install Edge
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /tmp/microsoft.gpg
+sudo curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /tmp/microsoft.gpg
 sudo install -o root -g root -m 644 /tmp/microsoft.gpg /usr/share/keyrings/
 sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
-# TODO: Fix
-#sudo rm /tmp/microsoft.gpg
+sudo rm /tmp/microsoft.gpg
 sudo apt update
 sudo apt install microsoft-edge-dev
 sudo apt update

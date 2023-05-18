@@ -23,6 +23,6 @@ if [ "$scriptPath" = "-h" ] || [ "$scriptPath" = "--help" ]; then
 else
   executionRoot="$featureSourceRoot/$scriptPath"
   pushd "$executionRoot"
-  sudo "./$script.sh" "$command"
+  "./$script.sh" "$command"
   popd
 fi

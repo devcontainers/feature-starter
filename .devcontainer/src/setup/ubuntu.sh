@@ -2,18 +2,10 @@
 #shellcheck source=/dev/null
 #shellcheck disable=SC2016
 set -e
-# Update the list of packages
-sudo apt-get update
-# Upgrade any packages available
-sudo apt-get upgrade -y
 # Install pre-requisite packages.
-if ! sudo apt install -y --fix-missing bzip2 sudo fonts-dejavu-core g++ git \
-  less libz-dev locales openssl make netbase openssh-client patch tzdata uuid-runtime \
-  apt-transport-https ca-certificates speedtest-cli checkinstall dos2unix shellcheck file \
-  wget curl zsh bash procps software-properties-common libnss3 libnss3-tools build-essential \
-  zlib1g-dev gcc bash-completion age postgresql-client powerline fonts-powerline gedit gimp nautilus vlc x11-apps;
-then echo "Retrying"; true;
-fi
+packages="bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,postgresql-client,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
+sudo PACKAGES="$packages" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/rund" -id rocker-org/devcontainer-features apt-packages install
+sudo apt install -y --fix-missing
 age --version
 age-keygen --version
 # Install oh-my-zsh

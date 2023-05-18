@@ -17,7 +17,7 @@ devcontainerRoot="$projectRoot/.devcontainer"
 devcontainerSourceRoot="$devcontainerRoot/src"
 dependencySourceRoot="$devcontainerRoot/dependencies/$dependency/src"
 source "$devcontainerSourceRoot/setup/set-env-vars.sh"
-if [ "$script" = "-h" ] || [ "$script" = "--help" ]; then
+if [ "$scriptPath" = "-h" ] || [ "$scriptPath" = "--help" ]; then
   echo "Run will run a script from in the src directory with the correct env variables setup."
   echo "Usage: ./run <script> <command>"
   echo "DevContainer Scripts:"
