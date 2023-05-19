@@ -1,42 +1,34 @@
 {
   "id": "nvm",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "name": "Node Version Manager with both lts and latest versions of Node.js (via nvm), yarn and pnpm",
   "documentationURL": "https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/nvm",
   "description": "Installs nvm, Node.js (lts and latest), yarn, pnpm, and needed dependencies.",
   "options": {
-      "version": {
-          "type": "string",
-          "proposals": [
-              "lts",
-              "latest",
-              "none",
-              "18",
-              "16",
-              "14"
-          ],
-          "default": "lts",
-          "description": "Select or enter a Node.js version to install"
-      },
-      "nodeGypDependencies": {
-          "type": "boolean",
-          "default": true,
-          "description": "Install dependencies to compile native node modules (node-gyp)?"
-      }
+    "username": {
+      "type": "string",
+      "default": "automatic",
+      "description": "User to install nvm"
+    },
+    "nodeGypDependencies": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install dependencies to compile native node modules (node-gyp)?"
+    }
   },
   "customizations": {
-      "vscode": {
-          "extensions": [
-              "dbaeumer.vscode-eslint"
-          ]
-      }
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint"
+      ]
+    }
   },
   "containerEnv": {
-      "NVM_DIR": "/usr/local/share/nvm",
-      "NVM_SYMLINK_CURRENT": "true",
-      "PATH": "/usr/local/share/nvm/current/bin:${PATH}"
+    "NVM_DIR": "/usr/local/share/nvm",
+    "NVM_SYMLINK_CURRENT": "true",
+    "PATH": "/usr/local/share/nvm/current/bin:${PATH}"
   },
   "installsAfter": [
-      "ghcr.io/devcontainers/features/common-utils"
+    "ghcr.io/devcontainers/features/common-utils"
   ]
 }

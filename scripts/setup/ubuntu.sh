@@ -34,35 +34,10 @@ git --version
 # Install Git LFS
 sudo VERSION="latest" AUTOPULL="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features git-lfs install
 git-lfs --version
-# # Install nvm
-# cd /tmp
-# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-# # No need to restart after nvm install
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-# nvm version
-# # TODO: update ~/.bashrc the above script is only updating ~/.zshrc
-# # Install Node.js
-# nvm install --lts
-# nvm install node
-# nvm use --lts
-# node --version
-# # Update lts npm
-# npm update -g npm
-# npm --version
-# npm version
-# # Update npm packages
-# npm i -g npm-check-updates && ncu -u && npm i
-# nvm use node
-# node --version
-# # Update lts npm
-# npm update -g npm
-# npm --version
-# npm version
-# # Update npm packages
-# npm i -g npm-check-updates && ncu -u && npm i
-# cd ..
+# Install nvm
+sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" nvm install
+nvm --version
+node --version
 # # Install GitHub CLI
 # curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
 # && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
