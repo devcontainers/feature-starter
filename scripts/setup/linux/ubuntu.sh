@@ -16,7 +16,7 @@ age-keygen --version
 sudo USERNAME="$CURRENT_USER" INSTALLZSH="true" CONFIGUREZSHASDEFAULTSHELL="true" INSTALLOHMYZSH="true" USERUID="$CURRENT_UID" USERGID="$CURRENT_GID" NONFREEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features common-utils install
 zsh --version
 # Install Brew
-sudo USERNAME="$CURRENT_USER" BREWS="bash zsh git git-lfs gh sigstore/tap/gitsign mkcert chezmoi libpq" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" homebrew install
+sudo USERNAME="$CURRENT_USER" BREWS="bash zsh git git-lfs git-credential-manager sigstore/tap/gitsign gh mkcert chezmoi libpq" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" homebrew install
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew --version
 bash --version

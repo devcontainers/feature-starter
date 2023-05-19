@@ -42,25 +42,21 @@ mkcert --version
 chezmoi --version
 psql --version
 devcontainer --version
+# Setup git credential manager
+git-credential-manager configure
+git-credential-manager diagnose
+# Make container a Root CA and trust it
+mkcert -install
 # # dotnet zsh profile setup
 # echo 'export PATH=$PATH:~/.dotnet/tools' >> ~/.zshrc
 # # kubectl completion zsh profile setup
 # source='source <(kubectl completion zsh)'
 # grep -qxF "$source"  ~/.zshrc || echo "$source" >>  ~/.zshrc
-# # Make container a Root CA and trust it
-# mkcert -install
 # dotnet dev-certs https --trust
 # # Adding GH .ssh known hosts
 # mkdir -p ~/.ssh/
 # touch ~/.ssh/known_hosts
 # bash -c eval "$(ssh-keyscan github.com >> ~/.ssh/known_hosts)"
-# # Install needed tools, packages, modules, brew, etc...
-# # Install git-credential-manager
-# tool=git-credential-manager && if ! (dotnet tool install -g "$tool"); then dotnet tool update -g "$tool"; fi
-# # TODO: Fix
-# # Setup git credential manager
-# git-credential-manager configure || true
-# git-credential-manager diagnose || true
 # # Install Chrome
 # sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 # sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
