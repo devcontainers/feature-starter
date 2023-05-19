@@ -39,7 +39,8 @@ jobs:
         features: [
             "color",
             "hello",
-            "homebrew"
+            "homebrew",
+            "nvm"
         ]
     steps:
       - uses: actions/checkout@v3

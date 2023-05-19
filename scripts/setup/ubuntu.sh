@@ -35,7 +35,10 @@ git --version
 sudo VERSION="latest" AUTOPULL="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features git-lfs install
 git-lfs --version
 # Install nvm
-sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" nvm install
+export NVM_DIR="/usr/local/share/nvm"
+export NVM_SYMLINK_CURRENT="true"
+export PATH="$PATH:/usr/local/share/nvm/current/bin"
+sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" NVM_DIR="$NVM_DIR" NVM_SYMLINK_CURRENT="$NVM_SYMLINK_CURRENT" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" nvm install
 nvm --version
 node --version
 # # Install GitHub CLI

@@ -1,7 +1,7 @@
 {
     "name": "Homebrew",
     "id": "homebrew",
-    "version": "3.0.2",
+    "version": "3.0.3",
     "description": "Installs Homebrew",
     "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/homebrew",
     "options": {
@@ -16,7 +16,11 @@
             "description": "Space seperated list of Brews to install after installing homebrew"
         }
     },
-    "installsAfter": [
+    "containerEnv": {
+      "BREW_PREFIX": "/home/linuxbrew/.linuxbrew",
+      "PATH": "/home/linuxbrew/.linuxbrew/bin:${PATH}"
+    },
+      "installsAfter": [
         "ghcr.io/devcontainers/features/common-utils",
         "ghcr.io/rocker-org/devcontainer-features/apt-packages"
     ]

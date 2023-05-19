@@ -15,6 +15,7 @@ jobs:
             color: ./**/color/**
             hello: ./**/hello/**
             homebrew: ./**/homebrew/**
+            nvm: ./**/homebrew/**
 
   test:
     needs: [detect-changes]
