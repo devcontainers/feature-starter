@@ -1,7 +1,7 @@
 {
     "name": "Homebrew",
     "id": "homebrew",
-    "version": "3.0.7",
+    "version": "3.0.8",
     "description": "Installs Homebrew",
     "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/homebrew",
     "options": {
@@ -21,6 +21,9 @@
       "PATH": "/home/linuxbrew/.linuxbrew/bin:${PATH}"
     },
       "installsAfter": [
-        "ghcr.io/devcontainers/features/common-utils"
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers-contrib/featues/apt-get-packages",
+        "ghcr.io/devcontainers-contrib/featues/apt-packages",
+        "ghcr.io/rocker-org/devcontainer-features/apt-packages"
     ]
 }

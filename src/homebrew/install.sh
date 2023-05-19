@@ -42,6 +42,23 @@ check_packages() {
   fi;
 }
 
+updaterc() {
+    echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
+    if [[ "$(cat /etc/bash.bashrc)" != *"$1"* ]]; then
+        echo -e "$1" >> /etc/bash.bashrc
+    fi
+    if [ -f "/etc/zsh/zshrc" ] && [[ "$(cat /etc/zsh/zshrc)" != *"$1"* ]]; then
+        echo -e "$1" >> /etc/zsh/zshrc
+    fi
+}
+
+# Snippet that should be added into rc / profiles
+nvm_rc_snippet="$(cat << EOF
+export BREW_PREFIX="${BREW_PREFIX}"
+eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+EOF
+)"
+
 export DEBIAN_FRONTEND=noninteractive
 
 echo "(*) Installing Homebrew..."
@@ -68,4 +85,5 @@ while ! check_packages \
   build-essential; do echo "Retrying"; done
 
 BREW_PREFIX="$BREW_PREFIX" BREWS="$BREWS" su "$USERNAME" -c ./usermode.sh
+updaterc "$nvm_rc_snippet"
 echo "Done!"
