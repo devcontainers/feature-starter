@@ -114,13 +114,11 @@
     },
     // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
     "ghcr.io/AlephZ-ai/devcontainer-features/homebrew": {
-      "brews": "bash zsh git git-lfs git-credential-manager sigstore/tap/gitsign gh mkcert chezmoi libpq"
+      "brews": "bash zsh git git-lfs sigstore/tap/gitsign gh mkcert chezmoi libpq"
     },
     // https://github.com/devcontainers/features/tree/main/src/dotnet
-    "ghcr.io/devcontainers/features/dotnet:1": {
-      "version": "latest",
-      "runtimeOnly": "false",
-      "installUsingApt": "false"
+    "ghcr.io/AlephZ-ai/devcontainer-features/dotnet": {
+      "tools": "git-credential-manager"
     },
     // https://github.com/devcontainers/features/tree/main/src/powershell
     "ghcr.io/devcontainers/features/powershell:1": {

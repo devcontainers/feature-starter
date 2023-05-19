@@ -109,7 +109,7 @@ umask 0002
 mkdir -p "${NVM_DIR}"
 chown "${USERNAME}:nvm" "${NVM_DIR}"
 chmod g+rws "${NVM_DIR}"
-su "${USERNAME}" -c ./usermode/install.sh
+su "${USERNAME}" -c ./usermode.sh
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 updaterc "${nvm_rc_snippet}"

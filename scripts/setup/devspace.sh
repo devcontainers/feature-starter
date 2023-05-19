@@ -6,13 +6,13 @@
 # Setup ENV
 set -e
 # Setup PATH
+# dotnet tools
+export PATH=$PATH:~/.dotnet/tools
 # NVM
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 # PostgreSQL client psql
 PATH="/home/linuxbrew/.linuxbrew/opt/libpq/bin:$PATH"
-# dotnet cli tools
-export PATH=$PATH:~/.dotnet/tools
 # Setup completions
 autoload -U +X compinit && compinit
 # Install Docker Completions
@@ -28,6 +28,8 @@ zsh --version
 pwsh --version
 git --version
 git-lfs --version
+# TODO: Fix
+git-credential-manager --version || true
 gitsign-credential-cache --version
 gh --version
 dotnet --version
@@ -43,16 +45,12 @@ chezmoi --version
 psql --version
 devcontainer --version
 # Setup git credential manager
-git-credential-manager configure
-git-credential-manager diagnose
+# TODO: Fix
+git-credential-manager configure || true
+git-credential-manager diagnose || true
 # Make container a Root CA and trust it
 mkcert -install
-# # dotnet zsh profile setup
-# echo 'export PATH=$PATH:~/.dotnet/tools' >> ~/.zshrc
-# # kubectl completion zsh profile setup
-# source='source <(kubectl completion zsh)'
-# grep -qxF "$source"  ~/.zshrc || echo "$source" >>  ~/.zshrc
-# dotnet dev-certs https --trust
+dotnet dev-certs https --trust
 # # Adding GH .ssh known hosts
 # mkdir -p ~/.ssh/
 # touch ~/.ssh/known_hosts
