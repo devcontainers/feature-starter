@@ -106,10 +106,6 @@ if [ ! -d "${NVM_DIR}" ]; then
     chown "${USERNAME}:nvm" "${NVM_DIR}"
     chmod g+rws "${NVM_DIR}"
     su "${USERNAME}" -c ./usermode/install.sh
-    # Update rc files
-    if [ "${UPDATE_RC}" = "true" ]; then
-        updaterc ./usermode/updaterc.sh
-    fi
 fi
 
 su "${USERNAME}" -c ./usermode/node.sh
