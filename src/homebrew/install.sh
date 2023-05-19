@@ -57,18 +57,7 @@ else
 fi
 
 # No need to restart after Homebrew install
-export PATH="$PATH:$BREW_PREFIX/bin"
 eval "$("$BREW_PREFIX/bin/brew" shellenv)"
-echo 'eval "export PATH="$PATH:$BREW_PREFIX/bin"' >> ~/.bashrc
-echo 'eval "export PATH="$PATH:$BREW_PREFIX/bin"' >> ~/.zshrc
-echo 'eval "export PATH="$PATH:$BREW_PREFIX/bin"' >> ~/.profile
-echo 'eval "export PATH="$PATH:$BREW_PREFIX/bin"' >> ~/.zprofile
-echo 'eval "$("$BREW_PREFIX/bin/brew" shellenv)"' >> ~/.bashrc
-echo 'eval "$("$BREW_PREFIX/bin/brew" shellenv)"' >> ~/.zshrc
-echo 'eval "$("$BREW_PREFIX/bin/brew" shellenv)"' >> ~/.profile
-echo 'eval "$("$BREW_PREFIX/bin/brew" shellenv)"' >> ~/.zprofile
-echo 'eval "$("$BREW_PREFIX/bin/brew" shellenv)"' >> ~/.bash_profile
-echo 'eval "$("$BREW_PREFIX/bin/brew" shellenv)"' >> ~/.zshenv
 
 # Check Homebrew was installed correctly and accessable
 brew --version
