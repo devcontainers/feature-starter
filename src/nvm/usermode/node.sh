@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 nvm version
 # Install Node.js
 nvm install --lts

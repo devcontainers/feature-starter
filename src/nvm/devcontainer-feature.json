@@ -1,6 +1,6 @@
 {
   "id": "nvm",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "name": "Node Version Manager with both lts and latest versions of Node.js (via nvm), yarn and pnpm",
   "documentationURL": "https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/nvm",
   "description": "Installs nvm, Node.js (lts and latest), yarn, pnpm, and needed dependencies.",
