@@ -16,10 +16,15 @@ age-keygen --version
 sudo USERNAME="$CURRENT_USER" INSTALLZSH="true" CONFIGUREZSHASDEFAULTSHELL="true" INSTALLOHMYZSH="true" USERUID="$CURRENT_UID" USERGID="$CURRENT_GID" NONFREEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features common-utils install
 zsh --version
 # Install Brew
-sudo USERNAME="$CURRENT_USER" BREWS="bash zsh mkcert chezmoi libpq sigstore/tap/gitsign" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" homebrew install
+sudo USERNAME="$CURRENT_USER" BREWS="bash zsh git git-lfs gh sigstore/tap/gitsign mkcert chezmoi libpq" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" homebrew install
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew --version
+bash --version
+zsh --version
 mkcert --version
+chezmoi --version
+psql --version
+gitsign-credential-cache --version
 # Install dotnet
 sudo rm -rf /usr/local/dotnet || true
 sudo USERNAME="$CURRENT_USER" VERSION="latest" RUNTIMEONLY="false" INSTALLUSINGAPT="false" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features dotnet install
@@ -43,13 +48,6 @@ sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" PACKAGES="@devcontainer
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 nvm --version
 node --version
-# # Install GitHub CLI
-# curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
-# && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
-# && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-# && sudo apt update \
-# && sudo apt install gh -y
-# gh --version
 # # Install Docker Completions
 # # sudo mkdir -p /etc/bash_completion.d
 # # mkdir -p /usr/share/zsh/vendor-completions
@@ -57,27 +55,11 @@ node --version
 # # curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/zsh/docker -o /usr/share/zsh/vendor-completions/_docker
 # docker --version
 # docker-compose --version
-# # Test age
-# age --version
-# age-keygen --version
-# # Install mkcert and generate certs
-# brew --version
-# bash --version
-# zsh --version
-# mkcert --version
-# chezmoi --version
-# psql --version
-# gitsign-credential-cache --version
-# # Ensure new package sources and packages are available
-# sudo apt update
-# sudo apt upgrade -y
-# sudo apt install -y gh git-lfs powershell dotnet-sdk-6.0 dotnet-sdk-7.0
-# brew upgrade
-# # Cleanup
-# sudo apt autoclean -y
-# sudo apt autoremove -y
-# # Continue with devspace setup
+# Cleanup
+sudo apt autoclean -y
+sudo apt autoremove -y
+# Continue with devspace setup
 # #"$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace.sh"
-# # Log into GitHub
-# if ! gh auth status; then gh auth login; fi
-# gh config set -h github.com git_protocol https
+# Log into GitHub
+if ! gh auth status; then gh auth login; fi
+gh config set -h github.com git_protocol https

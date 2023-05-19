@@ -114,7 +114,7 @@
     },
     // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
     "ghcr.io/AlephZ-ai/devcontainer-features/homebrew": {
-      "brews": "bash zsh mkcert chezmoi libpq sigstore/tap/gitsign"
+      "brews": "bash zsh git git-lfs gh sigstore/tap/gitsign mkcert chezmoi libpq"
     },
     // https://github.com/devcontainers/features/tree/main/src/dotnet
     "ghcr.io/devcontainers/features/dotnet:1": {
@@ -127,25 +127,10 @@
       "version": "latest",
       "modules": "Set-PsEnv,Pester"
     },
-    // https://github.com/devcontainers/features/tree/main/src/git-lfs
-    "ghcr.io/devcontainers/features/git:1": {
-      "version": "latest",
-      "ppa": true
-    },
-    // https://github.com/devcontainers/features/tree/main/src/git-lfs
-    "ghcr.io/devcontainers/features/git-lfs:1": {
-      "version": "latest",
-      "autoPull": true
-    },
     // https://github.com/devcontainers/features/tree/main/src/node
     "ghcr.io/AlephZ-ai/devcontainer-features/nvm": {
       "nodeGypDependencies": "true",
       "packages": "@devcontainers/cli,dotenv-cli"
-    },
-    // https://github.com/devcontainers/features/tree/main/src/github-cli
-    "ghcr.io/devcontainers/features/github-cli:1": {
-      "version": "latest",
-      "installDirectlyFromGitHubRelease": "true"
     },
     // https://github.com/devcontainers-contrib/features/tree/main/src/gitsign
     "ghcr.io/devcontainers-contrib/features/gitsign:1": {
