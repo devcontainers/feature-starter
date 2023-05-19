@@ -1,13 +1,13 @@
 
 # Dotnet CLI (dotnet)
 
-Installs the .NET CLI. Provides option of installing sdk or runtime, and option of versions to install. Uses latest version of .NET sdk as defaults to install.
+Installs the .NET CLI with preview, latest, and lts dotnet versions of the SDK and runtime.
 
 ## Example Usage
 
 ```json
 "features": {
-    "ghcr.io/devcontainers/features/dotnet:1": {}
+    "ghcr.io/AlephZ-ai/devcontainer-features/dotnet:1": {}
 }
 ```
 
@@ -15,9 +15,7 @@ Installs the .NET CLI. Provides option of installing sdk or runtime, and option 
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| version | Select or enter a dotnet CLI version. (Available versions may vary by Linux distribution.) | string | latest |
-| runtimeOnly | Install just the dotnet runtime if true, and sdk if false. | boolean | false |
-| installUsingApt | If true, it installs using apt instead of the release URL | boolean | true |
+| tools | Comma seperated list dotnet tools to install globally | string | - |
 
 ## Customizations
 
@@ -36,4 +34,4 @@ This Feature should work on recent versions of Debian/Ubuntu-based distributions
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/devcontainers/features/blob/main/src/dotnet/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/AlephZ-ai/devcontainer-features/blob/main/src/dotnet/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
