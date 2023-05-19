@@ -48,18 +48,13 @@ sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" PACKAGES="@devcontainer
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 nvm --version
 node --version
-# # Install Docker Completions
-# # sudo mkdir -p /etc/bash_completion.d
-# # mkdir -p /usr/share/zsh/vendor-completions
-# # sudo curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker.sh
-# # curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/zsh/docker -o /usr/share/zsh/vendor-completions/_docker
-# docker --version
-# docker-compose --version
+docker --version
+docker-compose --version
 # Cleanup
 sudo apt autoclean -y
 sudo apt autoremove -y
 # Continue with devspace setup
-# #"$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace.sh"
+"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s setup devspace
 # Log into GitHub
 if ! gh auth status; then gh auth login; fi
 gh config set -h github.com git_protocol https
