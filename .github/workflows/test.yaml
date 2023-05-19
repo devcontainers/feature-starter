@@ -15,7 +15,8 @@ jobs:
         features: [
             "color",
             "hello",
-            "homebrew"
+            "homebrew",
+            "nvm"
         ]
         baseImage:
           [
