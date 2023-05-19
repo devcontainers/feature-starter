@@ -11,8 +11,8 @@ curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 nvm version
 # Install Node.js
-nvm install --lts
 nvm install node
+nvm install --lts
 # Update lts npm
 nvm use --lts
 node --version
