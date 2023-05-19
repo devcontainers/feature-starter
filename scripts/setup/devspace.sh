@@ -41,6 +41,7 @@ age-keygen --version
 mkcert --version
 chezmoi --version
 psql --version
+devcontainer --version
 # # dotnet zsh profile setup
 # echo 'export PATH=$PATH:~/.dotnet/tools' >> ~/.zshrc
 # # kubectl completion zsh profile setup
