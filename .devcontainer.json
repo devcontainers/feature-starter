@@ -36,7 +36,7 @@
     "/bin/zsh",
     "-l",
     "-c",
-    "./rund events on-create"
+    "./run -s events on-create"
   ],
   // "postCreateCommand": [
   //   "/bin/zsh",
@@ -91,6 +91,15 @@
       "packages": "bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,postgresql-client,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps",
       "updatePackages": "true"
     },
+    // https://github.com/devcontainers/features/tree/main/src/docker-in-docker
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "moby": "true",
+      "dockerDashComposeVersion": "v2",
+      "azureDnsAutoDetection": "true",
+      "enableNonRootDocker": "true",
+      "installDockerBuildx": "true"
+    },
     // https://github.com/devcontainers/features/tree/main/src/common-utils
     "ghcr.io/devcontainers/features/common-utils:2": {
       "installZsh": "true",
@@ -102,7 +111,7 @@
       "nonFreePackages": "true"
     },
     // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
-    "ghcr.io/AlephZ-ai/devcontainers-features/homebrew:3": {
+    "ghcr.io/AlephZ-ai/devcontainer-features/homebrew": {
       "brews": "bash zsh mkcert chezmoi libpq sigstore/tap/gitsign"
     },
     // https://github.com/devcontainers/features/tree/main/src/powershell
@@ -121,15 +130,6 @@
       "version": "node",
       "nodeGypDependencies": "true",
       "nvmVersion": "0.39.3"
-    },
-    // https://github.com/devcontainers/features/tree/main/src/docker-in-docker
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {
-      "version": "latest",
-      "moby": "true",
-      "dockerDashComposeVersion": "v2",
-      "azureDnsAutoDetection": "true",
-      "enableNonRootDocker": "true",
-      "installDockerBuildx": "true"
     },
     // https://github.com/devcontainers/features/tree/main/src/git-lfs
     "ghcr.io/devcontainers/features/git-lfs:1": {
