@@ -10,7 +10,7 @@ source dev-container-features-test-lib
 
 
 # Extension-specific tests
-check "dotenv" dotenv
+check "dotenv --help" dotenv --help
 
 # Report result
 echo "All tests passed!"
