@@ -14,6 +14,7 @@
       "rogalmic.bash-debug",
       "shakram02.bash-beautify",
       "lizebang.bash-extension-pack",
-      "donjayamanne.githistory"
+      "donjayamanne.githistory",
+      "ms-dotnettools.csharp"
     ]
 }

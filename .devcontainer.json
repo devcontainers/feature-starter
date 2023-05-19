@@ -81,7 +81,8 @@
         "rogalmic.zsh-debug",
         "rogalmic.bash-debug",
         "shakram02.bash-beautify",
-        "lizebang.bash-extension-pack"
+        "lizebang.bash-extension-pack",
+        "ms-dotnettools.csharp"
       ]
     }
   },
@@ -114,16 +115,16 @@
     "ghcr.io/AlephZ-ai/devcontainer-features/homebrew": {
       "brews": "bash zsh mkcert chezmoi libpq sigstore/tap/gitsign"
     },
-    // https://github.com/devcontainers/features/tree/main/src/powershell
-    "ghcr.io/devcontainers/features/powershell:1": {
-      "version": "latest",
-      "modules": ""
-    },
     // https://github.com/devcontainers/features/tree/main/src/dotnet
     "ghcr.io/devcontainers/features/dotnet:1": {
       "version": "latest",
       "runtimeOnly": "false",
       "installUsingApt": "true"
+    },
+    // https://github.com/devcontainers/features/tree/main/src/powershell
+    "ghcr.io/devcontainers/features/powershell:1": {
+      "version": "latest",
+      "modules": ""
     },
     // https://github.com/devcontainers/features/tree/main/src/node
     "ghcr.io/devcontainers/features/node:1": {

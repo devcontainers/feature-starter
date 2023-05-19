@@ -9,14 +9,18 @@ CURRENT_GID="$(id -g "$CURRENT_USER")"
 # Install apt-packages
 sudo apt install -y --fix-missing
 packages="bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,postgresql-client,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
-sudo PACKAGES="$packages" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id rocker-org/devcontainer-features apt-packages install
+sudo packages="$packages" updatePackages="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id rocker-org/devcontainer-features apt-packages install
 age --version
 age-keygen --version
 # Install common-utils
-sudo INSTALLZSH=true CONFIGUREZSHASDEFAULTSHELL=true INSTALLOHMYZSH=true USERNAME="$CURRENT_USER" USERUID="$CURRENT_UID" USERGID="$CURRENT_GID" NONFREEPACKAGES=true "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features common-utils install
+sudo installZsh="true" configureZshAsDefaultShell="true" installOhMyZsh="true" username="$CURRENT_USER" userUid="$CURRENT_UID" userGid="$CURRENT_GID" nonFreePackages="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features common-utils install
 zsh --version
 # Install Brew
-sudo USERNAME="$CURRENT_USER" BREWS="bash zsh mkcert chezmoi libpq sigstore/tap/gitsign" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" homebrew install
+sudo username="$CURRENT_USER" brews="bash zsh mkcert chezmoi libpq sigstore/tap/gitsign" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" homebrew install
+brew --version
+mkcert --version
+# Install dotnet
+sudo username="$CURRENT_USER" version="latest" runtimeOnly="false" installUsingApt="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features dotnet install
 # # Get Ubuntu version
 # repo_version="$(lsb_release -r -s)"
 # # Download Microsoft signing key and repository
