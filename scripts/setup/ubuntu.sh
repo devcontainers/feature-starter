@@ -9,42 +9,31 @@ CURRENT_GID="$(id -g "$CURRENT_USER")"
 # Install apt-packages
 sudo apt install -y --fix-missing
 packages="bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,postgresql-client,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
-sudo packages="$packages" updatePackages="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id rocker-org/devcontainer-features apt-packages install
+sudo PACKAGES="$packages" UPDATEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id rocker-org/devcontainer-features apt-packages install
 age --version
 age-keygen --version
 # Install common-utils
-sudo installZsh="true" configureZshAsDefaultShell="true" installOhMyZsh="true" username="$CURRENT_USER" userUid="$CURRENT_UID" userGid="$CURRENT_GID" nonFreePackages="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features common-utils install
+sudo USERNAME="$CURRENT_USER" INSTALLZSH="true" CONFIGUREZSHASDEFAULTSHELL="true" INSTALLOHMYZSH="true" USERUID="$CURRENT_UID" USERGID="$CURRENT_GID" NONFREEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features common-utils install
 zsh --version
 # Install Brew
-sudo username="$CURRENT_USER" brews="bash zsh mkcert chezmoi libpq sigstore/tap/gitsign" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" homebrew install
+sudo USERNAME="$CURRENT_USER" BREWS="bash zsh mkcert chezmoi libpq sigstore/tap/gitsign" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" homebrew install
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew --version
 mkcert --version
 # Install dotnet
-sudo username="$CURRENT_USER" version="latest" runtimeOnly="false" installUsingApt="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features dotnet install
-# # Get Ubuntu version
-# repo_version="$(lsb_release -r -s)"
-# # Download Microsoft signing key and repository
-# wget "https://packages.microsoft.com/config/ubuntu/$repo_version/packages-microsoft-prod.deb" -O /tmp/packages-microsoft-prod.deb
-# # Install Microsoft signing key and repository
-# sudo dpkg -i /tmp/packages-microsoft-prod.deb
-# sudo apt-get update
-# # Clean up
-# rm -rf /tmp/packages-microsoft-prod.deb
-# # Install Dotnet SDK versions
-# sudo apt install dotnet-sdk-6.0 dotnet-sdk-7.0 -y
-# wget https://dot.net/v1/dotnet-install.sh -O /tmp/dotnet-install.sh
-# chmod +x /tmp/dotnet-install.sh
-# /tmp/dotnet-install.sh --runtime "dotnet" --version "6.0.16"
-# rm -rf /tmp/dotnet-install.sh
-# dotnet --version
-# # Install PowerShell
-# sudo apt-get install -y powershell
-# pwsh --version
-# # Install Git LFS
-# (. /etc/lsb-release && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo env os=ubuntu dist="${DISTRIB_CODENAME}" bash)
-# sudo apt-get update
-# sudo apt-get install git-lfs -y
-# git-lfs --version
+sudo rm -rf /usr/local/dotnet || true
+sudo USERNAME="$CURRENT_USER" VERSION="latest" RUNTIMEONLY="false" INSTALLUSINGAPT="false" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features dotnet install
+PATH="$PATH:/usr/local/dotnet/current"
+dotnet --version
+# Install PowerShell
+sudo VERSION="latest" MODULES="Set-PsEnv,Pester" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features powershell install
+pwsh --version
+# Install Git
+sudo VERSION="latest" PPA="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features git install
+git --version
+# Install Git LFS
+sudo VERSION="latest" AUTOPULL="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features git-lfs install
+git-lfs --version
 # # Install nvm
 # cd /tmp
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash

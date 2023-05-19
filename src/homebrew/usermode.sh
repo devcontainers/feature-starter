@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #shellcheck source=/dev/null
+#shellcheck disable=SC2016
 #shellcheck disable=SC2086
 # Install Homebrew package manager
 set -e
@@ -11,8 +12,11 @@ else
   while ! NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; do echo "Retrying"; done
 fi
 
-# No need to restart after Homebrew install
+# Setup rc files
 eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+rcSetup='eval "$("$BREW_PREFIX/bin/brew" shellenv)"'
+grep -qxF "$rcSetup" ~/.bashrc || echo "$rcSetup" >> ~/.bashrc
+grep -qxF "$rcSetup" ~/.zshrc || echo "$rcSetup" >> ~/.zshrc
 
 # Check Homebrew was installed correctly and accessable
 brew --version

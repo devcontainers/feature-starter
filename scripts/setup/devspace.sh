@@ -60,10 +60,6 @@ npm install -g "@devcontainers/cli"
 tool=git-credential-manager && if ! (dotnet tool install -g "$tool"); then dotnet tool update -g "$tool"; fi
 # Install dotenv cli
 npm install -g "dotenv-cli"
-# Install Set-PsEnv module
-pwsh -command Install-Module Set-PsEnv -Force -AcceptLicense
-# Install Pester module
-pwsh -command Install-Module "Pester" -Force -AcceptLicense
 # TODO: Fix
 # Setup git credential manager
 git-credential-manager configure || true

@@ -15,6 +15,7 @@
       "shakram02.bash-beautify",
       "lizebang.bash-extension-pack",
       "donjayamanne.githistory",
-      "ms-dotnettools.csharp"
+      "ms-dotnettools.csharp",
+      "dbaeumer.vscode-eslint"
     ]
 }

@@ -82,7 +82,8 @@
         "rogalmic.bash-debug",
         "shakram02.bash-beautify",
         "lizebang.bash-extension-pack",
-        "ms-dotnettools.csharp"
+        "ms-dotnettools.csharp",
+        "dbaeumer.vscode-eslint"
       ]
     }
   },
@@ -119,23 +120,28 @@
     "ghcr.io/devcontainers/features/dotnet:1": {
       "version": "latest",
       "runtimeOnly": "false",
-      "installUsingApt": "true"
+      "installUsingApt": "false"
     },
     // https://github.com/devcontainers/features/tree/main/src/powershell
     "ghcr.io/devcontainers/features/powershell:1": {
       "version": "latest",
-      "modules": ""
+      "modules": "Set-PsEnv,Pester"
+    },
+    // https://github.com/devcontainers/features/tree/main/src/git-lfs
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest",
+      "ppa": true
+    },
+    // https://github.com/devcontainers/features/tree/main/src/git-lfs
+    "ghcr.io/devcontainers/features/git-lfs:1": {
+      "version": "latest",
+      "autoPull": true
     },
     // https://github.com/devcontainers/features/tree/main/src/node
     "ghcr.io/devcontainers/features/node:1": {
       "version": "node",
       "nodeGypDependencies": "true",
       "nvmVersion": "0.39.3"
-    },
-    // https://github.com/devcontainers/features/tree/main/src/git-lfs
-    "ghcr.io/devcontainers/features/git-lfs:1": {
-      "version": "latest",
-      "autoPull": true
     },
     // https://github.com/devcontainers/features/tree/main/src/github-cli
     "ghcr.io/devcontainers/features/github-cli:1": {
