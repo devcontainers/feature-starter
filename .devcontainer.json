@@ -101,14 +101,14 @@
       "userGid": "automatic",
       "nonFreePackages": "true"
     },
+    // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
+    "ghcr.io/AlephZ-ai/devcontainers-features/homebrew:3": {
+      "brews": "bash zsh mkcert chezmoi libpq sigstore/tap/gitsign"
+    },
     // https://github.com/devcontainers/features/tree/main/src/powershell
     "ghcr.io/devcontainers/features/powershell:1": {
       "version": "latest",
       "modules": ""
-    },
-    // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
-    "./src/homebrew": {
-      "brews": "bash zsh mkcert chezmoi libpq sigstore/tap/gitsign"
     },
     // https://github.com/devcontainers/features/tree/main/src/dotnet
     "ghcr.io/devcontainers/features/dotnet:1": {
