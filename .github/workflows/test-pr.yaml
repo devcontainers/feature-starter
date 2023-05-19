@@ -15,7 +15,8 @@ jobs:
             color: ./**/color/**
             hello: ./**/hello/**
             homebrew: ./**/homebrew/**
-            nvm: ./**/homebrew/**
+            nvm: ./**/nvm/**
+            dotnet: ./**/dotnet/**
 
   test:
     needs: [detect-changes]
