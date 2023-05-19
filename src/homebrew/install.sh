@@ -54,8 +54,7 @@ updaterc() {
 
 # Snippet that should be added into rc / profiles
 nvm_rc_snippet="$(cat << EOF
-export BREW_PREFIX="${BREW_PREFIX}"
-eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+eval "\$("$BREW_PREFIX/bin/brew" shellenv)"
 EOF
 )"
 
