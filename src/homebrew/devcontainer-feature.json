@@ -5,6 +5,11 @@
     "description": "Installs Homebrew",
     "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/homebrew",
     "options": {
+        "username": {
+            "type": "string",
+            "default": "automatic",
+            "description": "User to install Homebrew"
+        },
         "brews": {
             "type": "string",
             "default": "",

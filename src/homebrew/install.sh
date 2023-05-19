@@ -8,8 +8,28 @@
 #example=https://github.com/meaningful-ooo/devcontainer-features/tree/main/src/homebrew
 set -e
 BREW_PREFIX="${BREW_PREFIX:-"/home/linuxbrew/.linuxbrew"}"
+USERNAME="${USERNAME:-"automatic"}"
 
 source /etc/os-release
+
+# If in automatic mode, determine if a user already exists, if not use vscode
+if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
+    if [ "${_REMOTE_USER}" != "root" ]; then
+        USERNAME="${_REMOTE_USER}"
+    else
+        USERNAME=""
+        POSSIBLE_USERS=("devcontainer" "vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
+        for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
+            if id -u ${CURRENT_USER} > /dev/null 2>&1; then
+                USERNAME=${CURRENT_USER}
+                break
+            fi
+        done
+        if [ "${USERNAME}" = "" ]; then
+            USERNAME=vscode
+        fi
+    fi
+fi
 
 # Checks if packages are installed and installs them if not
 check_packages() {
@@ -47,35 +67,5 @@ while ! check_packages \
   uuid-runtime \
   build-essential; do echo "Retrying"; done
 
-# Install Homebrew package manager
-if [ -e "${BREW_PREFIX}" ]; then
-  echo "Homebrew already installed at ${BREW_PREFIX}"
-else
-  echo "Installing Homebrew..."
-  . /etc/os-release
-  while ! NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; do echo "Retrying"; done
-fi
-
-# No need to restart after Homebrew install
-eval "$("$BREW_PREFIX/bin/brew" shellenv)"
-
-# Check Homebrew was installed correctly and accessable
-brew --version
-# Update Homebrew
-brew config
-brew update
-brew upgrade
-# Setup recommended gcc
-while ! brew install gcc; do echo "Retrying"; done
-
-# Run Brew doctor to check for errors
-brew doctor
-
-if [ -z "$BREWS" ]; then
-  echo "No brews to install"
-else
-  echo "Installing brews: $BREWS..."
-  while ! brew install --include-test $BREWS; do echo "Retrying"; done
-fi
-
+BREW_PREFIX="$BREW_PREFIX" BREWS="$BREWS" su "$USERNAME" -c ./usermode.sh
 echo "Done!"
