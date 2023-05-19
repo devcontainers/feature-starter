@@ -12,6 +12,8 @@ else
   while ! NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; do echo "Retrying"; done
 fi
 
+export BREW_PREFIX="${BREW_PREFIX}"
+eval "$("$BREW_PREFIX/bin/brew" shellenv)"
 # Check Homebrew was installed correctly and accessable
 brew --version
 # Update Homebrew
