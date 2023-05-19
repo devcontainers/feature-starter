@@ -94,6 +94,7 @@ usermod -a -G nvm "${USERNAME}"
 
 # Snippet that should be added into rc / profiles
 nvm_rc_snippet="$(cat << EOF
+export NVM_SYMLINK_CURRENT="true"
 export NVM_DIR="${NVM_DIR}"
 [ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
 [ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
