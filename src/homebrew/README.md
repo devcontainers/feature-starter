@@ -7,7 +7,7 @@ Installs Homebrew
 
 ```json
 "features": {
-    "ghcr.io/AlephZ-ai/devcontainer-features/homebrew:2": {}
+    "ghcr.io/AlephZ-ai/devcontainer-features/homebrew:3": {}
 }
 ```
 
