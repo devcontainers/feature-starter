@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #shellcheck source=/dev/null
+export NVM_DIR=${NVMINSTALLPATH:-"/usr/local/share/nvm"}
 INSTALL_TOOLS_FOR_NODE_GYP="${NODEGYPDEPENDENCIES:-true}"
 
 USERNAME="${USERNAME:-"${_REMOTE_USER:-"automatic"}"}"
@@ -38,14 +39,12 @@ elif [ "${USERNAME}" = "none" ] || ! id -u "${USERNAME}" > /dev/null 2>&1; then
 fi
 
 updaterc() {
-    if [ "${UPDATE_RC}" = "true" ]; then
-        echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        if [[ "$(cat /etc/bash.bashrc)" != *"$1"* ]]; then
-            echo -e "$1" >> /etc/bash.bashrc
-        fi
-        if [ -f "/etc/zsh/zshrc" ] && [[ "$(cat /etc/zsh/zshrc)" != *"$1"* ]]; then
-            echo -e "$1" >> /etc/zsh/zshrc
-        fi
+    echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
+    if [[ "$(cat /etc/bash.bashrc)" != *"$1"* ]]; then
+        echo -e "$1" >> /etc/bash.bashrc
+    fi
+    if [ -f "/etc/zsh/zshrc" ] && [[ "$(cat /etc/zsh/zshrc)" != *"$1"* ]]; then
+        echo -e "$1" >> /etc/zsh/zshrc
     fi
 }
 
@@ -87,28 +86,32 @@ else
     apt-get -y install --no-install-recommends yarn
 fi
 
-# Create a symlink to the installed version for use in Dockerfile PATH statements
-export NVM_SYMLINK_CURRENT=true
-
 # Create nvm group to the user's UID or GID to change while still allowing access to nvm
 if ! cat /etc/group | grep -e "^nvm:" > /dev/null 2>&1; then
     groupadd -r nvm
 fi
 usermod -a -G nvm "${USERNAME}"
 
+# Snippet that should be added into rc / profiles
+nvm_rc_snippet="$(cat << EOF
+export NVM_DIR="${NVM_DIR}"
+[ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
+[ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
+EOF
+)"
+
 # Install nvm (which also installs NODE_VERSION), otherwise
 # use nvm to install the specified node version. Always use
 # umask 0002 so both the owner so that everything is u+rw,g+rw
 umask 0002
-if [ ! -d "${NVM_DIR}" ]; then
-    # Create nvm dir, and set sticky bit
-    mkdir -p "${NVM_DIR}"
-    chown "${USERNAME}:nvm" "${NVM_DIR}"
-    chmod g+rws "${NVM_DIR}"
-    su "${USERNAME}" -c ./usermode/install.sh
-fi
-
-su "${USERNAME}" -c ./usermode/node.sh
+# Create nvm dir, and set sticky bit
+mkdir -p "${NVM_DIR}"
+chown "${USERNAME}:nvm" "${NVM_DIR}"
+chmod g+rws "${NVM_DIR}"
+su "${USERNAME}" -c ./usermode/install.sh
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+updaterc "${nvm_rc_snippet}"
 
 # Install pnpm
 if type pnpm > /dev/null 2>&1; then

@@ -139,7 +139,8 @@
     },
     // https://github.com/devcontainers/features/tree/main/src/node
     "ghcr.io/AlephZ-ai/devcontainer-features/nvm": {
-      "nodeGypDependencies": "true"
+      "nodeGypDependencies": "true",
+      "packages": "@devcontainers/cli,dotenv-cli"
     },
     // https://github.com/devcontainers/features/tree/main/src/github-cli
     "ghcr.io/devcontainers/features/github-cli:1": {

@@ -49,17 +49,9 @@ dotnet dev-certs https --trust
 mkdir -p ~/.ssh/
 touch ~/.ssh/known_hosts
 bash -c eval "$(ssh-keyscan github.com >> ~/.ssh/known_hosts)"
-# Update package managers
-npm update -g npm
-# https://stackoverflow.com/questions/33553082/how-can-i-update-all-npm-packages-modules-at-once
-npm i -g npm-check-updates && ncu -u && npm i
 # Install needed tools, packages, modules, brew, etc...
-# Install devcontainer cli
-npm install -g "@devcontainers/cli"
 # Install git-credential-manager
 tool=git-credential-manager && if ! (dotnet tool install -g "$tool"); then dotnet tool update -g "$tool"; fi
-# Install dotenv cli
-npm install -g "dotenv-cli"
 # TODO: Fix
 # Setup git credential manager
 git-credential-manager configure || true

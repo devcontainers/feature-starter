@@ -1,6 +1,9 @@
 {
     "name": "devcontainer-features",
     "devDependencies": {
-      "gitmoji-cli": "^8.2.2"
+        "gitmoji-cli": "^8.2.2"
+    },
+    "dependencies": {
+        "undefined": "^0.1.0"
     }
 }

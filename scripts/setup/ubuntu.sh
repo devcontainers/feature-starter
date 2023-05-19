@@ -36,9 +36,11 @@ sudo VERSION="latest" AUTOPULL="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" 
 git-lfs --version
 # Install nvm
 export NVM_DIR="/usr/local/share/nvm"
-export NVM_SYMLINK_CURRENT="true"
 export PATH="$PATH:/usr/local/share/nvm/current/bin"
-sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" NVM_DIR="$NVM_DIR" NVM_SYMLINK_CURRENT="$NVM_SYMLINK_CURRENT" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" nvm install
+export NVM_SYMLINK_CURRENT="true"
+sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" PACKAGES="@devcontainers/cli,dotenv-cli" NVM_DIR="$NVM_DIR" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" nvm install
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 nvm --version
 node --version
 # # Install GitHub CLI
