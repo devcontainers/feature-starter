@@ -1,6 +1,6 @@
 {
   "name": "DevContainer Features",
-  "dockerComposeFile": "../docker-compose.yaml",
+  "dockerComposeFile": "docker-compose.yaml",
   "service": "devcontainer-features",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   // https://aka.ms/dev-containers-non-root.

@@ -19,7 +19,7 @@ services:
     networks:
       - default
     volumes:
-      - ../..:/workspaces:cached
+      - ..:/workspaces:cached
 
 networks:
   default:
