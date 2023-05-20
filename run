@@ -33,6 +33,7 @@ source "$scriptsRoot/setup/set-env-vars.sh"
 #   echo "    Homebrew:"
 #   echo "        sudo BREWS=git ./run homebrew/install"
 #   echo "        ./run homebrew/uninstall"
+# Testing
 executionRoot="$sourceRoot"
 if [ "$dependency" != "" ]; then
   executionRoot="$dependencySourceRoot"
