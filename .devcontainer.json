@@ -113,7 +113,7 @@
       "nonFreePackages": "true"
     },
     // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
-    "./src/homebrew": {
+    "ghcr.io/AlephZ-ai/devcontainer-features/homebrew": {
       "brews": "bash zsh git git-lfs sigstore/tap/gitsign gh mkcert chezmoi libpq"
     },
     // https://github.com/devcontainers/features/tree/main/src/dotnet
