@@ -33,12 +33,6 @@ dotnet --version
 # Install PowerShell
 sudo VERSION="latest" MODULES="Set-PsEnv,Pester" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features powershell install
 pwsh --version
-# Install Git
-sudo VERSION="latest" PPA="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features git install
-git --version
-# Install Git LFS
-sudo VERSION="latest" AUTOPULL="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features git-lfs install
-git-lfs --version
 # Install nvm
 export NVM_DIR="/usr/local/share/nvm"
 export PATH="$PATH:/usr/local/share/nvm/current/bin"
