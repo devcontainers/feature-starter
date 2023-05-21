@@ -69,3 +69,4 @@ try {
 Write-Output "Don't forget to set your git credentials:"
 Write-Output 'git config --global user.name "Your Name"'
 Write-Output 'git config --global user.email "youremail@yourdomain.com"'
+#Test
