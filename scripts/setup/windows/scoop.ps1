@@ -16,11 +16,10 @@ scoop bucket add nonportable
 scoop bucket add php
 scoop bucket add versions
 scoop update
-sudo scoop install vcredist --global
+sudo scoop install vcredist git git-with-openssh openssh --global
 sudo C:\ProgramData\scoop\apps\openssh\current\install-sshd.ps1
-scoop install 7zip vscode pwsh pwsh-beta vulkan openssl curl grep sed less touch git-with-openssh git-lfs gitsign git-credential-manager gh bzip2 make patch cacert speedtest-cli dos2unix shellcheck file wget zlib gcc age mkcert chezmoi pester python postgresql gedit gimp vlc
-scoop update --all
-git config --global credential.helper manager
+sudo scoop update --global --all
+scoop install 7zip vscode pwsh pwsh-beta vulkan openssl curl grep sed less touch git-lfs gitsign git-credential-manager gh bzip2 make patch cacert speedtest-cli dos2unix shellcheck file wget zlib gcc age mkcert chezmoi pester python postgresql gedit gimp vlc nvm dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts
 git-credential-manager configure
 git-credential-manager diagnose
 "~\scoop\apps\7zip\current\install-context.reg"
@@ -30,5 +29,34 @@ git-credential-manager diagnose
 "~\scoop\apps\vscode\current\install-context.reg"
 "~\scoop\apps\vscode\current\install-associations.reg"
 & "~\scoop\apps\vulkan\current\install-vk-layers.ps1"
-sudo scoop install openssh --global
-sudo C:\ProgramData\scoop\apps\openssh\current\install-sshd.ps1
+nvm version
+# Install Node.js latest and lts
+nvm install node
+nvm install lts
+# Update lts npm
+nvm use lts
+npm update -g npm
+npm --version
+npm version
+# Update lts npm packages
+npm i -g npm-check-updates
+npm i -g @devcontainers/cli
+npm i -g dotenv-cli
+ncu -u
+npm i
+# Update latest npm
+nvm use node
+node --version
+npm update -g npm
+npm --version
+npm version
+# Update latest npm packages
+npm i -g npm-check-updates
+npm i -g @devcontainers/cli
+npm i -g dotenv-cli
+ncu -u
+npm i
+# scoop update
+scoop update
+scoop update --all
+scoop status
