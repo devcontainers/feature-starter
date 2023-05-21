@@ -1,11 +1,28 @@
+# Please make sure the winget is is installed
+# Run this in Windows PowerShell as non-admin
+# https://apps.microsoft.com/store/detail/app-installer/
+# https://github.com/microsoft/winget-cli
+# https://github.com/microsoft/winget-cli/issues/210
+# https://scoop.sh/
 try {
   scoop --version
 } catch {
   Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
 }
 
-scoop install sudo aria2 git
+scoop install sudo
+scoop update --all
+sudo scoop install --global aria2
+sudo scoop update --all --global
 scoop config aria2-warning-enabled false
+sudo "$PSScriptRoot/winget.ps1"
+sudo "$PSScriptRoot/chocolatey.ps1"
+$env:ChocolateyInstall = [Environment]::GetEnvironmentVariable("ChocolateyInstall", [EnvironmentVariableTarget]::Machine)
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
+refreshenv
+sudo scoop install --global sudo 7zip git git-with-openssh
+sudo scoop update --all --global
+refreshenv
 scoop bucket add extras
 scoop bucket add games
 scoop bucket add nerd-fonts
@@ -16,21 +33,20 @@ scoop bucket add nonportable
 scoop bucket add php
 scoop bucket add versions
 scoop update
-sudo scoop install vcredist git git-with-openssh openssh --global
+sudo scoop install --global vcredist openssh vulkan openssl git-lfs gitsign git-credential-manager gh curl wget grep sed less touch bzip2 make cmake patch cacert file dos2unix shellcheck zlib age mkcert gcc python dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts nvm chezmoi postgresql speedtest-cli speedtest gedit gimp vlc
+sudo scoop update --all --global
+refreshenv
 sudo C:\ProgramData\scoop\apps\openssh\current\install-sshd.ps1
-sudo scoop update --global --all
-scoop install 7zip vscode pwsh pwsh-beta vulkan openssl curl grep sed less touch git-lfs gitsign git-credential-manager gh bzip2 make cmake patch cacert speedtest-cli dos2unix shellcheck file wget zlib gcc python age mkcert chezmoi pester postgresql gedit gimp vlc nvm dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts
+scoop install pester
+scoop update --all
 git-credential-manager configure
 git-credential-manager diagnose
-"~\scoop\apps\7zip\current\install-context.reg"
-"~\scoop\apps\git\current\install-context.reg"
-"~\scoop\apps\git\current\install-file-associations.reg"
-"~\scoop\apps\pwsh\current\install-file-context.reg"
-"~\scoop\apps\vscode\current\install-context.reg"
-"~\scoop\apps\vscode\current\install-associations.reg"
-& "~\scoop\apps\vulkan\current\install-vk-layers.ps1"
-winget install --id Microsoft.VisualStudio.2022.Community --override "--add Microsoft.VisualStudio.Workload.CoreEditor,Microsoft.VisualStudio.Workload.Azure,Microsoft.VisualStudio.Workload.Data,Microsoft.VisualStudio.Workload.DataScience,Microsoft.VisualStudio.Workload.ManagedDesktopproductArchx64,Microsoft.VisualStudio.Workload.ManagedGame,Microsoft.VisualStudio.Workload.NativeCrossPlat,Microsoft.VisualStudio.Workload.NativeDesktopproductArchx64,Microsoft.VisualStudio.Workload.NativeGameproductArchx64,Microsoft.VisualStudio.Workload.NativeMobile,Microsoft.VisualStudio.Workload.NetCrossPlat,Microsoft.VisualStudio.Workload.NetWebproductArchx64,Microsoft.VisualStudio.Workload.Node,Microsoft.VisualStudio.Workload.Office,Microsoft.VisualStudio.Workload.Python,Microsoft.VisualStudio.Workload.UniversalproductArchx64,Microsoft.VisualStudio.Workload.VisualStudioExtension"
+# https://learn.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio?view=vs-2022
+# https://learn.microsoft.com/en-us/visualstudio/install/workload-and-component-ids?view=vs-2022
+# https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools?view=vs-2022&preserve-view=true
+sudo winget install --id Microsoft.VisualStudio.2022.BuildTools --override "--passive --wait --verify --fix --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.MSBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended"
 nvm version
+nvm on
 # Install Node.js latest and lts
 nvm install node
 nvm install lts
@@ -60,7 +76,12 @@ npm i
 # scoop update
 scoop update
 scoop update --all
+sudo scoop update --all --global
 scoop status
+# https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools?view=vs-2022&preserve-view=true
+sudo winget install --id Microsoft.VisualStudio.2022.BuildTools --override "--passive --wait --verify --fix --add Microsoft.VisualStudio.Workload.AzureBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.DataBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.MSBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.NodeBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.OfficeBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.UniversalBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended --add Microsoft.VisualStudio.Workload.VisualStudioExtensionBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.WebBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.XamarinBuildTools;includeRecommended"
+# https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-enterprise?view=vs-2022&preserve-view=true
+# sudo winget install --id Microsoft.VisualStudio.2022.Enterprise.Preview --override "--passive --wait --verify --fix --add Microsoft.VisualStudio.Workload.Azure;includeRecommended --add Microsoft.VisualStudio.Workload.Data;includeRecommended --add Microsoft.VisualStudio.Workload.DataScience;includeRecommended --add Microsoft.VisualStudio.Workload.ManagedDesktopproductArchx64;includeRecommended --add Microsoft.VisualStudio.Workload.ManagedGame;includeRecommended --add Microsoft.VisualStudio.Workload.NativeCrossPlat;includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktopproductArchx64;includeRecommended --add Microsoft.VisualStudio.Workload.NativeGameproductArchx64;includeRecommended --add Microsoft.VisualStudio.Workload.NativeMobile;includeRecommended --add Microsoft.VisualStudio.Workload.NetCrossPlat;includeRecommended --add Microsoft.VisualStudio.Workload.NetWebproductArchx64;includeRecommended --add Microsoft.VisualStudio.Workload.Node;includeRecommended --add Microsoft.VisualStudio.Workload.Office;includeRecommended --add Microsoft.VisualStudio.Workload.Python;includeRecommended --add Microsoft.VisualStudio.Workload.UniversalproductArchx64;includeRecommended --add Microsoft.VisualStudio.Workload.VisualStudioExtension;includeRecommended"
 try {
   gh auth status
 } catch {
@@ -69,3 +90,4 @@ try {
 Write-Output "Don't forget to set your git credentials:"
 Write-Output 'git config --global user.name "Your Name"'
 Write-Output 'git config --global user.email "youremail@yourdomain.com"'
+sudo winget install --id Microsoft.PowerToys
