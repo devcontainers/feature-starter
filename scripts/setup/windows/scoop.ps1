@@ -19,7 +19,7 @@ scoop update
 sudo scoop install vcredist git git-with-openssh openssh --global
 sudo C:\ProgramData\scoop\apps\openssh\current\install-sshd.ps1
 sudo scoop update --global --all
-scoop install 7zip vscode pwsh pwsh-beta vulkan openssl curl grep sed less touch git-lfs gitsign git-credential-manager gh bzip2 make patch cacert speedtest-cli dos2unix shellcheck file wget zlib gcc python age mkcert chezmoi pester postgresql gedit gimp vlc nvm dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts
+scoop install 7zip vscode pwsh pwsh-beta vulkan openssl curl grep sed less touch git-lfs gitsign git-credential-manager gh bzip2 make cmake patch cacert speedtest-cli dos2unix shellcheck file wget zlib gcc python age mkcert chezmoi pester postgresql gedit gimp vlc nvm dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts
 git-credential-manager configure
 git-credential-manager diagnose
 "~\scoop\apps\7zip\current\install-context.reg"
@@ -29,6 +29,7 @@ git-credential-manager diagnose
 "~\scoop\apps\vscode\current\install-context.reg"
 "~\scoop\apps\vscode\current\install-associations.reg"
 & "~\scoop\apps\vulkan\current\install-vk-layers.ps1"
+winget install --id Microsoft.VisualStudio.2022.Community --override "--add Microsoft.VisualStudio.Workload.CoreEditor,Microsoft.VisualStudio.Workload.Azure,Microsoft.VisualStudio.Workload.Data,Microsoft.VisualStudio.Workload.DataScience,Microsoft.VisualStudio.Workload.ManagedDesktopproductArchx64,Microsoft.VisualStudio.Workload.ManagedGame,Microsoft.VisualStudio.Workload.NativeCrossPlat,Microsoft.VisualStudio.Workload.NativeDesktopproductArchx64,Microsoft.VisualStudio.Workload.NativeGameproductArchx64,Microsoft.VisualStudio.Workload.NativeMobile,Microsoft.VisualStudio.Workload.NetCrossPlat,Microsoft.VisualStudio.Workload.NetWebproductArchx64,Microsoft.VisualStudio.Workload.Node,Microsoft.VisualStudio.Workload.Office,Microsoft.VisualStudio.Workload.Python,Microsoft.VisualStudio.Workload.UniversalproductArchx64,Microsoft.VisualStudio.Workload.VisualStudioExtension"
 nvm version
 # Install Node.js latest and lts
 nvm install node
@@ -60,3 +61,11 @@ npm i
 scoop update
 scoop update --all
 scoop status
+try {
+  gh auth status
+} catch {
+  gh auth login
+}
+Write-Output "Don't forget to set your git credentials:"
+Write-Output 'git config --global user.name "Your Name"'
+Write-Output 'git config --global user.email "youremail@yourdomain.com"'
