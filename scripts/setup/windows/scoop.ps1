@@ -19,7 +19,7 @@ scoop update
 sudo scoop install vcredist git git-with-openssh openssh --global
 sudo C:\ProgramData\scoop\apps\openssh\current\install-sshd.ps1
 sudo scoop update --global --all
-scoop install 7zip vscode pwsh pwsh-beta vulkan openssl curl grep sed less touch git-lfs gitsign git-credential-manager gh bzip2 make patch cacert speedtest-cli dos2unix shellcheck file wget zlib gcc age mkcert chezmoi pester postgresql gedit gimp vlc nvm dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts
+scoop install 7zip vscode pwsh pwsh-beta vulkan openssl curl grep sed less touch git-lfs gitsign git-credential-manager gh bzip2 make patch cacert speedtest-cli dos2unix shellcheck file wget zlib gcc python age mkcert chezmoi pester postgresql gedit gimp vlc nvm dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts
 git-credential-manager configure
 git-credential-manager diagnose
 "~\scoop\apps\7zip\current\install-context.reg"
