@@ -96,7 +96,7 @@
   "features": {
     // https://github.com/rocker-org/devcontainer-features/tree/main/src/apt-packages
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-      "packages": "bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,postgresql-client,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps",
+      "packages": "bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,postgresql,postgresql-contrib,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps",
       "updatePackages": "true"
     },
     // https://github.com/devcontainers/features/tree/main/src/docker-in-docker
@@ -120,7 +120,7 @@
     },
     // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
     "ghcr.io/AlephZ-ai/devcontainer-features/homebrew": {
-      "brews": "bash zsh git git-lfs sigstore/tap/gitsign gh mkcert chezmoi libpq"
+      "brews": "bash zsh git git-lfs sigstore/tap/gitsign gh mkcert chezmoi postgresql@15"
     },
     // https://github.com/devcontainers/features/tree/main/src/dotnet
     "ghcr.io/AlephZ-ai/devcontainer-features/dotnet": {

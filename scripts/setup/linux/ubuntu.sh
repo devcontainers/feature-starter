@@ -8,7 +8,7 @@ CURRENT_UID="$(id -u)"
 CURRENT_GID="$(id -g "$CURRENT_USER")"
 # Install apt-packages
 sudo apt install -y --fix-missing
-packages="bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,postgresql-client,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
+packages="bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,postgresql,postgresql-contrib,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
 sudo PACKAGES="$packages" UPDATEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id rocker-org/devcontainer-features apt-packages install
 age --version
 age-keygen --version
@@ -19,7 +19,7 @@ zsh --version
 sudo chsh "$(whoami)" -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
 # Install Brew
-sudo USERNAME="$CURRENT_USER" BREWS="bash zsh git git-lfs sigstore/tap/gitsign gh mkcert chezmoi libpq" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
+sudo USERNAME="$CURRENT_USER" BREWS="bash zsh git git-lfs sigstore/tap/gitsign gh mkcert chezmoi postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew --version
@@ -33,9 +33,6 @@ gitsign-credential-cache --version
 sudo rm -rf /usr/local/dotnet
 sudo USERNAME="$CURRENT_USER" TOOLS="git-credential-manager" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s dotnet install;
 export PATH="$PATH:/usr/local/dotnet/current";
-# Fix for git-credential-manager
-GCM_CREDENTIAL_STORE=cache
-sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
 dotnet --version
 # Install PowerShell
 sudo VERSION="latest" MODULES="Set-PsEnv,Pester" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features powershell install

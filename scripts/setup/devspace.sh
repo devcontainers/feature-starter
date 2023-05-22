@@ -3,6 +3,18 @@
 #shellcheck source=/dev/null
 #shellcheck disable=SC1090
 #shellcheck disable=SC2016
+updaterc() {
+    if [ "${UPDATE_RC}" = "true" ]; then
+        echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
+        if [[ "$(cat /etc/bash.bashrc)" != *"$1"* ]]; then
+            echo -e "$1" >> /etc/bash.bashrc
+        fi
+        if [ -f "/etc/zsh/zshrc" ] && [[ "$(cat /etc/zsh/zshrc)" != *"$1"* ]]; then
+            echo -e "$1" >> /etc/zsh/zshrc
+        fi
+    fi
+}
+
 # Setup ENV
 set -e
 # Setup PATH
@@ -10,13 +22,15 @@ set -e
 export PATH=$PATH:~/.dotnet/tools
 # Fix for git-credential-manager
 export GCM_CREDENTIAL_STORE=cache
+updaterc "export GCM_CREDENTIAL_STORE=cache"
 sudo rm -rf /usr/share/dotnet || false
 sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
 # NVM
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-# PostgreSQL client psql
-PATH="/home/linuxbrew/.linuxbrew/opt/libpq/bin:$PATH"
+# Homebrew
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # Setup completions
 autoload -U +X compinit && compinit
 # Install Docker Completions

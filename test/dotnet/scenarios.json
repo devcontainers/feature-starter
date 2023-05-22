@@ -1,0 +1,10 @@
+{
+    "install_tools": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "dotnet": {
+                "tools": "git-credential-manager"
+            }
+        }
+    }
+}
