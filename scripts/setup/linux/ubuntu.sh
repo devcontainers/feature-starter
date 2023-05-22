@@ -13,10 +13,14 @@ sudo PACKAGES="$packages" UPDATEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_
 age --version
 age-keygen --version
 # Install common-utils
-sudo USERNAME="$CURRENT_USER" INSTALLZSH="true" CONFIGUREZSHASDEFAULTSHELL="true" INSTALLOHMYZSH="true" USERUID="$CURRENT_UID" USERGID="$CURRENT_GID" NONFREEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features common-utils install
+# This messes up permissions for wsl user
+# sudo USERNAME="$CURRENT_USER" INSTALLZSH="true" CONFIGUREZSHASDEFAULTSHELL="true" INSTALLOHMYZSH="true" USERUID="$CURRENT_UID" USERGID="$CURRENT_GID" NONFREEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features common-utils install
 zsh --version
+sudo chsh "$(whoami)" -s $(which zsh)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
 # Install Brew
-sudo USERNAME="$CURRENT_USER" BREWS="bash zsh git git-lfs sigstore/tap/gitsign gh mkcert chezmoi libpq" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" homebrew install
+sudo USERNAME="$CURRENT_USER" BREWS="bash zsh git git-lfs sigstore/tap/gitsign gh mkcert chezmoi libpq" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew --version
 bash --version
@@ -26,9 +30,12 @@ chezmoi --version
 psql --version
 gitsign-credential-cache --version
 # Install dotnet
-sudo rm -rf /usr/local/dotnet || true
-sudo USERNAME="$CURRENT_USER" TOOLS="git-credential-manager" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" dotnet install
-PATH="$PATH:/usr/local/dotnet/current"
+sudo rm -rf /usr/local/dotnet
+sudo USERNAME="$CURRENT_USER" TOOLS="git-credential-manager" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s dotnet install;
+export PATH="$PATH:/usr/local/dotnet/current";
+# Fix for git-credential-manager
+GCM_CREDENTIAL_STORE=cache
+sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
 dotnet --version
 # Install PowerShell
 sudo VERSION="latest" MODULES="Set-PsEnv,Pester" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features powershell install
@@ -37,7 +44,7 @@ pwsh --version
 export NVM_DIR="/usr/local/share/nvm"
 export PATH="$PATH:/usr/local/share/nvm/current/bin"
 export NVM_SYMLINK_CURRENT="true"
-sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" PACKAGES="@devcontainers/cli,dotenv-cli" NVM_DIR="$NVM_DIR" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" nvm install
+sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" PACKAGES="@devcontainers/cli,dotenv-cli" NVM_DIR="$NVM_DIR" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s nvm install
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 nvm --version
@@ -48,7 +55,12 @@ docker-compose --version
 sudo apt autoclean -y
 sudo apt autoremove -y
 # Continue with devspace setup
-"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s setup devspace
+"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup devspace
 # Log into GitHub
-if ! gh auth status; then gh auth login; fi
 gh config set -h github.com git_protocol https
+if ! gh auth status; then gh auth login; fi
+gh auth status
+echo "Don't forget to set your git credentials:"
+echo 'git config --global user.name "Your Name"'
+echo 'git config --global user.email "youremail@yourdomain.com"'
+echo "WARNING: Please restart shell to get latest environment variables"

@@ -16,6 +16,7 @@
       "lizebang.bash-extension-pack",
       "donjayamanne.githistory",
       "ms-dotnettools.csharp",
-      "dbaeumer.vscode-eslint"
+      "dbaeumer.vscode-eslint",
+      "ms-vscode.powershell"
     ]
 }

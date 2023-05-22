@@ -2,44 +2,40 @@
 #shellcheck shell=bash
 #shellcheck source=/dev/null
 set -e
+projectRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"
+scriptsRoot="$projectRoot/scripts"
+source "$scriptsRoot/setup/set-env-vars.sh"
 if [ "$1" = "-id" ] || [ "$1" = "--in-dependency" ]; then
   dependency="$2"
   scriptPath="$3"
   script="$4"
-  command="${5-}"
-elif [ "$1" = "-s" ] || [ "$1" = "--script" ]; then
+  command="${5:-}"
+  scriptsRoot="$projectRoot/dependencies/$dependency/src"
+elif [ "$1" = "-s" ] || [ "$1" = "--src" ]; then
   scriptPath="$2"
   script="$3"
-  command="${4-}"
-  isScript="true"
+  command="${4:-}"
+  scriptsRoot="$projectRoot/src"
 else
-  scriptPath="${1-"-h"}"
-  script="${2}"
-  command="${3-}"
+  scriptPath="${1:-"-h"}"
+  script="$2"
+  command="${3:-}"
 fi
-projectRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"
-sourceRoot="$projectRoot/src"
-scriptsRoot="$projectRoot/scripts"
-dependencySourceRoot="$projectRoot/dependencies/$dependency/src"
-source "$scriptsRoot/setup/set-env-vars.sh"
-# if [ "$scriptPath" = "-h" ] || [ "$scriptPath" = "--help" ]; then
-#   echo "Run will run a script from in the src directory with the correct env variables setup."
-#   echo "Usage: ./run <script> <command>"
-#   echo "DevContainer Feature Scripts:"
-#   echo "    Color:"
-#   echo "        sudo FAVORITE=blue ./run color/install"
-#   echo "    Hello:"
-#   echo "        sudo GREETING=Hello ./run hello/install"
-#   echo "    Homebrew:"
-#   echo "        sudo BREWS=git ./run homebrew/install"
-#   echo "        ./run homebrew/uninstall"
-executionRoot="$sourceRoot"
-if [ "$dependency" != "" ]; then
-  executionRoot="$dependencySourceRoot"
-elif [ "$isScript" = "true" ]; then
-    executionRoot="$scriptsRoot"
+if [ "$scriptPath" = "-h" ] || [ "$scriptPath" = "--help" ]; then
+  echo "Run will run a script from in the src directory with the correct env variables setup."
+  echo "Usage: ./run <script> <command>"
+  echo "DevContainer Feature Scripts:"
+  echo "    Color:"
+  echo "        sudo FAVORITE=blue ./run -s color install"
+  echo "    Hello:"
+  echo "        sudo GREETING=Hello ./run -s hello install"
+  echo "    Homebrew:"
+  echo "        sudo BREWS=git ./run -s homebrew install"
+  echo "        sudo ./run -s homebrew uninstall"
+  exit 0
 fi
-executionRoot="$executionRoot/$scriptPath"
+
+executionRoot="$scriptsRoot/$scriptPath"
 pushd "$executionRoot"
   "./$script.sh" "$command"
 popd

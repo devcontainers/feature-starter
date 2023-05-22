@@ -4,7 +4,7 @@
 #shellcheck disable=SC2086
 # Install Homebrew package manager
 set -e
-if [ -e "${BREW_PREFIX}" ]; then
+if [ -e "${BREW_PREFIX}/bin/brew" ]; then
   echo "Homebrew already installed at ${BREW_PREFIX}"
 else
   echo "Installing Homebrew..."

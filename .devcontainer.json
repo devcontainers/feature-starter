@@ -36,21 +36,21 @@
     "/bin/zsh",
     "-l",
     "-c",
-    "./run -s events update-content"
+    "./run events update-content"
   ],
   "onCreateCommand": [
     "/bin/zsh",
     "-l",
     "-c",
-    "./run -s events on-create"
+    "./run events on-create"
   ],
   "postCreateCommand": [
     "/bin/zsh",
     "-l",
     "-c",
-    "./run -s events post-create"
+    "./run events post-create"
   ],
-  "postAttachCommand": "nohup bash -c './run -s events post-attach &'",
+  "postAttachCommand": "nohup bash -c './run events post-attach &'",
   "customizations": {
     "vscode": {
       "settings": {
@@ -88,7 +88,8 @@
         "shakram02.bash-beautify",
         "lizebang.bash-extension-pack",
         "ms-dotnettools.csharp",
-        "dbaeumer.vscode-eslint"
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.powershell"
       ]
     }
   },
@@ -143,5 +144,15 @@
       "webPort": 11080,
       "vncPort": 11901
     }
-  }
+  },
+  "overrideFeatureInstallOrder": [
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages",
+    "ghcr.io/devcontainers/features/docker-in-docker",
+    "ghcr.io/devcontainers/features/common-utils",
+    "ghcr.io/AlephZ-ai/devcontainer-features/homebrew",
+    "ghcr.io/AlephZ-ai/devcontainer-features/dotnet",
+    "ghcr.io/devcontainers/features/powershell",
+    "ghcr.io/AlephZ-ai/devcontainer-features/nvm",
+    "ghcr.io/devcontainers/features/desktop-lite"
+  ]
 }

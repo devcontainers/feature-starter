@@ -6,7 +6,7 @@ DOTNET_VERSION="latest"
 DOTNET_RUNTIME_ONLY="false"
 OVERRIDE_DEFAULT_VERSION="true"
 INSTALL_USING_APT="false"
-declare -a DOTNET_TOOLS=("${TOOLS//,/ }")
+FEATURE_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"
 
 DOTNET_LATEST="7"
 DOTNET_LTS="6"
@@ -381,12 +381,6 @@ install_using_dotnet_releases_url() {
     
     updaterc "if [[ \"\${PATH}\" != *\"${CURRENT_DIR}\"* ]]; then export PATH=${CURRENT_DIR}:\${PATH}; fi"
     updaterc "export PATH=\$PATH:~/.dotnet/tools"
-
-    if [[ "${PATH}" != *"${CURRENT_DIR}"* ]]; then export PATH=${CURRENT_DIR}:${PATH}; fi
-    if [ -n "$TOOLS" ]; then
-        echo "Installing $TOOLS..."
-        for i in ${DOTNET_TOOLS[@]}; do if dotnet tool list -g "$i"; then dotnet tool update -g "$i"; else echo "Installing $i"; dotnet tool install -g "$i"; fi; done
-    fi
 }
 
 ###########################
@@ -465,6 +459,8 @@ if [ "${CHANGE_OWNERSHIP}" = "true" ]; then
     chmod -R g+r+w "${TARGET_DOTNET_ROOT}"
     find "${TARGET_DOTNET_ROOT}" -type d -print0 | xargs -n 1 -0 chmod g+s
 fi
+
+TOOLS="$TOOLS" su "$USERNAME" -c "$FEATURE_ROOT/usermode.sh"
 
 # Clean up
 rm -rf /var/lib/apt/lists/*

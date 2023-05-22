@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 #shellcheck shell=bash
 set -e
 commandPath="$1"

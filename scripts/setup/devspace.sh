@@ -8,6 +8,10 @@ set -e
 # Setup PATH
 # dotnet tools
 export PATH=$PATH:~/.dotnet/tools
+# Fix for git-credential-manager
+export GCM_CREDENTIAL_STORE=cache
+sudo rm -rf /usr/share/dotnet || false
+sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
 # NVM
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
@@ -17,8 +21,10 @@ PATH="/home/linuxbrew/.linuxbrew/opt/libpq/bin:$PATH"
 autoload -U +X compinit && compinit
 # Install Docker Completions
 sudo mkdir -p /etc/bash_completion.d
+sudo touch /etc/bash_completion.d/docker.sh
 sudo curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker.sh
 sudo mkdir -p /usr/share/zsh/vendor-completions
+sudo touch /usr/share/zsh/vendor-completions/_docker
 sudo curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/zsh/docker -o /usr/share/zsh/vendor-completions/_docker
 # Check all tools are installed
 docker --version
@@ -28,8 +34,8 @@ zsh --version
 pwsh --version
 git --version
 git-lfs --version
-# TODO: Fix
-git-credential-manager --version || true
+git-credential-manager --version
+gitsign --version
 gitsign-credential-cache --version
 gh --version
 dotnet --version
@@ -45,16 +51,15 @@ chezmoi --version
 psql --version
 devcontainer --version
 # Setup git credential manager
-# TODO: Fix
-git-credential-manager configure || true
-git-credential-manager diagnose || true
+git-credential-manager configure
+git-credential-manager diagnose
 # Make container a Root CA and trust it
 mkcert -install
 dotnet dev-certs https --trust
-# # Adding GH .ssh known hosts
-# mkdir -p ~/.ssh/
-# touch ~/.ssh/known_hosts
-# bash -c eval "$(ssh-keyscan github.com >> ~/.ssh/known_hosts)"
+# Adding GH .ssh known hosts
+mkdir -p ~/.ssh/
+touch ~/.ssh/known_hosts
+bash -c eval "$(ssh-keyscan github.com >> ~/.ssh/known_hosts)"
 # # Install Chrome
 # sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 # sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
