@@ -32,12 +32,18 @@
   },
   // https://code.visualstudio.com/remote/advancedcontainers/start-processes
   // https://containers.dev/implementors/json_reference/#lifecycle-scripts
-  "onCreateCommand": [
+  "updateContentCommand": [
     "/bin/zsh",
     "-l",
     "-c",
-    "./run -s events on-create"
+    "./run events update-content"
   ],
+  // "onCreateCommand": [
+  //   "/bin/zsh",
+  //   "-l",
+  //   "-c",
+  //   "./run -s events on-create"
+  // ],
   // "postCreateCommand": [
   //   "/bin/zsh",
   //   "-l",

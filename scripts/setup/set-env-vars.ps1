@@ -2,7 +2,7 @@ if (-not (Get-Module Set-PsEnv)) {
   Install-Module -Name Set-PsEnv
 }
 Import-Module Set-PsEnv
-$projectRoot="$PSCommandPath" | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent
+$projectRoot="$PSCommandPath" | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent
 Push-Location "$projectRoot"
 try {
     Set-PsEnv
