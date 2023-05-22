@@ -10,17 +10,16 @@ try {
   Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
 }
 
-scoop install sudo
+scoop install sudo refreshenv
 scoop update --all
-sudo scoop install --global aria2
+sudo scoop install --global sudo refreshenv aria2
 sudo scoop update --all --global
 scoop config aria2-warning-enabled false
 sudo "$PSScriptRoot/winget.ps1"
 sudo "$PSScriptRoot/chocolatey.ps1"
-$env:ChocolateyInstall = [Environment]::GetEnvironmentVariable("ChocolateyInstall", [EnvironmentVariableTarget]::Machine)
-Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
 refreshenv
-sudo scoop install --global sudo 7zip git git-with-openssh
+scoop uninstall sudo refreshenv
+sudo scoop install --global 7zip git git-with-openssh
 sudo scoop update --all --global
 refreshenv
 scoop bucket add extras
@@ -33,20 +32,21 @@ scoop bucket add nonportable
 scoop bucket add php
 scoop bucket add versions
 scoop update
-sudo scoop install --global vcredist openssh vulkan openssl git-lfs gitsign git-credential-manager gh curl wget grep sed less touch bzip2 make cmake patch cacert file dos2unix shellcheck zlib age mkcert gcc python dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts nvm chezmoi postgresql speedtest-cli speedtest gedit gimp vlc
+sudo scoop install --global vcredist vcredist2022 openssh vulkan openssl git-lfs gitsign git-credential-manager gh curl wget grep sed less touch bzip2 make cmake patch cacert file dos2unix shellcheck zlib age mkcert gcc python dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts nvm chezmoi postgresql speedtest-cli speedtest gedit gimp vlc
 sudo scoop update --all --global
 refreshenv
+sudo Stop-Service -Force sshd
 sudo C:\ProgramData\scoop\apps\openssh\current\install-sshd.ps1
+refreshenv
+sudo C:\ProgramData\scoop\apps\git\current\install-context.reg
+sudo C:\ProgramData\scoop\apps\zlib\current\register.reg
 scoop install pester
 scoop update --all
 git-credential-manager configure
 git-credential-manager diagnose
-# https://learn.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio?view=vs-2022
-# https://learn.microsoft.com/en-us/visualstudio/install/workload-and-component-ids?view=vs-2022
-# https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools?view=vs-2022&preserve-view=true
-sudo winget install --id Microsoft.VisualStudio.2022.BuildTools --override "--passive --wait --verify --fix --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.MSBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended"
 nvm version
 nvm on
+refreshenv
 # Install Node.js latest and lts
 nvm install node
 nvm install lts
@@ -78,10 +78,6 @@ scoop update
 scoop update --all
 sudo scoop update --all --global
 scoop status
-# https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools?view=vs-2022&preserve-view=true
-sudo winget install --id Microsoft.VisualStudio.2022.BuildTools --override "--passive --wait --verify --fix --add Microsoft.VisualStudio.Workload.AzureBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.DataBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.MSBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.NodeBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.OfficeBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.UniversalBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended --add Microsoft.VisualStudio.Workload.VisualStudioExtensionBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.WebBuildTools;includeRecommended --add Microsoft.VisualStudio.Workload.XamarinBuildTools;includeRecommended"
-# https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-enterprise?view=vs-2022&preserve-view=true
-# sudo winget install --id Microsoft.VisualStudio.2022.Enterprise.Preview --override "--passive --wait --verify --fix --add Microsoft.VisualStudio.Workload.Azure;includeRecommended --add Microsoft.VisualStudio.Workload.Data;includeRecommended --add Microsoft.VisualStudio.Workload.DataScience;includeRecommended --add Microsoft.VisualStudio.Workload.ManagedDesktopproductArchx64;includeRecommended --add Microsoft.VisualStudio.Workload.ManagedGame;includeRecommended --add Microsoft.VisualStudio.Workload.NativeCrossPlat;includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktopproductArchx64;includeRecommended --add Microsoft.VisualStudio.Workload.NativeGameproductArchx64;includeRecommended --add Microsoft.VisualStudio.Workload.NativeMobile;includeRecommended --add Microsoft.VisualStudio.Workload.NetCrossPlat;includeRecommended --add Microsoft.VisualStudio.Workload.NetWebproductArchx64;includeRecommended --add Microsoft.VisualStudio.Workload.Node;includeRecommended --add Microsoft.VisualStudio.Workload.Office;includeRecommended --add Microsoft.VisualStudio.Workload.Python;includeRecommended --add Microsoft.VisualStudio.Workload.UniversalproductArchx64;includeRecommended --add Microsoft.VisualStudio.Workload.VisualStudioExtension;includeRecommended"
 try {
   gh auth status
 } catch {
