@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #shellcheck shell=bash
 #shellcheck source=/dev/null
+set -e
 projectRoot="$(dirname "$(dirname "$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)")")"
 set -o allexport
 source "$projectRoot/.env"

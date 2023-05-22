@@ -36,22 +36,21 @@
     "/bin/zsh",
     "-l",
     "-c",
-    "./run events update-content"
+    "./run -s events update-content"
   ],
-  // "onCreateCommand": [
-  //   "/bin/zsh",
-  //   "-l",
-  //   "-c",
-  //   "./run -s events on-create"
-  // ],
-  // "postCreateCommand": [
-  //   "/bin/zsh",
-  //   "-l",
-  //   "-c",
-  //   "./run devspace/events/post-create"
-  // ],
-  // "postAttachCommand": "nohup bash -c './run devspace/events/post-attach &'",
-  // "updateContentCommand": "",
+  "onCreateCommand": [
+    "/bin/zsh",
+    "-l",
+    "-c",
+    "./run -s events on-create"
+  ],
+  "postCreateCommand": [
+    "/bin/zsh",
+    "-l",
+    "-c",
+    "./run -s events post-create"
+  ],
+  "postAttachCommand": "nohup bash -c './run -s events post-attach &'",
   "customizations": {
     "vscode": {
       "settings": {

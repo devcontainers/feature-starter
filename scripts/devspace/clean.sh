@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 #shellcheck shell=bash
 #shellcheck disable=SC2034
+set -e
 for j in {1..5}; do
     containerid=$(docker ps -q -f name="$DEVCONTAINER_PROJECT_NAME-devspace")
     if [ -n "$containerid" ]; then
