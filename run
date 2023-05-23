@@ -3,7 +3,7 @@
 #shellcheck source=/dev/null
 set -e
 projectRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"
-scriptsRoot="$projectRoot/scripts"
+scriptsRoot="$projectRoot/.devcontainer/scripts"
 source "$scriptsRoot/setup/set-env-vars.sh"
 if [ "$1" = "-id" ] || [ "$1" = "--in-dependency" ]; then
   dependency="$2"
