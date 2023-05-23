@@ -379,7 +379,7 @@ install_using_dotnet_releases_url() {
         fi
     fi
     
-    updaterc "if [[ \"\${PATH}\" != *\"${CURRENT_DIR}\"* ]]; then export PATH=${CURRENT_DIR}:\${PATH}; fi"
+    updaterc "export PATH=\"${CURRENT_DIR}:\${PATH}\""
 }
 
 ###########################
@@ -459,8 +459,7 @@ if [ "${CHANGE_OWNERSHIP}" = "true" ]; then
     find "${TARGET_DOTNET_ROOT}" -type d -print0 | xargs -n 1 -0 chmod g+s
 fi
 
-updaterc "export PATH=\"\$PATH:~/.dotnet/tools\""
-TOOLS="$TOOLS" su "$USERNAME" -c "$FEATURE_ROOT/usermode.sh"
+TOOLS="$TOOLS" su "$USERNAME" -c bash -l -c "$FEATURE_ROOT/usermode.sh"
 
 # Clean up
 rm -rf /var/lib/apt/lists/*

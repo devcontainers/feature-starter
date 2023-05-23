@@ -4,9 +4,10 @@
 #shellcheck disable=SC1090
 #shellcheck disable=SC2016
 set -e
-# Fix for nvm
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+# Fix for dotnet
+export PATH="/usr/local/dotnet/current:$PATH"
+# Fix for dotnet tools
+export PATH="$HOME/dotnet/tools"
 # Fix for git-credential-manager
 export GCM_CREDENTIAL_STORE=cache
 rcLine="export GCM_CREDENTIAL_STORE=cache"
@@ -16,6 +17,16 @@ rcFile=/etc/zsh/zshrc
 grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee -a "$rcFile"
 sudo rm -rf /usr/share/dotnet || false
 sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
+# Fix for homebrew
+export BREW_PREFIX="/home/linuxbrew/.linuxbrew"
+eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+# Fix for nvm
+export NVM_SYMLINK_CURRENT="true"
+export NVM_DIR="/usr/local/share/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+# Fix for psql
+brew link postgresql@15
 # Install Docker Completions
 sudo rm -rf /etc/bash_completion.d/docker.sh || true
 sudo mkdir -p /etc/bash_completion.d

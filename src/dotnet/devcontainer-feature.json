@@ -1,6 +1,6 @@
 {
     "id": "dotnet",
-    "version": "1.2.15",
+    "version": "1.2.16",
     "name": "Dotnet CLI",
     "documentationURL": "https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/dotnet",
     "description": "Installs the .NET CLI with preview, latest, and lts dotnet versions of the SDK and runtime.",

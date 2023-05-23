@@ -32,7 +32,7 @@ scoop bucket add nonportable
 scoop bucket add php
 scoop bucket add versions
 scoop update
-sudo scoop install --global vcredist vcredist2022 openssh vulkan openssl git-lfs gitsign git-credential-manager gh curl wget grep sed less touch bzip2 make cmake patch cacert file dos2unix shellcheck zlib age mkcert gcc python dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts nvm chezmoi postgresql speedtest-cli speedtest gedit gimp vlc
+sudo scoop install --global vcredist vcredist2022 openssh vulkan openssl git-lfs gitsign gh curl wget grep sed less touch bzip2 make cmake patch cacert file dos2unix shellcheck zlib age mkcert gcc python dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts nvm chezmoi postgresql speedtest-cli speedtest gedit gimp vlc
 sudo scoop update --all --global
 refreshenv
 sudo Stop-Service -Force sshd
@@ -42,6 +42,13 @@ sudo C:\ProgramData\scoop\apps\git\current\install-context.reg
 sudo C:\ProgramData\scoop\apps\zlib\current\register.reg
 scoop install pester
 scoop update --all
+try {
+  dotnet tool install -g git-credential-manager
+}
+catch {
+  dotnet tool upgrade -g git-credential-manager
+}
+
 git-credential-manager configure
 git-credential-manager diagnose
 nvm version

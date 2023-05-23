@@ -60,8 +60,8 @@ sudo apt autoremove -y
 # Continue with devspace setup
 zsh -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup devspace"
 # Log into GitHub
-gh config set -h github.com git_protocol https
 if ! gh auth status; then gh auth login; fi
+gh config set -h github.com git_protocol https
 gh auth status
 echo "Don't forget to set your git credentials:"
 echo 'git config --global user.name "Your Name"'
