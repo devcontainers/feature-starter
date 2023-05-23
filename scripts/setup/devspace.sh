@@ -4,25 +4,17 @@
 #shellcheck disable=SC1090
 #shellcheck disable=SC2016
 set -e
-updaterc() {
-    if [ "${UPDATE_RC}" = "true" ]; then
-        echo "Updating ~/.bashrc and ~./zshrc..."
-        if [[ "$(cat ~/.bashrc)" != *"$1"* ]]; then
-            echo -e "$1" >> ~/.bashrc
-        fi
-        if [ -f "~./zshrc" ] && [[ "$(cat ~./zshrc)" != *"$1"* ]]; then
-            echo -e "$1" >> ~./zshrc
-        fi
-    fi
-}
-
 # Fix for dotnet
 PATH="/usr/local/dotnet/current:$PATH"
 # Fix for dotnet tools
 PATH="$HOME/.dotnet/tools:$PATH"
 # Fix for git-credential-manager
 export GCM_CREDENTIAL_STORE=cache
-updaterc "export GCM_CREDENTIAL_STORE=cache"
+rcFile=~/.bashrc
+rcLine="export GCM_CREDENTIAL_STORE=cache"
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
+rcFile=~/.zshrc
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 sudo rm -rf /usr/share/dotnet || false
 sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
 # Fix for homebrew
@@ -96,7 +88,11 @@ sudo apt upgrade --fix-broken --fix-missing -y
 # Select default browser
 sudo update-alternatives --config x-www-browser
 export BROWSER=/usr/bin/microsoft-edge-beta
-updaterc "export BROWSER=/usr/bin/microsoft-edge-beta"
+rcFile=~/.bashrc
+rcLine="export BROWSER=/usr/bin/microsoft-edge-beta"
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
+rcFile=~/.zshrc
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 # Cleanup
 sudo apt autoclean -y
 sudo apt autoremove -y
