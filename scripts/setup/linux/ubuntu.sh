@@ -4,8 +4,6 @@
 set -e
 # Get current user
 CURRENT_USER="$(whoami)"
-CURRENT_UID="$(id -u)"
-CURRENT_GID="$(id -g "$CURRENT_USER")"
 # Update submodules
 pushd "$DEVCONTAINER_FEATURES_PROJECT_ROOT"
 git submodule sync --recursive
@@ -21,13 +19,13 @@ age-keygen --version
 # Install common-utils
 # This messes up permissions for wsl user
 # sudo USERNAME="$CURRENT_USER" INSTALLZSH="true" CONFIGUREZSHASDEFAULTSHELL="true" INSTALLOHMYZSH="true" USERUID="$CURRENT_UID" USERGID="$CURRENT_GID" NONFREEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features common-utils install
-sudo usermod -aG sudo $(whoami)
+sudo usermod -aG sudo "$(whoami)"
 sudoFile=/etc/sudoers.d/$CURRENT_USER
 sudoLine="$CURRENT_USER ALL=(root) NOPASSWD:ALL"
 sudo grep -qxF "$sudoLine" "$sudoFile" || echo "$sudoLine" | sudo tee --append "$sudoFile"
 sudo chmod 0440 "$sudoFile"
 zsh --version
-sudo chsh "$(whoami)" -s $(which zsh)
+sudo chsh "$(whoami)" -s "$(which zsh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
 # Install Brew
 sudo USERNAME="$CURRENT_USER" BREWS="bash zsh grep git git-lfs sigstore/tap/gitsign gh mkcert chezmoi postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install

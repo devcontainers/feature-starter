@@ -5,13 +5,23 @@
 #shellcheck disable=SC2016
 set -e
 # Fix for dotnet
-export PATH="/usr/local/dotnet/current:$PATH"
+export PATH="/usr/local/dotnet/current:/usr/share/dotnet:$PATH"
+rcLine='export PATH="/usr/local/dotnet/current:/usr/share/dotnet:$PATH"'
+rcFile=~/.bashrc
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
+rcFile=~/.zshrc
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 # Fix for dotnet tools
 export PATH="$HOME/.dotnet/tools:$PATH"
+rcLine='export PATH="$HOME/.dotnet/tools:$PATH"'
+rcFile=~/.bashrc
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
+rcFile=~/.zshrc
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 # Fix for git-credential-manager
 export GCM_CREDENTIAL_STORE=cache
-rcFile=~/.bashrc
 rcLine="export GCM_CREDENTIAL_STORE=cache"
+rcFile=~/.bashrc
 grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 rcFile=~/.zshrc
 grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
@@ -20,8 +30,8 @@ sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
 # Fix for homebrew
 export BREW_PREFIX="/home/linuxbrew/.linuxbrew"
 eval "$("$BREW_PREFIX/bin/brew" shellenv)"
-rcFile=~/.bashrc
 rcLine="eval \"\$("$BREW_PREFIX/bin/brew" shellenv)\""
+rcFile=~/.bashrc
 grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 rcFile=~/.zshrc
 grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
@@ -49,7 +59,7 @@ zsh --version
 pwsh --version
 git --version
 git-lfs --version
-git-credential-manager --version
+# git-credential-manager --version
 gitsign --version
 gitsign-credential-cache --version
 gh --version
@@ -67,8 +77,8 @@ chezmoi --version
 psql --version
 devcontainer --version
 # Setup git credential manager
-git-credential-manager configure
-git-credential-manager diagnose
+# git-credential-manager configure
+# git-credential-manager diagnose
 # Make container a Root CA and trust it
 mkcert -install
 dotnet dev-certs https --trust
@@ -93,8 +103,8 @@ sudo apt upgrade --fix-broken --fix-missing -y
 # Select default browser
 sudo update-alternatives --config x-www-browser
 export BROWSER=/usr/bin/microsoft-edge-beta
-rcFile=~/.bashrc
 rcLine="export BROWSER=/usr/bin/microsoft-edge-beta"
+rcFile=~/.bashrc
 grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 rcFile=~/.zshrc
 grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
