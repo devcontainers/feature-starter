@@ -5,9 +5,9 @@
 #shellcheck disable=SC2016
 set -e
 # Fix for dotnet
-PATH="/usr/local/dotnet/current:$PATH"
+export PATH="/usr/local/dotnet/current:$PATH"
 # Fix for dotnet tools
-PATH="$HOME/.dotnet/tools:$PATH"
+export PATH="$HOME/.dotnet/tools:$PATH"
 # Fix for git-credential-manager
 export GCM_CREDENTIAL_STORE=cache
 rcFile=~/.bashrc
@@ -36,7 +36,6 @@ sudo rm -rf /usr/share/zsh/vendor-completions/_docker || true
 sudo mkdir -p /usr/share/zsh/vendor-completions
 sudo touch /usr/share/zsh/vendor-completions/_docker
 sudo curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/zsh/docker -o /usr/share/zsh/vendor-completions/_docker
-export PATH="$PATH"
 # Check all tools are installed
 docker --version
 docker-compose --version
