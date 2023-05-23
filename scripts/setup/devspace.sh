@@ -54,10 +54,11 @@ gitsign --version
 gitsign-credential-cache --version
 gh --version
 dotnet --version
+nvm --version
 nvm version
-node --version
 npm --version
 npm version
+node --version
 brew --version
 age --version
 age-keygen --version
