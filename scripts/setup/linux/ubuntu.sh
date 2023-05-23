@@ -11,7 +11,9 @@ git submodule update --init --recursive
 git submodule foreach --recursive git pull origin main
 popd
 # Install apt-packages
+sudo apt update
 sudo apt install -y --fix-broken --fix-missing
+sudo apt upgrade -y
 packages="sudo,grep,bzip2,fonts-dejavu-core,g++,git,less,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
 sudo PACKAGES="$packages" UPDATEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id rocker-org/devcontainer-features apt-packages install
 age --version
@@ -58,9 +60,6 @@ nvm --version
 node --version
 docker --version
 docker-compose --version
-# Cleanup
-sudo apt autoclean -y
-sudo apt autoremove -y
 # Continue with devspace setup
 "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup devspace
 # Log into GitHub

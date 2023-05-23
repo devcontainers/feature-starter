@@ -59,6 +59,7 @@ zsh --version
 pwsh --version
 git --version
 git-lfs --version
+# TODO: Fix on devspace
 # git-credential-manager --version
 gitsign --version
 gitsign-credential-cache --version
@@ -77,6 +78,7 @@ chezmoi --version
 psql --version
 devcontainer --version
 # Setup git credential manager
+# TODO: Fix on devspace
 # git-credential-manager configure
 # git-credential-manager diagnose
 # Make container a Root CA and trust it
@@ -86,20 +88,23 @@ dotnet dev-certs https --trust
 mkdir -p ~/.ssh/
 touch ~/.ssh/known_hosts
 bash -c eval "$(ssh-keyscan github.com >> ~/.ssh/known_hosts)"
-# Install Chrome
-sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
-sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb || true
-sudo apt install --fix-broken -y
-sudo rm -rf /tmp/google-chrome-stable_current_amd64.deb
 # Install Edge
 sudo curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /tmp/microsoft.gpg
 sudo install -o root -g root -m 644 /tmp/microsoft.gpg /usr/share/keyrings/
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft.list'
 sudo rm /tmp/microsoft.gpg
 sudo apt update
-sudo apt install microsoft-edge-beta microsoft-edge-dev
+sudo apt install -y microsoft-edge-beta microsoft-edge-dev
+# TODO: Fix W: Target Packages (main/binary-amd64/Packages) is configured multiple times in /etc/apt/sources.list.d/microsoft-edge-beta.list:3 and /etc/apt/sources.list.d/microsoft-edge-dev.list:3
+# Install Chrome
+sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
+sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb || true
 sudo apt update
-sudo apt upgrade --fix-broken --fix-missing -y
+sudo apt install --fix-broken -y
+sudo rm -rf /tmp/google-chrome-stable_current_amd64.deb
+# Update
+sudo apt install --fix-broken --fix-missing -y
+sudo apt upgrade -y
 # Select default browser
 sudo update-alternatives --config x-www-browser
 export BROWSER=/usr/bin/microsoft-edge-beta
