@@ -17,8 +17,11 @@ winget install --id "Microsoft.PowerShell"
 winget install --id "Microsoft.PowerShell.Preview"
 winget install --id "RedHat.Podman"
 winget install --name "Windows Subsystem for Linux"
+wsl --update
+wsl --set-default-version 2
 winget install --name --exact "Ubuntu"
 winget install --name "Ubuntu (Preview)"
+wsl --set-default Ubuntu
 winget install --id "Docker.DockerDesktop"
 Enable-WindowsOptionalFeature -FeatureName TFTP,LegacyComponents,DirectPlay,MediaPlayback,WindowsMediaPlayer,SmbDirect,MSRDC-Infrastructure,MicrosoftWindowsPowerShellV2Root,MicrosoftWindowsPowerShellV2,SearchEngine-Client-Package,Printing-PrintToPDFServices-Features,Printing-XPSServices-Features,TelnetClient,Printing-Foundation-InternetPrinting-Client,VirtualMachinePlatform,Containers-DisposableClientVM -All -Online
 Add-WindowsCapability -Online -Name "App.StepsRecorder"
@@ -49,7 +52,6 @@ Add-WindowsCapability -Online -Name "Tools.DeveloperMode.Core"
 Add-WindowsCapability -Online -Name "Tools.Graphics.DirectX"
 Add-WindowsCapability -Online -Name "WMI-SNMP-Provider.Client"
 Add-WindowsCapability -Online -Name "XPS.Viewer"
-wsl --update
 winget install --name "Microsoft Visual Studio Code"
 winget install --name "Microsoft Visual Studio Code Insiders"
 # https://learn.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio?view=vs-2022
