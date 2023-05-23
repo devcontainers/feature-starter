@@ -20,8 +20,8 @@ brew --version
 brew config
 brew update
 brew upgrade
-# Setup recommended gcc
-while ! brew install gcc; do echo "Retrying"; done
+# Setup recommended gcc, clang, and ruby
+while ! brew install gcc ruby; do echo "Retrying"; done
 
 # Run Brew doctor to check for errors
 brew doctor

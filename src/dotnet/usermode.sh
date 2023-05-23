@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating ~/.bashrc and ~/.zshrc..."
@@ -11,6 +12,7 @@ updaterc() {
     fi
 }
 
+export PATH="/usr/local/dotnet/current:$PATH"
 declare -a DOTNET_TOOLS=("${TOOLS//,/ }")
 if [ -n "$TOOLS" ]; then
     echo "Installing $TOOLS..."

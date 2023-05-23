@@ -1,20 +1,28 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 #shellcheck shell=bash
 #shellcheck source=/dev/null
 #shellcheck disable=SC1090
 #shellcheck disable=SC2016
 set -e
+updaterc() {
+    if [ "${UPDATE_RC}" = "true" ]; then
+        echo "Updating ~/.bashrc and ~./zshrc..."
+        if [[ "$(cat ~/.bashrc)" != *"$1"* ]]; then
+            echo -e "$1" >> ~/.bashrc
+        fi
+        if [ -f "~./zshrc" ] && [[ "$(cat ~./zshrc)" != *"$1"* ]]; then
+            echo -e "$1" >> ~./zshrc
+        fi
+    fi
+}
+
 # Fix for dotnet
-export PATH="/usr/local/dotnet/current:$PATH"
+PATH="/usr/local/dotnet/current:$PATH"
 # Fix for dotnet tools
-export PATH="$HOME/dotnet/tools"
+PATH="$HOME/.dotnet/tools:$PATH"
 # Fix for git-credential-manager
 export GCM_CREDENTIAL_STORE=cache
-rcLine="export GCM_CREDENTIAL_STORE=cache"
-rcFile=/etc/bash.bashrc
-grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee -a "$rcFile"
-rcFile=/etc/zsh/zshrc
-grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee -a "$rcFile"
+updaterc "export GCM_CREDENTIAL_STORE=cache"
 sudo rm -rf /usr/share/dotnet || false
 sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
 # Fix for homebrew
@@ -36,6 +44,7 @@ sudo rm -rf /usr/share/zsh/vendor-completions/_docker || true
 sudo mkdir -p /usr/share/zsh/vendor-completions
 sudo touch /usr/share/zsh/vendor-completions/_docker
 sudo curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/zsh/docker -o /usr/share/zsh/vendor-completions/_docker
+export PATH="$PATH"
 # Check all tools are installed
 docker --version
 docker-compose --version
@@ -70,16 +79,24 @@ dotnet dev-certs https --trust
 mkdir -p ~/.ssh/
 touch ~/.ssh/known_hosts
 bash -c eval "$(ssh-keyscan github.com >> ~/.ssh/known_hosts)"
-# # Install Chrome
-# sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
-# sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
-# sudo rm -rf /tmp/google-chrome-stable_current_amd64.deb
-# # Install Edge
-# sudo curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /tmp/microsoft.gpg
-# sudo install -o root -g root -m 644 /tmp/microsoft.gpg /usr/share/keyrings/
-# sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
-# sudo rm /tmp/microsoft.gpg
-# sudo apt update
-# sudo apt install microsoft-edge-dev
-# sudo apt update
-# sudo apt upgrade --fix-broken -y
+# Install Chrome
+sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
+sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb || true
+sudo apt install --fix-broken -y
+sudo rm -rf /tmp/google-chrome-stable_current_amd64.deb
+# Install Edge
+sudo curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /tmp/microsoft.gpg
+sudo install -o root -g root -m 644 /tmp/microsoft.gpg /usr/share/keyrings/
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
+sudo rm /tmp/microsoft.gpg
+sudo apt update
+sudo apt install microsoft-edge-beta microsoft-edge-dev
+sudo apt update
+sudo apt upgrade --fix-broken --fix-missing -y
+# Select default browser
+sudo update-alternatives --config x-www-browser
+export BROWSER=/usr/bin/microsoft-edge-beta
+updaterc "export BROWSER=/usr/bin/microsoft-edge-beta"
+# Cleanup
+sudo apt autoclean -y
+sudo apt autoremove -y

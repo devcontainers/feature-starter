@@ -459,7 +459,7 @@ if [ "${CHANGE_OWNERSHIP}" = "true" ]; then
     find "${TARGET_DOTNET_ROOT}" -type d -print0 | xargs -n 1 -0 chmod g+s
 fi
 
-TOOLS="$TOOLS" su "$USERNAME" -c bash -l -c "$FEATURE_ROOT/usermode.sh"
+TOOLS="$TOOLS" su "$USERNAME" -c "$FEATURE_ROOT/usermode.sh"
 
 # Clean up
 rm -rf /var/lib/apt/lists/*

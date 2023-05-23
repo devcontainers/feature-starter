@@ -13,19 +13,24 @@ git submodule update --init --recursive
 git submodule foreach --recursive git pull origin main
 popd
 # Install apt-packages
-sudo apt install -y --fix-missing
-packages="bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
+sudo apt install -y --fix-broken --fix-missing
+packages="sudo,grep,bzip2,fonts-dejavu-core,g++,git,less,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
 sudo PACKAGES="$packages" UPDATEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id rocker-org/devcontainer-features apt-packages install
 age --version
 age-keygen --version
 # Install common-utils
 # This messes up permissions for wsl user
 # sudo USERNAME="$CURRENT_USER" INSTALLZSH="true" CONFIGUREZSHASDEFAULTSHELL="true" INSTALLOHMYZSH="true" USERUID="$CURRENT_UID" USERGID="$CURRENT_GID" NONFREEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features common-utils install
+sudo usermod -aG sudo $(whoami)
+sudoFile=/etc/sudoers.d/$CURRENT_USER
+sudoLine="$CURRENT_USER ALL=(root) NOPASSWD:ALL"
+sudo grep -qxF "$sudoLine" "$sudoFile" || echo "$sudoLine" | sudo tee --append "$sudoFile"
+sudo chmod 0440 "$sudoFile"
 zsh --version
 sudo chsh "$(whoami)" -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
 # Install Brew
-sudo USERNAME="$CURRENT_USER" BREWS="bash zsh git git-lfs sigstore/tap/gitsign gh mkcert chezmoi postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
+sudo USERNAME="$CURRENT_USER" BREWS="bash zsh grep git git-lfs sigstore/tap/gitsign gh mkcert chezmoi postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew --version
@@ -33,7 +38,6 @@ bash --version
 zsh --version
 mkcert --version
 chezmoi --version
-psql --version
 gitsign-credential-cache --version
 # Install dotnet
 sudo rm -rf /usr/local/dotnet
@@ -58,7 +62,7 @@ docker-compose --version
 sudo apt autoclean -y
 sudo apt autoremove -y
 # Continue with devspace setup
-zsh -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup devspace"
+"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup devspace
 # Log into GitHub
 if ! gh auth status; then gh auth login; fi
 gh config set -h github.com git_protocol https
