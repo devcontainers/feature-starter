@@ -6,9 +6,15 @@ set -e
 CURRENT_USER="$(whoami)"
 CURRENT_UID="$(id -u)"
 CURRENT_GID="$(id -g "$CURRENT_USER")"
+# Update submodules
+pushd "$DEVCONTAINER_FEATURES_PROJECT_ROOT"
+git submodule sync --recursive
+git submodule update --init --recursive
+git submodule foreach --recursive git pull origin main
+popd
 # Install apt-packages
 sudo apt install -y --fix-missing
-packages="bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,postgresql,postgresql-contrib,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
+packages="bzip2,sudo,fonts-dejavu-core,g++,git,less,libz-dev,locales,openssl,make,netbase,openssh-client,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,file,wget,curl,zsh,bash,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,gcc,bash-completion,age,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
 sudo PACKAGES="$packages" UPDATEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id rocker-org/devcontainer-features apt-packages install
 age --version
 age-keygen --version
@@ -52,7 +58,7 @@ docker-compose --version
 sudo apt autoclean -y
 sudo apt autoremove -y
 # Continue with devspace setup
-"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup devspace
+zsh -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup devspace"
 # Log into GitHub
 gh config set -h github.com git_protocol https
 if ! gh auth status; then gh auth login; fi

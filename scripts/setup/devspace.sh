@@ -3,40 +3,25 @@
 #shellcheck source=/dev/null
 #shellcheck disable=SC1090
 #shellcheck disable=SC2016
-updaterc() {
-    if [ "${UPDATE_RC}" = "true" ]; then
-        echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        if [[ "$(cat /etc/bash.bashrc)" != *"$1"* ]]; then
-            echo -e "$1" >> /etc/bash.bashrc
-        fi
-        if [ -f "/etc/zsh/zshrc" ] && [[ "$(cat /etc/zsh/zshrc)" != *"$1"* ]]; then
-            echo -e "$1" >> /etc/zsh/zshrc
-        fi
-    fi
-}
-
-# Setup ENV
 set -e
-# Setup PATH
-# dotnet tools
-export PATH=$PATH:~/.dotnet/tools
-# Fix for git-credential-manager
-export GCM_CREDENTIAL_STORE=cache
-updaterc "export GCM_CREDENTIAL_STORE=cache"
-sudo rm -rf /usr/share/dotnet || false
-sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
-# NVM
+# Fix for nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-# Homebrew
-export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-# Setup completions
-autoload -U +X compinit && compinit
+# Fix for git-credential-manager
+export GCM_CREDENTIAL_STORE=cache
+rcLine="export GCM_CREDENTIAL_STORE=cache"
+rcFile=/etc/bash.bashrc
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee -a "$rcFile"
+rcFile=/etc/zsh/zshrc
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee -a "$rcFile"
+sudo rm -rf /usr/share/dotnet || false
+sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
 # Install Docker Completions
+sudo rm -rf /etc/bash_completion.d/docker.sh || true
 sudo mkdir -p /etc/bash_completion.d
 sudo touch /etc/bash_completion.d/docker.sh
 sudo curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker.sh
+sudo rm -rf /usr/share/zsh/vendor-completions/_docker || true
 sudo mkdir -p /usr/share/zsh/vendor-completions
 sudo touch /usr/share/zsh/vendor-completions/_docker
 sudo curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/zsh/docker -o /usr/share/zsh/vendor-completions/_docker
