@@ -10,7 +10,7 @@ if [ "$1" = "-id" ] || [ "$1" = "--in-dependency" ]; then
   scriptPath="$3"
   script="$4"
   command="${5:-}"
-  scriptsRoot="$projectRoot/dependencies/$dependency/src"
+  scriptsRoot="$projectRoot/.devcontainer/dependencies/$dependency/src"
 elif [ "$1" = "-s" ] || [ "$1" = "--src" ]; then
   scriptPath="$2"
   script="$3"
