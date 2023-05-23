@@ -20,6 +20,11 @@ sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
 # Fix for homebrew
 export BREW_PREFIX="/home/linuxbrew/.linuxbrew"
 eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+rcFile=~/.bashrc
+rcLine="eval \"\$("$BREW_PREFIX/bin/brew" shellenv)\""
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
+rcFile=~/.zshrc
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 # Fix for nvm
 export NVM_SYMLINK_CURRENT="true"
 export NVM_DIR="/usr/local/share/nvm"
