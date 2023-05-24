@@ -141,7 +141,7 @@
     // https://github.com/devcontainers/features/tree/main/src/node
     "ghcr.io/AlephZ-ai/devcontainer-features/nvm": {
       "nodeGypDependencies": "true",
-      "packages": "@devcontainers/cli,dotenv-cli"
+      "packages": "@npmcli/fs,@devcontainers/cli,dotenv-cli"
     },
     // https://github.com/devcontainers/features/tree/main/src/desktop-lite
     "ghcr.io/devcontainers/features/desktop-lite:1": {

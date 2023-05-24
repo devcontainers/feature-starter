@@ -3,8 +3,6 @@
 #example=https://github.com/devcontainers/features/blob/main/test/azure-cli/test.sh
 #example=https://github.com/meaningful-ooo/devcontainer-features/blob/main/test/homebrew/test.sh
 set -e
-# refresh environment profile
-reset
 source /etc/os-release
 
 # Import test library for `check` command

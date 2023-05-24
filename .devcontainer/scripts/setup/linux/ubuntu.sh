@@ -22,13 +22,8 @@ age-keygen --version
 # Install common-utils
 # This messes up permissions for wsl user
 # sudo USERNAME="$CURRENT_USER" INSTALLZSH="true" CONFIGUREZSHASDEFAULTSHELL="true" INSTALLOHMYZSH="true" USERUID="$CURRENT_UID" USERGID="$CURRENT_GID" NONFREEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features common-utils install
-sudo usermod -aG sudo "$(whoami)"
-sudoFile=/etc/sudoers.d/$CURRENT_USER
-sudoLine="$CURRENT_USER ALL=(root) NOPASSWD:ALL"
-sudo grep -qxF "$sudoLine" "$sudoFile" || echo "$sudoLine" | sudo tee --append "$sudoFile"
-sudo chmod 0440 "$sudoFile"
 zsh --version
-sudo chsh "$(whoami)" -s "$(which zsh)"
+sudo chsh "$CURRENT_USER" -s "$(which zsh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
 # Install Brew
 sudo USERNAME="$CURRENT_USER" BREWS="bash zsh grep git git-lfs sigstore/tap/gitsign gh mkcert chezmoi postgresql@15" LINKS="postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
@@ -55,7 +50,7 @@ pwsh --version
 export NVM_DIR="/usr/local/share/nvm"
 export PATH="$PATH:/usr/local/share/nvm/current/bin"
 export NVM_SYMLINK_CURRENT="true"
-sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" PACKAGES="@devcontainers/cli,dotenv-cli" NVM_DIR="$NVM_DIR" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s nvm install
+sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" PACKAGES="@npmcli/fs,@devcontainers/cli,dotenv-cli" NVM_DIR="$NVM_DIR" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s nvm install
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 nvm --version
