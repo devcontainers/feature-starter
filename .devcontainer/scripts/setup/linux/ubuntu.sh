@@ -26,7 +26,7 @@ zsh --version
 sudo chsh "$CURRENT_USER" -s "$(which zsh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
 # Install Brew
-sudo USERNAME="$CURRENT_USER" BREWS="bash zsh file-formula curl wget grep bzip2 git git-lfs less openssl@1.1 openssl@3 openssh make cmake ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib-ng bash-completion age gedit asdf sigstore/tap/gitsign gh mkcert chezmoi postgresql@15" LINKS="postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
+sudo USERNAME="$CURRENT_USER" BREWS="bash zsh file-formula curl wget grep bzip2 git git-lfs less openssl@1.1 openssl@3 openssh make cmake ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib zlib-ng age gedit asdf sigstore/tap/gitsign gh mkcert chezmoi postgresql@15" LINKS="postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
 # Refresh environment profile
 reset
 brew --version

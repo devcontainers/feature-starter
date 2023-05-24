@@ -126,7 +126,7 @@
     },
     // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
     "ghcr.io/AlephZ-ai/devcontainer-features/homebrew": {
-      "brews": "bash zsh file-formula curl wget grep bzip2 git git-lfs less openssl@1.1 openssl@3 openssh make cmake ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib-ng bash-completion age gedit asdf sigstore/tap/gitsign gh mkcert chezmoi postgresql@15",
+      "brews": "bash zsh file-formula curl wget grep bzip2 git git-lfs less openssl@1.1 openssl@3 openssh make cmake ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib zlib-ng age gedit asdf sigstore/tap/gitsign gh mkcert chezmoi postgresql@15",
       "links": "postgresql@15"
     },
     // https://github.com/devcontainers/features/tree/main/src/dotnet
