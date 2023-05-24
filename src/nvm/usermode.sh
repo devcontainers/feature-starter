@@ -1,8 +1,27 @@
 #!/usr/bin/env bash
 #shellcheck source=/dev/null
 #shellcheck disable=SC2068
-declare -a NPM_PACKAGES=("${PACKAGES//,/ }")
 set -e
+declare -a NPM_PACKAGES=("${PACKAGES//,/ }")
+updaterc() {
+  set -e
+  echo "Updating $HOME/.bashrc and $HOME/.zshrc..."
+  if [[ "$(cat "$HOME/.bashrc")" != *"$1"* ]]; then
+      echo -e "$1" >> "$HOME/.bashrc"
+  fi
+  if [ -f "$HOME/.zshrc" ] && [[ "$(cat "$HOME/.zshrc")" != *"$1"* ]]; then
+      echo -e "$1" >> "$HOME/.zshrc"
+  fi
+}
+
+# Snippet that should be added into rc / profiles
+nvm_rc_snippet="$(cat << EOF
+export NVM_DIR="$NVM_DIR"
+[ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
+[ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
+EOF
+)"
+
 umask 0002
 # Create a symlink to the installed version for use in Dockerfile PATH statements
 export NVM_SYMLINK_CURRENT="true"
@@ -39,3 +58,6 @@ if [ -n "$PACKAGES" ]; then
     echo "Installing $PACKAGES in latest..."
     for i in ${NPM_PACKAGES[@]}; do echo "Installing $i"; npm i -g "$i"; done
 fi
+
+updaterc 'export NVM_SYMLINK_CURRENT="true"'
+updaterc "${nvm_rc_snippet}"
