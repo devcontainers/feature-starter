@@ -443,7 +443,7 @@ if [ ! -z "${ADDITIONAL_VERSIONS}" ]; then
         read -a additional_versions <<< "$ADDITIONAL_VERSIONS"
         for version in "${additional_versions[@]}"; do
             OVERRIDE_DEFAULT_VERSION="false"
-            install_using_apt "${DOTNET_SDK_OR_RUNTIME}" "${version}"
+            install_using_apt "${DOTNET_SDK_OR_RUNTIME}" "${version}" "true"
         done
     IFS=$OLDIFS
 fi
