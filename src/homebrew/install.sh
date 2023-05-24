@@ -33,6 +33,7 @@ fi
 
 # Checks if packages are installed and installs them if not
 check_packages() {
+  set -e
   if ! dpkg -s "$@" > /dev/null 2>&1; then
       if [ "$(find /var/lib/apt/lists/* | wc -l)" = "0" ]; then
           echo "Running apt-get update..."
@@ -43,6 +44,7 @@ check_packages() {
 }
 
 updaterc() {
+    set -e
     echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
     if [[ "$(cat /etc/bash.bashrc)" != *"$1"* ]]; then
         echo -e "$1" >> /etc/bash.bashrc
@@ -54,6 +56,7 @@ updaterc() {
 
 # Snippet that should be added into rc / profiles
 nvm_rc_snippet="$(cat << EOF
+export PATH="$BREW_PREFIX/bin:\$PATH"
 eval "\$("$BREW_PREFIX/bin/brew" shellenv)"
 EOF
 )"

@@ -4,6 +4,24 @@
 #shellcheck disable=SC2086
 # Install Homebrew package manager
 set -e
+updaterc() {
+  set -e
+  echo "Updating $HOME/.bashrc and $HOME/.zshrc..."
+  if [[ "$(cat $HOME/.bashrc)" != *"$1"* ]]; then
+      echo -e "$1" >> $HOME/.bashrc
+  fi
+  if [ -f "$HOME/.zshrc" ] && [[ "$(cat $HOME/.zshrc)" != *"$1"* ]]; then
+      echo -e "$1" >> $HOME/.zshrc
+  fi
+}
+
+# Snippet that should be added into rc / profiles
+nvm_rc_snippet="$(cat << EOF
+export PATH="$BREW_PREFIX/bin:\$PATH"
+eval "\$("$BREW_PREFIX/bin/brew" shellenv)"
+EOF
+)"
+
 if [ -e "${BREW_PREFIX}/bin/brew" ]; then
   echo "Homebrew already installed at ${BREW_PREFIX}"
 else
@@ -32,3 +50,5 @@ else
   echo "Installing brews: $BREWS..."
   while ! brew install --include-test $BREWS; do echo "Retrying"; done
 fi
+
+updaterc "$nvm_rc_snippet"

@@ -8,7 +8,8 @@ CURRENT_USER="$(whoami)"
 pushd "$DEVCONTAINER_FEATURES_PROJECT_ROOT"
 git submodule sync --recursive
 git submodule update --init --recursive
-git submodule foreach --recursive git pull #origin main
+git submodule foreach --recursive git checkout main
+git submodule foreach --recursive git pull
 popd
 # Install apt-packages
 sudo apt update
