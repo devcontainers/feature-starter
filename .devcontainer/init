@@ -1,1 +1,1 @@
-./run setup set-env-vars
+./run setup environment

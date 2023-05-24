@@ -70,6 +70,9 @@ gh auth status
 # TODO: Fix
 # git-credential-manager configure
 # git-credential-manager diagnose
+# Setup environment
+reset
+./run setup environment
 echo "Don't forget to set your git credentials:"
 echo 'git config --global user.name "Your Name"'
 echo 'git config --global user.email "youremail@yourdomain.com"'

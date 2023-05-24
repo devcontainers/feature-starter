@@ -11,7 +11,7 @@ param (
 
 $projectRoot = "$PSCommandPath" | Split-Path -Parent
 $scriptsRoot = "$projectRoot/.devcontainer/scripts"
-& "$scriptsRoot/setup/set-env-vars.ps1"
+& "$scriptsRoot/setup/environment.ps1"
 $executionRoot = "$scriptsRoot/$scriptPath"
 Push-Location "$executionRoot"
 try {

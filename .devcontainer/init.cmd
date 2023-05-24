@@ -1,2 +1,2 @@
 @ECHO OFF
-run.cmd setup set-env-vars
+run.cmd setup environment
