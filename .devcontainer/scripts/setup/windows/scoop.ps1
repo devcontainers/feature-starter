@@ -15,8 +15,9 @@ scoop update --all
 sudo scoop install --global sudo refreshenv aria2
 sudo scoop update --all --global
 scoop config aria2-warning-enabled false
-sudo "$PSScriptRoot/winget.ps1"
-sudo "$PSScriptRoot/chocolatey.ps1"
+sudo "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows winget
+refreshenv
+sudo "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows chocolatey
 refreshenv
 scoop uninstall sudo refreshenv
 sudo scoop install --global 7zip git git-with-openssh
@@ -90,4 +91,3 @@ try {
 } catch {
   gh auth login
 }
-sudo winget install --id Microsoft.PowerToys

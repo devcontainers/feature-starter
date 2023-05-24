@@ -6,8 +6,7 @@
 set -e
 # Refresh environment profile
 reset
-cat ~/.zshrc
-cat ~/.bashrc
+source ~/.bashrc
 # Fix for git-credential-manager
 # TODO: Finish fixing
 # export GCM_CREDENTIAL_STORE=cache
@@ -16,12 +15,9 @@ cat ~/.bashrc
 # grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 # rcFile=~/.zshrc
 # grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
-# Fix for node
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-sudo rm -rf /usr/share/dotnet || false
-sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
-# Check all tools are installed
+# sudo rm -rf /usr/share/dotnet || false
+# sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
+# Test all tools are installed
 docker --version
 docker-compose --version
 bash --version
