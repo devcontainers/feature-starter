@@ -5,8 +5,8 @@ for($j=1; $j -le 5; $j++) {
   }
 
   docker volume rm -f vscode
-  $volumes = docker volume ls -q -f name="${env:DEVCONTAINER_PROJECT_NAME}_devcontainer"
-  if ($volumes) {
+  $volumes = docker volume ls -q -f name="${env:DEVCONTAINER_FEATURES_PROJECT_NAME}_devcontainer"
+   if ($volumes) {
       $volumes | ForEach-Object { docker volume rm -f $_ }
   }
 

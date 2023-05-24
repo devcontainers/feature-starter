@@ -9,7 +9,7 @@ for j in {1..5}; do
     fi
 
     docker volume rm -f vscode
-    volumes=$(docker volume ls -q -f name="${DEVCONTAINER_PROJECT_NAME}_devcontainer")
+    volumes=$(docker volume ls -q -f name="${DEVCONTAINER_FEATURES_PROJECT_NAME}_devcontainer")
     if [ -n "$volumes" ]; then
         echo "$volumes" | xargs docker volume rm -f
     fi
