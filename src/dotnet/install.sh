@@ -459,6 +459,7 @@ if [ "${CHANGE_OWNERSHIP}" = "true" ]; then
     find "${TARGET_DOTNET_ROOT}" -type d -print0 | xargs -n 1 -0 chmod g+s
 fi
 
+updaterc "export PATH=\"/home/$USERNAME/.dotnet/tools:\$PATH\""
 TOOLS="$TOOLS" su "$USERNAME" -c "$FEATURE_ROOT/usermode.sh"
 
 # Clean up

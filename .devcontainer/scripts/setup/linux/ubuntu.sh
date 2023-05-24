@@ -39,9 +39,8 @@ psql --version
 # Install dotnet
 sudo rm -rf /usr/local/dotnet
 sudo USERNAME="$CURRENT_USER" TOOLS="git-credential-manager" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s dotnet install;
-export PATH="/usr/local/dotnet/current:$PATH"
-export PATH="$HOME/.dotnet/tools:$PATH"
-export GCM_CREDENTIAL_STORE=cache
+# Refresh environment profile
+reset
 dotnet --version
 # Install PowerShell
 sudo VERSION="latest" MODULES="Set-PsEnv,Pester" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features powershell install

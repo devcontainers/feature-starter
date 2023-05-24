@@ -6,20 +6,6 @@
 set -e
 # Refresh environment profile
 reset
-# Fix for dotnet
-export PATH="/usr/local/dotnet/current:/usr/share/dotnet:$PATH"
-rcLine='export PATH="/usr/local/dotnet/current:/usr/share/dotnet:$PATH"'
-rcFile=~/.bashrc
-grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
-rcFile=~/.zshrc
-grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
-# Fix for dotnet tools
-export PATH="$HOME/.dotnet/tools:$PATH"
-rcLine='export PATH="$HOME/.dotnet/tools:$PATH"'
-rcFile=~/.bashrc
-grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
-rcFile=~/.zshrc
-grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 # Fix for git-credential-manager
 export GCM_CREDENTIAL_STORE=cache
 rcLine="export GCM_CREDENTIAL_STORE=cache"

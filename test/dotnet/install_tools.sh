@@ -8,11 +8,6 @@ set -e
 echo "Installing test library..."
 source dev-container-features-test-lib
 
-# Fix for git-credential-manager
-export GCM_CREDENTIAL_STORE=cache
-sudo rm -rf /usr/share/dotnet || false
-sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
-
 # Extension-specific tests
 check "git-credential-manager --version" git-credential-manager --version
 
