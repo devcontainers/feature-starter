@@ -126,7 +126,8 @@
     },
     // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
     "ghcr.io/AlephZ-ai/devcontainer-features/homebrew": {
-      "brews": "bash zsh grep git git-lfs sigstore/tap/gitsign gh mkcert chezmoi postgresql@15"
+      "brews": "bash zsh grep git git-lfs sigstore/tap/gitsign gh mkcert chezmoi postgresql@15",
+      "links": "postgresql@15"
     },
     // https://github.com/devcontainers/features/tree/main/src/dotnet
     "ghcr.io/AlephZ-ai/devcontainer-features/dotnet": {

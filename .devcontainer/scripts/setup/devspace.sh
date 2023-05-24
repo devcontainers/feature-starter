@@ -4,6 +4,8 @@
 #shellcheck disable=SC1090
 #shellcheck disable=SC2016
 set -e
+# Refresh environment profile
+reset
 # Fix for dotnet
 export PATH="/usr/local/dotnet/current:/usr/share/dotnet:$PATH"
 rcLine='export PATH="/usr/local/dotnet/current:/usr/share/dotnet:$PATH"'
@@ -27,21 +29,11 @@ rcFile=~/.zshrc
 grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 sudo rm -rf /usr/share/dotnet || false
 sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
-# Fix for homebrew
-export BREW_PREFIX="/home/linuxbrew/.linuxbrew"
-eval "$("$BREW_PREFIX/bin/brew" shellenv)"
-rcLine="eval \"\$("$BREW_PREFIX/bin/brew" shellenv)\""
-rcFile=~/.bashrc
-grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
-rcFile=~/.zshrc
-grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 # Fix for nvm
 export NVM_SYMLINK_CURRENT="true"
 export NVM_DIR="/usr/local/share/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-# Fix for psql
-brew link postgresql@15
 # Install Docker Completions
 sudo rm -rf /etc/bash_completion.d/docker.sh || true
 sudo mkdir -p /etc/bash_completion.d

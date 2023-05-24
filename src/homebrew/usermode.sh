@@ -51,4 +51,11 @@ else
   while ! brew install --include-test $BREWS; do echo "Retrying"; done
 fi
 
+if [ -z "$LINKS" ]; then
+  echo "No brews to link"
+else
+  echo "Linking brews: $LINKS..."
+  brew link $LINKS
+fi
+
 updaterc "$nvm_rc_snippet"

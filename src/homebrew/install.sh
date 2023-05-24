@@ -88,6 +88,6 @@ while ! check_packages \
 
 sudo mkdir -p "$BREW_PREFIX"
 sudo chown "$USERNAME":"$USERNAME" "$BREW_PREFIX"
-BREW_PREFIX="$BREW_PREFIX" BREWS="$BREWS" su "$USERNAME" -c ./usermode.sh
+BREW_PREFIX="$BREW_PREFIX" BREWS="$BREWS" LINKS="$LINKS" su "$USERNAME" -c ./usermode.sh
 updaterc "$nvm_rc_snippet"
 echo "Done!"

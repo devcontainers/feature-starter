@@ -1,7 +1,7 @@
 {
     "name": "Homebrew",
     "id": "homebrew",
-    "version": "3.2.16",
+    "version": "3.2.17",
     "description": "Installs Homebrew",
     "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/homebrew",
     "options": {
@@ -14,8 +14,13 @@
             "type": "string",
             "default": "",
             "description": "Space seperated list of Brews to install after installing homebrew"
-        }
-    },
+        },
+        "links": {
+          "type": "string",
+          "default": "",
+          "description": "Space seperated list of Brews to force link after installing"
+      }
+  },
     "containerEnv": {
       "BREW_PREFIX": "/home/linuxbrew/.linuxbrew",
       "PATH": "/home/linuxbrew/.linuxbrew/bin:${PATH}"

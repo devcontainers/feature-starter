@@ -31,15 +31,16 @@ zsh --version
 sudo chsh "$(whoami)" -s "$(which zsh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
 # Install Brew
-sudo USERNAME="$CURRENT_USER" BREWS="bash zsh grep git git-lfs sigstore/tap/gitsign gh mkcert chezmoi postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
-export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+sudo USERNAME="$CURRENT_USER" BREWS="bash zsh grep git git-lfs sigstore/tap/gitsign gh mkcert chezmoi postgresql@15" LINKS="postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
+# Refresh environment profile
+reset
 brew --version
 bash --version
 zsh --version
 mkcert --version
 chezmoi --version
 gitsign-credential-cache --version
+psql --version
 # Install dotnet
 sudo rm -rf /usr/local/dotnet
 sudo USERNAME="$CURRENT_USER" TOOLS="git-credential-manager" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s dotnet install;
