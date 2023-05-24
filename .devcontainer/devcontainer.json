@@ -32,6 +32,7 @@
   },
   // https://code.visualstudio.com/remote/advancedcontainers/start-processes
   // https://containers.dev/implementors/json_reference/#lifecycle-scripts
+  "initializeCommand": [".devcontainer/init"],
   "updateContentCommand": [
     "/bin/zsh",
     "-l",
@@ -150,6 +151,10 @@
       "password": "vscode",
       "webPort": 11080,
       "vncPort": 11901
+    },
+    // https://github.com/devcontainers-contrib/features/tree/main/src/bash-command
+    "ghcr.io/devcontainers-contrib/features/bash-command:1": {
+      "command": "${localEnv:DEVCONTAINER_POST_BUILD_COMMAND}"
     }
   },
   "overrideFeatureInstallOrder": [
@@ -160,6 +165,7 @@
     "ghcr.io/AlephZ-ai/devcontainer-features/dotnet",
     "ghcr.io/devcontainers/features/powershell",
     "ghcr.io/AlephZ-ai/devcontainer-features/nvm",
-    "ghcr.io/devcontainers/features/desktop-lite"
+    "ghcr.io/devcontainers/features/desktop-lite",
+    "ghcr.io/devcontainers-contrib/features/bash-command:1"
   ]
 }
