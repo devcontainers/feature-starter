@@ -50,12 +50,16 @@ export NVM_DIR="/usr/local/share/nvm"
 export PATH="$PATH:/usr/local/share/nvm/current/bin"
 export NVM_SYMLINK_CURRENT="true"
 sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" PACKAGES="@npmcli/fs,@devcontainers/cli,dotenv-cli" NVM_DIR="$NVM_DIR" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s nvm install
+# Refresh environment profile
+reset
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 nvm --version
 node --version
 docker --version
 docker-compose --version
+# Run post-build command
+sudo COMMAND="$DEVCONTAINER_POST_BUILD_COMMAND" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers-contrib/features bash-command install
 # Continue with devspace setup
 "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup devspace
 # Log into GitHub
@@ -63,8 +67,9 @@ if ! gh auth status; then gh auth login; fi
 gh config set -h github.com git_protocol https
 gh auth status
 # Setup git credential manager
-git-credential-manager configure
-git-credential-manager diagnose
+# TODO: Fix
+# git-credential-manager configure
+# git-credential-manager diagnose
 echo "Don't forget to set your git credentials:"
 echo 'git config --global user.name "Your Name"'
 echo 'git config --global user.email "youremail@yourdomain.com"'
