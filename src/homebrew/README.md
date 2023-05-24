@@ -17,6 +17,7 @@ Installs Homebrew
 |-----|-----|-----|-----|
 | username | User to install Homebrew | string | automatic |
 | brews | Space seperated list of Brews to install after installing homebrew | string | - |
+| links | Space seperated list of Brews to force link after installing | string | - |
 
 
 
