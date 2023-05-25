@@ -82,6 +82,7 @@ docker-compose --version
 "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup devspace
 # Setup windows browser as default
 alias xdg-open=wslview
+export BROWSER=wslview
 sed -i 's/^export BROWSER=.*$/export BROWSER=wslview/' ~/.bashrc
 sed -i 's/^export BROWSER=.*$/export BROWSER=wslview/' ~/.zshrc
 # Log into GitHub
