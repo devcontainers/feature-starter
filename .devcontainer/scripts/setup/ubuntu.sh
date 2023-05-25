@@ -67,7 +67,7 @@ node --version
 docker --version
 docker-compose --version
 # Run post-build command
-sudo USERNAME="$CURRENT_USER" COMMAND="$DEVCONTAINER_POST_BUILD_COMMAND" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s bash-command install
+"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/devspace post-build
 # Refresh environment profile
 source ~/.bashrc
 # Continue with devspace setup
@@ -85,7 +85,7 @@ gh auth status
 # Refresh environment profile
 source ~/.bashrc
 # Setup environment
-"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
+source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
 echo "Don't forget to set your git credentials:"
 echo 'git config --global user.name "Your Name"'
 echo 'git config --global user.email "youremail@yourdomain.com"'
