@@ -9,7 +9,7 @@ source dev-container-features-test-lib
 
 check "echo \$HELLO" [ "$(source /etc/environment && echo \"\$HELLO\")" == "5" ]
 echo -e "$(whoami)"
-check "echo \$CURRENT_USER" [ "$(source \"\$HOME/.bashrc\" && echo \"\$CURRENT_USER\")" == "$(whoami)" ]
+check "echo \$CURRENT_USER" [ "$(source "$HOME/.bashrc" && echo \"\$CURRENT_USER\")" == "$(whoami)" ]
 
 
 reportResults
