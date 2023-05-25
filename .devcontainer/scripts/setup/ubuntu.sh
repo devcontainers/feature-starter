@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #shellcheck shell=bash
 #shellcheck source=/dev/null
 #shellcheck disable=SC2016
