@@ -22,6 +22,8 @@ try {
 } catch {
   gh auth login
 }
+gh config set -h github.com git_protocol https
+gh auth status
 
 git-credential-manager configure
 git-credential-manager diagnose
