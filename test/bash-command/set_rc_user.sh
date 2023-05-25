@@ -14,7 +14,7 @@ mkdir -p $sudoers_dir
 sudo touch $sudoers_file
 grep -qF "$line" $sudoers_file || echo "$line" >> $sudoers_file
 chmod 0440 $sudoers_file
-check "echo \$CURRENT_USER" [ "$(su "$user" -c 'source $HOME/.bashrc && echo $CURRENT_USER')" == "$user" ]
+check "echo \$CURRENT_USER $(whoami)" [ "$(su "$user" -c 'source $HOME/.bashrc && echo $CURRENT_USER')" == "$user" ]
 
 
 reportResults
