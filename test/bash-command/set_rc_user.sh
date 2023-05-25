@@ -6,7 +6,8 @@ set -e
 source dev-container-features-test-lib
 
 
-check "echo \$CURRENT_USER" "su vscode -c 'bash -l -c \"source ~/.bashrc && [[ \\\"$CURRENT_USER\\\" == \\\"$(whoami)\\\" ]]\"'"
+cmd="bash -l -c 'source ~/.bashrc && echo \$CURRENT_USER'"
+check "echo \$CURRENT_USER" "[ \"$(su vscode -c "$cmd")\" == \"$(whoami)\" ]"
 
 
 reportResults
