@@ -15,6 +15,8 @@ refreshenv
 refreshenv
 & "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows nvm
 refreshenv
+sudo "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows pwsh-modules
+refreshenv
 # Setup environment
 & "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
 try {

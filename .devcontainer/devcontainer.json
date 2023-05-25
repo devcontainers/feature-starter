@@ -5,17 +5,12 @@
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   // https://aka.ms/dev-containers-non-root.
   "remoteUser": "vscode",
-  // https://code.visualstudio.com/remote/advancedcontainers/environment-variables
   "userEnvProbe": "loginInteractiveShell",
-  "remoteEnv": {
-    // WSLg GUI Apps in Dev Space
-    // "TERM": "${localEnv:TERM}",
-    // "DISPLAY": "${localEnv:DISPLAY}",
-    // "WAYLAND_DISPLAY":  "${localEnv:WAYLAND_DISPLAY}",
-    // "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
-    // "WSL2_GUI_APPS_ENABLED": "${localEnv:WSL2_GUI_APPS_ENABLED}",
-    // "ALEPHZ_AI_ADMIN_GITHUB_TOKEN": "${localEnv:ALEPHZ_AI_ADMIN_GITHUB_TOKEN}"
-  },
+  // https://code.visualstudio.com/remote/advancedcontainers/environment-variables
+  "containerEnv": {},
+  "remoteEnv": {},
+  // https://code.visualstudio.com/remote/advancedcontainers/add-local-file-mount
+  "mounts": [],
   "forwardPorts": [
     11080,
     11901
@@ -32,7 +27,9 @@
   },
   // https://code.visualstudio.com/remote/advancedcontainers/start-processes
   // https://containers.dev/implementors/json_reference/#lifecycle-scripts
-  "initializeCommand": [".devcontainer/init"],
+  "initializeCommand": [
+    ".devcontainer/init"
+  ],
   "updateContentCommand": [
     "/bin/zsh",
     "-l",

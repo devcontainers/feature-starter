@@ -5,6 +5,13 @@
 set -e
 # Get current user
 CURRENT_USER="$(whoami)"
+# Update max open files
+sudo sh -c "ulimit -n 1048576"
+rcLine="$CURRENT_USER soft nofile 4096"
+rcFile=/etc/security/limits.conf
+sudo grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee --append "$rcFile"
+rcLine="$CURRENT_USER hard nofile 1048576"
+sudo grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee --append "$rcFile"
 # Install apt-packages
 sudo apt update
 sudo apt install -y --fix-broken --fix-missing
@@ -17,7 +24,7 @@ git submodule update --init --recursive
 git submodule foreach --recursive git checkout main
 git submodule foreach --recursive git pull
 popd
-packages="sudo,bash,zsh,file,curl,wget,grep,bzip2,fonts-dejavu-core,gcc,g++,git,less,locales,openssl,openssh-client,make,cmake,netbase,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,bash-completion,age,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
+packages="wslu,sudo,bash,zsh,file,sed,curl,wget,grep,bzip2,fonts-dejavu-core,gcc,g++,git,less,locales,openssl,openssh-client,make,cmake,netbase,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,bash-completion,age,powerline,fonts-powerline,gedit,gimp,nautilus,vlc,x11-apps"
 sudo PACKAGES="$packages" UPDATEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id rocker-org/devcontainer-features apt-packages install
 age --version
 age-keygen --version
@@ -29,10 +36,13 @@ zsh --version
 sudo chsh "$CURRENT_USER" -s "$(which zsh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
 # Install Brew
-sudo USERNAME="$CURRENT_USER" BREWS="bash zsh file-formula curl wget grep bzip2 git git-lfs less openssl@1.1 openssl@3 openssh make cmake ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib zlib-ng age gedit asdf sigstore/tap/gitsign gh mkcert chezmoi postgresql@15" LINKS="postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
+sudo USERNAME="$CURRENT_USER" BREWS="bash zsh file-formula gnu-sed curl wget grep bzip2 git git-lfs less openssl@1.1 openssl@3 openssh make cmake ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib zlib-ng age gedit asdf sigstore/tap/gitsign gh mkcert chezmoi postgresql@15" LINKS="postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
+alias sed=gsed
+sed -i 's/^alias sed=.*$/alias sed=gsed/' ~/.bashrc
+sed -i 's/^alias sed=.*$/alias sed=gsed/' ~/.zshrc
 # Refresh environment profile
-source ~/.bashrc
-# Test
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+eval "$("/home/linuxbrew/.linuxbrew/bin/brew" shellenv)"# Test
 brew --version
 bash --version
 zsh --version
@@ -44,13 +54,13 @@ psql --version
 sudo rm -rf /usr/local/dotnet
 sudo USERNAME="$CURRENT_USER" TOOLS="git-credential-manager" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s dotnet install;
 # Refresh environment profile
-source ~/.bashrc
+export PATH="/usr/local/dotnet/current:${PATH}"
+export PATH="/home/acehack/.dotnet/tools:$PATH"
 # Test
 dotnet --version
 # Install PowerShell
 sudo VERSION="latest" MODULES="Set-PsEnv,Pester" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id devcontainers/features powershell install
 # Refresh environment profile
-source ~/.bashrc
 # Test
 pwsh --version
 # Install nvm
@@ -59,7 +69,6 @@ export PATH="$PATH:/usr/local/share/nvm/current/bin"
 export NVM_SYMLINK_CURRENT="true"
 sudo USERNAME="$CURRENT_USER" NODEGYPDEPENDENCIES="true" PACKAGES="@npmcli/fs,@devcontainers/cli,dotenv-cli" NVM_DIR="$NVM_DIR" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s nvm install
 # Refresh environment profile
-source ~/.bashrc
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 # Test
@@ -69,12 +78,12 @@ docker --version
 docker-compose --version
 # Run post-build command
 "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/devspace post-build
-# Refresh environment profile
-source ~/.bashrc
 # Continue with devspace setup
 "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup devspace
-# Refresh environment profile
-source ~/.bashrc
+# Setup windows browser as default
+alias xdg-open=wslview
+sed -i 's/^export BROWSER=.*$/export BROWSER=wslview/' ~/.bashrc
+sed -i 's/^export BROWSER=.*$/export BROWSER=wslview/' ~/.zshrc
 # Log into GitHub
 if ! gh auth status; then gh auth login; fi
 gh config set -h github.com git_protocol https
@@ -83,8 +92,6 @@ gh auth status
 # TODO: Fix
 # git-credential-manager configure
 # git-credential-manager diagnose
-# Refresh environment profile
-source ~/.bashrc
 # Setup environment
 source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
 echo "Don't forget to set your git credentials:"
