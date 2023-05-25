@@ -26,8 +26,14 @@ fi
 # Clean up
 rm -rf /var/lib/apt/lists/*
 
-bash -l -c "${SUDOCOMMAND}"
-su "$USERNAME" -c "bash -l -c \"${USERCOMMAND}\""
+if [ -n "$SUDOCOMMAND" ]; then
+  echo "Running command as root: ${SUDOCOMMAND}"
+  eval "${SUDOCOMMAND}"
+fi
+if [ -n "$USERCOMMAND" ]; then
+  echo "Running command as user: ${USERCOMMAND}"
+  su "$USERNAME" -c "bash -l -c \"${USERCOMMAND}\""
+fi
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
