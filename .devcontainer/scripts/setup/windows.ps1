@@ -3,22 +3,22 @@
 # https://apps.microsoft.com/store/detail/app-installer/
 # https://github.com/microsoft/winget-cli
 # https://github.com/microsoft/winget-cli/issues/210
-& "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows sudo
+& "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows sudo
 refreshenv
-& "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows winget
+& "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows winget
 refreshenv
-& "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows chocolatey
+& "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows chocolatey
 refreshenv
-& "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows scoop
+& "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows scoop
 refreshenv
-& "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows dotnet-tools
+& "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows dotnet-tools
 refreshenv
-& "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows nvm
+& "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows nvm
 refreshenv
-sudo "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows pwsh-modules
+sudo "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/windows pwsh-modules
 refreshenv
 # Setup environment
-& "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
+& "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
 try {
   gh auth status
 } catch {
