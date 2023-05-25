@@ -31,7 +31,7 @@ if [ -n "$SUDOCOMMAND" ]; then
   eval "${SUDOCOMMAND}"
 fi
 if [ -n "$USERCOMMAND" ]; then
-  echo "Running command as user: ${USERCOMMAND}"
+  echo "Running command as ${USERNAME}: ${USERCOMMAND}"
   su "$USERNAME" -c "bash -l -c \"${USERCOMMAND}\""
 fi
 
