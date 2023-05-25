@@ -27,7 +27,7 @@ fi
 rm -rf /var/lib/apt/lists/*
 
 bash -l -c "${SUDOCOMMAND}"
-su "$USERNAME" -c bash -l -c "${USERCOMMAND}"
+su "$USERNAME" -c "bash -l -c \"${USERCOMMAND}\""
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
