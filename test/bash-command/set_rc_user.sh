@@ -8,6 +8,6 @@ source dev-container-features-test-lib
 
 user="$(whoami)"
 source "$HOME/.bashrc"
-check "echo $CURRENT_USER" [ "$CURRENT_USER" == "$user" ]
+check "$CURRENT_USER" [ "$CURRENT_USER" == "$user" ]
 
 reportResults
