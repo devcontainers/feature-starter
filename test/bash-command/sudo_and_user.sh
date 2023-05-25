@@ -7,7 +7,7 @@ source dev-container-features-test-lib
 
 
 check "echo \$HELLO" [ "$(source /etc/environment && echo "$HELLO")" == "5" ]
-check "echo \$CURRENT_USER" [ "$(sudo -u vscode -i -- bash -l -c 'source $HOME/.bashrc && echo $CURRENT_USER')" == "vscode" ]
+check "echo \$CURRENT_USER" [ "$(sudo -u vscode -i -- 'source $HOME/.bashrc && echo $CURRENT_USER')" == "vscode" ]
 
 
 reportResults
