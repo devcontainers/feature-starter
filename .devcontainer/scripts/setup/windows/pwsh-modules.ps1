@@ -1,7 +1,5 @@
-Install-Module -Name Pester
-Install-Module -Name PsEnv
 # Define an array of module names
-$modules = @('Pester', 'PsEnv')
+$modules = @('Pester', 'Set-PsEnv')
 
 foreach ($module in $modules) {
     Install-Module -Force -Name $module
