@@ -2,14 +2,14 @@
 $modules = @('Pester', 'Set-PsEnv')
 
 foreach ($module in $modules) {
-    Install-Module -Force -Name $module
+    Install-Module -Force -SkipPublisherCheck -Name $module
 }
 
 # Function to install modules
 function Install-Modules {
     param($ShellCommand)
     foreach ($module in $modules) {
-        Start-Process -FilePath $ShellCommand -ArgumentList "-Command Install-Module -Force -Name $module" -Wait -NoNewWindow
+        Start-Process -FilePath $ShellCommand -ArgumentList "-Command Install-Module -Force -SkipPublisherCheck -Name $module" -Wait -NoNewWindow
     }
 }
 
