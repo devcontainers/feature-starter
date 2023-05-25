@@ -8,12 +8,9 @@ source dev-container-features-test-lib
 
 
 check "echo \$HELLO" [ "$(source /etc/environment && echo "$HELLO")" == "5" ]
-echo -e "$(whoami)"
-echo -e "Sourcing .bashrc..."
+user="$(whoami)"
 source "$HOME/.bashrc"
-echo -e "Done sourcing .bashrc"
-echo -e "CURRENT_USER is $CURRENT_USER"
-check "echo $CURRENT_USER" [ "echo $CURRENT_USER" == "$(whoami)" ]
+check "echo $CURRENT_USER" [ "echo $CURRENT_USER" == "$user" ]
 
 
 reportResults
