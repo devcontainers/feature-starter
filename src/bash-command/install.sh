@@ -2,7 +2,8 @@
 #shellcheck disable=SC2086
 set -ex
 
-COMMAND="${COMMAND:-""}"
+SUDOCOMMAND="${SUDOCOMMAND:-""}"
+USERCOMMAND="${USERCOMMAND:-""}"
 USERNAME="${USERNAME:-"automatic"}"
 
 # Determine the appropriate non-root user.
@@ -25,7 +26,8 @@ fi
 # Clean up
 rm -rf /var/lib/apt/lists/*
 
-su "$USERNAME" -c "${COMMAND}"
+bash -l -c "${SUDOCOMMAND}"
+su "$USERNAME" -c bash -l -c "${USERCOMMAND}"
 
 # Clean up
 rm -rf /var/lib/apt/lists/*

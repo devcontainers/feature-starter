@@ -36,7 +36,7 @@ zsh --version
 sudo chsh "$CURRENT_USER" -s "$(which zsh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
 # Install Brew
-sudo USERNAME="$CURRENT_USER" BREWS="bash zsh file-formula gnu-sed curl wget grep bzip2 git git-lfs less openssl@1.1 openssl@3 openssh make cmake ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib zlib-ng age gedit asdf sigstore/tap/gitsign gh mkcert chezmoi postgresql@15" LINKS="postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
+sudo USERNAME="$CURRENT_USER" BREWS="bash zsh file-formula gnu-sed curl wget grep bzip2 git git-lfs less openssl@1.1 openssl@3 openssh make cmake ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib zlib-ng age gedit asdf sigstore/tap/gitsign gh mkcert chezmoi postgresql@15 azure-cli awscli" LINKS="postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
 alias sed=gsed
 sed -i 's/^alias sed=.*$/alias sed=gsed/' ~/.bashrc
 sed -i 's/^alias sed=.*$/alias sed=gsed/' ~/.zshrc
@@ -76,8 +76,9 @@ nvm --version
 node --version
 docker --version
 docker-compose --version
-# Run post-build command
-"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/devspace post-build
+# Run post-build commands
+sudo "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/devspace post-build-sudo
+"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/devspace post-build-user
 # Continue with devspace setup
 "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup devspace
 # Setup windows browser as default
