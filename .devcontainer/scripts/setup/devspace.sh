@@ -5,7 +5,6 @@
 #shellcheck disable=SC2016
 set -e
 # Refresh environment profile
-reset
 source ~/.bashrc
 # Fix for git-credential-manager
 # TODO: Finish fixing

@@ -1,5 +1,3 @@
-# Please make sure winget is is installed
-# Run this in Windows PowerShell as admin
 # https://apps.microsoft.com/store/detail/app-installer/
 # https://github.com/microsoft/winget-cli
 # https://github.com/microsoft/winget-cli/issues/210

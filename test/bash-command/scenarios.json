@@ -1,0 +1,10 @@
+{
+    "set_env": {
+        "image": "debian:bullseye",
+        "features": {
+            "bash-command": {
+                "command": "echo -e HELLO=5 >> /etc/environment"
+            }
+        }
+    }
+}

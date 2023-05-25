@@ -1,5 +1,4 @@
-# Please make sure the winget is is installed
-# Run this in Windows PowerShell as admin
+# https://chocolatey.org/
 try {
   cup all -y
 } catch {

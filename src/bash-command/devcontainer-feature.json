@@ -1,0 +1,22 @@
+{
+  "name": "Bash Command",
+  "id": "bash-command",
+  "version": "1.0.1",
+  "description": "Executes a bash command",
+  "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/bash-command",
+  "options": {
+    "username": {
+      "type": "string",
+      "default": "automatic",
+      "description": "User to run command as"
+    },
+    "command": {
+      "type": "string",
+      "proposals": [
+        "echo hi!"
+      ],
+      "default": "",
+      "description": "command to be executed (will be forwarded as is to a 'bash -c <command>' line)"
+    }
+  }
+}

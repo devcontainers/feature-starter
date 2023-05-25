@@ -17,7 +17,8 @@ jobs:
             "hello",
             "homebrew",
             "nvm",
-            "dotnet"
+            "dotnet",
+            "bash-command"
         ]
         baseImage:
           [
@@ -43,7 +44,8 @@ jobs:
             "hello",
             "homebrew",
             "nvm",
-            "dotnet"
+            "dotnet",
+            "bash-command"
         ]
     steps:
       - uses: actions/checkout@v3

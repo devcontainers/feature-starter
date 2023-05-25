@@ -17,6 +17,7 @@ jobs:
             homebrew: ./**/homebrew/**
             nvm: ./**/nvm/**
             dotnet: ./**/dotnet/**
+            bash-command: ./**/bash-command/**
 
   test:
     needs: [detect-changes]

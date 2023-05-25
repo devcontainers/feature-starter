@@ -153,7 +153,7 @@
       "vncPort": 11901
     },
     // https://github.com/devcontainers-contrib/features/tree/main/src/bash-command
-    "ghcr.io/devcontainers-contrib/features/bash-command:1": {
+    "ghcr.io/AlephZ-ai/devcontainer-features/bash-command:1": {
       "command": "${localEnv:DEVCONTAINER_POST_BUILD_COMMAND}"
     }
   },
@@ -166,6 +166,6 @@
     "ghcr.io/devcontainers/features/powershell",
     "ghcr.io/AlephZ-ai/devcontainer-features/nvm",
     "ghcr.io/devcontainers/features/desktop-lite",
-    "ghcr.io/devcontainers-contrib/features/bash-command:1"
+    "ghcr.io/AlephZ-ai/devcontainer-features/bash-command:1"
   ]
 }
