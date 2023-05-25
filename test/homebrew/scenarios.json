@@ -1,10 +1,10 @@
 {
-    "install_brews": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-        "features": {
-            "homebrew": {
-                "brews": "mkcert"
-            }
-        }
+  "install_brews": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "homebrew": {
+        "brews": "mkcert"
+      }
     }
+  }
 }

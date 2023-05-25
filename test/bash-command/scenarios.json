@@ -1,10 +1,30 @@
 {
-    "set_env": {
-        "image": "debian:bullseye",
-        "features": {
-            "bash-command": {
-                "command": "echo -e HELLO=5 >> /etc/environment"
-            }
-        }
+  "set_env_sudo": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "bash-command": {
+        "username": "vscode",
+        "sudocommand": "echo -e HELLO=5 >> /etc/environment"
+      }
     }
+  },
+  "set_rc_user": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "bash-command": {
+        "username": "vscode",
+        "usercommand": "echo export CURRENT_USER=$(whoami) >> ~/.bashrc"
+      }
+    }
+  },
+  "sudo_and_user": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "bash-command": {
+        "username": "vscode",
+        "sudocommand": "echo -e HELLO=5 >> /etc/environment",
+        "usercommand": "echo export CURRENT_USER=$(whoami) >> ~/.bashrc"
+      }
+    }
+  }
 }

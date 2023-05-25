@@ -17,8 +17,7 @@ jobs:
             "hello",
             "homebrew",
             "nvm",
-            "dotnet",
-            "bash-command"
+            "dotnet"
         ]
         baseImage:
           [
