@@ -1,6 +1,5 @@
 nvm version
 nvm on
-refreshenv
 # Install Node.js latest and lts
 nvm install node
 nvm install lts

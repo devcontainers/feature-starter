@@ -7,7 +7,6 @@ try {
 
 $env:ChocolateyInstall = [Environment]::GetEnvironmentVariable("ChocolateyInstall", [EnvironmentVariableTarget]::Machine)
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
-refreshenv
 choco feature enable -n allowGlobalConfirmation
 choco feature enable -n useRememberedArgumentsForUpgrades
 choco feature enable -n showDownloadProgress
