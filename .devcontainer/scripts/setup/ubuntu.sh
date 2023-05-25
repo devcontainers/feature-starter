@@ -38,8 +38,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Install Brew
 sudo USERNAME="$CURRENT_USER" BREWS="bash zsh file-formula gnu-sed curl wget grep bzip2 git git-lfs less openssl@1.1 openssl@3 openssh make cmake ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib zlib-ng age gedit asdf sigstore/tap/gitsign gh mkcert chezmoi postgresql@15 azure-cli awscli" LINKS="postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
 alias sed=gsed
-sed -i 's/^alias sed=.*$/alias sed=gsed/' ~/.bashrc
-sed -i 's/^alias sed=.*$/alias sed=gsed/' ~/.zshrc
+sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.bashrc"
+sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.zshrc"
 # Refresh environment profile
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 eval "$("/home/linuxbrew/.linuxbrew/bin/brew" shellenv)"# Test
@@ -84,8 +84,8 @@ sudo "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/devspace post-build-sudo
 # Setup windows browser as default
 alias xdg-open=wslview
 export BROWSER=wslview
-sed -i 's/^export BROWSER=.*$/export BROWSER=wslview/' ~/.bashrc
-sed -i 's/^export BROWSER=.*$/export BROWSER=wslview/' ~/.zshrc
+sed -i 's/^export BROWSER=.*$/export BROWSER=wslview/' "$HOME/.bashrc"
+sed -i 's/^export BROWSER=.*$/export BROWSER=wslview/' "$HOME/.zshrc"
 # Log into GitHub
 if ! gh auth status; then gh auth login; fi
 gh config set -h github.com git_protocol https

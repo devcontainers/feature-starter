@@ -11,9 +11,9 @@ set -e
 # TODO: Finish fixing
 # export GCM_CREDENTIAL_STORE=cache
 # rcLine="export GCM_CREDENTIAL_STORE=cache"
-# rcFile=~/.bashrc
+# rcFile=$HOME/.bashrc
 # grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
-# rcFile=~/.zshrc
+# rcFile=$HOME/.zshrc
 # grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 # sudo rm -rf /usr/share/dotnet || false
 # sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
@@ -48,6 +48,6 @@ devcontainer --version
 # git-credential-manager configure
 # git-credential-manager diagnose
 # Adding GH .ssh known hosts
-mkdir -p ~/.ssh/
-touch ~/.ssh/known_hosts
-bash -c eval "$(ssh-keyscan github.com >> ~/.ssh/known_hosts)"
+mkdir -p "$HOME/.ssh/"
+touch "$HOME/.ssh/known_hosts"
+bash -c eval "$(ssh-keyscan github.com >> "$HOME/.ssh/known_hosts")"
