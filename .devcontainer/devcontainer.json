@@ -7,15 +7,10 @@
   "remoteUser": "vscode",
   "userEnvProbe": "loginInteractiveShell",
   // https://code.visualstudio.com/remote/advancedcontainers/environment-variables
-  "containerEnv": {
-    "X11": "${localEnv:X11:=/tmp/.X11-unix}"
-  },
+  "containerEnv": {},
   "remoteEnv": {},
   // https://code.visualstudio.com/remote/advancedcontainers/add-local-file-mount
-  "mounts": [
-    { "source": "${localEnv:WSLG}", "target": "/mnt/wslg", "type": "volume" },
-    { "source": "${localEnv:LIB_WSL}", "target": "/usr/lib/wsl", "type": "volume" }
-  ],
+  "mounts": [],
   "forwardPorts": [
     11080,
     11901

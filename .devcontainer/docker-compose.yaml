@@ -12,8 +12,11 @@ services:
     environment:
       DISPLAY: $DISPLAY
       WAYLAND_DISPLAY: $WAYLAND_DISPLAY
-      XDG_RUNTIME_DIR: $XDG_RUNTIME_DIR
+      XDG_RUNTIME_DIR: ${XDG_RUNTIME_DIR:="/tmp/runtime-$USER"}
       PULSE_SERVER: $PULSE_SERVER
+      X11: ${X11:=/tmp/.X11-unix}
+      WSLG: ${WSLG:=/tmp/wslg}
+      LIB_WSL: ${LIB_WSL:=/tmp/lib/wsl}
     devices:
       - /dev/dxg
     # https://docs.docker.com/compose/compose-file/build/#build-definition
@@ -41,6 +44,8 @@ services:
     volumes:
       - ../..:/workspaces:cached
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - $XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR
+      - ${XDG_RUNTIME_DIR:="/tmp/runtime-$USER"}:$XDG_RUNTIME_DIR
+      - ${WSLG:=/tmp/wslg}:/mnt/wslg
+      - ${LIB_WSL:=/tmp/lib/wsl}:/usr/lib/wsl
 networks:
   default:
