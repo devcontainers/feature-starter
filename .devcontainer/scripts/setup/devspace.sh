@@ -51,3 +51,5 @@ devcontainer --version
 mkdir -p "$HOME/.ssh/"
 touch "$HOME/.ssh/known_hosts"
 bash -c eval "$(ssh-keyscan github.com >> "$HOME/.ssh/known_hosts")"
+echo "Don't forget to run 'gh auth login'"
+echo "WARNING: Please restart shell to get latest environment variables"
