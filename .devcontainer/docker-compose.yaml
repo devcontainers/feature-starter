@@ -4,7 +4,6 @@ version: '3.8'
 services:
   # Kind cluster
   devcontainer-features:
-    image: "$DEVCONTAINER_PROJECT_NAME:latest"
     container_name: $DEVCONTAINER_PROJECT_NAME-devspace
     labels: ["ai.alephz.role=$DEVCONTAINER_FEATURES_PROJECT_NAME"]
     env_file: .env
