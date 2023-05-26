@@ -4,7 +4,7 @@ version: '3.8'
 services:
   # Kind cluster
   devcontainer-features:
-    image: "alephzai.azurecr.io/devcontainers/$DEVCONTAINER_PROJECT_NAME:latest"
+    image: "cr.alephz.ai/devcontainers/$DEVCONTAINER_PROJECT_NAME:latest"
     container_name: $DEVCONTAINER_PROJECT_NAME-devspace
     labels: ["ai.alephz.role=$DEVCONTAINER_FEATURES_PROJECT_NAME"]
     env_file: .env
@@ -14,6 +14,8 @@ services:
       WAYLAND_DISPLAY: $WAYLAND_DISPLAY
       XDG_RUNTIME_DIR: $XDG_RUNTIME_DIR
       PULSE_SERVER: $PULSE_SERVER
+    devices:
+      - /dev/dxg
     # https://docs.docker.com/compose/compose-file/build/#build-definition
     # Includes https://github.com/devcontainers/features/tree/main/src/common-utils
     build:
@@ -22,6 +24,12 @@ services:
       args:
         # https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps
         IMAGE: mcr.microsoft.com/devcontainers/base:ubuntu
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
     networks:
       - default
     # https://medium.com/swlh/docker-and-systemd-381dfd7e4628
@@ -33,7 +41,9 @@ services:
     volumes:
       - ../..:/workspaces:cached
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - /tmp/.X11-unix:$X11
+      - $X11:/tmp/.X11-unix
       - $XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR
+      - $WSLG:/mnt/wslg
+      - $LIB_WSLG:/usr/lib/wsl
 networks:
   default:
