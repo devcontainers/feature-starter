@@ -4,8 +4,9 @@ version: '3.8'
 services:
   # Kind cluster
   devcontainer-features:
+    image: ${DEVCONTAINER_PROJECT_NAME}:latest
     container_name: $DEVCONTAINER_PROJECT_NAME-devspace
-    labels: ["ai.alephz.role=$DEVCONTAINER_FEATURES_PROJECT_NAME"]
+    labels: [ "ai.alephz.role=$DEVCONTAINER_FEATURES_PROJECT_NAME" ]
     env_file: .env
     # https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md
     environment:
@@ -28,15 +29,15 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              capabilities: [gpu]
+              capabilities: [ gpu ]
     networks:
       - default
     # https://medium.com/swlh/docker-and-systemd-381dfd7e4628
     cap_add:
-      - SYS_ADMIN  # This is typically required for systemd
-      - DAC_READ_SEARCH  # This may also be required in some cases for systemd
+      - SYS_ADMIN # This is typically required for systemd
+      - DAC_READ_SEARCH # This may also be required in some cases for systemd
     security_opt:
-      - seccomp:unconfined  # This may also be required in some cases for systemd
+      - seccomp:unconfined # This may also be required in some cases for systemd
     volumes:
       - ../..:/workspaces:cached
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
