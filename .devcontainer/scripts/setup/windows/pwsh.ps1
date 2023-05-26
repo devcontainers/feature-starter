@@ -7,11 +7,13 @@ foreach ($module in $modules) {
   Install-Module -Force -SkipPublisherCheck -Name $module
 }
 
+# Add awk alias
+Set-Alias -Name awk -Value gawk
 # Function to install modules
 function Install-Modules {
     param($ShellCommand)
     foreach ($module in $modules) {
-        Start-Process -FilePath $ShellCommand -ArgumentList "-Command Install-Module -Name PowerShellGet -Force -SkipPublisherCheck -AllowClobber; Import-Module PowerShellGet -ErrorAction Stop; Install-Module -Force -SkipPublisherCheck -Name $module" -Wait -NoNewWindow
+        Start-Process -FilePath $ShellCommand -ArgumentList "-Command Install-Module -Name PowerShellGet -Force -SkipPublisherCheck -AllowClobber; Import-Module PowerShellGet -ErrorAction Stop; Set-Alias -Name awk -Value gawk; Install-Module -Force -SkipPublisherCheck -Name $module" -Wait -NoNewWindow
     }
 }
 

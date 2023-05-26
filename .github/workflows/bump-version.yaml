@@ -1,0 +1,28 @@
+name: Update version in devcontainer-feature.json
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+    - '**.src'
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Install moreutils for sponge
+      run: sudo apt-get install -y yq moreutils
+
+    - name: Update version
+      run: ./.devcontainer/scripts/utils/bump-version.sh
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -am "Auto-update version in devcontainer-feature.json"
+        git push
