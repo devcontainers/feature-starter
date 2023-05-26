@@ -8,11 +8,11 @@ services:
     container_name: $DEVCONTAINER_PROJECT_NAME-devspace
     labels: ["ai.alephz.role=$DEVCONTAINER_FEATURES_PROJECT_NAME"]
     env_file: .env
-    # environment:
-    #   DISPLAY: $DISPLAY
-    #   WAYLAND_DISPLAY: $WAYLAND_DISPLAY
-    #   XDG_RUNTIME_DIR: $XDG_RUNTIME_DIR
-    #   PULSE_SERVER: $PULSE_SERVER
+    environment:
+      DISPLAY: $DISPLAY
+      WAYLAND_DISPLAY: $WAYLAND_DISPLAY
+      XDG_RUNTIME_DIR: $XDG_RUNTIME_DIR
+      PULSE_SERVER: $PULSE_SERVER
     # https://docs.docker.com/compose/compose-file/build/#build-definition
     # Includes https://github.com/devcontainers/features/tree/main/src/common-utils
     build:
@@ -23,9 +23,15 @@ services:
         IMAGE: mcr.microsoft.com/devcontainers/base:ubuntu
     networks:
       - default
+     cap_add:
+      - SYS_ADMIN  # This is typically required for systemd
+      - DAC_READ_SEARCH  # This may also be required in some cases for systemd
+    security_opt:
+      - seccomp:unconfined  # This may also be required in some cases for systemd
     volumes:
       - ../..:/workspaces:cached
-      # - /tmp/.X11-unix:/tmp/.X11-unix
-      # - $XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - $X11:/tmp/.X11-unix
+      - $XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR
 networks:
   default:
