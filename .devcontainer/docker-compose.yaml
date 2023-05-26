@@ -27,12 +27,12 @@ services:
       args:
         # https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps
         IMAGE: mcr.microsoft.com/devcontainers/base:ubuntu
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              capabilities: [ gpu ]
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           capabilities: [ gpu ]
     networks:
       - default
     # https://medium.com/swlh/docker-and-systemd-381dfd7e4628
