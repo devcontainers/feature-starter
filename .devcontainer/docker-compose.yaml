@@ -23,7 +23,7 @@ services:
         IMAGE: mcr.microsoft.com/devcontainers/base:ubuntu
     networks:
       - default
-     cap_add:
+    cap_add:
       - SYS_ADMIN  # This is typically required for systemd
       - DAC_READ_SEARCH  # This may also be required in some cases for systemd
     security_opt:
