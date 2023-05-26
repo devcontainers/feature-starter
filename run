@@ -5,7 +5,7 @@ set -e
 projectRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"
 scriptsRoot="$projectRoot/.devcontainer/scripts"
 source "$scriptsRoot/setup/environment.sh"
-"$scriptsRoot/setup/submodules.sh"
+"$scriptsRoot/setup/submodules.sh" &>/dev/null
 if [ "$1" = "-id" ] || [ "$1" = "--in-dependency" ]; then
   dependency="$2"
   scriptPath="$3"

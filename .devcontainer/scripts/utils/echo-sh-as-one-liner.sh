@@ -2,7 +2,6 @@
 script="$1"
 
 OUTPUT=""
-
 while IFS= read -r LINE
 do
   if [[ ! $LINE =~ ^# ]]; then # Skip comments
