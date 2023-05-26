@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #shellcheck shell=bash
 set -e
+# Refresh environment profile
+source ~/.bashrc
 # Make Edge the default browser
 export BROWSER=/usr/bin/microsoft-edge-beta
 rcLine=export BROWSER=/usr/bin/microsoft-edge-beta

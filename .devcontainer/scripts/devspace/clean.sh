@@ -3,13 +3,14 @@
 #shellcheck disable=SC2034
 set -e
 for j in {1..5}; do
-    containerid=$(docker ps -q -f name="$DEVCONTAINER_PROJECT_NAME-devspace")
+    echo ${DEVCONTAINER_FEATURES_PROJECT_NAME}_${DEVCONTAINER_PROJECT_NAME}
+    containerid=$(docker container ls --all --quiet --filter name="$DEVCONTAINER_PROJECT_NAME-devspace")
     if [ -n "$containerid" ]; then
         docker rm -f "$containerid"
     fi
 
     docker volume rm -f vscode
-    volumes=$(docker volume ls -q -f name="${DEVCONTAINER_FEATURES_PROJECT_NAME}_devcontainer")
+    volumes=$(docker volume ls --quiet --filter name="${DEVCONTAINER_FEATURES_PROJECT_NAME}_devcontainer")
     if [ -n "$volumes" ]; then
         echo "$volumes" | xargs docker volume rm -f
     fi

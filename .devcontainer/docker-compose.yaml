@@ -9,16 +9,16 @@ services:
     labels: [ "ai.alephz.role=$DEVCONTAINER_FEATURES_PROJECT_NAME" ]
     env_file: .env
     # https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md
-    environment:
-      DISPLAY: $DISPLAY
-      WAYLAND_DISPLAY: $WAYLAND_DISPLAY
-      XDG_RUNTIME_DIR: ${XDG_RUNTIME_DIR:="/tmp/runtime-$USER"}
-      PULSE_SERVER: $PULSE_SERVER
-      X11: ${X11:=/tmp/.X11-unix}
-      WSLG: ${WSLG:=/tmp/wslg}
-      LIB_WSL: ${LIB_WSL:=/tmp/lib/wsl}
-    devices:
-      - /dev/dxg
+    environment: {}
+      # DISPLAY: $DISPLAY
+      # WAYLAND_DISPLAY: $WAYLAND_DISPLAY
+      # XDG_RUNTIME_DIR: ${XDG_RUNTIME_DIR:="/tmp/runtime-$USER"}
+      # PULSE_SERVER: $PULSE_SERVER
+      # X11: ${X11:=/tmp/.X11-unix}
+      # WSLG: ${WSLG:=/tmp/wslg}
+      # LIB_WSL: ${LIB_WSL:=/tmp/lib/wsl}
+    # devices:
+    #   - /dev/dxg
     # https://docs.docker.com/compose/compose-file/build/#build-definition
     # Includes https://github.com/devcontainers/features/tree/main/src/common-utils
     build:
@@ -44,8 +44,8 @@ services:
     volumes:
       - ../..:/workspaces:cached
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - ${XDG_RUNTIME_DIR:="/tmp/runtime-$USER"}:$XDG_RUNTIME_DIR
-      - ${WSLG:=/tmp/wslg}:/mnt/wslg
-      - ${LIB_WSL:=/tmp/lib/wsl}:/usr/lib/wsl
+      # - ${XDG_RUNTIME_DIR:="/tmp/runtime-$USER"}:$XDG_RUNTIME_DIR
+      # - ${WSLG:=/tmp/wslg}:/mnt/wslg
+      # - ${LIB_WSL:=/tmp/lib/wsl}:/usr/lib/wsl
 networks:
   default:

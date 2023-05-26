@@ -1,11 +1,11 @@
 for($j=1; $j -le 5; $j++) {
-  $containerid = docker ps -q -f name="${env:DEVCONTAINER_PROJECT_NAME}-devspace"
+  $containerid = docker container ls --all --quiet --filter name="${env:DEVCONTAINER_PROJECT_NAME}-devspace"
   if ($containerid) {
       docker rm -f $containerid
   }
 
   docker volume rm -f vscode
-  $volumes = docker volume ls -q -f name="${env:DEVCONTAINER_FEATURES_PROJECT_NAME}_devcontainer"
+  $volumes = docker volume ls --quiet --filter name="${env:DEVCONTAINER_FEATURES_PROJECT_NAME}_devcontainer"
    if ($volumes) {
       $volumes | ForEach-Object { docker volume rm -f $_ }
   }

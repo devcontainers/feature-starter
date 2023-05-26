@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #shellcheck shell=bash
 set -e
+# Refresh environment profile
+source /etc/bash.bashrc
 # Install docker completions
 rm -rf /etc/bash_completion.d/docker.sh || true
 mkdir -p /etc/bash_completion.d

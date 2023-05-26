@@ -36,7 +36,8 @@ sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.bashrc"
 sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.zshrc"
 # Refresh environment profile
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-eval "$("/home/linuxbrew/.linuxbrew/bin/brew" shellenv)"# Test
+eval "$("/home/linuxbrew/.linuxbrew/bin/brew" shellenv)"
+# Test
 brew --version
 bash --version
 zsh --version
@@ -71,10 +72,10 @@ node --version
 docker --version
 docker-compose --version
 # Run post-build commands
-sudo "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/devspace post-build-sudo
-"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/devspace post-build-user
+sudo -i bash -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup/devspace post-build-sudo"
+bash -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup/devspace post-build-user"
 # Continue with devspace setup
-"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup devspace
+bash -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup devspace"
 if [ "$IS_WSL"!="true" ]; then
     # Log into GitHub
     if ! gh auth status; then gh auth login; fi

@@ -20,5 +20,5 @@ gh auth status
 # Setup environment
 source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
 # WSLg GPU acceleration
-glxinfo
+# glxinfo
 echo "WARNING: Please restart shell to get latest environment variables"
