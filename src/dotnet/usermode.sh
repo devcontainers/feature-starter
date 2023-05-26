@@ -20,5 +20,6 @@ if [ -n "$TOOLS" ]; then
     for i in ${DOTNET_TOOLS[@]}; do if dotnet tool list -g "$i"; then dotnet tool update -g "$i"; else echo "Installing $i"; dotnet tool install -g "$i"; fi; done
 fi
 
+updaterc "export DOTNET_HOME=/usr/local/dotnet"
 updaterc "export PATH=\"/usr/local/dotnet/current:\${PATH}\""
 updaterc "export PATH=\"$HOME/.dotnet/tools:\$PATH\""

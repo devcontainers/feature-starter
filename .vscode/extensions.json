@@ -27,6 +27,9 @@
       "ms-kubernetes-tools.vscode-aks-tools",
       "amazonwebservices.aws-toolkit-vscode",
       "rechinformatica.rech-editor-batch",
-      "ms-vscode.powershell"
+      "ms-vscode.powershell",
+      "ms-python.python",
+      "visualstudioexptteam.vscodeintellicode",
+      "donjayamanne.python-extension-pack"
     ]
 }
