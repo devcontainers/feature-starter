@@ -31,7 +31,7 @@ services:
     volumes:
       - ../..:/workspaces:cached
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - $X11:/tmp/.X11-unix
+      - /tmp/.X11-unix:$X11
       - $XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR
 networks:
   default:
