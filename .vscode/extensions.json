@@ -15,6 +15,16 @@
       "shakram02.bash-beautify",
       "lizebang.bash-extension-pack",
       "donjayamanne.githistory",
-      "dbaeumer.vscode-eslint"
+      "dbaeumer.vscode-eslint",
+      "ms-ossdata.vscode-postgresql",
+      "ms-azuretools.vscode-cosmosdb",
+      "uniquevision.vscode-plpgsql-lsp",
+      "bradymholt.pgformatter",
+      "ms-azuretools.vscode-azurefunctions",
+      "ms-vscode.vscode-node-azure-pack",
+      "ms-vscode.azurecli",
+      "msazurermtools.azurerm-vscode-tools",
+      "ms-kubernetes-tools.vscode-aks-tools",
+      "amazonwebservices.aws-toolkit-vscode"
     ]
 }
