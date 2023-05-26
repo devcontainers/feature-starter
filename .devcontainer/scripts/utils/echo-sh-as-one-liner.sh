@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-script="$1"
+scriptPath="$1"
+script="$2"
 
 OUTPUT=""
 while IFS= read -r LINE
@@ -9,7 +10,7 @@ do
     LINE=${LINE//\$/\\\$} # Escape dollar signs
     OUTPUT+="$LINE && "
   fi
-done < "$DEVCONTAINER_SCRIPTS_ROOT/$script.sh"
+done < "$DEVCONTAINER_SCRIPTS_ROOT/$scriptPath/$script.sh"
 
 # Remove trailing ' && '
 OUTPUT=${OUTPUT::-4}
