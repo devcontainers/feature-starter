@@ -4,7 +4,7 @@ version: '3.8'
 services:
   # Kind cluster
   devcontainer-features:
-    image: "cr.alephz.ai/devcontainers/$DEVCONTAINER_PROJECT_NAME:latest"
+    image: "devcontainers/$DEVCONTAINER_PROJECT_NAME:latest"
     container_name: $DEVCONTAINER_PROJECT_NAME-devspace
     labels: ["ai.alephz.role=$DEVCONTAINER_FEATURES_PROJECT_NAME"]
     env_file: .env
@@ -41,9 +41,6 @@ services:
     volumes:
       - ../..:/workspaces:cached
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - $X11:/tmp/.X11-unix
       - $XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR
-      - $WSLG:/mnt/wslg
-      - $LIB_WSLG:/usr/lib/wsl
 networks:
   default:
