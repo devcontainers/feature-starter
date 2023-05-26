@@ -1,10 +1,12 @@
 param (
   [Parameter(Mandatory = $true)]
-  [string]$script
+  [string]$commandPath,
+  [Parameter(Mandatory = $true)]
+  [string]$command
 )
 
 $OUTPUT = ""
-Get-Content "$DEVCONTAINER_SCRIPTS_ROOT/$script.sh" | ForEach-Object {
+Get-Content "$env:DEVCONTAINER_SCRIPTS_ROOT/$commandPath/$command.sh" | ForEach-Object {
     if (!($_.StartsWith("#"))) { # Skip comments
         $LINE = $_ -replace '\"', '\\"' # Escape double quotes
         $LINE = $LINE -replace '\$', '\\$' # Escape dollar signs
@@ -13,6 +15,6 @@ Get-Content "$DEVCONTAINER_SCRIPTS_ROOT/$script.sh" | ForEach-Object {
 }
 
 # Remove trailing ' && '
-$OUTPUT = $OUTPUT.Substring(0, $OUTPUT.Length - 4)
+$OUTPUT = $OUTPUT.Trim(" ").Trim("&")
 
-Write-Output $OUTPUT
+return $OUTPUT

@@ -12,7 +12,7 @@ param (
 $projectRoot = "$PSCommandPath" | Split-Path -Parent
 $scriptsRoot = "$projectRoot/.devcontainer/scripts"
 & "$scriptsRoot/setup/environment.ps1"
-& "$scriptsRoot/setup/submodules.ps1"
+& "$scriptsRoot/setup/submodules.ps1" | Out-Null
 $executionRoot = "$scriptsRoot/$scriptPath"
 Push-Location "$executionRoot"
 try {
@@ -20,7 +20,7 @@ try {
     $result = & "./$script.ps1"
   }
   else {
-    $result = & "./$script.ps1" -commandPath "$commandPath" -command "$command"
+    $result = & "./$script.ps1" "$commandPath" "$command"
   }
 }
 finally {
