@@ -76,7 +76,7 @@ sudo -i bash -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup/devspace p
 bash -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup/devspace post-build-user"
 # Continue with devspace setup
 bash -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup devspace"
-if [ "$IS_WSL"!="true" ]; then
+if [ "$IS_WSL" != "true" ]; then
     # Log into GitHub
     if ! gh auth status; then gh auth login; fi
     gh config set -h github.com git_protocol https
