@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
-script="$2"
+script="$1"
 
 OUTPUT=""
 
 while IFS= read -r LINE
 do
-  LINE=${LINE//\"/\\\"} # Escape double quotes
-  LINE=${LINE//\$/\\\$} # Escape dollar signs
-  OUTPUT+="$LINE && "
-done < "$DEVCONTAINER_FEATURES_PROJECT_ROOT/$script.sh"
+  if [[ ! $LINE =~ ^# ]]; then # Skip comments
+    LINE=${LINE//\"/\\\"} # Escape double quotes
+    LINE=${LINE//\$/\\\$} # Escape dollar signs
+    OUTPUT+="$LINE && "
+  fi
+done < "$DEVCONTAINER_SCRIPTS_ROOT/$script.sh"
 
 # Remove trailing ' && '
 OUTPUT=${OUTPUT::-4}
