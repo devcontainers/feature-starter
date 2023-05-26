@@ -104,7 +104,8 @@
 		"ms-azuretools.vscode-azureterraform",
 		"msazurermtools.azurerm-vscode-tools",
 		"ms-kubernetes-tools.vscode-aks-tools",
-		"amazonwebservices.aws-toolkit-vscode"
+		"amazonwebservices.aws-toolkit-vscode",
+		"rechinformatica.rech-editor-batch"
 	]
     }
   },

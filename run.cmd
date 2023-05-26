@@ -7,6 +7,7 @@ set commandPath=%3
 set command=%4
 set "scriptsRoot=%projectRoot%/.devcontainer/scripts"
 "%scriptsRoot%/setup/environment.cmd"
+"%scriptsRoot%/setup/submodules.cmd"
 call :Run "%projectRoot%/run.ps1" "%scriptPath%" "%script%" "%commandPath%" "%command%"
 endlocal
 :Run
