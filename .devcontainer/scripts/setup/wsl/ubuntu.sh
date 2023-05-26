@@ -1,4 +1,4 @@
-"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup ubuntu
+IS_WSL=true "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup ubuntu
 # Install WSL Utilties
 # https://github.com/wslutilities/wslu
 sudo apt update
@@ -19,5 +19,4 @@ gh auth status
 # git-credential-manager diagnose
 # Setup environment
 source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
-echo "Don't forget to run 'gh auth login'"
 echo "WARNING: Please restart shell to get latest environment variables"

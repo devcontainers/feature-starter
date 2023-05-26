@@ -3,6 +3,7 @@
 #shellcheck source=/dev/null
 #shellcheck disable=SC2016
 set -e
+IS_WSL=${IS_WSL:=false}
 # Get current user
 CURRENT_USER="$(whoami)"
 # Update max open files
@@ -74,5 +75,14 @@ sudo "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/devspace post-build-sudo
 "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup/devspace post-build-user
 # Continue with devspace setup
 "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup devspace
-echo "Don't forget to run 'gh auth login'"
+if [ "$IS_WSL"!="true" ]; then
+    # Log into GitHub
+    if ! gh auth status; then gh auth login; fi
+    gh config set -h github.com git_protocol https
+    gh auth status
+    # Setup git credential manager
+    # TODO: Fix
+    # git-credential-manager configure
+    # git-credential-manager diagnose
+fi
 echo "WARNING: Please restart shell to get latest environment variables"
