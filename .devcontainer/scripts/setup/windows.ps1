@@ -23,7 +23,4 @@ gh auth status
 
 git-credential-manager configure
 git-credential-manager diagnose
-Write-Host "Don't forget to set your git credentials:"
-Write-Host 'git config --global user.name "Your Name"'
-Write-Host 'git config --global user.email "youremail@yourdomain.com"'
 sudo winget install --id Microsoft.PowerToys

@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+#shellcheck shell=bash
+#shellcheck source=/dev/null
 IS_WSL=true "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup ubuntu
 # Install WSL Utilties
 # https://github.com/wslutilities/wslu
