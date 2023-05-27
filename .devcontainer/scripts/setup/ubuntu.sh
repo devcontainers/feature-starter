@@ -17,7 +17,6 @@ sudo grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee --append "$rcFil
 sudo apt update
 sudo apt install -y --fix-broken --fix-missing
 sudo apt upgrade -y
-sudo apt install -y git
 packages="sudo,systemd,mawk,gawk,bash,zsh,file,sed,curl,wget,grep,bzip2,fonts-dejavu-core,gcc,g++,git,less,locales,openssl,openssh-client,make,cmake,netbase,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,bash-completion,age,powerline,fonts-powerline,jq,moreutils,gedit,gimp,nautilus,vlc,x11-apps"
 sudo PACKAGES="$packages" UPDATEPACKAGES="true" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -id rocker-org/devcontainer-features apt-packages install
 age --version
@@ -29,11 +28,18 @@ age-keygen --version
 zsh --version
 sudo chsh "$CURRENT_USER" -s "$(which zsh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
+# Setup environment
+rcLine="source \"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup environment"
+rcFile=$HOME/.bashrc
+sudo grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee --append "$rcFile"
+rcFile=$HOME/.zshrc
+sudo grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee --append "$rcFile"
 # Install Brew
 sudo USERNAME="$CURRENT_USER" BREWS="sevenzip p7zip awk bash zsh file-formula gnu-sed curl wget grep bzip2 git git-lfs gh less sqlite sqlite-utils gcc buf protobuf grpc llvm openssl@1.1 openssl@3 nghttp2 openssh make cmake go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib zlib-ng age jq moreutils gedit asdf sigstore/tap/gitsign mkcert chezmoi postgresql@15 azure-cli awscli" LINKS="postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
 alias sed=gsed
 sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.bashrc"
-#sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.zshrc"
+# TODO: Fix this to always
+sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.zshrc"
 # Refresh environment profile
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 eval "$("/home/linuxbrew/.linuxbrew/bin/brew" shellenv)"
