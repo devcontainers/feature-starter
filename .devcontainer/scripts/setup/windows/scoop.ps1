@@ -12,7 +12,17 @@ scoop bucket add nonportable
 scoop bucket add php
 scoop bucket add versions
 scoop update
-scoop install --global vcredist vcredist2022 gawk openssh vulkan openssl gitsign gh sed curl wget grep sed less touch sqlite gcc buf protobuf grpc-tools llvm bzip2 make cmake patch cacert file dos2unix shellcheck zlib age mkcert go python dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts nvm chezmoi postgresql speedtest-cli speedtest jq gedit gimp vlc azure-cli aws fiddler
+$complete = $false
+do {
+    try {
+        scoop install --global vcredist vcredist2022 gawk openssh vulkan openssl gitsign gh sed curl wget grep sed less touch sqlite gcc buf protobuf grpc-tools llvm bzip2 make cmake patch cacert file dos2unix shellcheck zlib age mkcert go python dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts nvm chezmoi postgresql speedtest-cli speedtest jq gedit gimp vlc azure-cli aws fiddler
+        $complete = $true
+    } catch [Exception] {
+        Write-Host $_.Exception.Message
+        Write-Host "Retrying"
+    }            
+} while (-not $complete)
+
 scoop update --all --global
 Stop-Service -Force sshd
 C:\ProgramData\scoop\apps\openssh\current\install-sshd.ps1
