@@ -2,6 +2,7 @@
 # https://github.com/microsoft/winget-cli
 # https://github.com/microsoft/winget-cli/issues/210
 winget --version
+winget install --name "Sysinternals Suite" --accept-package-agreements --accept-source-agreements --disable-interactivity
 winget install --id "Microsoft.Edge" --accept-package-agreements --accept-source-agreements --disable-interactivity
 winget install --id "Microsoft.Edge.Beta" --accept-package-agreements --accept-source-agreements --disable-interactivity
 winget install --id "Microsoft.Edge.Dev" --accept-package-agreements --accept-source-agreements --disable-interactivity
