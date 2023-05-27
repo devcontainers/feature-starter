@@ -6,7 +6,7 @@ IS_WSL=true "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup ubuntu
 # https://github.com/wslutilities/wslu
 sudo apt update
 sudo apt upgrade -y
-audo apt install -y wslu
+sudo apt install -y wslu
 # Setup windows browser as default
 alias xdg-open=wslview
 export BROWSER=wslview
