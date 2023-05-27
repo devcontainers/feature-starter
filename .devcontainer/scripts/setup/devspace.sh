@@ -17,6 +17,10 @@ set -e
 # grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | tee --append "$rcFile"
 # sudo rm -rf /usr/share/dotnet || false
 # sudo ln -s /usr/local/dotnet/6.0.408 /usr/share/dotnet
+# TODO: Move to homebrew with taps option
+brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
+brew update
+HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18
 # Test all tools are installed
 docker --version
 docker-compose --version

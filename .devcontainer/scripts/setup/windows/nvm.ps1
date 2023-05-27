@@ -12,6 +12,7 @@ npm version
 npm i -g @npmcli/fs
 npm i -g @devcontainers/cli
 npm i -g dotenv-cli
+npm i -g typescript
 npm i -g npm-check-updates
 ncu -u
 npm i
@@ -25,6 +26,7 @@ npm version
 npm i -g @npmcli/fs
 npm i -g @devcontainers/cli
 npm i -g dotenv-cli
+npm i -g typescript
 npm i -g npm-check-updates
 ncu -u
 npm i

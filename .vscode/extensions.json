@@ -30,6 +30,8 @@
       "ms-vscode.powershell",
       "ms-python.python",
       "visualstudioexptteam.vscodeintellicode",
-      "donjayamanne.python-extension-pack"
+      "donjayamanne.python-extension-pack",
+      "golang.go",
+      "rebornix.ruby"
     ]
 }
