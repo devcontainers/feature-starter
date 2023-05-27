@@ -3,7 +3,6 @@
 #shellcheck disable=SC2034
 set -e
 for j in {1..5}; do
-    echo ${DEVCONTAINER_FEATURES_PROJECT_NAME}_${DEVCONTAINER_PROJECT_NAME}
     containerid=$(docker container ls --all --quiet --filter name="$DEVCONTAINER_PROJECT_NAME-devspace")
     if [ -n "$containerid" ]; then
         docker rm -f "$containerid"
@@ -19,4 +18,5 @@ for j in {1..5}; do
     docker image prune -a -f
     docker network prune -f
     docker volume prune -f
+    docker system prune -a -f
 done
