@@ -1,16 +1,6 @@
 # https://scoop.sh/
-Write-Host "Installing scoop..."
 scoop install --global 7zip
 scoop update --all --global
-scoop bucket add extras
-scoop bucket add games
-scoop bucket add nerd-fonts
-scoop bucket add nirsoft
-scoop bucket add sysinternals
-scoop bucket add java
-scoop bucket add nonportable
-scoop bucket add php
-scoop bucket add versions
 scoop update
 $complete = $false
 do {
