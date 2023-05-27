@@ -18,5 +18,5 @@ for j in {1..5}; do
     docker image prune -a -f
     docker network prune -f
     docker volume prune -f
-    docker system prune -a -f
+    docker system prune -a -f --volumes
 done

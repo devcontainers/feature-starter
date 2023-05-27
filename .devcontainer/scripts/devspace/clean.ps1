@@ -14,5 +14,5 @@ for($j=1; $j -le 5; $j++) {
   docker image prune -a -f
   docker network prune -f
   docker volume prune -f
-  docker system prune -a -f
+  docker system prune -a -f --volumes
 }
