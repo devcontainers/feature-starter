@@ -32,6 +32,8 @@
       "visualstudioexptteam.vscodeintellicode",
       "donjayamanne.python-extension-pack",
       "golang.go",
-      "rebornix.ruby"
+      "rebornix.ruby",
+      "eamodio.gitlens",
+      "ms-mssql.mssql"
     ]
 }

@@ -111,7 +111,11 @@
 		"donjayamanne.python-extension-pack",
 		"golang.go",
 		"dotenv.dotenv-vscode",
-    "rebornix.ruby"
+		"rebornix.ruby",
+		"donjayamanne.githistory",
+		"eamodio.gitlens",
+		"ms-mssql.mssql",
+		"donjayamanne.git-extension-pack"
 	]
     }
   },
