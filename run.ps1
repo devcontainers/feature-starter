@@ -17,7 +17,7 @@ $scriptsRoot = "$projectRoot/.devcontainer/scripts"
 $executionRoot = "$env:DEVCONTAINER_SCRIPTS_ROOT/$scriptPath"
 Push-Location "$executionRoot"
 try {
-  if ($command -eq $null) {
+  if ("$command" -eq "") {
     $result = & "./$script.ps1"
   }
   else {
