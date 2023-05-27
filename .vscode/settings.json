@@ -19,8 +19,5 @@
     },
     "terminal.integrated.defaultProfile.windows": "PowerShell",
     "terminal.integrated.defaultProfile.osx": "zsh",
-    "terminal.integrated.defaultProfile.linux": "zsh",
-    "githubPullRequests.ignoredPullRequestBranches": [
-        "main"
-    ]
+    "terminal.integrated.defaultProfile.linux": "zsh"
 }
