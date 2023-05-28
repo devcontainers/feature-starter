@@ -12,6 +12,7 @@ scoop update --all --global
 & "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup environment
 try {
   gh auth status
+  if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
 } catch {
   gh auth login
 }

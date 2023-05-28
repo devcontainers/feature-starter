@@ -14,10 +14,7 @@ jobs:
       matrix:
         features: [
             "color",
-            "hello",
-            "homebrew",
-            "nvm",
-            "dotnet"
+            "hello"
         ]
         baseImage:
           [
@@ -41,9 +38,6 @@ jobs:
         features: [
             "color",
             "hello",
-            "homebrew",
-            "nvm",
-            "dotnet",
             "bash-command"
         ]
     steps:

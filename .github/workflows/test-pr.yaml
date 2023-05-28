@@ -14,9 +14,6 @@ jobs:
           filters: |
             color: ./**/color/**
             hello: ./**/hello/**
-            homebrew: ./**/homebrew/**
-            nvm: ./**/nvm/**
-            dotnet: ./**/dotnet/**
             bash-command: ./**/bash-command/**
 
   test:
