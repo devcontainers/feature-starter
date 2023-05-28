@@ -1,10 +1,11 @@
 $projectRoot="$PSCommandPath" | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent
 Push-Location "$projectRoot/.devcontainer"
 try {
-    # Install-Module -Name Set-PsEnv -Force -SkipPublisherCheck -AllowClobber
-    # TODO: Figure out how to tell someone they need to run this as admin first or make this automated.
     Set-PsEnv
     if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
+  } catch {
+    $env:DEVCONTAINER_FEATURES_PROJECT_NAME="devcontainer-features"
+    $env:DEVCONTAINER_PROJECT_NAME="devcontainer"
   } finally {
     Pop-Location
 }

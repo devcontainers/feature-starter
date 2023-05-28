@@ -2,8 +2,9 @@
 #shellcheck shell=bash
 #shellcheck source=/dev/null
 #shellcheck disable=SC2016,SC2143
-set -e
-rcFile="$HOME/.zshrc"
+# init
+  set -e
+  rcFile="$HOME/.zshrc"
 # Setup Developer Command Line tools
   if ! git --version; then sudo xcode-select --install; fi
 # Setup ohmyzsh
@@ -125,6 +126,33 @@ rcFile="$HOME/.zshrc"
     if [ -z "$(dotnet tool list -g | grep -q "$tool")" ]; then dotnet tool update -g "$tool"; else dotnet tool install -g "$tool"; fi
     # Test
       git-credential-manager --version
+  # Setup dotnet workloads
+    dotnet workload install --include-previews wasi-experimental
+    # Clean, repair, and update
+      dotnet workload clean
+      dotnet workload update
+      dotnet workload repair
+# pwsh modules
+  modules=('Pester' 'Set-PsEnv')
+  install_modules() {
+    local shell_command=$1
+    $shell_command -Command "Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber; Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber -AllowPrerelease; Set-Alias -Name awk -Value gawk;"
+    for module in "${modules[@]}"; do
+      $shell_command -Command "Install-Module -Name $module -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber;"
+    done
+  }
+  # PowerShell Core (pwsh)
+    if command -v pwsh > /dev/null; then
+      install_modules "pwsh"
+    else
+      echo "PowerShell Core is not installed"
+    fi
+  # PowerShell Core Preview (pwsh-preview)
+    if command -v pwsh-preview > /dev/null; then
+      install_modules "pwsh-preview"
+    else
+      echo "PowerShell Core Preview is not installed"
+    fi
 # Test docker
   docker --version
   docker-compose --version
@@ -146,4 +174,4 @@ rcFile="$HOME/.zshrc"
     git-credential-manager configure
     git-credential-manager diagnose
 # Done
-echo "WARNING: Please restart shell to get latest environment variables"
+  echo "WARNING: Please restart shell to get latest environment variables"

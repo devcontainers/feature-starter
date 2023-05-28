@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 #shellcheck shell=bash
 #shellcheck source=/dev/null
-#shellcheck disable=SC2016
-set -e
-IS_WSL=${IS_WSL:=false}
+#shellcheck disable=SC2016,SC2143
+# init
+  set -e
+  IS_WSL=${IS_WSL:=false}
 # Get current user
   CURRENT_USER="$(whoami)"
 # Update max open files
@@ -179,6 +180,12 @@ IS_WSL=${IS_WSL:=false}
     if [ -z "$(dotnet tool list -g | grep -q "$tool")" ]; then dotnet tool update -g "$tool"; else dotnet tool install -g "$tool"; fi
     # Test
       git-credential-manager --version
+  # Setup dotnet workloads
+    dotnet workload install --include-previews wasi-experimental
+    # Clean, repair, and update
+      dotnet workload clean
+      dotnet workload update
+      dotnet workload repair
 # Install docker completions
   rm -rf /etc/bash_completion.d/docker.sh || true
   mkdir -p /etc/bash_completion.d
@@ -215,4 +222,5 @@ IS_WSL=${IS_WSL:=false}
       git-credential-manager configure
       git-credential-manager diagnose
   fi
-echo "WARNING: Please restart shell to get latest environment variables"
+# Done
+  echo "WARNING: Please restart shell to get latest environment variables"

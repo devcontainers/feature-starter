@@ -3,7 +3,6 @@ $modules = @('Pester', 'Set-PsEnv')
 # Windows PowerShell
 Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber
 Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber -AllowPrerelease
-Import-Module PowerShellGet -ErrorAction Stop
 Set-Alias -Name awk -Value gawk
 foreach ($module in $modules) {
   Install-Module -Name $module -Force -SkipPublisherCheck -AllowClobber
@@ -12,8 +11,9 @@ foreach ($module in $modules) {
 # Function to install modules
 function Install-Modules {
   param($ShellCommand)
+  Start-Process -FilePath $ShellCommand -ArgumentList "-Command Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber; Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber -AllowPrerelease; Set-Alias -Name awk -Value gawk;" -Wait -NoNewWindow
   foreach ($module in $modules) {
-    Start-Process -FilePath $ShellCommand -ArgumentList "-Command Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber; Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber -AllowPrerelease; Import-Module PowerShellGet -ErrorAction Stop; Set-Alias -Name awk -Value gawk; Install-Module -Name $module -Force -SkipPublisherCheck -AllowClobber" -Wait -NoNewWindow
+    Start-Process -FilePath $ShellCommand -ArgumentList "-Command Install-Module -Name $module -Force -SkipPublisherCheck -AllowClobber;" -Wait -NoNewWindow
   }
 }
 
