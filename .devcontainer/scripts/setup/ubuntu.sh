@@ -25,6 +25,7 @@
     age-keygen --version
     zsh --version
 # Setup ohmyzsh
+  sudo chsh "$(whoami)" -s "$(which zsh)"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/powerlevel10k" || true
     rcFile="$HOME/.zshrc"
@@ -50,7 +51,7 @@
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
     rcFile="$HOME/.zshrc"
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
     rcLine='eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"'
     rcFile="$HOME/.bashrc"
@@ -77,8 +78,8 @@
     brew upgrade
   # Setup post hombrew packages
     brew link --force --overwrite postgresql@15
-    source /usr/local/opt/asdf/libexec/asdf.sh
-      rcLine='source /usr/local/opt/asdf/libexec/asdf.sh'
+    source $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
+      rcLine='source $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh'
       rcFile="$HOME/.bashrc"
       grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
       rcFile="$HOME/.zshrc"

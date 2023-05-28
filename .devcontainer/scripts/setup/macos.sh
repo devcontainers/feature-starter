@@ -8,6 +8,7 @@
 # Setup Developer Command Line tools
   if ! git --version; then sudo xcode-select --install; fi
 # Setup ohmyzsh
+  sudo chsh "$(whoami)" -s "$(which zsh)"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/powerlevel10k" || true
     rcLine='source ~/powerlevel10k/powerlevel10k.zsh-theme'
@@ -17,7 +18,7 @@
     rcLine="source \"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup environment"
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
 # Setup Homebrew
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   eval "$(/usr/local/bin/brew shellenv)"
     rcLine='eval "$(/usr/local/bin/brew shellenv)"'
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
