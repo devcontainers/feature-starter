@@ -1,6 +1,8 @@
 # Define an array of module names
 $modules = @('Pester', 'Set-PsEnv')
 # Windows PowerShell
+Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber
+Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber -AllowPrerelease
 Import-Module PowerShellGet -ErrorAction Stop
 Set-Alias -Name awk -Value gawk
 foreach ($module in $modules) {
@@ -11,7 +13,7 @@ foreach ($module in $modules) {
 function Install-Modules {
   param($ShellCommand)
   foreach ($module in $modules) {
-    Start-Process -FilePath $ShellCommand -ArgumentList "-Command Import-Module PowerShellGet -ErrorAction Stop; Set-Alias -Name awk -Value gawk; Install-Module -Name $module -Force -SkipPublisherCheck -AllowClobber" -Wait -NoNewWindow
+    Start-Process -FilePath $ShellCommand -ArgumentList "-Command Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber; Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber -AllowPrerelease; Import-Module PowerShellGet -ErrorAction Stop; Set-Alias -Name awk -Value gawk; Install-Module -Name $module -Force -SkipPublisherCheck -AllowClobber" -Wait -NoNewWindow
   }
 }
 
