@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 #shellcheck shell=bash
 #shellcheck source=/dev/null
-#shellcheck disable=SC2016,SC2155
+#shellcheck disable=SC2016,SC2143,SC2155
 set -e
 # Setup Developer Command Line tools
 if ! git --version; then sudo xcode-select --install; fi
@@ -21,7 +21,7 @@ grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
 eval "$(/usr/local/bin/brew shellenv)"
 brew update
 # Install Homebrew packages
-brew install sevenzip p7zip awk bash zsh powershell oh-my-posh file-formula gnu-sed coreutils curl wget grep bzip2 git git-lfs less sqlite gcc llvm openssl@1.1 openssl@3 nghttp2 openssh make cmake go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck nss mono-libgdiplus zlib zlib-ng age jq moreutils gedit asdf sigstore/tap/gitsign gh mkcert chezmoi postgresql@15 azure-cli awscli
+brew install sevenzip p7zip awk bash zsh powershell/tap/powershell powershell/tap/powershell-preview oh-my-posh file-formula gnu-sed coreutils curl wget grep bzip2 git git-lfs less sqlite gcc llvm openssl@1.1 openssl@3 nghttp2 openssh make cmake go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck nss mono-libgdiplus zlib zlib-ng age jq moreutils gedit asdf sigstore/tap/gitsign gh mkcert chezmoi postgresql@15 azure-cli awscli
 # Setup post hombrew packages
 brew link --force --overwrite postgresql@15
 source /usr/local/opt/asdf/libexec/asdf.sh
@@ -47,9 +47,9 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 nvm version
 # Install Node.js latest and lts
 nvm install node
-nvm install lts
+nvm install --lts
 # Update lts npm
-nvm use lts
+nvm use --lts
 npm update -g npm
 npm --version
 npm version
@@ -87,17 +87,33 @@ asdf install dotnet-core "$preview"
 asdf global dotnet-core "$lts"
 asdf reshim
 asdf info
-PATH="$HOME/.dotnet/tools:$PATH"
 source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh"
-rcLine='PATH="$HOME/.dotnet/tools:$PATH"'
 rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh"'
 grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
 dotnet --version
 dotnet --info
+# Setup dotnet tools
+PATH="$HOME/.dotnet/tools:$PATH"
+rcLine='PATH="$HOME/.dotnet/tools:$PATH"'
+grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+tool=git-credential-manager
+if [ -z "$(dotnet tool list -g | grep -q "$tool")" ]; then dotnet tool update -g "$tool"; else dotnet tool install -g "$tool"; fi
+# Adding GH .ssh known hosts
+mkdir -p "$HOME/.ssh/"
+touch "$HOME/.ssh/known_hosts"
+bash -c eval "$(ssh-keyscan github.com >> "$HOME/.ssh/known_hosts")"
+# Make trusted root CA then install and trust it
+mkcert -install
+dotnet dev-certs https --trust
 # Log into GitHub
 if ! gh auth status; then gh auth login; fi
 gh config set -h github.com git_protocol https
 gh auth status
 # Setup environment
+source "$HOME/.zshrc"
 source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
+# Setup git credential manager
+git-credential-manager configure
+git-credential-manager diagnose
+# Done
 echo "WARNING: Please restart shell to get latest environment variables"

@@ -1,5 +1,11 @@
 # Define an array of module names
 $modules = @('Pester', 'Set-PsEnv')
+# Windows PowerShell
+Import-Module PowerShellGet -ErrorAction Stop
+Set-Alias -Name awk -Value gawk
+foreach ($module in $modules) {
+  Install-Module -Name $module -Force -SkipPublisherCheck -AllowClobber
+}
 
 # Function to install modules
 function Install-Modules {
@@ -7,14 +13,6 @@ function Install-Modules {
   foreach ($module in $modules) {
     Start-Process -FilePath $ShellCommand -ArgumentList "-Command Import-Module PowerShellGet -ErrorAction Stop; Set-Alias -Name awk -Value gawk; Install-Module -Name $module -Force -SkipPublisherCheck -AllowClobber" -Wait -NoNewWindow
   }
-}
-
-# Windows PowerShell
-if (Get-Command powershell -ErrorAction SilentlyContinue) { 
-  Install-Modules "powershell"
-}
-else {
-  Write-Host "Windows PowerShell is not installed"
 }
 
 # PowerShell Core (pwsh)
