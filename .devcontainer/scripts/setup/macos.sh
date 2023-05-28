@@ -27,7 +27,10 @@
     brew tap --repair
     brew update
   # Install Homebrew packages
-    HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk bash zsh powershell/tap/powershell powershell/tap/powershell-preview oh-my-posh file-formula gnu-sed coreutils curl wget grep bzip2 git git-lfs sigstore/tap/gitsign gh less sqlite sqlite-utils buf protobuf grpc gcc llvm openssl@1.1 openssl@3 nghttp2 openssh make cmake go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck nss mono-libgdiplus zlib zlib-ng age jq moreutils gedit asdf mkcert chezmoi postgresql@15 azure-cli awscli microsoft/mssql-release/msodbcsql18 microsoft/mssql-release/mssql-tools18
+    HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk bash zsh powershell/tap/powershell powershell/tap/powershell-preview oh-my-posh file-formula gnu-sed coreutils grep
+    HOMEBREW_ACCEPT_EULA=Y brew install curl wget bzip2 git git-lfs sigstore/tap/gitsign gh less sqlite sqlite-utils buf protobuf grpc gcc llvm openssl@1.1 openssl@3 nghttp2
+    HOMEBREW_ACCEPT_EULA=Y brew install openssh make cmake go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck nss mono-libgdiplus zlib zlib-ng age jq moreutils
+    HOMEBREW_ACCEPT_EULA=Y brew install gedit asdf mkcert chezmoi postgresql@15 azure-cli awscli microsoft/mssql-release/msodbcsql18 microsoft/mssql-release/mssql-tools18
     alias sed=gsed
       sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.bashrc"
       sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.zshrc"
