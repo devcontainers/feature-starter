@@ -5,13 +5,13 @@ scoop update
 $complete = $false
 do {
     try {
-        scoop install --global vcredist vcredist2022 gawk openssh vulkan openssl gitsign gh sed curl wget grep sed less touch sqlite gcc buf protobuf grpc-tools llvm bzip2 make cmake patch cacert file dos2unix shellcheck zlib age mkcert go python dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts nvm chezmoi postgresql speedtest-cli speedtest jq gedit gimp vlc azure-cli aws fiddler
+        scoop install --global vcredist vcredist2022 gawk openssh vulkan openssl gitsign gh sed curl wget grep sed coreutils less touch sqlite gcc buf protobuf grpc-tools llvm bzip2 make cmake patch cacert file dos2unix shellcheck zlib age mkcert go python dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts nvm chezmoi postgresql speedtest-cli speedtest jq gedit gimp vlc azure-cli aws fiddler
         if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
         $complete = $true
     } catch [Exception] {
         Write-Host $_.Exception.Message
         Write-Host "Retrying"
-    }            
+    }
 } while (-not $complete)
 
 scoop update --all --global

@@ -35,7 +35,7 @@ sudo grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee --append "$rcFil
 rcFile=$HOME/.zshrc
 sudo grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee --append "$rcFile"
 # Install Brew
-sudo USERNAME="$CURRENT_USER" BREWS="sevenzip p7zip awk bash zsh file-formula gnu-sed curl wget grep bzip2 git git-lfs gh less sqlite sqlite-utils gcc buf protobuf grpc llvm openssl@1.1 openssl@3 nghttp2 openssh make cmake go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib zlib-ng age jq moreutils gedit asdf sigstore/tap/gitsign mkcert chezmoi postgresql@15 azure-cli awscli" LINKS="postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
+sudo USERNAME="$CURRENT_USER" BREWS="sevenzip p7zip awk bash zsh file-formula gnu-sed coreutils curl wget grep bzip2 git git-lfs gh less sqlite sqlite-utils gcc buf protobuf grpc llvm openssl@1.1 openssl@3 nghttp2 openssh make cmake go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib zlib-ng age jq moreutils gedit asdf sigstore/tap/gitsign mkcert chezmoi postgresql@15 azure-cli awscli" LINKS="postgresql@15" "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" -s homebrew install
 alias sed=gsed
 sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.bashrc"
 # TODO: Fix this to always
