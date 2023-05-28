@@ -5,6 +5,7 @@
 
 # dev spaces nohup
 nohup.out
+.tools-versions
 
 # User-specific files
 *.rsuser

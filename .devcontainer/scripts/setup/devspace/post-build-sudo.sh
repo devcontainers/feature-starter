@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #shellcheck shell=bash
+#shellcheck source=/dev/null
 set -e
 # Refresh environment profile
 source /etc/bash.bashrc

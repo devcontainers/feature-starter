@@ -155,19 +155,19 @@
       "userGid": "automatic",
       "nonFreePackages": "true"
     },
+    // https://github.com/devcontainers/features/tree/main/src/powershell
+    "ghcr.io/devcontainers/features/powershell:1": {
+      "version": "latest",
+      "modules": "Set-PsEnv,Pester"
+    },
     // https://github.com/AlephZ-ai/devcontainer-features/tree/main/src/homebrew
     "ghcr.io/AlephZ-ai/devcontainer-features/homebrew": {
-      "brews": "sevenzip p7zip awk bash zsh file-formula gnu-sed coreutils curl wget grep bzip2 git git-lfs gh less sqlite sqlite-utils gcc llvm buf protobuf grpc openssl@1.1 openssl@3 nghttp2 openssh make cmake go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck procps nss zlib zlib-ng age jq moreutils gedit asdf sigstore/tap/gitsign mkcert chezmoi postgresql@15 azure-cli awscli",
+      "brews": "sevenzip p7zip awk bash zsh oh-my-posh file-formula gnu-sed coreutils curl wget grep bzip2 git git-lfs gh less sqlite sqlite-utils gcc llvm buf protobuf grpc openssl@1.1 openssl@3 nghttp2 openssh make cmake go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck procps nss mono-libgdiplus zlib zlib-ng age jq moreutils gedit asdf sigstore/tap/gitsign mkcert chezmoi postgresql@15 azure-cli awscli",
       "links": "postgresql@15"
     },
     // https://github.com/devcontainers/features/tree/main/src/dotnet
     "ghcr.io/AlephZ-ai/devcontainer-features/dotnet": {
       "tools": "git-credential-manager"
-    },
-    // https://github.com/devcontainers/features/tree/main/src/powershell
-    "ghcr.io/devcontainers/features/powershell:1": {
-      "version": "latest",
-      "modules": "Set-PsEnv,Pester"
     },
     // https://github.com/devcontainers/features/tree/main/src/node
     "ghcr.io/AlephZ-ai/devcontainer-features/nvm": {
@@ -184,16 +184,17 @@
     },
     // https://github.com/devcontainers-contrib/features/tree/main/src/bash-command
     "ghcr.io/AlephZ-ai/devcontainer-features/bash-command:1": {
-      "command": "${localEnv:DEVCONTAINER_POST_BUILD_COMMAND}"
+      "sudocommand": "${localEnv:DEVCONTAINER_POST_BUILD_SUDO_COMMAND}",
+      "usercommand": "${localEnv:DEVCONTAINER_POST_BUILD_USER_COMMAND}"
     }
   },
   "overrideFeatureInstallOrder": [
     "ghcr.io/rocker-org/devcontainer-features/apt-packages",
     "ghcr.io/devcontainers/features/docker-in-docker",
     "ghcr.io/devcontainers/features/common-utils",
+    "ghcr.io/devcontainers/features/powershell",
     "ghcr.io/AlephZ-ai/devcontainer-features/homebrew",
     "ghcr.io/AlephZ-ai/devcontainer-features/dotnet",
-    "ghcr.io/devcontainers/features/powershell",
     "ghcr.io/AlephZ-ai/devcontainer-features/nvm",
     "ghcr.io/devcontainers/features/desktop-lite",
     "ghcr.io/AlephZ-ai/devcontainer-features/bash-command:1"
