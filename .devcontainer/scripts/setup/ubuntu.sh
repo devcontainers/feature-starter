@@ -122,8 +122,9 @@
   asdf global dotnet-core "$preview"
   asdf reshim
   asdf info
-  reset
+  source "$HOME/.bashrc"
   source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"
+  echo "$DOTNET_ROOT"
     rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"'
     rcFile="$HOME/.bashrc"
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
