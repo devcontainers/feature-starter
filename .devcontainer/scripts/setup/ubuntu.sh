@@ -134,6 +134,7 @@ EOF
   asdf global dotnet-core "$preview"
   asdf reshim
   asdf info
+  reset
   source "$HOME/.bashrc"
   source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"
     rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"'
