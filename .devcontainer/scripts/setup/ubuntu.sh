@@ -73,7 +73,7 @@ EOF
     HOMEBREW_ACCEPT_EULA=Y brew install mono-libgdiplus chezmoi postgresql@15 azure-cli awscli microsoft/mssql-release/msodbcsql18 microsoft/mssql-release/mssql-tools18 gedit
     updaterc 'alias sed=gsed'
     git lfs install
-    git lfs install --system
+    sudo git lfs install --system
     brew update
     brew upgrade
   # Setup post hombrew packages
@@ -153,6 +153,7 @@ EOF
       dotnet workload repair
   # Setup dotnet tools
     updaterc 'PATH="$HOME/.dotnet/tools:$PATH"'
+    mkdir -p "$HOME/.dotnet/tools"
     echo "$dotnet_latest_major_global" > "$HOME/.dotnet/tools/global.json"
     tools=('powershell' 'git-credential-manager')
     for tool in "${tools[@]}"; do
