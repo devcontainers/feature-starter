@@ -72,8 +72,8 @@ EOF
     HOMEBREW_ACCEPT_EULA=Y brew install age nss openssl@1.1 openssl@3 nghttp2 openssh make cmake cmake-docs mkcert go python@3.11 ca-certificates speedtest-cli shellcheck
     HOMEBREW_ACCEPT_EULA=Y brew install mono-libgdiplus chezmoi postgresql@15 azure-cli awscli microsoft/mssql-release/msodbcsql18 microsoft/mssql-release/mssql-tools18 gedit
     updaterc 'alias sed=gsed'
-    git lfs install
-    git lfs install --system
+    # git lfs install
+    # git lfs install --system
     brew update
     brew upgrade
   # Setup post hombrew packages
