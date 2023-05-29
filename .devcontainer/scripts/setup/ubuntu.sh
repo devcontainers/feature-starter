@@ -19,8 +19,8 @@
   sudo apt install -y --fix-broken --fix-missing
   sudo apt upgrade -y
 # Run post-build commands
-  sudo -i bash -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup/devspace post-build-sudo"
-  bash -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup/devspace post-build-user"
+  sudo -i bash -l -c "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace post-build-sudo.sh"
+  bash -l -c "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace post-build-user.sh"
 # Continue with devspace setup
   bash -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup devspace"
 # Log into GitHub
