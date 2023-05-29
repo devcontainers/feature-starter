@@ -64,6 +64,8 @@
     HOMEBREW_ACCEPT_EULA=Y brew install go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck nss mono-libgdiplus zlib zlib-ng age jq moreutils
     HOMEBREW_ACCEPT_EULA=Y brew install chezmoi postgresql@15 azure-cli awscli microsoft/mssql-release/msodbcsql18 microsoft/mssql-release/mssql-tools18 gedit
     updaterc 'alias sed=gsed'
+    git lfs install
+    git lfs install --system
     brew update
     brew upgrade
   # Setup post hombrew packages
