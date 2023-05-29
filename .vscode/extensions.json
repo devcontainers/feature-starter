@@ -9,7 +9,7 @@
       "rechinformatica.rech-editor-batch",
       "dbaeumer.vscode-eslint",
       "dotenv.dotenv-vscode",
-      "VisualStudioExptTeam.vscodeintellicode",
+      "visualstudioexptteam.vscodeintellicode",
       "donjayamanne.githistory",
       "eamodio.gitlens",
       "donjayamanne.git-extension-pack",
@@ -19,7 +19,6 @@
       "ms-vscode.azurecli",
       "ms-vscode.cpptools",
       "ms-vscode.cpptools-extension-pack",
-      "ms-dotnettools.csharp",
       "ms-python.python",
       "ms-mssql.mssql",
       "donjayamanne.python-extension-pack",
@@ -38,17 +37,11 @@
       "golang.go",
       "rebornix.ruby",
       "amazonwebservices.aws-toolkit-vscode",
-      "gitHub.codespaces",
-      "gitHub.vscode-pull-request-github",
-      "gitHub.remotehub",
-      "gitHub.copilot-nightly",
-      "gitHub.copilot-labs",
-      "github.vscode-github-actions",
       "github.codespaces",
       "github.vscode-pull-request-github",
       "github.remotehub",
       "github.copilot-nightly",
       "github.copilot-labs",
       "github.vscode-github-actions"
-  ]
+    ]
 }
