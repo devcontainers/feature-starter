@@ -133,7 +133,7 @@
       dotnet workload update
       dotnet workload repair
   # Setup dotnet tools
-    PATH="$HOME/.dotnet/tools:$PATH"
+    updaterc 'PATH="$HOME/.dotnet/tools:$PATH"'
     rcLine='PATH="$HOME/.dotnet/tools:$PATH"'
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
     tools=('powershell' 'git-credential-manager')
