@@ -7,7 +7,6 @@ set -e
 # Refresh environment profile
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-# TODO: Move to homebrew with taps option
 brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
 brew update
 HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18
