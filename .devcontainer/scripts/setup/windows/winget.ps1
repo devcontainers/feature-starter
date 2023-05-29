@@ -12,9 +12,8 @@ winget install --id "Google.Chrome" --accept-package-agreements --accept-source-
 winget install --name "Chrome Remote Desktop Host" --accept-package-agreements --accept-source-agreements --disable-interactivity
 winget install --id "Microsoft.WindowsTerminal" --accept-package-agreements --accept-source-agreements --disable-interactivity
 winget install --id "Microsoft.WindowsTerminal.Preview" --accept-package-agreements --accept-source-agreements --disable-interactivity
-winget install --id "Microsoft.PowerShell" --accept-package-agreements --accept-source-agreements --disable-interactivity
-winget install --id "Microsoft.PowerShell.Preview" --accept-package-agreements --accept-source-agreements --disable-interactivity
 winget install --id "RedHat.Podman" --accept-package-agreements --accept-source-agreements --disable-interactivity
+winget install --id "JanDeDobbeleer.OhMyPosh" --accept-package-agreements --accept-source-agreements --disable-interactivity
 winget install --name "Windows Subsystem for Linux" --accept-package-agreements --accept-source-agreements --disable-interactivity
 wsl --update
 wsl --set-default-version 2

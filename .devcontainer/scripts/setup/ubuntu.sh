@@ -65,13 +65,13 @@
     brew tap --repair
     brew update
   # Install Homebrew packages
-  # procps os linux only
+  # procps is linux only
     HOMEBREW_ACCEPT_EULA=Y brew install procps
   # These work on all brew platforms
-    HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk bash zsh powershell/tap/powershell powershell/tap/powershell-preview oh-my-posh file-formula gnu-sed coreutils grep
-    HOMEBREW_ACCEPT_EULA=Y brew install curl wget bzip2 git git-lfs sigstore/tap/gitsign gh less sqlite sqlite-utils buf protobuf grpc gcc llvm openssl@1.1 openssl@3 nghttp2
-    HOMEBREW_ACCEPT_EULA=Y brew install openssh make cmake go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck nss mono-libgdiplus zlib zlib-ng age jq moreutils
-    HOMEBREW_ACCEPT_EULA=Y brew install gedit asdf mkcert chezmoi postgresql@15 azure-cli awscli microsoft/mssql-release/msodbcsql18 microsoft/mssql-release/mssql-tools18
+    HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less buf protobuf grpc asdf
+    HOMEBREW_ACCEPT_EULA=Y brew install git git-lfs sigstore/tap/gitsign gh sqlite sqlite-utils gcc llvm openssl@1.1 openssl@3 nghttp2 openssh make cmake mkcert
+    HOMEBREW_ACCEPT_EULA=Y brew install go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck nss mono-libgdiplus zlib zlib-ng age jq moreutils
+    HOMEBREW_ACCEPT_EULA=Y brew install chezmoi postgresql@15 azure-cli awscli microsoft/mssql-release/msodbcsql18 microsoft/mssql-release/mssql-tools18 gedit
     alias sed=gsed
       sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.bashrc"
       sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.zshrc"
@@ -91,7 +91,6 @@
   # Test
     bash --version
     zsh --version
-    pwsh --version
     mkcert --version
     chezmoi --version
     gitsign-credential-cache --version
@@ -177,20 +176,44 @@
   # Test
     dotnet --version
     dotnet --info
-  # Setup dotnet tools
-    PATH="$HOME/.dotnet/tools:$PATH"
-    rcLine='PATH="$HOME/.dotnet/tools:$PATH"'
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-    tool=git-credential-manager
-    if [ -z "$(dotnet tool list -g | grep -q "$tool")" ]; then dotnet tool update -g "$tool"; else dotnet tool install -g "$tool"; fi
-    # Test
-      git-credential-manager --version
   # Setup dotnet workloads
     dotnet workload install --include-previews wasi-experimental
     # Clean, repair, and update
       dotnet workload clean
       dotnet workload update
       dotnet workload repair
+  # Setup dotnet tools
+    PATH="$HOME/.dotnet/tools:$PATH"
+    rcLine='PATH="$HOME/.dotnet/tools:$PATH"'
+    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+    tools=('powershell' 'git-credential-manager')
+    for tool in "${tools[@]}"; do
+      if [ -z "$(dotnet tool list -g | grep -q "$tool")" ]; then dotnet tool update -g "$tool"; else dotnet tool install -g "$tool"; fi
+    done
+    # Test
+      pwsh --version
+      git-credential-manager --version
+# pwsh modules
+  modules=('Pester' 'Set-PsEnv')
+  install_modules() {
+    local shell_command=$1
+    $shell_command -Command "Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber; Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber -AllowPrerelease; Set-Alias -Name awk -Value gawk;"
+    for module in "${modules[@]}"; do
+      $shell_command -Command "Install-Module -Name $module -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber;"
+    done
+  }
+  # PowerShell Core (pwsh)
+    if command -v pwsh > /dev/null; then
+      install_modules "pwsh"
+    else
+      echo "PowerShell Core is not installed"
+    fi
+  # PowerShell Core Preview (pwsh-preview)
+    if command -v pwsh-preview > /dev/null; then
+      install_modules "pwsh-preview"
+    else
+      echo "PowerShell Core Preview is not installed"
+    fi
 # Install docker completions
   rm -rf /etc/bash_completion.d/docker.sh || true
   mkdir -p /etc/bash_completion.d
