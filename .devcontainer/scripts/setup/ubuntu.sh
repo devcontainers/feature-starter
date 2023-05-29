@@ -60,8 +60,8 @@
     HOMEBREW_ACCEPT_EULA=Y brew install procps
   # These work on all brew platforms
     HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less buf protobuf grpc asdf
-    HOMEBREW_ACCEPT_EULA=Y brew install git git-lfs sigstore/tap/gitsign gh sqlite sqlite-utils gcc llvm openssl@1.1 openssl@3 nghttp2 openssh make cmake mkcert
-    HOMEBREW_ACCEPT_EULA=Y brew install go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck nss mono-libgdiplus zlib zlib-ng age jq moreutils
+    HOMEBREW_ACCEPT_EULA=Y brew install git git-lfs sigstore/tap/gitsign gh sqlite sqlite-utils gcc llvm openssl@1.1 openssl@3 nghttp2 openssh make cmake cmake-docs
+    HOMEBREW_ACCEPT_EULA=Y brew install mkcert go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck nss mono-libgdiplus zlib zlib-ng age jq moreutils
     HOMEBREW_ACCEPT_EULA=Y brew install chezmoi postgresql@15 azure-cli awscli microsoft/mssql-release/msodbcsql18 microsoft/mssql-release/mssql-tools18 gedit
     updaterc 'alias sed=gsed'
     git lfs install
@@ -113,6 +113,7 @@
     done
     nvm use node
 # Setup dotnet
+  setuprc 'export DOTNET_ROLL_FORWARD=LatestMajor'
   asdf plugin-add dotnet-core https://github.com/emersonsoares/asdf-dotnet-core.git || true
   asdf plugin update --all
   preview="$(asdf list all dotnet-core 8)"
@@ -125,6 +126,13 @@
   asdf reshim
   asdf info
   source "$HOME/.bashrc"
+  source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"
+    rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"'
+    rcFile="$HOME/.bashrc"
+    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+    rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh"'
+    rcFile="$HOME/.zshrc"
+    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
   # Test
     dotnet --version
     dotnet --info
