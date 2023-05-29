@@ -190,6 +190,9 @@
   # Setup dotnet tools
     PATH="$HOME/.dotnet/tools:$PATH"
     rcLine='PATH="$HOME/.dotnet/tools:$PATH"'
+    rcFile="$HOME/.bashrc"
+    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+    rcFile="$HOME/.zshrc"
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
     tools=('powershell' 'git-credential-manager')
     for tool in "${tools[@]}"; do
