@@ -21,7 +21,10 @@
   # updaterc 'PATH="$HOME/.dotnet/tools:$PATH"'
 # Run base ubuntu setup
   IS_WSL=true source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup ubuntu
-  source "$HOME/.bashrc"
+  # TODO: Homebrew fix, why?
+    updaterc 'export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"'
+    updaterc 'export PATH="$HOMEBREW_PREFIX/bin:$PATH"'
+    updaterc 'eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"'
 # Install WSL Utilties
   # https://github.com/wslutilities/wslu
   sudo apt update
