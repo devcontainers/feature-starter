@@ -30,7 +30,7 @@ EOF
     updaterc 'export PATH="$HOMEBREW_PREFIX/bin:$PATH"'
     updaterc 'eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"'
   # TODO: dotnet tools fix, why?
-    echo "$dotnet_latest_major_global" > "$HOME/global.json"
+    env
     updaterc 'PATH="$HOME/.dotnet/tools:$PATH"'
 # Install WSL Utilties
   # https://github.com/wslutilities/wslu
