@@ -122,6 +122,7 @@
   asdf global dotnet-core "$preview"
   asdf reshim
   asdf info
+  reset
   source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"
     rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"'
     rcFile="$HOME/.bashrc"
@@ -142,14 +143,14 @@
       dotnet workload update
       dotnet workload repair
   # Setup dotnet tools
-    reset
     updaterc 'PATH="$HOME/.dotnet/tools:$PATH"'
     tools=('powershell' 'git-credential-manager')
     for tool in "${tools[@]}"; do
       if [ -z "$(dotnet tool list -g | grep -q "$tool")" ]; then dotnet tool update -g "$tool"; else dotnet tool install -g "$tool"; fi
     done
     # Test
-      bash -l -c "pwsh --version && git-credential-manager --version"
+      pwsh --version
+      git-credential-manager --version
 # pwsh modules
   modules=('Pester' 'Set-PsEnv')
   install_modules() {
