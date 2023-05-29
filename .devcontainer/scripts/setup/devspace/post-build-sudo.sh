@@ -28,7 +28,7 @@
   apt update
   apt install --install-recommends -y microsoft-edge-stable
   apt install --fix-broken --fix-missing -y
-  rm -rf /etc/apt/sources.list.d/microsoft-edge-stable.list
+  rm -rf /etc/apt/sources.list.d/microsoft-edge.list
 # Update apt-packages
   apt update
   apt install -y --fix-broken --fix-missing
