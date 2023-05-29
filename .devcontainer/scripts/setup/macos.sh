@@ -27,8 +27,6 @@
   # Repair and Update if needed
     brew tap --repair
     brew update
-  # powershell is mac os only
-    HOMEBREW_ACCEPT_EULA=Y brew install powershell/tap/powershell
   # Install Homebrew packages
     HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less buf protobuf grpc asdf
     HOMEBREW_ACCEPT_EULA=Y brew install git git-lfs sigstore/tap/gitsign gh sqlite sqlite-utils gcc llvm openssl@1.1 openssl@3 nghttp2 openssh make cmake mkcert
