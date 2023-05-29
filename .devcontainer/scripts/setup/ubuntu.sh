@@ -4,8 +4,6 @@
   set -e
   # shellcheck source=/dev/null
   source "$HOME/.bashrc"
-  # shellcheck source=/dev/null
-  source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
   current_user="$(whoami)"
   IS_WSL=${IS_WSL:=false}
   updaterc() { line="$1"; eval "$line"; echo "Updating ~/.bashrc and ~/.zshrc..."; rcs=("$HOME/.bashrc" "$HOME/.zshrc"); for rc in "${rcs[@]}"; do if [[ "$(cat "$rc")" != *"$line"* ]]; then echo -e "$line" >> "$rc"; fi; done }
@@ -16,9 +14,6 @@
     sudo grep -qxF "$line" "$file" || echo "$line" | sudo tee --append "$file"
     line="$current_user hard nofile 1048576"
     sudo grep -qxF "$line" "$file" || echo "$line" | sudo tee --append "$file"
-# Setup environment
-  # shellcheck disable=SC2016
-  updaterc 'source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment'
 # Install apt-packages
   sudo apt update
   sudo apt install -y --fix-broken --fix-missing

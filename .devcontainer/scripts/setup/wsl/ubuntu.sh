@@ -2,7 +2,6 @@
 # init
   set -e
   # shellcheck source=/dev/null
-  source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
   updaterc() { line="$1"; eval "$line"; echo "Updating ~/.bashrc and ~/.zshrc..."; rcs=("$HOME/.bashrc" "$HOME/.zshrc"); for rc in "${rcs[@]}"; do if [[ "$(cat "$rc")" != *"$line"* ]]; then echo -e "$line" >> "$rc"; fi; done }
   # Setup to use windows git credential manager if exists
     gcm=/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe

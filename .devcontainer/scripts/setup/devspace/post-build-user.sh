@@ -7,6 +7,8 @@
   current_user="$(whoami)"
   os=$(uname -s)
   HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/home/linuxbrew/.linuxbrew}"
+# Setup environment
+  updaterc "source \"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup environment"
 # Make Edge the default browser if installed
   edge=/usr/bin/microsoft-edge-stable
   if [ -e "$edge" ]; then updaterc 'export BROWSER=/usr/bin/microsoft-edge-stable'; fi

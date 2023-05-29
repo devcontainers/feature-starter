@@ -3,11 +3,6 @@
   set -e
   # shellcheck source=/dev/null
   source /etc/bash.bashrc
-  FIREBIRD_PASSWORD="password"
-  export DEBIAN_FRONTEND=noninteractive
-# Default setting
-  echo firebird3.0-server firebird3.0-server/sysdba_password password $FIREBIRD_PASSWORD | debconf-set-selections
-  echo firebird3.0-server firebird3.0-server/sysdba_password_again password $FIREBIRD_PASSWORD | debconf-set-selections
 # Update apt-packages
   apt update
   apt install -y --install-recommends --fix-broken --fix-missing
