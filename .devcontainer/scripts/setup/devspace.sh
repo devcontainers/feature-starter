@@ -38,8 +38,9 @@ chezmoi --version
 psql --version
 devcontainer --version
 # Setup git credential manager
-git-credential-manager configure
-git-credential-manager diagnose
+# TODO: Fix
+# git-credential-manager configure
+# git-credential-manager diagnose
 # Adding GH .ssh known hosts
 mkdir -p "$HOME/.ssh/"
 touch "$HOME/.ssh/known_hosts"
