@@ -6,7 +6,7 @@
   updaterc() { local line="$1"; eval "$line"; echo "Updating ~/.bashrc and ~/.zshrc..."; rcs=("$HOME/.bashrc" "$HOME/.zshrc"); for rc in "${rcs[@]}"; do if [[ "$(cat "$rc")" != *"$line"* ]]; then echo -e "$line" >> "$rc"; fi; done }
   current_user="$(whoami)"
   os=$(uname -s)
-  HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/home/linuxbrew/.linuxbrew/bin}"
+  HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/home/linuxbrew/.linuxbrew}"
 # Make Edge the default browser if installed
   edge=/usr/bin/microsoft-edge-stable
   if [ -e "$edge" ]; then updaterc 'export BROWSER=/usr/bin/microsoft-edge-stable'; fi
@@ -20,6 +20,7 @@
   #   grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
 # Setup Homebrew
   updaterc "export PATH=\"$HOMEBREW_PREFIX/bin:\$PATH\""
+  sudo echo "sudo cached for noninteractive homebrew install"
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   updaterc "eval \"\$(\"$HOMEBREW_PREFIX/bin/brew\" shellenv)\""
   # Install taps
