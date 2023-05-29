@@ -178,6 +178,8 @@
   # Test
     dotnet --version
     dotnet --info
+    cat "$HOME/.bashrc"
+    cat "$HOME/.zshrc"
     env
   # Setup dotnet workloads
     dotnet workload install --include-previews wasi-experimental
