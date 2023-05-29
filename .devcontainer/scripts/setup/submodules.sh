@@ -18,4 +18,4 @@ if [ "$init_submodules" = "true" ]; then
 fi
 
 git submodule foreach --recursive git pull
-popd || exit
+popd 1> /dev/null || exit
