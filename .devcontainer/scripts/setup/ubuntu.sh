@@ -73,7 +73,7 @@ EOF
     HOMEBREW_ACCEPT_EULA=Y brew install mono-libgdiplus chezmoi postgresql@15 azure-cli awscli microsoft/mssql-release/msodbcsql18 microsoft/mssql-release/mssql-tools18 gedit
     updaterc 'alias sed=gsed'
     git lfs install
-    sudo git lfs install --system
+    git lfs install --system
     brew update
     brew upgrade
   # Setup post hombrew packages

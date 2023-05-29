@@ -36,7 +36,7 @@
       sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.bashrc"
       sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.zshrc"
     git lfs install
-    sudo git lfs install --system
+    git lfs install --system
     brew update
     brew upgrade
   # Setup post hombrew packages
