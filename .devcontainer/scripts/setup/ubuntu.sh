@@ -123,20 +123,9 @@
   asdf reshim
   asdf info
   source "$HOME/.bashrc"
-  source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"
-  echo "$DOTNET_ROOT"
-    rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"'
-    rcFile="$HOME/.bashrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-    rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh"'
-    rcFile="$HOME/.zshrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
   # Test
     dotnet --version
     dotnet --info
-    cat "$HOME/.bashrc"
-    cat "$HOME/.zshrc"
-    env
   # Setup dotnet workloads
     dotnet workload install --include-previews wasi-experimental
     # Clean, repair, and update
