@@ -134,9 +134,8 @@ EOF
   asdf global dotnet-core "$preview"
   asdf reshim
   asdf info
-  source "$HOME/.bashrc"
+  updaterc "export DOTNET_ROOT=\"/home/acehack/.asdf/installs/dotnet-core/$preview\""
   source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"
-  env
     rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"'
     rcFile="$HOME/.bashrc"
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
