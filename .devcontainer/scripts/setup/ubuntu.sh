@@ -167,10 +167,11 @@
   asdf global dotnet-core "$preview"
   asdf reshim
   asdf info
-  source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh"
-    rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh"'
+  source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"
+    rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"'
     rcFile="$HOME/.bashrc"
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+    rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh"'
     rcFile="$HOME/.zshrc"
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
   # Test
