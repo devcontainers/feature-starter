@@ -2,6 +2,14 @@
 #shellcheck shell=bash
 #shellcheck source=/dev/null
 #shellcheck disable=SC2016
+dotnet_latest_major_global=$(cat <<-EOF
+{
+  "sdk": {
+    "rollForward": "latestmajor"
+  }
+}
+EOF
+)
 # init
   set -e
   updaterc() {
@@ -23,6 +31,7 @@
     updaterc 'eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"'
   # TODO: dotnet tools fix, why?
     updaterc 'PATH="$HOME/.dotnet/tools:$PATH"'
+    echo "$dotnet_latest_major_global" > "$HOME/.dotnet/tools"
 # Install WSL Utilties
   # https://github.com/wslutilities/wslu
   sudo apt update
