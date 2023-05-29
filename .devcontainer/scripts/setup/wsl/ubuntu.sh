@@ -23,6 +23,11 @@ EOF
       fi
     done
   }
+  # Setup to use windows git credential manager if exists
+    gcm=/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe
+    if [ -e "$gcm" ]; then
+      git config --global credential.helper "$gcm"
+    fi
 # Run base ubuntu setup
   IS_WSL=true source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup ubuntu
   # TODO: Homebrew fix, why?
@@ -51,9 +56,6 @@ EOF
   if ! gh auth status; then gh auth login; fi
   gh config set -h github.com git_protocol https
   gh auth status
-  # Setup git credential manager
-    git-credential-manager configure
-    git-credential-manager diagnose
 # WSLg GPU acceleration
   # glxinfo
 # Done
