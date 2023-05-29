@@ -2,6 +2,15 @@
 #shellcheck shell=bash
 #shellcheck source=/dev/null
 #shellcheck disable=SC2016,SC2143
+dotnet_latest_major_snippet=$(cat <<-EOF
+{
+  "sdk": {
+    "version": "8",
+    "rollForward": "latestmajor"
+  }
+}
+EOF
+)
 # init
   set -e
   IS_WSL=${IS_WSL:=false}
@@ -114,6 +123,7 @@
     nvm use node
 # Setup dotnet
   updaterc 'export DOTNET_ROLL_FORWARD=LatestMajor'
+  dotnet_latest_major_snippet > "$HOME/global.json"
   asdf plugin-add dotnet-core https://github.com/emersonsoares/asdf-dotnet-core.git || true
   asdf plugin update --all
   preview="$(asdf list all dotnet-core 8)"
