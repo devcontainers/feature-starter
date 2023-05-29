@@ -30,9 +30,9 @@ EOF
     updaterc 'export PATH="$HOMEBREW_PREFIX/bin:$PATH"'
     updaterc 'eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"'
   # TODO: dotnet tools fix, why?
-    env
-    updaterc 'PATH="$HOME/.dotnet/tools:$PATH"'
-# Install WSL Utilties
+    preview="$(asdf list all dotnet-core 8)"
+    updaterc "export DOTNET_ROOT=\"$HOME/.asdf/installs/dotnet-core/$preview\""
+  # Install WSL Utilties
   # https://github.com/wslutilities/wslu
   sudo apt update
   sudo apt upgrade -y
