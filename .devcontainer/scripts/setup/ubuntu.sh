@@ -28,10 +28,6 @@
     if ! gh auth status; then gh auth login; fi
     gh config set -h github.com git_protocol https
     gh auth status
-    # TODO: Figure out if this is needed on linux
-    # Setup git credential manager
-      # git-credential-manager configure
-      # git-credential-manager diagnose
   fi
 # Done
   echo "WARNING: Please restart shell to get latest environment variables"

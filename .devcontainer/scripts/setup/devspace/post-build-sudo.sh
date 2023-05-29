@@ -5,8 +5,8 @@
   source /etc/bash.bashrc
 # Update apt-packages
   apt update
-  apt install -y --install-recommends --fix-broken --fix-missing
   apt upgrade -y
+  apt install -y --install-recommends --fix-broken --fix-missing
   apt install -y --install-recommends sudo systemd mawk gawk bash zsh file sed curl wget grep bzip2 build-essential make cmake gcc g++ less locales
   apt install -y --install-recommends patch tzdata uuid-runtime netbase dotnet-sdk-6.0 dotnet-sdk-7.0 git apt-transport-https ca-certificates age
   apt install -y --install-recommends openssl openssh-client procps checkinstall dos2unix software-properties-common libnss3 libnss3-tools shellcheck jq moreutils
@@ -27,11 +27,10 @@
   rm /tmp/microsoft.gpg
   apt update
   apt install --install-recommends -y microsoft-edge-stable
-  apt install --fix-broken --fix-missing -y
   rm -rf /etc/apt/sources.list.d/microsoft-edge.list
 # Update apt-packages
+  apt install -y --install-recommends --fix-broken --fix-missing
   apt update
-  apt install -y --fix-broken --fix-missing
   apt upgrade -y
 # Cleanup apt-packages
   apt autoclean -y
