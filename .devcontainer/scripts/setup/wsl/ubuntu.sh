@@ -4,6 +4,17 @@
 #shellcheck disable=SC2016
 # init
   set -e
+  updaterc() {
+    line="$1"
+    eval "$line"
+    echo "Updating ~/.bashrc and ~/.zshrc..."
+    rcs=("$HOME/.bashrc" "$HOME/.zshrc")
+    for rc in "${rcs[@]}"; do
+      if [[ "$(cat "$rc")" != *"$line"* ]]; then
+        echo -e "$line" >> "$rc"
+      fi
+    done
+  }
   updaterc 'export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"'
   updaterc 'export PATH="$HOMEBREW_PREFIX/bin:$PATH"'
   updaterc 'eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"'
