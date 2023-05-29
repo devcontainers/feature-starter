@@ -67,10 +67,10 @@ EOF
   # procps is linux only
     HOMEBREW_ACCEPT_EULA=Y brew install procps
   # These work on all brew platforms
-    HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less buf protobuf grpc asdf
-    HOMEBREW_ACCEPT_EULA=Y brew install git git-lfs sigstore/tap/gitsign gh sqlite sqlite-utils gcc llvm openssl@1.1 openssl@3 nghttp2 openssh make cmake cmake-docs
-    HOMEBREW_ACCEPT_EULA=Y brew install mkcert go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck nss mono-libgdiplus zlib zlib-ng age jq moreutils
-    HOMEBREW_ACCEPT_EULA=Y brew install chezmoi postgresql@15 azure-cli awscli microsoft/mssql-release/msodbcsql18 microsoft/mssql-release/mssql-tools18 gedit
+    HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less zlib zlib-ng buf protobuf grpc
+    HOMEBREW_ACCEPT_EULA=Y brew install dos2unix git git-lfs sigstore/tap/gitsign-credential-cache sigstore/tap/gitsign gh asdf sqlite sqlite-utils gcc llvm jq moreutils
+    HOMEBREW_ACCEPT_EULA=Y brew install age nss openssl@1.1 openssl@3 nghttp2 openssh make cmake cmake-docs mkcert go python@3.11 ca-certificates speedtest-cli shellcheck
+    HOMEBREW_ACCEPT_EULA=Y brew install mono-libgdiplus chezmoi postgresql@15 azure-cli awscli microsoft/mssql-release/msodbcsql18 microsoft/mssql-release/mssql-tools18 gedit
     updaterc 'alias sed=gsed'
     git lfs install
     git lfs install --system
