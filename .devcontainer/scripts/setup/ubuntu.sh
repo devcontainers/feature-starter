@@ -174,12 +174,11 @@
     rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh"'
     rcFile="$HOME/.zshrc"
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+    source "$HOME/.bashrc"
+    cat "$HOME/.bashrc"
   # Test
     dotnet --version
     dotnet --info
-    dotnet --list-sdks
-    dotnet --list-runtimes
-    whoami
     env
   # Setup dotnet workloads
     dotnet workload install --include-previews wasi-experimental
