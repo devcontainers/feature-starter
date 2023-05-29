@@ -19,8 +19,7 @@ zsh --version
 pwsh --version
 git --version
 git-lfs --version
-# TODO: Fix on devspace
-# git-credential-manager --version
+git-credential-manager --version
 gitsign --version
 gitsign-credential-cache --version
 gh --version
@@ -37,10 +36,6 @@ mkcert --version
 chezmoi --version
 psql --version
 devcontainer --version
-# Setup git credential manager
-# TODO: Fix
-# git-credential-manager configure
-# git-credential-manager diagnose
 # Adding GH .ssh known hosts
 mkdir -p "$HOME/.ssh/"
 touch "$HOME/.ssh/known_hosts"

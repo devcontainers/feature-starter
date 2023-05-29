@@ -208,9 +208,8 @@ EOF
     gh config set -h github.com git_protocol https
     gh auth status
     # Setup git credential manager
-      # TODO: Fix
-      # git-credential-manager configure
-      # git-credential-manager diagnose
+      git-credential-manager configure
+      git-credential-manager diagnose
   fi
 # Done
   echo "WARNING: Please restart shell to get latest environment variables"
