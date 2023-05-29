@@ -5,15 +5,26 @@
 # init
   set -e
   IS_WSL=${IS_WSL:=false}
+  updaterc() {
+    line="$1"
+    eval "$line"
+    echo "Updating ~/.bashrc and ~/.zshrc..."
+    rcs=("$HOME/.bashrc" "$HOME/.zshrc")
+    for rc in "${rcs[@]}"; do
+      if [[ "$(cat "$rc")" != *"$line"* ]]; then
+        echo -e "$line" >> "$rc"
+      fi
+    done
+  }
 # Get current user
   CURRENT_USER="$(whoami)"
 # Update max open files
   sudo sh -c "ulimit -n 1048576"
-    rcLine="$CURRENT_USER soft nofile 4096"
-    rcFile=/etc/security/limits.conf
-    sudo grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee --append "$rcFile"
-    rcLine="$CURRENT_USER hard nofile 1048576"
-    sudo grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" | sudo tee --append "$rcFile"
+    line="$CURRENT_USER soft nofile 4096"
+    file=/etc/security/limits.conf
+    sudo grep -qxF "$line" "$file" || echo "$line" | sudo tee --append "$file"
+    line="$CURRENT_USER hard nofile 1048576"
+    sudo grep -qxF "$line" "$file" || echo "$line" | sudo tee --append "$file"
 # Install apt-packages
   sudo apt update
   sudo apt install -y --fix-broken --fix-missing
@@ -33,32 +44,12 @@
   #   rcLine='source ~/powerlevel10k/powerlevel10k.zsh-theme'
   #   grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
 # Setup environment
-  source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
-    rcLine="source \"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup environment"
-    rcFile="$HOME/.bashrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-    rcFile="$HOME/.zshrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+  updaterc 'source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment'
 # Setup Homebrew
-  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
-    rcLine='export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"'
-    rcFile="$HOME/.bashrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-    rcFile="$HOME/.zshrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-  export PATH="$HOMEBREW_PREFIX/bin:$PATH"
-    rcLine='PATH="$HOMEBREW_PREFIX/bin:$PATH"'
-    rcFile="$HOME/.bashrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-    rcFile="$HOME/.zshrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+  updaterc 'export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"'
+  updaterc 'export PATH="$HOMEBREW_PREFIX/bin:$PATH"'
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
-    rcLine='eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"'
-    rcFile="$HOME/.bashrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-    rcFile="$HOME/.zshrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+  updaterc 'eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"'
   # Test
     brew --version
   # Repair and Update if needed
@@ -72,19 +63,12 @@
     HOMEBREW_ACCEPT_EULA=Y brew install git git-lfs sigstore/tap/gitsign gh sqlite sqlite-utils gcc llvm openssl@1.1 openssl@3 nghttp2 openssh make cmake mkcert
     HOMEBREW_ACCEPT_EULA=Y brew install go python@3.11 ca-certificates speedtest-cli dos2unix shellcheck nss mono-libgdiplus zlib zlib-ng age jq moreutils
     HOMEBREW_ACCEPT_EULA=Y brew install chezmoi postgresql@15 azure-cli awscli microsoft/mssql-release/msodbcsql18 microsoft/mssql-release/mssql-tools18 gedit
-    alias sed=gsed
-      sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.bashrc"
-      sed -i 's/^alias sed=.*$/alias sed=gsed/' "$HOME/.zshrc"
+    updaterc 'alias sed=gsed'
     brew update
     brew upgrade
   # Setup post hombrew packages
     brew link --force --overwrite postgresql@15
-    source $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
-      rcLine='source $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh'
-      rcFile="$HOME/.bashrc"
-      grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-      rcFile="$HOME/.zshrc"
-      grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+    updaterc 'source $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh'
   # Run Homebrew doctor to check for errors
     brew cleanup
     brew doctor
@@ -97,64 +81,35 @@
     psql --version
     asdf --version
 # Setup nvm
-  export NVM_SYMLINK_CURRENT="true"
-    rcLine='export NVM_SYMLINK_CURRENT="true"'
-    rcFile="$HOME/.bashrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-    rcFile="$HOME/.zshrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+  updaterc 'export NVM_SYMLINK_CURRENT="true"'
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-  NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-  export NVM_DIR="$NVM_DIR"
-    rcLine='export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"'
-    rcFile="$HOME/.bashrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-    rcFile="$HOME/.zshrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    rcLine='[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
-    rcFile="$HOME/.bashrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-    rcFile="$HOME/.zshrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+  updaterc 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"'
+  updaterc '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
   # Test
     nvm version
   # Install Node.js latest and lts
-    nvm install node
-    nvm install --lts
-    # Update lts npm
-      nvm use --lts
-      npm update -g npm
-      npm --version
-      npm version
-    # Update lts npm packages
-      npm i -g @npmcli/fs
-      npm i -g @devcontainers/cli
-      npm i -g dotenv-cli
-      npm i -g typescript
-      npm i -g npm-check-updates
-      ncu -u
-      npm i
-    # Test
-      node --version
-      npm --version
-    # Update latest npm
-      nvm use node
-      node --version
-      npm update -g npm
-      npm --version
-      npm version
-    # Update latest npm packages
-      npm i -g @npmcli/fs
-      npm i -g @devcontainers/cli
-      npm i -g dotenv-cli
-      npm i -g typescript
-      npm i -g npm-check-updates
-      ncu -u
-      npm i
-    # Test
-      node --version
-      npm --version
+    nodes=('node' '--lts')
+    for node in "${nodes[@]}"; do
+      nvm install "$node"
+      # Update npm
+        nvm use "$node"
+        node --version
+        npm update -g npm
+        npm --version
+        npm version
+      # Update npm packages
+        npm i -g @npmcli/fs
+        npm i -g @devcontainers/cli
+        npm i -g dotenv-cli
+        npm i -g typescript
+        npm i -g npm-check-updates
+        ncu -u
+        npm i
+      # Test
+        node --version
+        npm --version
+    done
+    nvm use node
 # Setup dotnet
   asdf plugin-add dotnet-core https://github.com/emersonsoares/asdf-dotnet-core.git || true
   asdf plugin update --all
@@ -167,7 +122,6 @@
   asdf global dotnet-core "$preview"
   asdf reshim
   asdf info
-  source "$HOME/.bashrc"
   source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"
     rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"'
     rcFile="$HOME/.bashrc"
@@ -188,12 +142,7 @@
       dotnet workload update
       dotnet workload repair
   # Setup dotnet tools
-    PATH="$HOME/.dotnet/tools:$PATH"
-    rcLine='PATH="$HOME/.dotnet/tools:$PATH"'
-    rcFile="$HOME/.bashrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-    rcFile="$HOME/.zshrc"
-    grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+    updaterc 'PATH="$HOME/.dotnet/tools:$PATH"'
     tools=('powershell' 'git-credential-manager')
     for tool in "${tools[@]}"; do
       if [ -z "$(dotnet tool list -g | grep -q "$tool")" ]; then dotnet tool update -g "$tool"; else dotnet tool install -g "$tool"; fi
