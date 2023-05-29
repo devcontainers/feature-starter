@@ -183,18 +183,9 @@ EOF
     else
       echo "PowerShell Core Preview is not installed"
     fi
-# Install docker completions
-  rm -rf /etc/bash_completion.d/docker.sh || true
-  mkdir -p /etc/bash_completion.d
-  touch /etc/bash_completion.d/docker.sh
-  curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker.sh
-  rm -rf /usr/share/zsh/vendor-completions/_docker || true
-  mkdir -p /usr/share/zsh/vendor-completions
-  touch /usr/share/zsh/vendor-completions/_docker
-  curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/zsh/docker -o /usr/share/zsh/vendor-completions/_docker
-  # Test
-    docker --version
-    docker-compose --version
+# Test docker
+  docker --version
+  docker-compose --version
 # Adding GH .ssh known hosts
   mkdir -p "$HOME/.ssh/"
   touch "$HOME/.ssh/known_hosts"
