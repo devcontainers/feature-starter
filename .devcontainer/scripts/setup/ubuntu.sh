@@ -199,7 +199,6 @@ EOF
 # Continue with devspace setup
   bash -l -c "\"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup devspace"
 # Refresh environment
-  source "$HOME/.zshrc"
   source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
 # Log into GitHub
   if [ "$IS_WSL" != "true" ]; then

@@ -20,7 +20,6 @@
     sed -i "$rcSed" "$HOME/.bashrc"
     sed -i "$rcSed" "$HOME/.zshrc"
 # Refresh environment
-  source "$HOME/.zshrc"
   source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
 # Log into GitHub
   if ! gh auth status; then gh auth login; fi
