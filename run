@@ -40,6 +40,6 @@ if [ "$scriptPath" = "-h" ] || [ "$scriptPath" = "--help" ]; then
 fi
 
 executionRoot="$scriptsRoot/$scriptPath"
-pushd "$executionRoot" || exit 1
+pushd "$executionRoot" 1> /dev/null || exit 1
   "./$script.sh" "$commandPath" "$command"
 popd || exit
