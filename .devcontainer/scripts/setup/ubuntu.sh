@@ -113,7 +113,7 @@
     done
     nvm use node
 # Setup dotnet
-  setuprc 'export DOTNET_ROLL_FORWARD=LatestMajor'
+  updaterc 'export DOTNET_ROLL_FORWARD=LatestMajor'
   asdf plugin-add dotnet-core https://github.com/emersonsoares/asdf-dotnet-core.git || true
   asdf plugin update --all
   preview="$(asdf list all dotnet-core 8)"
