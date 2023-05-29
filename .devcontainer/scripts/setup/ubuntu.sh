@@ -177,6 +177,10 @@
   # Test
     dotnet --version
     dotnet --info
+    dotnet --list-sdks
+    dotnet --list-runtimes
+    whoami
+    env
   # Setup dotnet workloads
     dotnet workload install --include-previews wasi-experimental
     # Clean, repair, and update
