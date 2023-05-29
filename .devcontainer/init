@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 #shellcheck source=/dev/null
-set -e
 ulimit -n 1048576 || true
 source ./run setup environment

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 #shellcheck shell=bash
 #shellcheck source=/dev/null
-set -e
 projectRoot="$(cd -- "$(dirname -- "${BASH_SOURCE-$0}")" &> /dev/null && pwd)"
 scriptsRoot="$projectRoot/.devcontainer/scripts"
 source "$scriptsRoot/setup/environment.sh"
