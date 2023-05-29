@@ -32,6 +32,7 @@ EOF
   # TODO: dotnet tools fix, why?
     preview="$(asdf list all dotnet-core 8)"
     updaterc "export DOTNET_ROOT=\"$HOME/.asdf/installs/dotnet-core/$preview\""
+    echo "$dotnet_latest_major_global" > "$HOME/.dotnet/tools/global.json"
   # Install WSL Utilties
   # https://github.com/wslutilities/wslu
   sudo apt update
