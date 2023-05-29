@@ -177,8 +177,6 @@
   # Test
     dotnet --version
     dotnet --info
-    source "$HOME/.bashrc"
-    echo -e "$(env)"
   # Setup dotnet workloads
     dotnet workload install --include-previews wasi-experimental
     # Clean, repair, and update
