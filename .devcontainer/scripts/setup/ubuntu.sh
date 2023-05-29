@@ -2,7 +2,7 @@
 #shellcheck shell=bash
 #shellcheck source=/dev/null
 #shellcheck disable=SC2016,SC2143
-dotnet_latest_major_snippet=$(cat <<-EOF
+dotnet_latest_major_global=$(cat <<-EOF
 {
   "sdk": {
     "version": "8",
@@ -123,7 +123,7 @@ EOF
     nvm use node
 # Setup dotnet
   updaterc 'export DOTNET_ROLL_FORWARD=LatestMajor'
-  dotnet_latest_major_snippet > "$HOME/global.json"
+  echo "$dotnet_latest_major_global" > "$HOME/global.json"
   asdf plugin-add dotnet-core https://github.com/emersonsoares/asdf-dotnet-core.git || true
   asdf plugin update --all
   preview="$(asdf list all dotnet-core 8)"
@@ -154,6 +154,7 @@ EOF
       dotnet workload repair
   # Setup dotnet tools
     updaterc 'PATH="$HOME/.dotnet/tools:$PATH"'
+    echo "$dotnet_latest_major_global" > "$HOME/.dotnet/tools/global.json"
     tools=('powershell' 'git-credential-manager')
     for tool in "${tools[@]}"; do
       if [ -z "$(dotnet tool list -g | grep -q "$tool")" ]; then dotnet tool update -g "$tool"; else dotnet tool install -g "$tool"; fi
