@@ -7,8 +7,6 @@
   current_user="$(whoami)"
   os=$(uname -s)
   HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/home/linuxbrew/.linuxbrew}"
-# Setup environment
-  updaterc "source \"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup environment"
 # Make Edge the default browser if installed
   edge=/usr/bin/microsoft-edge-stable
   if [ -e "$edge" ]; then updaterc 'export BROWSER=/usr/bin/microsoft-edge-stable'; fi
@@ -117,5 +115,7 @@
   mkdir -p "$HOME/.ssh/"
   touch "$HOME/.ssh/known_hosts"
   bash -c eval "$(ssh-keyscan github.com >> "$HOME/.ssh/known_hosts")"
+# Setup devspace environment
+  updaterc "source \"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup environment"
 # Done
   echo "WARNING: Please restart shell to get latest environment variables"
