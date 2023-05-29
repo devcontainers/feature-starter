@@ -4,7 +4,7 @@
 # init
   set -e
 # Run base ubuntu setup
-  IS_WSL=true "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup ubuntu
+  source IS_WSL=true "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup ubuntu
 # Install WSL Utilties
   # https://github.com/wslutilities/wslu
   sudo apt update
