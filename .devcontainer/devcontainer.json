@@ -27,34 +27,12 @@
   },
   // https://code.visualstudio.com/remote/advancedcontainers/start-processes
   // https://containers.dev/implementors/json_reference/#lifecycle-scripts
-  "initializeCommand": [
-    ".devcontainer/init"
-  ],
-  "updateContentCommand": [
-    "/bin/zsh",
-    "-l",
-    "-c",
-    "./run events update-content"
-  ],
-  "onCreateCommand": [
-    "/bin/zsh",
-    "-l",
-    "-c",
-    "./run events on-create"
-  ],
-  "postCreateCommand": [
-    "/bin/zsh",
-    "-l",
-    "-c",
-    "./run events post-create"
-  ],
-  "postStartCommand": [
-    "/bin/zsh",
-    "-l",
-    "-c",
-    "./run events post-start"
-  ],
-  "postAttachCommand": "nohup bash -c './run events post-attach &'",
+  "initializeCommand": [ ".devcontainer/init" ],
+  "updateContentCommand": [ "/bin/zsh", "-l", "-c", "./run events update-content" ],
+  "onCreateCommand": [ "/bin/zsh", "-l", "-c", "./run events on-create" ],
+  "postCreateCommand": [ "/bin/zsh", "-l", "-c", "./run events post-create" ],
+  "postStartCommand": [ "/bin/zsh", "-l", "-c", "./run events post-start" ],
+  "postAttachCommand": "nohup bash -l -c './run events post-attach &'",
   "customizations": {
     "vscode": {
       "settings": {
