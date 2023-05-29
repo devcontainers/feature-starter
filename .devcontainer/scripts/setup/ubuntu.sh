@@ -142,14 +142,14 @@
       dotnet workload update
       dotnet workload repair
   # Setup dotnet tools
+    reset
     updaterc 'PATH="$HOME/.dotnet/tools:$PATH"'
     tools=('powershell' 'git-credential-manager')
     for tool in "${tools[@]}"; do
       if [ -z "$(dotnet tool list -g | grep -q "$tool")" ]; then dotnet tool update -g "$tool"; else dotnet tool install -g "$tool"; fi
     done
     # Test
-      pwsh --version
-      git-credential-manager --version
+      bash -l -c "pwsh --version && git-credential-manager --version"
 # pwsh modules
   modules=('Pester' 'Set-PsEnv')
   install_modules() {
