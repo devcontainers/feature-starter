@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 #shellcheck shell=bash
 #shellcheck source=/dev/null
+#shellcheck disable=SC2016
 # init
   set -e
+  updaterc 'export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"'
+  updaterc 'export PATH="$HOMEBREW_PREFIX/bin:$PATH"'
+  updaterc 'eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"'
 # Run base ubuntu setup
   IS_WSL=true source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup ubuntu
 # Install WSL Utilties
