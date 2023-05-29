@@ -29,5 +29,6 @@ apt upgrade -y
 apt autoclean -y
 apt autoremove -y
 # Make trusted root CA then install and trust it
-mkcert -install
-dotnet dev-certs https --trust
+# TODO: Fix
+# mkcert -install
+# dotnet dev-certs https --trust
