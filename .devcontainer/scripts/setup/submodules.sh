@@ -10,7 +10,7 @@ if [ -d "$submodule_path" ]; then
   fi
 fi
 
-pushd "$DEVCONTAINER_FEATURES_PROJECT_ROOT" || exit
+pushd "$DEVCONTAINER_FEATURES_PROJECT_ROOT" || exit 1
 if [ "$init_submodules" = "true" ]; then
   git submodule sync --recursive
   git submodule update --init --recursive

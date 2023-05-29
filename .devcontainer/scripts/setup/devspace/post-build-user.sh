@@ -97,12 +97,12 @@
     updaterc 'PATH="$HOME/.dotnet/tools:$PATH"'
     echo "$dotnet_latest_major_global" > "$HOME/.dotnet/tools/global.json"
 # Setup pwsh modules
-  modules=('Pester' 'Set-PsEnv')
+  pwsh_modules=('Pester' 'Set-PsEnv')
   pwsh_update='Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber; Update-Module; Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber -AllowPrerelease; Set-Alias -Name awk -Value gawk'
   # shellcheck disable=SC2016
   pwsh_install_module='Install-Module -Name $module -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber;'
-  #shellcheck disable=SC2034
-  install_modules() { local pwsh=$1; "$pwsh" -Command "$pwsh_update"; for module in "${modules[@]}"; do $pwsh -Command "$(eval echo "$pwsh_install_module")"; done }
+  # shellcheck disable=SC2034
+  install_modules() { local pwsh=$1; "$pwsh" -Command "$pwsh_update"; for module in "${pwsh_modules[@]}"; do $pwsh -Command "$(eval echo "$pwsh_install_module")"; done }
   # PowerShell Core (pwsh)
     if command -v pwsh > /dev/null; then install_modules "pwsh"; else echo "PowerShell Core is not installed"; fi
   # PowerShell Core Preview (pwsh-preview)
