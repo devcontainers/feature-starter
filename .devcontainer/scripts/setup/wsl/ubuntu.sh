@@ -1,57 +1,38 @@
 #!/usr/bin/env bash
-#shellcheck shell=bash
-#shellcheck source=/dev/null
-#shellcheck disable=SC2016
-dotnet_latest_major_global=$(cat <<-EOF
-{
-  "sdk": {
-    "rollForward": "latestmajor"
-  }
-}
-EOF
-)
 # init
   set -e
-  updaterc() {
-    line="$1"
-    eval "$line"
-    echo "Updating ~/.bashrc and ~/.zshrc..."
-    rcs=("$HOME/.bashrc" "$HOME/.zshrc")
-    for rc in "${rcs[@]}"; do
-      if [[ "$(cat "$rc")" != *"$line"* ]]; then
-        echo -e "$line" >> "$rc"
-      fi
-    done
-  }
+  # shellcheck source=/dev/null
+  source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup environment
+  updaterc() { line="$1"; eval "$line"; echo "Updating ~/.bashrc and ~/.zshrc..."; rcs=("$HOME/.bashrc" "$HOME/.zshrc"); for rc in "${rcs[@]}"; do if [[ "$(cat "$rc")" != *"$line"* ]]; then echo -e "$line" >> "$rc"; fi; done }
   # Setup to use windows git credential manager if exists
     gcm=/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe
     if [ -e "$gcm" ]; then
       git config --global credential.helper "$gcm"
     fi
 # Run base ubuntu setup
+  # shellcheck source=/dev/null
   IS_WSL=true source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup ubuntu
-  # TODO: Homebrew fix, why?
-    updaterc 'export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"'
-    updaterc 'export PATH="$HOMEBREW_PREFIX/bin:$PATH"'
-    updaterc 'eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"'
-  # TODO: dotnet tools fix, why?
-    preview="$(asdf list all dotnet-core 8)"
-    updaterc "export DOTNET_ROOT=\"$HOME/.asdf/installs/dotnet-core/$preview\""
-    echo "$dotnet_latest_major_global" > "$HOME/.dotnet/tools/global.json"
-  # Install WSL Utilties
+  # shellcheck source=/dev/null
+  source "$HOME/.bashrc"
+# Install WSL Utilties
   # https://github.com/wslutilities/wslu
   sudo apt update
   sudo apt upgrade -y
   sudo apt install -y wslu
 # Setup windows browser as default
-  alias xdg-open=wslview
-    rcSed='s/^alias xdg-open=.*$/alias xdg-open=wslview/'
-    sed -i "$rcSed" "$HOME/.bashrc"
-    sed -i "$rcSed" "$HOME/.zshrc"
-  export BROWSER=wslview
-    rcSed='s/^export BROWSER=.*$/export BROWSER=wslview/'
-    sed -i "$rcSed" "$HOME/.bashrc"
-    sed -i "$rcSed" "$HOME/.zshrc"
+  cmds=('alias xdg-open=wslview' 'export BROWSER=wslview')
+  seds=('s/^alias xdg-open=.*$/alias xdg-open=wslview/' 's/^export BROWSER=.*$/export BROWSER=wslview/')
+  files=("$HOME/.bashrc" "$HOME/.zshrc")
+  # shellcheck disable=SC2068
+  for i in ${!cmds[@]}; do
+    cmd="${cmds[$i]}"
+    sed="${seds[$i]}"
+    eval "$cmd"
+    for file in "${files[@]}"; do
+      sed -i "$sed" "$file"
+      grep -qF "$cmd" "$file" || echo "$cmd" >> "$file"
+    done
+  done
 # Log into GitHub
   if ! gh auth status; then gh auth login; fi
   gh config set -h github.com git_protocol https

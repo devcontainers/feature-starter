@@ -131,20 +131,6 @@
     }
   },
   "features": {
-    // https://github.com/rocker-org/devcontainer-features/tree/main/src/apt-packages
-    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-      "packages": "sudo,systemd,mawk,gawk,bash,zsh,file,sed,curl,wget,grep,bzip2,fonts-dejavu-core,gcc,g++,git,less,locales,openssl,openssh-client,make,cmake,netbase,patch,tzdata,uuid-runtime,apt-transport-https,ca-certificates,speedtest-cli,checkinstall,dos2unix,shellcheck,procps,software-properties-common,libnss3,libnss3-tools,build-essential,zlib1g-dev,bash-completion,age,powerline,fonts-powerline,jq,moreutils,gedit,gimp,nautilus,vlc,x11-apps",
-      "updatePackages": "true"
-    },
-    // https://github.com/devcontainers/features/tree/main/src/docker-in-docker
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {
-      "version": "latest",
-      "moby": "true",
-      "dockerDashComposeVersion": "v2",
-      "azureDnsAutoDetection": "true",
-      "enableNonRootDocker": "true",
-      "installDockerBuildx": "true"
-    },
     // https://github.com/devcontainers/features/tree/main/src/common-utils
     "ghcr.io/devcontainers/features/common-utils:2": {
       "installZsh": "true",
@@ -155,25 +141,33 @@
       "userGid": "automatic",
       "nonFreePackages": "true"
     },
-    // https://github.com/devcontainers/features/tree/main/src/desktop-lite
-    "ghcr.io/devcontainers/features/desktop-lite:1": {
+    // https://github.com/devcontainers/features/tree/main/src/docker-in-docker
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "version": "latest",
-      "noVncVersion": "1.2.0",
-      "password": "vscode",
-      "webPort": 11080,
-      "vncPort": 11901
+      "moby": "true",
+      "dockerDashComposeVersion": "v2",
+      "azureDnsAutoDetection": "true",
+      "enableNonRootDocker": "true",
+      "installDockerBuildx": "true"
     },
     // https://github.com/devcontainers-contrib/features/tree/main/src/bash-command
     "ghcr.io/AlephZ-ai/devcontainer-features/bash-command:1": {
       "sudocommand": "${localEnv:DEVCONTAINER_POST_BUILD_SUDO_COMMAND}",
       "usercommand": "${localEnv:DEVCONTAINER_POST_BUILD_USER_COMMAND}"
+    },
+    // https://github.com/devcontainers/features/tree/main/src/desktop-lite
+    "ghcr.io/devcontainers/features/desktop-lite:1": {
+      "version": "latest",
+      "noVncVersion": "1.4.0",
+      "password": "vscode",
+      "webPort": 11080,
+      "vncPort": 11901
     }
   },
   "overrideFeatureInstallOrder": [
-    "ghcr.io/rocker-org/devcontainer-features/apt-packages",
-    "ghcr.io/devcontainers/features/docker-in-docker",
     "ghcr.io/devcontainers/features/common-utils",
-    "ghcr.io/devcontainers/features/desktop-lite",
-    "ghcr.io/AlephZ-ai/devcontainer-features/bash-command:1"
+    "ghcr.io/devcontainers/features/docker-in-docker",
+    "ghcr.io/AlephZ-ai/devcontainer-features/bash-command",
+    "ghcr.io/devcontainers/features/desktop-lite"
   ]
 }
