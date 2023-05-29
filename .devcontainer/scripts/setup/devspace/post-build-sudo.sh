@@ -3,14 +3,19 @@
   set -e
   # shellcheck source=/dev/null
   source /etc/bash.bashrc
+  FIREBIRD_PASSWORD="password"
+  export DEBIAN_FRONTEND=noninteractive
+# Default setting
+  echo firebird3.0-server firebird3.0-server/sysdba_password password $FIREBIRD_PASSWORD | debconf-set-selections
+  echo firebird3.0-server firebird3.0-server/sysdba_password_again password $FIREBIRD_PASSWORD | debconf-set-selections
 # Update apt-packages
   apt update
-  apt install -y --install-recommends --install-suggests --fix-broken --fix-missing
+  apt install -y --install-recommends --fix-broken --fix-missing
   apt upgrade -y
-  apt install -y --install-recommends --install-suggests sudo systemd mawk gawk bash zsh file sed curl wget grep bzip2 build-essential make cmake gcc g++ less locales
-  apt install -y --install-recommends --install-suggests patch tzdata uuid-runtime netbase dotnet-sdk-6.0 dotnet-sdk-7.0 git apt-transport-https ca-certificates age
-  apt install -y --install-recommends --install-suggests openssl openssh-client procps checkinstall dos2unix software-properties-common libnss3 libnss3-tools shellcheck jq moreutils
-  apt install -y --install-recommends --install-suggests bash-completion zlib1g-dev speedtest-cli powerline fonts-powerline fonts-dejavu-core gedit gimp nautilus vlc x11-apps
+  apt install -y --install-recommends sudo systemd mawk gawk bash zsh file sed curl wget grep bzip2 build-essential make cmake gcc g++ less locales
+  apt install -y --install-recommends patch tzdata uuid-runtime netbase dotnet-sdk-6.0 dotnet-sdk-7.0 git apt-transport-https ca-certificates age
+  apt install -y --install-recommends openssl openssh-client procps checkinstall dos2unix software-properties-common libnss3 libnss3-tools shellcheck jq moreutils
+  apt install -y --install-recommends bash-completion zlib1g-dev speedtest-cli powerline fonts-powerline fonts-dejavu-core gedit gimp nautilus vlc x11-apps
 # Install docker completions
   rm -rf /etc/bash_completion.d/docker.sh || true
   mkdir -p /etc/bash_completion.d
@@ -26,7 +31,7 @@
   sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft.list'
   rm /tmp/microsoft.gpg
   apt update
-  apt install --install-recommends --install-suggests -y microsoft-edge-stable
+  apt install --install-recommends -y microsoft-edge-stable
   apt install --fix-broken --fix-missing -y
   rm -rf /etc/apt/sources.list.d/microsoft-edge-stable.list
 # Update apt-packages
