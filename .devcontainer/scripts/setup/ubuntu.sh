@@ -5,7 +5,6 @@
 dotnet_latest_major_global=$(cat <<-EOF
 {
   "sdk": {
-    "version": "8",
     "rollForward": "latestmajor"
   }
 }
