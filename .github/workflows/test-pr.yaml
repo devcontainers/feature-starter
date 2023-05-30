@@ -14,7 +14,8 @@ jobs:
           filters: |
             color: ./**/color/**
             hello: ./**/hello/**
-            bash-command: ./**/bash-command/**
+            sudo-command: ./**/sudo-command/**
+            user-command: ./**/user-command/**
 
   test:
     needs: [detect-changes]

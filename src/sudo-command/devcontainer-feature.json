@@ -1,0 +1,31 @@
+{
+  "name": "Sudo Command",
+  "id": "sudo-command",
+  "version": "1.0.42",
+  "description": "Executes a sudo command",
+  "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/sudo-command",
+  "options": {
+    "username": {
+      "type": "string",
+      "default": "automatic",
+      "description": "User to run command as"
+    },
+    "command": {
+      "type": "string",
+      "proposals": [
+        "echo hi!"
+      ],
+      "default": "",
+      "description": "command to be executed as root (will be forwarded as is to a 'bash -c <command>' line)"
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils",
+    "ghcr.io/devcontainers-contrib/featues/apt-get-packages",
+    "ghcr.io/devcontainers-contrib/featues/apt-packages",
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages",
+    "ghcr.io/AlephZ-ai/devcontainer-features/dotnet",
+    "ghcr.io/AlephZ-ai/devcontainer-features/homebrew",
+    "ghcr.io/AlephZ-ai/devcontainer-features/nvm"
+  ]  
+}
