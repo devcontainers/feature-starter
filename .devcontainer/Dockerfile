@@ -7,7 +7,6 @@ COPY scripts/docker/ /usr/local/bin/
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-RUN find "/usr/local/bin" -type f -iname "*.sh" -exec chmod=+x "{}" \;
 RUN create-user.sh $USERNAME $USER_UID $USER_GID
 USER $USERNAME
 ENTRYPOINT ["entrypoint.sh"]

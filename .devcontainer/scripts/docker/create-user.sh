@@ -1,4 +1,4 @@
-#!/usr/bin/bash zsh
+#!/usr/bin/env bash
 
 USERNAME="$1"
 USER_UID="$2"
