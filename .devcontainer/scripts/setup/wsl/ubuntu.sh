@@ -11,7 +11,7 @@
     fi
 # Run base ubuntu setup
   # shellcheck source=/dev/null
-  IS_WSL=true source "$DEVCONTAINER_FEATURES_PROJECT_ROOT/run" setup ubuntu
+  IS_WSL=true "$DEVCONTAINER_SCRIPTS_ROOT/setup/ubuntu.sh"
   # shellcheck source=/dev/null
   source "$HOME/.bashrc"
 # Install WSL Utilties
