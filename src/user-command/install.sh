@@ -22,18 +22,17 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} >/dev/null 2>&1; then
   USERNAME="$who"
 fi
 
-# Setup command
-if [ "$USERNAME" = "root" ]; then
-  COMMAND="${COMMAND:-echo TEST="test" >> /etc/environment}"
-else
-  COMMAND="${COMMAND:-echo TEST="test" >> "/home/$USERNAME/.bashrc"}"
-fi
-
 # Clean up
 rm -rf /var/lib/apt/lists/*
 
 # Run
-su "$USERNAME" -c "$COMMAND"
+if [ "$USERNAME" = "root" ]; then
+  COMMAND="${COMMAND:-echo TEST="test" >> /etc/environment}"
+  bash -c "$COMMAND"
+else
+  COMMAND="${COMMAND:-echo TEST="test" >> "/home/$USERNAME/.bashrc"}"
+  su "$USERNAME" -c "$COMMAND"
+fi
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
