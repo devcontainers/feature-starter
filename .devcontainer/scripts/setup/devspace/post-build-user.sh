@@ -68,6 +68,8 @@
   # shellcheck disable=SC2016
   updaterc '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
   # Install Node.js latest and lts
+    echo "$PWD"
+    env
     nodes=('node' '--lts')
     packages=('@npmcli/fs' '@devcontainers/cli' 'dotenv-cli' 'typescript' 'npm-check-updates')
     for node in "${nodes[@]}"; do nvm install "$node"; nvm use "$node"; node --version; npm update -g npm; npm i -g "${packages[@]}"; ncu -u; done

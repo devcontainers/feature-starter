@@ -14,8 +14,9 @@
     sudo grep -qxF "$line" "$file" || echo "$line" | sudo tee --append "$file"
     line="$current_user hard nofile 1048576"
     sudo grep -qxF "$line" "$file" || echo "$line" | sudo tee --append "$file"
+# Run pre-build commands
+  sudo -i USERNAME="$current_user" bash -l -c "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/pre-build-sudo.sh"
 # Run post-build commands
-  sudo -i USERNAME="$current_user" bash -l -c "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-sudo.sh"
   bash -l -c "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-user.sh"
 # Continue with devspace setup
   zsh -l -c "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace.sh"
