@@ -20,6 +20,11 @@ jobs:
           [
             "mcr.microsoft.com/devcontainers/base:ubuntu",
             "mcr.microsoft.com/devcontainers/base:debian",
+            "ubuntu:focal",
+            "ubuntu:jammy",
+            "ubuntu:bionic",
+            "debian:11",
+            "debian:10"
           ]
     steps:
       - uses: actions/checkout@v3
