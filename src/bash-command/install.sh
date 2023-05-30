@@ -26,13 +26,23 @@ fi
 # Clean up
 rm -rf /var/lib/apt/lists/*
 
+file=/tmp/sudocommand.sh
 if [ -n "$SUDOCOMMAND" ]; then
   echo "Running command as root: ${SUDOCOMMAND}"
-  eval "${SUDOCOMMAND}"
+  echo "$SUDOCOMMAND" > $file
+  chmod +x $file
+  source $file
+  rm -rf $file
 fi
+
+file=/tmp/usercommand.sh
 if [ -n "$USERCOMMAND" ]; then
   echo "Running command as ${USERNAME}: ${USERCOMMAND}"
-  su "$USERNAME" -c "bash -l -c \"${USERCOMMAND}\""
+  echo "$SUDOCOMMAND" > $file
+  chmod +x $file
+  sudo chown "$USERNAME":$USERNAME" $file
+  su "$USERNAME" -c "bash -l -c $file"
+  sudo rm -rf $file
 fi
 
 # Clean up

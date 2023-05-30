@@ -6,7 +6,6 @@
   updaterc() { local line="$1"; eval "$line"; echo "Updating ~/.bashrc and ~/.zshrc..."; rcs=("$HOME/.bashrc" "$HOME/.zshrc"); for rc in "${rcs[@]}"; do if [[ "$(cat "$rc")" != *"$line"* ]]; then echo -e "$line" >> "$rc"; fi; done }
   current_user="$(whoami)"
   os=$(uname -s)
-  HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/home/linuxbrew/.linuxbrew}"
 # Make Edge the default browser if installed
   edge=/usr/bin/microsoft-edge-stable
   if [ -e "$edge" ]; then updaterc 'export BROWSER=/usr/bin/microsoft-edge-stable'; fi
@@ -19,12 +18,13 @@
   #   rcLine='source ~/powerlevel10k/powerlevel10k.zsh-theme'
   #   grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
 # Setup Homebrew
-  updaterc "export PATH=\"$HOMEBREW_PREFIX/bin:\$PATH\""
   sudo echo "sudo cached for noninteractive homebrew install"
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  updaterc "eval \"\$(\"$HOMEBREW_PREFIX/bin/brew\" shellenv)\""
+  source "$HOME/.bashrc"
+  updaterc 'eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"'
+  updaterc 'export PATH="$HOMEBREW_PREFIX/bin:$PATH"'
   # Install taps
-    brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release    
+    brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
   # Repair and Update if needed
     brew update
     brew tap --repair
@@ -32,7 +32,7 @@
     # procps is linux only
       if [ "$os" == "Linux" ]; then HOMEBREW_ACCEPT_EULA=Y brew install procps; fi
     # These work on all brew platforms
-      HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less zlib zlib-ng
+      HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less zlib zlib-ng dotnet dotnet@6
       HOMEBREW_ACCEPT_EULA=Y brew install buf protobuf grpc dos2unix git git-lfs sigstore/tap/gitsign-credential-cache sigstore/tap/gitsign gh asdf jq moreutils
       HOMEBREW_ACCEPT_EULA=Y brew install gcc llvm age nss openssl@1.1 openssl@3 nghttp2 openssh make cmake cmake-docs mkcert go python@3.11 ca-certificates shellcheck
       HOMEBREW_ACCEPT_EULA=Y brew install speedtest-cli mono-libgdiplus chezmoi sqlite sqlite-utils postgresql@15 azure-cli awscli msodbcsql18 mssql-tools18 gedit
