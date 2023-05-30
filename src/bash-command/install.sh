@@ -31,7 +31,7 @@ if [ -n "$SUDOCOMMAND" ]; then
 fi
 
 if [ -n "$USERCOMMAND" ]; then
-  su -l "$USERNAME" bash -l -c "$(echo "$USERCOMMAND" | base64 --decode)"
+  su -l $USERNAME -c "bash -l -c \"\$(echo \"$DEVCONTAINER_POST_BUILD_USER_COMMAND\" | base64 --decode)\""
 fi
 
 # Clean up
