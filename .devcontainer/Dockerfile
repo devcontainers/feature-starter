@@ -8,7 +8,7 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 RUN if id $USERNAME; then echo "User $USERNAME already exists"; else \
-        echo "Creating user $USERNAME"
+        echo "Creating user $USERNAME" \
         groupadd --gid $USER_GID $USERNAME \
         && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
         # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
