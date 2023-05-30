@@ -8,8 +8,8 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 RUN create-user.sh $USERNAME $USER_UID $USER_GID
-COPY --chown=vscode:vscode scripts/setup/devspace/ /devspaces/devcontainer/
 USER $USERNAME
+COPY --chown=vscode:vscode ./ /devspaces/devcontainer/
 ENTRYPOINT ["entrypoint.sh"]
 # https://docs.docker.com/engine/reference/builder/#cmd
 # https://riptutorial.com/docker/example/11009/cmd-instruction
