@@ -30,7 +30,7 @@ if [ "$USERNAME" = "root" ]; then
   COMMAND="${COMMAND:-echo TEST="test" >> /etc/environment}"
   bash -c "$COMMAND"
 else
-  COMMAND="${COMMAND:-echo TEST="test" >> "/home/$USERNAME/.bashrc"}"
+  COMMAND="${COMMAND:-echo TEST="test" >> "$HOME/.bashrc"}"
   su "$USERNAME" -c "$COMMAND"
 fi
 
