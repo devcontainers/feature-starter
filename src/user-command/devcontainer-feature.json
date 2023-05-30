@@ -15,7 +15,7 @@
       "proposals": [
         "echo hi!"
       ],
-      "default": "echo TEST=test >> /etc/environment",
+      "default": "echo TEST=test >> \"$HOME/.bashrc\"",
       "description": "command to be executed as username (will be forwarded as is to a 'bash -c <command>' line)"
     }
   },
