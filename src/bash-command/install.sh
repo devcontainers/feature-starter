@@ -27,13 +27,11 @@ fi
 rm -rf /var/lib/apt/lists/*
 
 if [ -n "$SUDOCOMMAND" ]; then
-  echo "Running command as root: ${SUDOCOMMAND}"
-  bash -l -c "$(echo "$SCRIPT" | base64 --decode)"
+  bash -l -c "$(echo "$SUDOCOMMAND" | base64 --decode)"
 fi
 
 if [ -n "$USERCOMMAND" ]; then
-  echo "Running command as ${USERNAME}: ${USERCOMMAND}"
-  su "$USERNAME" -c "bash -l -c \"$(echo "$SCRIPT" | base64 --decode)\""
+  su "$USERNAME" -c "bash -l -c \"$(echo "$USERCOMMAND" | base64 --decode)\""
 fi
 
 # Clean up
