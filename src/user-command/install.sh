@@ -22,7 +22,11 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} >/dev/null 2>&1; then
 fi
 
 # Setup command
-COMMAND="${COMMAND:-echo -e TEST="test" | sudo tee --append /etc/environment}"
+if [ "$USERNAME" = "root" ]; then
+  COMMAND="${COMMAND:-echo -e TEST="test" >> /etc/environment}"
+else
+  COMMAND="${COMMAND:-echo -e TEST="test" >> "$HOME/.bashrc"}"
+fi
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
