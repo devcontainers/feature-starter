@@ -22,7 +22,7 @@
   sudo -i bash -l -c "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-sudo.sh"
   bash -l -c "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-user.sh"
 # Continue with devspace setup
-  zsh -l -c "$DEVCONTAINER_SCRIPTS_ROOT/run/setup/devspace.sh"
+  zsh -l -c "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace.sh"
 # Log into GitHub
   if [ "$IS_WSL" != "true" ]; then
     if ! gh auth status; then gh auth login; fi
