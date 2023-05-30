@@ -26,7 +26,7 @@ fi
 if [ "$USERNAME" = "root" ]; then
   COMMAND="${COMMAND:-echo TEST="test" >> /etc/environment}"
 else
-  COMMAND="${COMMAND:-echo TEST="test" >> "$HOME/.bashrc"}"
+  COMMAND="${COMMAND:-echo TEST="test" >> "/home/$who/.bashrc"}"
 fi
 
 # Clean up
