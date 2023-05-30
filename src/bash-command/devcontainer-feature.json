@@ -1,7 +1,7 @@
 {
   "name": "Bash Command",
   "id": "bash-command",
-  "version": "1.0.49",
+  "version": "1.0.50",
   "description": "Executes a bash command",
   "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/bash-command",
   "options": {

@@ -27,11 +27,11 @@ fi
 rm -rf /var/lib/apt/lists/*
 
 if [ -n "$SUDOCOMMAND" ]; then
-  bash -l -c "export USERNAME=\"$USERNAME\"; $(echo "$SUDOCOMMAND" | base64 --decode)"
+  bash -c "$(echo "$SUDOCOMMAND" | base64 --decode)"
 fi
 
 if [ -n "$USERCOMMAND" ]; then
-  su -l $USERNAME -c "bash -l -c \"\$(echo \"$DEVCONTAINER_POST_BUILD_USER_COMMAND\" | base64 --decode)\""
+  su -l $USERNAME -c "bash -l -c \"\$(echo \"$USERCOMMAND\" | base64 --decode)\""
 fi
 
 # Clean up
