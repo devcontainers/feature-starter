@@ -2,7 +2,7 @@
 #shellcheck disable=SC2086
 set -ex
 
-COMMAND="${OMMAND:-}"
+COMMAND="${COMMAND:-}"
 USERNAME="${USERNAME:-"automatic"}"
 
 # Determine the appropriate non-root user.

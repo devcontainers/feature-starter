@@ -1,7 +1,7 @@
 {
   "name": "Sudo Command",
   "id": "sudo-command",
-  "version": "1.0.42",
+  "version": "1.0.43",
   "description": "Executes a sudo command",
   "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/sudo-command",
   "options": {
