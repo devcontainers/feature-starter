@@ -11,7 +11,7 @@
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
       "bash-command": {
-        "usercommand": "echo export CURRENT_USER=\\$(whoami) >> $HOME/.bashrc"
+        "usercommand": "echo export CURRENT_USER=\\$(whoami) >> \\$HOME/.bashrc"
       }
     }
   },
@@ -20,7 +20,7 @@
     "features": {
       "bash-command": {
         "sudocommand": "echo -e HELLO=5 >> /etc/environment",
-        "usercommand": "echo export CURRENT_USER=\\$(whoami) >> $HOME/.bashrc"
+        "usercommand": "echo export CURRENT_USER=\\$(whoami) >> \\$HOME/.bashrc"
       }
     }
   }
