@@ -14,7 +14,9 @@ jobs:
       matrix:
         features: [
             "color",
-            "hello"
+            "hello",
+            "sudo-command",
+            "user-command"
         ]
         baseImage:
           [

@@ -2,7 +2,6 @@
 #shellcheck disable=SC2086
 set -ex
 
-COMMAND="${COMMAND:-}"
 USERNAME="${USERNAME:-"automatic"}"
 
 # Determine the appropriate non-root user.
@@ -21,6 +20,9 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
 elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} >/dev/null 2>&1; then
   USERNAME=root
 fi
+
+# Setup command
+COMMAND="${COMMAND:-echo TEST="test" >> "/home/$USERNAME/.bashrc"}"
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
