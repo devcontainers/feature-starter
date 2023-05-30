@@ -27,11 +27,11 @@ fi
 rm -rf /var/lib/apt/lists/*
 
 if [ -n "$SUDOCOMMAND" ]; then
-  bash -l -c "$(echo "$SUDOCOMMAND" | base64 --decode)"
+  bash -l -c "USERNAME=\"$USERNAME\" $(echo "$SUDOCOMMAND" | base64 --decode)"
 fi
 
 if [ -n "$USERCOMMAND" ]; then
-  su "$USERNAME" -c "bash -l -c \"$(echo "$USERCOMMAND" | base64 --decode)\""
+  su -l "$USERNAME" bash -l -c "USERNAME=\"$USERNAME\" $(echo "$USERCOMMAND" | base64 --decode)"
 fi
 
 # Clean up

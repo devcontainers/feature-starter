@@ -4,13 +4,13 @@
   # shellcheck source=/dev/null
   source "$HOME/.bashrc"
   updaterc() { local line="$1"; eval "$line"; echo "Updating ~/.bashrc and ~/.zshrc..."; rcs=("$HOME/.bashrc" "$HOME/.zshrc"); for rc in "${rcs[@]}"; do if [[ "$(cat "$rc")" != *"$line"* ]]; then echo -e "$line" >> "$rc"; fi; done }
-  current_user="$(whoami)"
+  USERNAME="${USERNAME:-$(whoami)}"
   os=$(uname -s)
 # Make Edge the default browser if installed
   edge=/usr/bin/microsoft-edge-stable
   if [ -e "$edge" ]; then updaterc 'export BROWSER=/usr/bin/microsoft-edge-stable'; fi
 # Setup ohmyzsh and make zsh default shell
-  sudo chsh "$current_user" -s "$(which zsh)"
+  sudo chsh "$USERNAME" -s "$(which zsh)"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
   # powerlevel10k not working in wsl
   # git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/powerlevel10k" || true
@@ -19,7 +19,7 @@
   #   grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
 # Setup Homebrew
   sudo echo "sudo cached for noninteractive homebrew install"
-  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   source "$HOME/.bashrc"
   updaterc 'eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"'
   updaterc 'export PATH="$HOMEBREW_PREFIX/bin:$PATH"'

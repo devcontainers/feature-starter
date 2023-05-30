@@ -18,7 +18,7 @@
     rcLine="source \"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup environment"
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
 # Setup Homebrew
-  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   eval "$(/usr/local/bin/brew shellenv)"
     rcLine='eval "$(/usr/local/bin/brew shellenv)"'
     grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
