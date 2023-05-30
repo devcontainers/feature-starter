@@ -14,10 +14,6 @@
     sudo grep -qxF "$line" "$file" || echo "$line" | sudo tee --append "$file"
     line="$current_user hard nofile 1048576"
     sudo grep -qxF "$line" "$file" || echo "$line" | sudo tee --append "$file"
-# Install apt-packages
-  sudo apt update
-  sudo apt install -y --fix-broken --fix-missing
-  sudo apt upgrade -y
 # Run post-build commands
   sudo -i bash -l -c "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-sudo.sh"
   bash -l -c "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-user.sh"
