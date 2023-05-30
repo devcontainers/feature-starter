@@ -6,8 +6,15 @@ set -e
 source dev-container-features-test-lib
 
 
-check "echo \$TEST" [ "$(source /etc/environment && echo "$TEST")" == "test" ]
-check "echo \$TEST" [ "$($(source /etc/environment || source "$HOME/.bashrc") && echo "$TEST")" == "test" ]
+if [ "$USERNAME" = "root" ]; then
+  COMMAND="${COMMAND:-echo TEST="test" >> /etc/environment}"
+  bash -c "$COMMAND"
+  check "echo \$TEST" [ "$(source /etc/environment)" ]
+else
+  COMMAND="${COMMAND:-echo TEST="test" >> "$HOME/.bashrc"}"
+  su "$USERNAME" -c "$COMMAND"
+  check "echo \$TEST" [ "$(source "$HOME/.bashrc")" ]
+fi
 
 
 reportResults
