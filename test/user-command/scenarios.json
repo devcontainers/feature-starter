@@ -3,7 +3,7 @@
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
       "user-command": {
-        "usercommand": "echo export CURRENT_USER=\\$(whoami) >> \\$HOME/.bashrc"
+        "command": "echo export CURRENT_USER=\\$(whoami) >> \\$HOME/.bashrc"
       }
     }
   }
