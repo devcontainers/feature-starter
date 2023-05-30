@@ -3,7 +3,7 @@
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
       "sudo-command": {
-        "command": "echo -e HELLO=5 >> /etc/environment"
+        "command": "echo HELLO=5 >> /etc/environment"
       }
     }
   }

@@ -23,9 +23,9 @@ fi
 
 # Setup command
 if [ "$USERNAME" = "root" ]; then
-  COMMAND="${COMMAND:-echo -e TEST="test" >> /etc/environment}"
+  COMMAND="${COMMAND:-echo TEST="test" | sudo tee --append /etc/environment}"
 else
-  COMMAND="${COMMAND:-echo -e TEST="test" >> "$HOME/.bashrc"}"
+  COMMAND="${COMMAND:-echo TEST="test" >> "$HOME/.bashrc"}"
 fi
 
 # Clean up

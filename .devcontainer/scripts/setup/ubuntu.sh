@@ -6,7 +6,7 @@
   source "$HOME/.bashrc"
   current_user="$(whoami)"
   IS_WSL=${IS_WSL:=false}
-  updaterc() { line="$1"; eval "$line"; echo "Updating ~/.bashrc and ~/.zshrc..."; rcs=("$HOME/.bashrc" "$HOME/.zshrc"); for rc in "${rcs[@]}"; do if [[ "$(cat "$rc")" != *"$line"* ]]; then echo -e "$line" >> "$rc"; fi; done }
+  updaterc() { line="$1"; eval "$line"; echo "Updating ~/.bashrc and ~/.zshrc..."; rcs=("$HOME/.bashrc" "$HOME/.zshrc"); for rc in "${rcs[@]}"; do if [[ "$(cat "$rc")" != *"$line"* ]]; then echo "$line" >> "$rc"; fi; done }
 # Update max open files
   sudo sh -c "ulimit -n 1048576"
     line="$current_user soft nofile 4096"

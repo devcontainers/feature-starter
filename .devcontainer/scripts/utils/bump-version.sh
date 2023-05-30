@@ -10,6 +10,7 @@ for feature in $CHANGED_FEATURES; do
         json_file="src/$feature/devcontainer-feature.json"
         jq '.version = (.version | split(".") | map(tonumber) | .[2] += 1 | join("."))' "$json_file" | sponge "$json_file"
     else
-        echo -e "No directory found for $feature"
+        echo "No directory found for $feature"
+        exit 1
     fi
 done

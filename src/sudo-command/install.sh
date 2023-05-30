@@ -22,7 +22,7 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} >/dev/null 2>&1; then
 fi
 
 # Setup command
-COMMAND="${COMMAND:-echo -e TEST="test" >> /etc/environment}"
+COMMAND="${COMMAND:-echo TEST="test" >> /etc/environment}"
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
