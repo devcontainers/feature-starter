@@ -15,7 +15,7 @@
       "proposals": [
         "echo hi!"
       ],
-      "default": "if [ \"\\$USERNAME\" = \"root\" ]; then echo TEST=test >> \"/etc/environment\"; else echo TEST=test >> \"$HOME/.bashrc; fi",
+      "default": "echo TEST=test >> /etc/environment",
       "description": "command to be executed as username (will be forwarded as is to a 'bash -c <command>' line)"
     }
   },

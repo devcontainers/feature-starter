@@ -6,7 +6,7 @@ set -e
 source dev-container-features-test-lib
 
 user="$(whoami)"
-check "$CURRENT_USER" [ "$CURRENT_USER" == "$user" ]
+check "$user" [ "$CURRENT_USER" == "$user" ]
 if [ "$USERNAME" = "root" ]; then
   COMMAND="${COMMAND:-echo TEST="test" >> /etc/environment}"
   bash -c "$COMMAND"
