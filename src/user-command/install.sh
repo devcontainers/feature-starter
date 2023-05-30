@@ -22,7 +22,9 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} >/dev/null 2>&1; then
 fi
 
 # Setup command
-rcFile="/home/$USERNAME/.bashrc"
+rcDir="/home/$USERNAME"
+rcFile="$rcDir/.bashrc"
+mkdir -p "$rcDir"
 touch "$rcFile"
 COMMAND="${COMMAND:-echo TEST="test" >> "$rcFile"}"
 
