@@ -9,8 +9,8 @@
   os=$(uname -s)
 # Make Edge the default browser if installed
   browser=/usr/bin/microsoft-edge-stable
-  cmds=("alias xdg-open=$edge" "export BROWSER=$edge")
-  seds=("s/^alias xdg-open=.*$/alias xdg-open=$edge/" "s/^export BROWSER=.*$/export BROWSER=$edge/")
+  cmds=("alias xdg-open=$browser" "export BROWSER=$browser")
+  seds=("s/^alias xdg-open=.*$/alias xdg-open=$browser/" "s/^export BROWSER=.*$/export BROWSER=$browser/")
   files=("$HOME/.bashrc" "$HOME/.zshrc")
   # shellcheck disable=SC2068
   for i in ${!cmds[@]}; do
@@ -33,6 +33,7 @@
 # Setup Homebrew
   sudo echo "sudo cached for noninteractive homebrew install"
   NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  # shellcheck source=/dev/null
   source "$HOME/.bashrc"
   cat "$HOME/.bashrc"
   updaterc "eval \"\$("$HOMEBREW_PREFIX/bin/brew" shellenv)\""
@@ -67,6 +68,8 @@
   # shellcheck disable=SC2016
   updaterc '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
   # Install Node.js latest and lts
+    env
+    echo "$PWD"
     nodes=('node' '--lts')
     packages=('@npmcli/fs' '@devcontainers/cli' 'dotenv-cli' 'typescript' 'npm-check-updates')
     for node in "${nodes[@]}"; do nvm install "$node"; nvm use "$node"; node --version; npm update -g npm; npm i -g "${packages[@]}"; ncu -u; done
