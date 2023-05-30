@@ -18,7 +18,7 @@
   # https://github.com/wslutilities/wslu
   sudo apt update
   sudo apt upgrade -y
-  sudo apt install -y wslu
+  sudo apt install -y --install-recommends wslu
 # Setup windows browser as default
   cmds=('alias xdg-open=wslview' 'export BROWSER=wslview')
   seds=('s/^alias xdg-open=.*$/alias xdg-open=wslview/' 's/^export BROWSER=.*$/export BROWSER=wslview/')

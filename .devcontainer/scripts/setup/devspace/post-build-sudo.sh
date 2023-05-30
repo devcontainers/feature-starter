@@ -26,7 +26,7 @@
   sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft.list'
   rm /tmp/microsoft.gpg
   apt update
-  apt install --install-recommends -y microsoft-edge-stable
+  apt install -y --install-recommends microsoft-edge-stable
   rm -rf /etc/apt/sources.list.d/microsoft-edge.list
 # Update apt-packages
   apt install -y --install-recommends --fix-broken --fix-missing
