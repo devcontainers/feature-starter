@@ -20,8 +20,9 @@
   sudo apt upgrade -y
   sudo apt install -y --install-recommends wslu
 # Setup windows browser as default
-  cmds=('alias xdg-open=wslview' 'export BROWSER=wslview')
-  seds=('s/^alias xdg-open=.*$/alias xdg-open=wslview/' 's/^export BROWSER=.*$/export BROWSER=wslview/')
+  browser=wslview
+  cmds=("alias xdg-open=$browser" "export BROWSER=$browser")
+  seds=("s/^alias xdg-open=.*$/alias xdg-open=$browser/" "s/^export BROWSER=.*$/export BROWSER=$browser/")
   files=("$HOME/.bashrc" "$HOME/.zshrc")
   # shellcheck disable=SC2068
   for i in ${!cmds[@]}; do

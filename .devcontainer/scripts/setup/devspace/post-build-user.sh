@@ -4,11 +4,24 @@
   # shellcheck source=/dev/null
   source "$HOME/.bashrc"
   updaterc() { local line="$1"; eval "$line"; echo "Updating ~/.bashrc and ~/.zshrc..."; rcs=("$HOME/.bashrc" "$HOME/.zshrc"); for rc in "${rcs[@]}"; do if [[ "$(cat "$rc")" != *"$line"* ]]; then echo -e "$line" >> "$rc"; fi; done }
+  HOMEBREW_PREFIX=${HOMEBREW_PREFIX:-/home/linuxbrew/.linuxbrew}
   USERNAME="${USERNAME:-$(whoami)}"
   os=$(uname -s)
 # Make Edge the default browser if installed
-  edge=/usr/bin/microsoft-edge-stable
-  if [ -e "$edge" ]; then updaterc 'export BROWSER=/usr/bin/microsoft-edge-stable'; fi
+  browser=/usr/bin/microsoft-edge-stable
+  cmds=("alias xdg-open=$edge" "export BROWSER=$edge")
+  seds=("s/^alias xdg-open=.*$/alias xdg-open=$edge/" "s/^export BROWSER=.*$/export BROWSER=$edge/")
+  files=("$HOME/.bashrc" "$HOME/.zshrc")
+  # shellcheck disable=SC2068
+  for i in ${!cmds[@]}; do
+    cmd="${cmds[$i]}"
+    sed="${seds[$i]}"
+    eval "$cmd"
+    for file in "${files[@]}"; do
+      sed -i "$sed" "$file"
+      grep -qF "$cmd" "$file" || echo "$cmd" >> "$file"
+    done
+  done
 # Setup ohmyzsh and make zsh default shell
   sudo chsh "$USERNAME" -s "$(which zsh)"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
@@ -21,8 +34,9 @@
   sudo echo "sudo cached for noninteractive homebrew install"
   NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   source "$HOME/.bashrc"
-  updaterc 'eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"'
-  updaterc 'export PATH="$HOMEBREW_PREFIX/bin:$PATH"'
+  cat "$HOME/.bashrc"
+  updaterc "eval \"\$("$HOMEBREW_PREFIX/bin/brew" shellenv)\""
+  updaterc "export PATH=\"$HOMEBREW_PREFIX/bin:$PATH\""
   # Install taps
     brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
   # Repair and Update if needed
@@ -115,7 +129,5 @@
   mkdir -p "$HOME/.ssh/"
   touch "$HOME/.ssh/known_hosts"
   bash -c eval "$(ssh-keyscan github.com >> "$HOME/.ssh/known_hosts")"
-# Setup devspace environment
-  updaterc "source \"$DEVCONTAINER_FEATURES_PROJECT_ROOT/run\" setup environment"
 # Done
   echo "WARNING: Please restart shell to get latest environment variables"
