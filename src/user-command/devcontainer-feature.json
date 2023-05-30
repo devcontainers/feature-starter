@@ -1,7 +1,7 @@
 {
   "name": "User Command",
   "id": "user-command",
-  "version": "1.0.50",
+  "version": "1.0.60",
   "description": "Executes a user command",
   "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/user-command",
   "options": {
