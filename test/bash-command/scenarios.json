@@ -3,7 +3,7 @@
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
       "bash-command": {
-        "sudocommand": "ZWNobyAtZSBIRUxMTz01ID4+IC9ldGMvZW52aXJvbm1lbnQK"
+        "sudocommand": "echo -e HELLO=5 >> /etc/environment"
       }
     }
   },
@@ -11,7 +11,7 @@
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
       "bash-command": {
-        "usercommand": "ZWNobyBleHBvcnQgQ1VSUkVOVF9VU0VSPSQod2hvYW1pKSA+PiAkSE9NRS8uYmFzaHJjCg=="
+        "usercommand": "echo export CURRENT_USER=$(whoami) >> $HOME/.bashrc"
       }
     }
   },
@@ -19,8 +19,8 @@
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
       "bash-command": {
-        "sudocommand": "ZWNobyAtZSBIRUxMTz01ID4+IC9ldGMvZW52aXJvbm1lbnQK",
-        "usercommand": "ZWNobyBleHBvcnQgQ1VSUkVOVF9VU0VSPSQod2hvYW1pKSA+PiAkSE9NRS8uYmFzaHJjCg=="
+        "sudocommand": "echo -e HELLO=5 >> /etc/environment",
+        "usercommand": "echo export CURRENT_USER=$(whoami) >> $HOME/.bashrc"
       }
     }
   }

@@ -130,8 +130,8 @@
     },
     // https://github.com/devcontainers-contrib/features/tree/main/src/bash-command
     "ghcr.io/AlephZ-ai/devcontainer-features/bash-command:1": {
-      "sudocommand": "${localEnv:DEVCONTAINER_POST_BUILD_SUDO_COMMAND}",
-      "usercommand": "${localEnv:DEVCONTAINER_POST_BUILD_USER_COMMAND}"
+      "sudocommand": "/devspaces/devcontainer/post-build-sudo.sh",
+      "usercommand": "/devspaces/devcontainer/post-build-user.sh"
     },
     // https://github.com/devcontainers/features/tree/main/src/desktop-lite
     "ghcr.io/devcontainers/features/desktop-lite:1": {
