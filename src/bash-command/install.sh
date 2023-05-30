@@ -31,7 +31,7 @@ if [ -n "$SUDOCOMMAND" ]; then
 fi
 
 if [ -n "$USERCOMMAND" ]; then
-  su -l $USERNAME -c "$USERCOMMAND"
+  su "$USERNAME" -c "$USERCOMMAND"
 fi
 
 # Clean up

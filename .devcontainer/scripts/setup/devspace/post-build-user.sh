@@ -8,9 +8,9 @@
   USERNAME="${USERNAME:-$(whoami)}"
   os=$(uname -s)
 # Make Edge the default browser if installed
-  browser=/usr/bin/microsoft-edge-stable
+  browser='/usr/bin/microsoft-edge-stable'
   cmds=("alias xdg-open=$browser" "export BROWSER=$browser")
-  seds=("s/^alias xdg-open=.*$/alias xdg-open=$browser/" "s/^export BROWSER=.*$/export BROWSER=$browser/")
+  seds=("s:^alias xdg-open=.*$:alias xdg-open=$browser:" "s:^export BROWSER=.*$:export BROWSER=$browser:")
   files=("$HOME/.bashrc" "$HOME/.zshrc")
   # shellcheck disable=SC2068
   for i in ${!cmds[@]}; do
@@ -68,8 +68,6 @@
   # shellcheck disable=SC2016
   updaterc '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
   # Install Node.js latest and lts
-    env
-    echo "$PWD"
     nodes=('node' '--lts')
     packages=('@npmcli/fs' '@devcontainers/cli' 'dotenv-cli' 'typescript' 'npm-check-updates')
     for node in "${nodes[@]}"; do nvm install "$node"; nvm use "$node"; node --version; npm update -g npm; npm i -g "${packages[@]}"; ncu -u; done

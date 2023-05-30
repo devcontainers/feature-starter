@@ -22,7 +22,7 @@
 # Setup windows browser as default
   browser=wslview
   cmds=("alias xdg-open=$browser" "export BROWSER=$browser")
-  seds=("s/^alias xdg-open=.*$/alias xdg-open=$browser/" "s/^export BROWSER=.*$/export BROWSER=$browser/")
+  seds=("s:^alias xdg-open=.*$:alias xdg-open=$browser:" "s:^export BROWSER=.*$:export BROWSER=$browser:")
   files=("$HOME/.bashrc" "$HOME/.zshrc")
   # shellcheck disable=SC2068
   for i in ${!cmds[@]}; do
