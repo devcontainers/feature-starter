@@ -1,7 +1,7 @@
 {
   "name": "User Command",
   "id": "user-command",
-  "version": "1.0.64",
+  "version": "1.0.65",
   "description": "Executes a user command",
   "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/user-command",
   "options": {
@@ -15,7 +15,7 @@
       "proposals": [
         "echo hi!"
       ],
-      "default": "",
+      "default": "echo TEST=\"test\" >> \"/home/\\$USERNAME/.bashrc\"",
       "description": "command to be executed as username (will be forwarded as is to a 'bash -c <command>' line)"
     }
   },
