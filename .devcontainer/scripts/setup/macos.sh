@@ -184,4 +184,4 @@
     git-credential-manager configure
     git-credential-manager diagnose
 # Done
-  echo "WARNING: Please restart shell to get latest environment variables"
+  echo "Please restart shell to get latest environment variables"

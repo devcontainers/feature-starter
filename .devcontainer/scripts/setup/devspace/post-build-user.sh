@@ -145,4 +145,4 @@
   touch "$HOME/.ssh/known_hosts"
   bash -c eval "$(ssh-keyscan github.com >> "$HOME/.ssh/known_hosts")"
 # Done
-  echo "WARNING: Please restart shell to get latest environment variables"
+  echo "Please restart shell to get latest environment variables"

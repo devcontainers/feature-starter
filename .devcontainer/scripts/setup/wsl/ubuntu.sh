@@ -39,4 +39,4 @@
 # WSLg GPU acceleration
   # glxinfo
 # Done
-  echo "WARNING: Please restart shell to get latest environment variables"
+  echo "Please restart shell to get latest environment variables"

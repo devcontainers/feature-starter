@@ -27,4 +27,4 @@
     gh auth status
   fi
 # Done
-  echo "WARNING: Please restart shell to get latest environment variables"
+  echo "Please restart shell to get latest environment variables"
