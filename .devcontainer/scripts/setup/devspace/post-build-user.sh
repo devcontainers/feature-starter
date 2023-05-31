@@ -71,7 +71,7 @@
   updaterc '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
   # Create default package.json
   default_package_json="{ "name": "devspace" }"
-  echo "$default_package_json" > package.json
+  echo "$default_package_json" | sudo tee package.json
   # Install Node.js latest and lts
     nodes=('node' '--lts')
     packages=('@npmcli/fs' '@devcontainers/cli' 'dotenv-cli' 'typescript' 'npm-check-updates')
