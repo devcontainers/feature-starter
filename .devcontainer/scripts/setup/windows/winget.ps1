@@ -20,8 +20,6 @@ wsl --set-default-version 2
 winget install --name --exact "Ubuntu" --accept-package-agreements --accept-source-agreements --disable-interactivity
 winget install --name "Ubuntu (Preview)" --accept-package-agreements --accept-source-agreements --disable-interactivity
 winget install --id "Docker.DockerDesktop" --accept-package-agreements --accept-source-agreements --disable-interactivity
-# Windows Features
-& "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup/windows pre-sudo
 winget install --name "Microsoft Visual Studio Code" --accept-package-agreements --accept-source-agreements --disable-interactivity
 winget install --name "Microsoft Visual Studio Code Insiders" --accept-package-agreements --accept-source-agreements --disable-interactivity
 # https://learn.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio?view=vs-2022

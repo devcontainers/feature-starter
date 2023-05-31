@@ -2,6 +2,7 @@ scoop install --global sudo refreshenv #aria2
 scoop update --all --global
 #scoop config aria2-warning-enabled false
 & "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup/windows winget
+& "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup/windows features
 & "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup/windows chocolatey
 & "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup/windows scoop
 & "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup/windows dotnet

@@ -9,9 +9,9 @@ do {
         scoop install --global gawk cacert file sed coreutils grep curl wget bzip2 less
         scoop install --global zlib buf protobuf grpc-tools dos2unix gitsign gh
         scoop install --global jq gcc make cmake llvm dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts mono go python openssl openssh age 
-        scoop install --global mkcert shellcheck speedtest-cli chezmoi nvm sqlite postgresql azure-cli aws
-        scoop install --global gedit 
-        scoop install --global vulkan fiddler speedtest gimp vlc azuredatastudio azuredatastudio-insiders
+        scoop install --global mkcert shellcheck speedtest-cli chezmoi sqlite postgresql azure-cli aws
+        scoop install --global gedit
+        scoop install --global nvm vulkan fiddler speedtest gimp vlc azuredatastudio azuredatastudio-insiders
         if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
         $complete = $true
     } catch [Exception] {
