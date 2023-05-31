@@ -46,10 +46,11 @@
     # procps is linux only
       if [ "$os" == "Linux" ]; then HOMEBREW_ACCEPT_EULA=Y brew install procps; fi
     # These work on all brew platforms
-      HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less zlib zlib-ng dotnet dotnet@6
-      HOMEBREW_ACCEPT_EULA=Y brew install buf protobuf grpc dos2unix git git-lfs sigstore/tap/gitsign-credential-cache sigstore/tap/gitsign gh asdf jq moreutils
-      HOMEBREW_ACCEPT_EULA=Y brew install gcc llvm age nss openssl@1.1 openssl@3 nghttp2 openssh make cmake cmake-docs mkcert go python@3.11 ca-certificates shellcheck
-      HOMEBREW_ACCEPT_EULA=Y brew install speedtest-cli mono-libgdiplus chezmoi sqlite sqlite-utils postgresql@15 azure-cli awscli msodbcsql18 mssql-tools18 gedit
+      HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk ca-certificates systemd bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less
+      HOMEBREW_ACCEPT_EULA=Y brew install zlib zlib-ng buf protobuf grpc dos2unix git git-lfs sigstore/tap/gitsign-credential-cache sigstore/tap/gitsign gh
+      HOMEBREW_ACCEPT_EULA=Y brew install asdf jq moreutils gcc make cmake cmake-docs llvm dotnet dotnet@6 go python@3.11 age nss openssl@1.1 openssl@3 openssh
+      HOMEBREW_ACCEPT_EULA=Y brew install nghttp2 mkcertshellcheck speedtest-cli mono-libgdiplus chezmoi sqlite sqlite-utils postgresql@15 azure-cli awscli
+      HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18 gedit
       updaterc 'alias sed=gsed'
   # Upgrade all packages
     brew update
