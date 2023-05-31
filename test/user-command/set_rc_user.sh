@@ -8,6 +8,6 @@ source dev-container-features-test-lib
 
 who="$(whoami)"
 check "\$TEST=43" [ "$(source "$HOME/.bashrc" && echo "$TEST")" == "43" ]
-#check "\$TEST_USER=$who" [ "$(source "$HOME/.bashrc" && echo "$TEST_USER")" == "$who" ]
+check "\$TEST_USER=$who" [ "$(source "$HOME/.bashrc" && echo "$TEST_USER")" == "$who" ]
 
 reportResults
