@@ -47,7 +47,7 @@
     updaterc "source \"$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh\""
     updaterc "export MONO_GAC_PREFIX=\"$HOMEBREW_PREFIX\""
     # shellcheck disable=SC2016
-    updaterc 'export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"'
+    updaterc "export PATH=\"$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:\$PATH\""
   # Run Homebrew cleanup and doctor to check for errors
     brew cleanup
     brew doctor
