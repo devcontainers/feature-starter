@@ -1,4 +1,9 @@
 Write-Host "setup/windows/powershell.ps1"
+# Make sure profile exists
+if (!(Test-Path $PROFILE)) {
+  New-Item -ItemType File -Path $PROFILE -Force
+}
+
 # Define an array of module names
 $modules = @('Pester', 'Set-PsEnv', 'posh-docker', 'posh-git', 'lazy-posh-git')
 # Windows PowerShell
