@@ -1,3 +1,4 @@
+Write-Host "setup/windows/nvm.ps1"
 nvm on
 nvm version
 # Install Node.js latest and lts

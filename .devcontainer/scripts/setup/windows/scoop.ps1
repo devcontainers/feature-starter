@@ -1,3 +1,4 @@
+Write-Host "setup/windows/scoop.ps1"
 # https://scoop.sh/
 scoop install --global 7zip
 scoop update --all --global
@@ -12,7 +13,7 @@ do {
         scoop install --global mkcert shellcheck speedtest-cli chezmoi sqlite postgresql azure-cli aws
         scoop install --global gedit
         scoop install --global nvm vulkan fiddler speedtest gimp vlc azuredatastudio azuredatastudio-insiders
-        if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
+        if ($LASTEXITCODE -ne 0) { Write-Host "scoop install --global failed"; throw "Exit code is $LASTEXITCODE" }
         $complete = $true
     } catch [Exception] {
         Write-Host $_.Exception.Message

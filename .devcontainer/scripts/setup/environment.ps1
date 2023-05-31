@@ -2,7 +2,7 @@ $projectRoot="$PSCommandPath" | Split-Path -Parent | Split-Path -Parent | Split-
 Push-Location "$projectRoot/.devcontainer"
 try {
     Set-PsEnv
-    if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
+    if ($LASTEXITCODE -ne 0) { Write-Host "Set-PsEnv failed"; throw "Exit code is $LASTEXITCODE" }
   } catch {
     $env:DEVCONTAINER_FEATURES_PROJECT_NAME="devcontainer-features"
     $env:DEVCONTAINER_PROJECT_NAME="devcontainer"

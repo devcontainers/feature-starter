@@ -1,3 +1,4 @@
+Write-Host "setup/windows/pwsh.ps1"
 # Define an array of module names
 $modules = @('Pester', 'Set-PsEnv', 'posh-docker', 'posh-git', 'lazy-posh-git')
 # Windows PowerShell

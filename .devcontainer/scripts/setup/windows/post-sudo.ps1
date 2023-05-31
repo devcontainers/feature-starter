@@ -1,3 +1,4 @@
+Write-Host "setup/windows/post-sudo.ps1"
 scoop install --global sudo refreshenv #aria2
 scoop update --all --global
 #scoop config aria2-warning-enabled false
@@ -13,7 +14,7 @@ scoop update --all --global
 & "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup environment
 try {
   gh auth status
-  if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
+  if ($LASTEXITCODE -ne 0) { Write-Host "gh auth status failed"; throw "Exit code is $LASTEXITCODE" }
 } catch {
   gh auth login
 }

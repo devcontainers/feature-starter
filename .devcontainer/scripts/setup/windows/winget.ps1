@@ -1,3 +1,4 @@
+Write-Host "setup/windows/winget.ps1"
 # https://apps.microsoft.com/store/detail/app-installer/
 # https://github.com/microsoft/winget-cli
 # https://github.com/microsoft/winget-cli/issues/210

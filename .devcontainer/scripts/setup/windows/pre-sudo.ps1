@@ -1,7 +1,8 @@
+Write-Host "setup/windows/pre-sudo.ps1"
 # https://scoop.sh/
 try {
   scoop --version
-  if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
+  if ($LASTEXITCODE -ne 0) { throw Write-Host "scoop --version failed"; "Exit code is $LASTEXITCODE" }
 } catch {
   Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
 }
