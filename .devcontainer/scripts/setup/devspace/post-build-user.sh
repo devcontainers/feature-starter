@@ -5,145 +5,32 @@
   updaterc() { local line="$1"; eval "$line"; echo "Updating ~/.bashrc and ~/.zshrc..."; rcs=("$HOME/.bashrc" "$HOME/.zshrc"); for rc in "${rcs[@]}"; do if [[ "$(cat "$rc")" != *"$line"* ]]; then echo "$line" >> "$rc"; fi; done }
   HOMEBREW_PREFIX=${HOMEBREW_PREFIX:-/home/linuxbrew/.linuxbrew}
   USERNAME="${USERNAME:-$(whoami)}"
-  os=$(uname -s)
 # Setup ohmyzsh and make zsh default shell
-  sudo chsh "$USERNAME" -s "$(which zsh)"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
-  # powerlevel10k not working in wsl
-  # git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/powerlevel10k" || true
-  #   rcFile="$HOME/.zshrc"
-  #   rcLine='source ~/powerlevel10k/powerlevel10k.zsh-theme'
-  #   grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-# Setup Homebrew
-  sudo echo "sudo cached for noninteractive homebrew install"
-  NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   # shellcheck source=/dev/null
-  source "$HOME/.bashrc"
-  cat "$HOME/.bashrc"
-  updaterc "eval \"\$(\"$HOMEBREW_PREFIX/bin/brew\" shellenv)\""
-  # Install taps
-    brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
-  # Repair and Update if needed
-    brew update
-    brew tap --repair
-  # Install Homebrew packages
-    # procps is linux only
-      #TODO: Fix
-      #if [ "$os" == "Linux" ]; then HOMEBREW_ACCEPT_EULA=Y brew install procps systemd; fi
-    # These work on all brew platforms
-      HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk ca-certificates bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less
-      HOMEBREW_ACCEPT_EULA=Y brew install zlib zlib-ng buf protobuf grpc dos2unix git git-lfs sigstore/tap/gitsign-credential-cache sigstore/tap/gitsign gh asdf
-      HOMEBREW_ACCEPT_EULA=Y brew install jq moreutils gcc make cmake cmake-docs llvm dotnet dotnet@6 mono go python@3.11 nss openssl@3 openssl@1.1 openssh age
-      HOMEBREW_ACCEPT_EULA=Y brew install nghttp2 mkcert shellcheck speedtest-cli mono-libgdiplus chezmoi sqlite sqlite-utils postgresql@15 azure-cli awscli
-      HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18 gedit
-  # Upgrade all packages
-    brew update
-    brew upgrade
-  # Setup post hombrew packages
-    brew link --force --overwrite postgresql@15 openssl@3
-    # shellcheck disable=SC2016
-    updaterc "export PATH=\"$HOMEBREW_PREFIX/opt/python/libexec/bin:\$PATH\""
-    updaterc "source \"$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh\""
-    updaterc "export MONO_GAC_PREFIX=\"$HOMEBREW_PREFIX\""
-    # shellcheck disable=SC2016
-    updaterc "export PATH=\"$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:\$PATH\""
-  # Run Homebrew cleanup and doctor to check for errors
-    brew cleanup
-    brew doctor
+  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/zsh.sh"
 # Make Edge the default browser if installed
-  browser='/usr/bin/microsoft-edge-stable'
-  cmds=("alias xdg-open=$browser" "export BROWSER=$browser")
-  seds=("s:^alias xdg-open=.*$:alias xdg-open=$browser:" "s:^export BROWSER=.*$:export BROWSER=$browser:")
-  files=("$HOME/.bashrc" "$HOME/.zshrc")
-  # shellcheck disable=SC2068
-  for i in ${!cmds[@]}; do
-    cmd="${cmds[$i]}"
-    sed="${seds[$i]}"
-    eval "$cmd"
-    for file in "${files[@]}"; do
-      sed -i "$sed" "$file"
-      grep -qF "$cmd" "$file" || echo "$cmd" >> "$file"
-    done
-  done
+  # shellcheck source=/dev/null
+  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/edge-default.sh"
+# Setup Homebrew
+  # shellcheck source=/dev/null
+  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/brew.sh"
 # Setup pip
-  python -m ensurepip --upgrade
-  python -m pip install --upgrade pip
-  pip install --use-pep517 pip-review
-  pip install moreutils
-  pip-review --auto
+  # shellcheck source=/dev/null
+  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/pip.sh"
 # Setup nvm
-  updaterc 'export NVM_SYMLINK_CURRENT="true"'
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-  # shellcheck disable=SC2016
-  updaterc 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"'
-  # shellcheck disable=SC2016
-  updaterc '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
-  # Create default package.json
-  package_json=package.json
-  default_package_json='{ "name": "devspace" }'
-  echo "$default_package_json" | sudo tee $package_json
-  # Install Node.js latest and lts
-    nodes=('node' '--lts')
-    packages=('npm-check-updates' 'corepack' '@npmcli/fs' '@devcontainers/cli' 'dotenv-cli' 'typescript')
-    for node in "${nodes[@]}"; do nvm install "$node"; nvm use "$node"; node --version; npm update -g npm; npm i -g "${packages[@]}"; ncu -u; done
-    nvm use node
-  sudo rm -rf $package_json
+  # shellcheck source=/dev/null
+  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/nvm.sh"
 # Setup dotnet
-  dotnet_latest_major_global='{ "sdk": { "rollForward": "latestmajor" } }'
-  updaterc 'export DOTNET_ROLL_FORWARD=LatestMajor'
-  echo "$dotnet_latest_major_global" > "$HOME/global.json"
-  asdf plugin-add dotnet-core https://github.com/emersonsoares/asdf-dotnet-core.git || true
-  asdf plugin update --all
-  preview="$(asdf list all dotnet-core 8)"
-  current="$(asdf list all dotnet-core 7)"
-  lts="$(asdf list all dotnet-core 6)"
-  asdf install dotnet-core "$preview"
-  asdf install dotnet-core "$current"
-  asdf install dotnet-core "$lts"
-  asdf global dotnet-core "$preview"
-  asdf reshim
-  asdf info
-  # Update rc files
-    updaterc "export DOTNET_ROOT=\"\$HOME/.asdf/installs/dotnet-core/$preview\""
-    # shellcheck source=/dev/null
-    source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"
-      # shellcheck disable=SC2016
-      rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.bash"'
-      rcFile="$HOME/.bashrc"
-      grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-      # shellcheck disable=SC2016
-      rcLine='source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh"'
-      rcFile="$HOME/.zshrc"
-      grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
-  # Setup dotnet workloads
-    dotnet workload install --include-previews wasi-experimental
-    # Clean, repair, and update
-      dotnet workload clean
-      dotnet workload update
-      dotnet workload repair
-  # Setup dotnet tools
-    tools=('powershell' 'git-credential-manager')
-    for tool in "${tools[@]}"; do if [ -z "$(dotnet tool list -g | grep -q "$tool")" ]; then dotnet tool update -g "$tool"; else dotnet tool install -g "$tool"; fi; done
-      # shellcheck disable=SC2016
-    updaterc 'PATH="$HOME/.dotnet/tools:$PATH"'
-    echo "$dotnet_latest_major_global" > "$HOME/.dotnet/tools/global.json"
+  # shellcheck source=/dev/null
+  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/dotnet.sh"
 # Setup pwsh modules
-  pwsh_modules=('Pester' 'Set-PsEnv')
-  pwsh_update='Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber; Update-Module; Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber -AllowPrerelease; Set-Alias -Name awk -Value gawk'
-  # shellcheck disable=SC2016
-  pwsh_install_module='Install-Module -Name $module -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber;'
-  # shellcheck disable=SC2034
-  install_modules() { local pwsh=$1; "$pwsh" -Command "$pwsh_update"; for module in "${pwsh_modules[@]}"; do $pwsh -Command "$(eval echo "$pwsh_install_module")"; done }
-  # PowerShell Core (pwsh)
-    if command -v pwsh > /dev/null; then install_modules "pwsh"; else echo "PowerShell Core is not installed"; fi
-  # PowerShell Core Preview (pwsh-preview)
-    if command -v pwsh-preview > /dev/null; then install_modules "pwsh-preview"; else echo "PowerShell Core Preview is not installed"; fi
+  # shellcheck source=/dev/null
+  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/pwsh.sh"
 # Make trusted root CA then install and trust it
-  mkcert -install
-  dotnet dev-certs https --trust
+  # shellcheck source=/dev/null
+  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/trust-root-ca.sh"
 # Adding GH .ssh known hosts
-  mkdir -p "$HOME/.ssh/"
-  touch "$HOME/.ssh/known_hosts"
-  bash -c eval "$(ssh-keyscan github.com >> "$HOME/.ssh/known_hosts")"
+  # shellcheck source=/dev/null
+  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/gh.sh"
 # Done
   echo "Please restart shell to get latest environment variables"

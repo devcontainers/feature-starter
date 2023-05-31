@@ -13,8 +13,7 @@
 # Continue with devspace setup
   "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace.sh"
 # Log into GitHub
-  if ! gh auth status; then gh auth login; fi
-  gh config set -h github.com git_protocol https
-  gh auth status
+  # shellcheck source=/dev/null
+  source "$DEVCONTAINER_SCRIPTS_ROOT/utils/gh-login.sh"
 # Done
   echo "Please restart shell to get latest environment variables"

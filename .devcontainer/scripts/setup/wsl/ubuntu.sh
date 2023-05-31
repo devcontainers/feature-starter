@@ -9,6 +9,7 @@
 # Run base ubuntu setup
   # shellcheck source=/dev/null
   export IS_WSL="true"
+  # shellcheck source=/dev/null
   source "$DEVCONTAINER_SCRIPTS_ROOT/setup/ubuntu.sh"
   # shellcheck source=/dev/null
   source "$HOME/.bashrc"
@@ -33,9 +34,8 @@
     done
   done
 # Log into GitHub
-  if ! gh auth status; then gh auth login; fi
-  gh config set -h github.com git_protocol https
-  gh auth status
+  # shellcheck source=/dev/null
+  source "$DEVCONTAINER_SCRIPTS_ROOT/utils/gh-login.sh"
 # WSLg GPU acceleration
   # glxinfo
 # Done
