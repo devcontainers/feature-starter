@@ -1,7 +1,7 @@
 Write-Host "setup/windows/features.ps1"
 $ProgPref = $ProgressPreference
 $ProgressPreference = 'SilentlyContinue'
-$results = Enable-WindowsOptionalFeature -FeatureName TFTP,LegacyComponents,DirectPlay,MediaPlayback,SmbDirect,MSRDC-Infrastructure,MicrosoftWindowsPowerShellV2Root,MicrosoftWindowsPowerShellV2,SearchEngine-Client-Package,Printing-PrintToPDFServices-Features,Printing-XPSServices-Features,TelnetClient,Printing-Foundation-InternetPrinting-Client,VirtualMachinePlatform,Containers-DisposableClientVM -All -Online -NoRestart -WarningAction SilentlyContinue
+$results = Enable-WindowsOptionalFeature -FeatureName TFTP,LegacyComponents,DirectPlay,MediaPlayback,SmbDirect,MSRDC-Infrastructure,MicrosoftWindowsPowerShellV2Root,MicrosoftWindowsPowerShellV2,SearchEngine-Client-Package,Printing-PrintToPDFServices-Features,Printing-XPSServices-Features,TelnetClient,Printing-Foundation-InternetPrinting-Client,HypervisorPlatform,Microsoft-Hyper-V-All,Microsoft-Hyper-V-Tools-All,VirtualMachinePlatform,Containers-DisposableClientVM -All -Online -NoRestart -WarningAction SilentlyContinue
 $ProgressPreference = $ProgPref
 if ($results.RestartNeeded -eq $true) {
   Restart-Computer -Force
