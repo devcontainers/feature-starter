@@ -8,7 +8,8 @@
 # Run post-build commands
   # shellcheck source=/dev/null
   export HOMEBREW_PREFIX="/usr/local"
-  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-user.sh"
+  bash -l -c "source $DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-user.sh"
+  source "$HOME/.zshrc"
 # Continue with devspace setup
   "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace.sh"
 # Log into GitHub
