@@ -7,6 +7,14 @@
   HOMEBREW_PREFIX=${HOMEBREW_PREFIX:-/home/linuxbrew/.linuxbrew}
   USERNAME="${USERNAME:-$(whoami)}"
   os=$(uname -s)
+# Setup ohmyzsh and make zsh default shell
+  sudo chsh "$USERNAME" -s "$(which zsh)"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
+  # powerlevel10k not working in wsl
+  # git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/powerlevel10k" || true
+  #   rcFile="$HOME/.zshrc"
+  #   rcLine='source ~/powerlevel10k/powerlevel10k.zsh-theme'
+  #   grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
 # Make Edge the default browser if installed
   browser='/usr/bin/microsoft-edge-stable'
   cmds=("alias xdg-open=$browser" "export BROWSER=$browser")
@@ -22,14 +30,6 @@
       grep -qF "$cmd" "$file" || echo "$cmd" >> "$file"
     done
   done
-# Setup ohmyzsh and make zsh default shell
-  sudo chsh "$USERNAME" -s "$(which zsh)"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
-  # powerlevel10k not working in wsl
-  # git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/powerlevel10k" || true
-  #   rcFile="$HOME/.zshrc"
-  #   rcLine='source ~/powerlevel10k/powerlevel10k.zsh-theme'
-  #   grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
 # Setup Homebrew
   sudo echo "sudo cached for noninteractive homebrew install"
   NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
