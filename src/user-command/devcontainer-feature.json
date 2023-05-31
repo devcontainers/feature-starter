@@ -1,7 +1,7 @@
 {
   "name": "User Command",
   "id": "user-command",
-  "version": "1.0.71",
+  "version": "1.0.73",
   "description": "Executes a user command",
   "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/user-command",
   "options": {
@@ -16,7 +16,7 @@
         "echo hi!"
       ],
       "default": "echo export TEST=42 >> \"\\$HOME/.bashrc\"",
-      "description": "command to be executed as username (will be forwarded as is to a 'bash -c <command>' line)"
+      "description": "command to be executed as username (will be forwarded as is to a 'su <username> -c <command>' line)"
     }
   },
   "installsAfter": [
@@ -24,8 +24,6 @@
     "ghcr.io/devcontainers-contrib/featues/apt-get-packages",
     "ghcr.io/devcontainers-contrib/featues/apt-packages",
     "ghcr.io/rocker-org/devcontainer-features/apt-packages",
-    "ghcr.io/AlephZ-ai/devcontainer-features/dotnet",
-    "ghcr.io/AlephZ-ai/devcontainer-features/homebrew",
-    "ghcr.io/AlephZ-ai/devcontainer-features/nvm"
+    "ghcr.io/AlephZ-ai/devcontainer-features/sudo-command"
   ]  
 }
