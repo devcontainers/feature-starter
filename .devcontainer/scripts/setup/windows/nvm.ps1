@@ -3,7 +3,7 @@ nvm on
 nvm version
 # Install Node.js latest and lts
 $nodes = 'latest', 'lts'
-$packages = '@npmcli/fs', '@devcontainers/cli', 'dotenv-cli', 'typescript', 'npm-check-updates'
+$packages = 'npm-check-updates', 'corepack', '@npmcli/fs', '@devcontainers/cli', 'dotenv-cli', 'typescript'
 
 # You need to install nvm-windows before running these commands
 # Download and install nvm-windows from https://github.com/coreybutler/nvm-windows/releases
@@ -20,7 +20,6 @@ foreach ($node in $nodes) {
         npm install -g $package
     }
 
-    ncu -g -u
     ncu -u
 }
 
