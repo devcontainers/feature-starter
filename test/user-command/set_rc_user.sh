@@ -6,7 +6,8 @@ set -e
 
 source dev-container-features-test-lib
 
-user="$(whoami)"
-check "$CURRENT_USER" [ "$CURRENT_USER" == "$user" ]
+who="$(whoami)"
+check "\$TEST=42" [ "$(source "$HOME/.bashrc" && echo "$TEST")" == "42" ]
+check "\$TEST_USER=$who" [ "$(source "$HOME/.bashrc" && echo $CURRENT_USER)" == "$user" ]
 
 reportResults

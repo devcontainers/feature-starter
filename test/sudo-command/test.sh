@@ -6,7 +6,7 @@ set -e
 source dev-container-features-test-lib
 
 
-check "echo \$TEST" [ "$(source /etc/environment && echo "$TEST")" == "test" ]
+check "\$TEST=42" [ "$(source /etc/environment && echo "$TEST")" == "42" ]
 
 
 reportResults

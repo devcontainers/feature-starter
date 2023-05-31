@@ -1,7 +1,7 @@
 {
   "name": "Sudo Command",
   "id": "sudo-command",
-  "version": "1.0.49",
+  "version": "1.0.50",
   "description": "Executes a sudo command",
   "documentationURL": "https://github.com/alephz-ai/devcontainer-features/tree/main/src/sudo-command",
   "options": {
@@ -15,7 +15,7 @@
       "proposals": [
         "echo hi!"
       ],
-      "default": "echo TEST=\"test\" >> /etc/environment",
+      "default": "echo TEST=42 >> /etc/environment",
       "description": "command to be executed as root (will be forwarded as is to a 'bash -c <command>' line)"
     }
   },

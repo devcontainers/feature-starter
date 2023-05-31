@@ -3,6 +3,7 @@
 set -ex
 
 USERNAME="${USERNAME:-"automatic"}"
+COMMAND="${COMMAND:-}"
 who="$(whoami)"
 
 # Determine the appropriate non-root user.
@@ -26,13 +27,7 @@ fi
 rm -rf /var/lib/apt/lists/*
 
 # Run
-if [ "$USERNAME" = "root" ]; then
-  COMMAND="${COMMAND:-echo TEST="test" >> /etc/environment}"
-  bash -c "$COMMAND"
-else
-  COMMAND="${COMMAND:-echo TEST="test" >> "$HOME/.bashrc"}"
-  su "$USERNAME" -c "$COMMAND"
-fi
+su "$USERNAME" -c "$COMMAND"
 
 # Clean up
 rm -rf /var/lib/apt/lists/*

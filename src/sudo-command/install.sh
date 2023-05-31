@@ -3,6 +3,8 @@
 set -ex
 
 USERNAME="${USERNAME:-"automatic"}"
+COMMAND="${COMMAND:-}"
+who="$(whoami)"
 
 # Determine the appropriate non-root user.
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
@@ -15,14 +17,11 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     fi
   done
   if [ "${USERNAME}" = "" ]; then
-    USERNAME=root
+    USERNAME="$who"
   fi
 elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} >/dev/null 2>&1; then
-  USERNAME=root
+  USERNAME="$who"
 fi
-
-# Setup command
-COMMAND="${COMMAND:-}"
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
