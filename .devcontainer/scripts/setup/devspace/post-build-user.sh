@@ -48,7 +48,7 @@
     # These work on all brew platforms
       HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk ca-certificates systemd bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less
       HOMEBREW_ACCEPT_EULA=Y brew install zlib zlib-ng buf protobuf grpc dos2unix git git-lfs sigstore/tap/gitsign-credential-cache sigstore/tap/gitsign gh asdf
-      HOMEBREW_ACCEPT_EULA=Y brew install jq moreutils gcc make cmake cmake-docs llvm dotnet dotnet@6 mono go python@3.11 nss openssl@1.1 openssl@3 openssh age
+      HOMEBREW_ACCEPT_EULA=Y brew install jq moreutils gcc make cmake cmake-docs llvm dotnet dotnet@6 mono go python@3.11 nss openssl@3 openssl@1.1 openssh age
       HOMEBREW_ACCEPT_EULA=Y brew install nghttp2 mkcert shellcheck speedtest-cli mono-libgdiplus chezmoi sqlite sqlite-utils postgresql@15 azure-cli awscli
       HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18 gedit
       updaterc 'alias sed=gsed'

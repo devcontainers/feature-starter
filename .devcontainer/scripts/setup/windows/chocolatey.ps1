@@ -12,3 +12,7 @@ choco feature enable -n allowGlobalConfirmation
 choco feature enable -n useRememberedArgumentsForUpgrades
 choco feature enable -n showDownloadProgress
 choco feature enable -n showNonElevatedWarnings
+choco install -y psqlodbc
+choco install -y sqlserver-odbcdriver
+choco install -y sql-server-management-studio
+cup all -y

@@ -5,7 +5,13 @@ scoop update
 $complete = $false
 do {
     try {
-        scoop install --global vcredist vcredist2022 gawk openssh vulkan openssl gitsign gh sed curl wget grep sed coreutils less touch sqlite gcc buf protobuf grpc-tools llvm bzip2 make cmake patch cacert file dos2unix shellcheck zlib age mkcert go python dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts nvm chezmoi postgresql speedtest-cli speedtest jq gedit gimp vlc azure-cli aws fiddler
+        scoop install --global vcredist vcredist2022 touch patch
+        scoop install --global gawk cacert file sed coreutils grep curl wget bzip2 less
+        scoop install --global zlib buf protobuf grpc-tools dos2unix gitsign gh
+        scoop install --global jq gcc make cmake llvm dotnet-nightly dotnet-sdk-preview dotnet-sdk dotnet-sdk-lts mono go python openssl openssh age 
+        scoop install --global mkcert shellcheck speedtest-cli chezmoi nvm sqlite postgresql azure-cli aws
+        scoop install --global gedit 
+        scoop install --global vulkan fiddler speedtest gimp vlc azuredatastudio azuredatastudio-insiders
         if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
         $complete = $true
     } catch [Exception] {

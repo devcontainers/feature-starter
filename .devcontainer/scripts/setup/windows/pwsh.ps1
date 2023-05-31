@@ -1,5 +1,5 @@
 # Define an array of module names
-$modules = @('Pester', 'Set-PsEnv')
+$modules = @('Pester', 'Set-PsEnv', 'posh-docker', 'posh-git', 'lazy-posh-git')
 # Windows PowerShell
 Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber
 Install-Module PowerShellGet -ErrorAction Stop -Force -SkipPublisherCheck -AllowClobber -AllowPrerelease
