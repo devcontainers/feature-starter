@@ -58,7 +58,7 @@
   # Setup post hombrew packages
     brew link --force --overwrite postgresql@15 python@3.11 openssl@3
     # shellcheck disable=SC2016
-    updaterc 'export PATH="/usr/local/opt/python/libexec/bin:$PATH"'
+    updaterc "export PATH=\"$HOMEBREW_PREFIX/opt/python/libexec/bin:\$PATH\""
     updaterc "source \"$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh\""
     updaterc "export MONO_GAC_PREFIX=\"$HOMEBREW_PREFIX\""
   # Run Homebrew cleanup and doctor to check for errors
