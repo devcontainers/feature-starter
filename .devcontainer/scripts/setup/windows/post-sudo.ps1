@@ -26,3 +26,5 @@ gh auth status
 git-credential-manager configure
 git-credential-manager diagnose
 winget install --id Microsoft.PowerToys --accept-package-agreements --accept-source-agreements --disable-interactivity
+# The command above will fail if it's already installed, so make sure to have clean exit code
+exit
