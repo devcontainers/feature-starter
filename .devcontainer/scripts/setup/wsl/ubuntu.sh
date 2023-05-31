@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # init
-  set -e
   # Setup to use windows git credential manager if exists
     gcm="/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe"
     if [ -e "$(eval echo $gcm)" ]; then
@@ -9,7 +8,8 @@
     fi
 # Run base ubuntu setup
   # shellcheck source=/dev/null
-  IS_WSL=true "$DEVCONTAINER_SCRIPTS_ROOT/setup/ubuntu.sh"
+  export IS_WSL="true"
+  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/ubuntu.sh"
   # shellcheck source=/dev/null
   source "$HOME/.bashrc"
 # Install WSL Utilties

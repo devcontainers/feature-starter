@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 #shellcheck shell=bash
 # init
-  set -e
   # shellcheck source=/dev/null
   source "$HOME/.bashrc"
   current_user="$(whoami)"
@@ -17,7 +16,7 @@
 # Run pre-build commands
   sudo -s USERNAME="$current_user" bash -c "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/pre-build-sudo.sh"
 # Run post-build commands
-  "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-user.sh"
+  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-user.sh"
 # Continue with devspace setup
   "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace.sh"
 # Log into GitHub
