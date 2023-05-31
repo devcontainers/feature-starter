@@ -6,5 +6,4 @@
 Write-Host "setup/windows.ps1"
 & "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup/windows pre-sudo
 sudo "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup/windows post-sudo
-refreshenv
 Write-Host "WARNING: Please restart shell to get latest environment variables"

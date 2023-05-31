@@ -19,3 +19,4 @@ scoop bucket add versions
 scoop update
 scoop install sudo refreshenv
 scoop update --all
+refreshenv

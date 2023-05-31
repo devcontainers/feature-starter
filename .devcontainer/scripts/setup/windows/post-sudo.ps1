@@ -12,6 +12,7 @@ scoop update --all --global
 & "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup/windows pwsh
 & "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup/windows pip
 # Setup environment
+refreshenv
 & "$env:DEVCONTAINER_FEATURES_PROJECT_ROOT/run.ps1" setup environment
 try {
   gh auth status
