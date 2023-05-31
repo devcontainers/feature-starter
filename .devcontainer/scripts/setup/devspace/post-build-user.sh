@@ -8,12 +8,12 @@
 # Setup ohmyzsh and make zsh default shell
   # shellcheck source=/dev/null
   source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/zsh.sh"
-# Make Edge the default browser if installed
-  # shellcheck source=/dev/null
-  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/edge-default.sh"
 # Setup Homebrew
   # shellcheck source=/dev/null
   source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/brew.sh"
+# Make Edge the default browser if installed
+  # shellcheck source=/dev/null
+  source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/edge-default.sh"
 # Setup pip
   # shellcheck source=/dev/null
   source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/pip.sh"
