@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 #shellcheck shell=bash
 # init
+  # shellcheck source=/dev/null
+  source "$HOME/.zshrc"
 # Run post-build commands
   # shellcheck source=/dev/null
   source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-user.sh"
