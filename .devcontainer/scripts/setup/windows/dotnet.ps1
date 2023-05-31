@@ -12,6 +12,7 @@ foreach ($module in $modules) {
     dotnet tool install -g "$module"
     if ($LASTEXITCODE -ne 0) { Write-Host "dotnet tool install -g $module failed"; throw "Exit code is $LASTEXITCODE" }
   } catch {
-    dotnet tool upgrade -g "$module"
+    Write-Host "Upgrading dotnet tool $module"
+    dotnet tool update -g "$module"
   }
 }

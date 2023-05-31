@@ -1,6 +1,7 @@
 $projectRoot="$PSCommandPath" | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent
 Push-Location "$projectRoot/.devcontainer"
 try {
+    Import-Module Set-PsEnv
     Set-PsEnv
     if ($LASTEXITCODE -ne 0) { Write-Host "Set-PsEnv failed"; throw "Exit code is $LASTEXITCODE" }
   } catch {
