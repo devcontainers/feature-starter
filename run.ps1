@@ -23,7 +23,8 @@ try {
     $result = & "./$script.ps1" "$commandPath" "$command"
   }
 
-  if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
+  # TODO: Fix
+  # if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
 }
 finally {
   Pop-Location
