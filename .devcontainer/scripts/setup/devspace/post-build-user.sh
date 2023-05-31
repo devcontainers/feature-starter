@@ -36,7 +36,6 @@
       HOMEBREW_ACCEPT_EULA=Y brew install jq moreutils gcc make cmake cmake-docs llvm dotnet dotnet@6 mono go python@3.11 nss openssl@3 openssl@1.1 openssh age
       HOMEBREW_ACCEPT_EULA=Y brew install nghttp2 mkcert shellcheck speedtest-cli mono-libgdiplus chezmoi sqlite sqlite-utils postgresql@15 azure-cli awscli
       HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18 gedit
-      updaterc 'alias sed=gsed'
   # Upgrade all packages
     brew update
     brew upgrade
