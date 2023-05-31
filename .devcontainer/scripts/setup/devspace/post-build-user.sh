@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # init
-  set -e
   # shellcheck source=/dev/null
   source "$HOME/.bashrc"
   updaterc() { local line="$1"; eval "$line"; echo "Updating ~/.bashrc and ~/.zshrc..."; rcs=("$HOME/.bashrc" "$HOME/.zshrc"); for rc in "${rcs[@]}"; do if [[ "$(cat "$rc")" != *"$line"* ]]; then echo "$line" >> "$rc"; fi; done }
