@@ -62,6 +62,13 @@
   # Run Homebrew cleanup and doctor to check for errors
     brew cleanup
     brew doctor
+# Setup pip
+  python -m ensurepip --upgrade
+  python -m pip install --upgrade pip
+  pip install pip-review
+  pip install moreutils
+  pip install mssql-cli
+  pip-review --auto
 # Setup nvm
   updaterc 'export NVM_SYMLINK_CURRENT="true"'
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
@@ -75,7 +82,7 @@
   # Install Node.js latest and lts
     nodes=('node' '--lts')
     packages=('@npmcli/fs' '@devcontainers/cli' 'dotenv-cli' 'typescript' 'npm-check-updates')
-    for node in "${nodes[@]}"; do nvm install "$node"; nvm use "$node"; node --version; npm update -g npm; npm i -g "${packages[@]}"; ncu -u; ncu -g -u; done
+    for node in "${nodes[@]}"; do nvm install "$node"; nvm use "$node"; node --version; npm update -g npm; npm i -g "${packages[@]}"; ncu -g -u; ncu -u; done
     nvm use node
 # Setup dotnet
   dotnet_latest_major_global='{ "sdk": { "rollForward": "latestmajor" } }'

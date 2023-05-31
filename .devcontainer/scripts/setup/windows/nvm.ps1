@@ -19,8 +19,9 @@ foreach ($node in $nodes) {
     foreach ($package in $packages) {
         npm install -g $package
     }
-    ncu -u
+
     ncu -g -u
+    ncu -u
 }
 
 nvm use latest
