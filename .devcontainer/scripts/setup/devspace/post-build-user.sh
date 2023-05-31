@@ -14,6 +14,43 @@
   #   rcFile="$HOME/.zshrc"
   #   rcLine='source ~/powerlevel10k/powerlevel10k.zsh-theme'
   #   grep -qxF "$rcLine" "$rcFile" || echo "$rcLine" >> "$rcFile"
+# Setup Homebrew
+  sudo echo "sudo cached for noninteractive homebrew install"
+  NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  # shellcheck source=/dev/null
+  source "$HOME/.bashrc"
+  cat "$HOME/.bashrc"
+  updaterc "eval \"\$(\"$HOMEBREW_PREFIX/bin/brew\" shellenv)\""
+  # Install taps
+    brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
+  # Repair and Update if needed
+    brew update
+    brew tap --repair
+  # Install Homebrew packages
+    # procps is linux only
+      #TODO: Fix
+      #if [ "$os" == "Linux" ]; then HOMEBREW_ACCEPT_EULA=Y brew install procps systemd; fi
+    # These work on all brew platforms
+      HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk ca-certificates bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less
+      HOMEBREW_ACCEPT_EULA=Y brew install zlib zlib-ng buf protobuf grpc dos2unix git git-lfs sigstore/tap/gitsign-credential-cache sigstore/tap/gitsign gh asdf
+      HOMEBREW_ACCEPT_EULA=Y brew install jq moreutils gcc make cmake cmake-docs llvm dotnet dotnet@6 mono go python@3.11 nss openssl@3 openssl@1.1 openssh age
+      HOMEBREW_ACCEPT_EULA=Y brew install nghttp2 mkcert shellcheck speedtest-cli mono-libgdiplus chezmoi sqlite sqlite-utils postgresql@15 azure-cli awscli
+      HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18 gedit
+      updaterc 'alias sed=gsed'
+  # Upgrade all packages
+    brew update
+    brew upgrade
+  # Setup post hombrew packages
+    brew link --force --overwrite postgresql@15 openssl@3
+    # shellcheck disable=SC2016
+    updaterc "export PATH=\"$HOMEBREW_PREFIX/opt/python/libexec/bin:\$PATH\""
+    updaterc "source \"$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh\""
+    updaterc "export MONO_GAC_PREFIX=\"$HOMEBREW_PREFIX\""
+    # shellcheck disable=SC2016
+    updaterc 'export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"'
+  # Run Homebrew cleanup and doctor to check for errors
+    brew cleanup
+    brew doctor
 # Make Edge the default browser if installed
   browser='/usr/bin/microsoft-edge-stable'
   cmds=("alias xdg-open=$browser" "export BROWSER=$browser")
@@ -29,40 +66,6 @@
       grep -qF "$cmd" "$file" || echo "$cmd" >> "$file"
     done
   done
-# Setup Homebrew
-  sudo echo "sudo cached for noninteractive homebrew install"
-  NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  # shellcheck source=/dev/null
-  source "$HOME/.bashrc"
-  cat "$HOME/.bashrc"
-  updaterc "eval \"\$(\"$HOMEBREW_PREFIX/bin/brew\" shellenv)\""
-  # Install taps
-    brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
-  # Repair and Update if needed
-    brew update
-    brew tap --repair
-  # Install Homebrew packages
-    # procps is linux only
-      if [ "$os" == "Linux" ]; then HOMEBREW_ACCEPT_EULA=Y brew install procps; fi
-    # These work on all brew platforms
-      HOMEBREW_ACCEPT_EULA=Y brew install sevenzip p7zip awk ca-certificates systemd bash zsh oh-my-posh file-formula gnu-sed coreutils grep curl wget bzip2 less
-      HOMEBREW_ACCEPT_EULA=Y brew install zlib zlib-ng buf protobuf grpc dos2unix git git-lfs sigstore/tap/gitsign-credential-cache sigstore/tap/gitsign gh asdf
-      HOMEBREW_ACCEPT_EULA=Y brew install jq moreutils gcc make cmake cmake-docs llvm dotnet dotnet@6 mono go python@3.11 nss openssl@3 openssl@1.1 openssh age
-      HOMEBREW_ACCEPT_EULA=Y brew install nghttp2 mkcert shellcheck speedtest-cli mono-libgdiplus chezmoi sqlite sqlite-utils postgresql@15 azure-cli awscli
-      HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18 gedit
-      updaterc 'alias sed=gsed'
-  # Upgrade all packages
-    brew update
-    brew upgrade
-  # Setup post hombrew packages
-    brew link --force --overwrite postgresql@15 openssl@3
-    # shellcheck disable=SC2016
-    updaterc "export PATH=\"$HOMEBREW_PREFIX/opt/python/libexec/bin:\$PATH\""
-    updaterc "source \"$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh\""
-    updaterc "export MONO_GAC_PREFIX=\"$HOMEBREW_PREFIX\""
-  # Run Homebrew cleanup and doctor to check for errors
-    brew cleanup
-    brew doctor
 # Setup pip
   python -m ensurepip --upgrade
   python -m pip install --upgrade pip
