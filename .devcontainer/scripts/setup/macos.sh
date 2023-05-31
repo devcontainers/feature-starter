@@ -3,6 +3,8 @@
 # init
   # shellcheck source=/dev/null
   source "$HOME/.zshrc"
+# Setup Developer Command Line tools
+  if ! git --version; then sudo xcode-select --install; fi
 # Run post-build commands
   # shellcheck source=/dev/null
   source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-user.sh"
