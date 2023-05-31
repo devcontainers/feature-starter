@@ -56,7 +56,7 @@
     brew update
     brew upgrade
   # Setup post hombrew packages
-    brew link --force --overwrite postgresql@15
+    brew link --force --overwrite postgresql@15 python@3.11 openssl@3
     updaterc "source \"$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh\""
     updaterc "export MONO_GAC_PREFIX=\"$HOMEBREW_PREFIX\""
   # Run Homebrew cleanup and doctor to check for errors
