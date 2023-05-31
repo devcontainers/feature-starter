@@ -86,7 +86,7 @@
     packages=('npm-check-updates' 'corepack' '@npmcli/fs' '@devcontainers/cli' 'dotenv-cli' 'typescript')
     for node in "${nodes[@]}"; do nvm install "$node"; nvm use "$node"; node --version; npm update -g npm; npm i -g "${packages[@]}"; ncu -u; done
     nvm use node
-  rm -rf $package_json
+  sudo rm -rf $package_json
 # Setup dotnet
   dotnet_latest_major_global='{ "sdk": { "rollForward": "latestmajor" } }'
   updaterc 'export DOTNET_ROLL_FORWARD=LatestMajor'
