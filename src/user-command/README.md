@@ -16,7 +16,7 @@ Executes a user command
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | username | User to run command as | string | automatic |
-| command | command to be executed as username (will be forwarded as is to a 'bash -c <command>' line) | string | - |
+| command | command to be executed as username (will be forwarded as is to a 'su <username> -c <command>' line) | string | echo export TEST=42 >> "\$HOME/.bashrc" |
 
 
 
