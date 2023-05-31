@@ -7,6 +7,7 @@
   if ! git --version; then sudo xcode-select --install; fi
 # Run post-build commands
   # shellcheck source=/dev/null
+  export HOMEBREW_PREFIX="/usr/local"
   source "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace/post-build-user.sh"
 # Continue with devspace setup
   "$DEVCONTAINER_SCRIPTS_ROOT/setup/devspace.sh"
