@@ -10,6 +10,8 @@ ARG USER_GID=$USER_UID
 RUN create-user.sh $USERNAME $USER_UID $USER_GID
 USER $USERNAME
 COPY --chown=vscode:vscode ./ /devspaces/devcontainer/
+ENV PSHELL=pwsh
+ENV DEVCONTAINER_PROJECT_NAME=devcontainer
 ENV DEVCONTAINER_SCRIPTS_ROOT=/devspaces/devcontainer/scripts
 ENTRYPOINT ["entrypoint.sh"]
 # https://docs.docker.com/engine/reference/builder/#cmd
