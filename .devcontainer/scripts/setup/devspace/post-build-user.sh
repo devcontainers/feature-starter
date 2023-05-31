@@ -36,7 +36,7 @@
   # shellcheck source=/dev/null
   source "$HOME/.bashrc"
   cat "$HOME/.bashrc"
-  updaterc "eval \"\$("$HOMEBREW_PREFIX/bin/brew" shellenv)\""
+  updaterc "eval \"\$(\"$HOMEBREW_PREFIX/bin/brew\" shellenv)\""
   # Install taps
     brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
   # Repair and Update if needed
