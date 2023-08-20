@@ -1,0 +1,26 @@
+name: Publish features
+on:
+  # push:
+  #   branches: "main"
+  #   paths:
+  #     - src/*/**
+  #     - .github/workflows/publish-features.yml
+  workflow_dispatch:
+concurrency: ${{ github.workflow }}
+jobs:
+  publish-features:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install -g @devcontainers/cli
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - run: devcontainer features publish -r ghcr.io -n ${{ github.repository }} src
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
