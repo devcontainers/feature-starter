@@ -1,0 +1,11 @@
+{
+  "using_non_root_remote_user": {
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:bullseye",
+    "features": {
+      "zsh": {
+        "useOhMyZsh": "true"
+      }
+    },
+    "remoteUser": "node"
+  }
+}

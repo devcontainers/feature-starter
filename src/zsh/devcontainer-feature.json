@@ -1,0 +1,16 @@
+{
+  "name": "zsh",
+  "id": "zsh",
+  "version": "0.0.1",
+  "description": "A feature to install and configure zsh",
+  "options": {
+    "useOhMyZsh": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether or not to install OhMyZsh"
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils"
+  ]
+}
