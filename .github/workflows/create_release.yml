@@ -1,0 +1,42 @@
+name: Create Release with Tarball
+
+on:
+  workflow_dispatch:
+    inputs:
+      folder_path:
+        description: 'Path to the folder to be archived'
+        required: true
+      release_tag:
+        description: 'Tag for the release'
+        required: true
+
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create tarball
+        run: tar -czvf release.tgz ${{ github.event.inputs.folder_path }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.release_tag }}
+          release_name: Release ${{ github.event.inputs.release_tag }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release.tar.gz
+          asset_name: release.tar.gz
+          asset_content_type: application/gzip
