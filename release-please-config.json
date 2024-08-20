@@ -1,0 +1,18 @@
+{
+    "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+    "release-type": "go",
+    "tag-separator": "/",
+    "packages": {
+      ".": {
+        "package-name": "feature-starter"
+      }
+    },
+    "bump-patch-for-minor-pre-major": true,
+    "bump-minor-pre-major": true,
+    "separate-pull-requests": true,
+    "plugins": [
+      {
+        "type": "sentence-case"
+      }
+    ]
+  }
