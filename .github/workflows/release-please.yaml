@@ -21,6 +21,6 @@ jobs:
         with:
           token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
       
-      - name: c
+      - name: testing lol
         if: ${{ steps.release.outputs.releases_created }}
-        run: echo "Releases created"
+        run: echo "Releases created ${{ steps.release.outputs.version }}"
