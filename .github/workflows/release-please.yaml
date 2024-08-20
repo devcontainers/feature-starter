@@ -20,3 +20,7 @@ jobs:
         id: release
         with:
           token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
+      
+      - name: c
+      if: ${{ steps.release.outputs.releases_created }}
+      run: echo "Releases created"
