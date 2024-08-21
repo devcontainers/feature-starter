@@ -24,6 +24,7 @@ jobs:
       - name: Check release created
         id: check_release
         run: |
+          echo "Release was created with version: ${{ steps.release.outputs.version }}"
           if [ -z "${{ steps.release.outputs.release_created }}" ]; then
             echo "Release was not created"
             exit 1
