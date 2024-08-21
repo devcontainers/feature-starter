@@ -7,7 +7,7 @@
 #
 # The value of a scenarios element is any properties available in the 'devcontainer.json'.
 # Scenarios are useful for testing specific options in a feature, or to test a combination of features.
-# 
+#
 # This test can be run with the following command (from the root of this repo)
 #    devcontainer features test --global-scenarios-only .
 
