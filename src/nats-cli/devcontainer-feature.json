@@ -1,0 +1,22 @@
+{
+    "name": "NATS CLI",
+    "id": "nats-cli",
+    "version": "1.0.0",
+    "documentationURL": "https://github.com/lipov3cz3k/feature-nats/tree/main/src/nats-cli",
+    "description": "Installs the NATS CLI. Auto-detects latest version and installs needed dependencies.",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest",
+                "none"
+            ],
+            "default": "latest",
+            "description": "Select version of the GitHub CLI, if not latest."
+        },
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers/features/git"
+    ]
+}
