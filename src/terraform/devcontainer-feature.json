@@ -1,0 +1,48 @@
+{
+    "id": "terraform",
+    "version": "0.0.1",
+    "name": "Terraform",
+    "documentationURL": "https://github.com/devcontainers/features/tree/main/src/terraform",
+    "description": "Installs the Terraform CLI. Auto-detects latest version and installs needed dependencies.",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest",
+                "none",
+                "1.1",
+                "1.0",
+                "0.13.7"
+            ],
+            "default": "latest",
+            "description": "Terraform version"
+        },
+        "httpProxy": {
+            "type": "string",
+            "default": "",
+            "description": "Connect to a keyserver using a proxy by configuring this option"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "HashiCorp.terraform"
+            ],
+            "settings": {
+                "terraform.languageServer.enable": true,
+                "terraform.languageServer.args": [
+                    "serve"
+                ],
+                "github.copilot.chat.codeGeneration.instructions": [
+                    {
+                        "text": "This dev container includes the Terraform CLI pre-installed and available on the `PATH`, along with the Terraform extension for Terraform development."
+                    }
+                ]
+            }
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers/features/git"
+    ]
+}
