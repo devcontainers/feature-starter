@@ -1,0 +1,7 @@
+{
+    "name": "Custom bashrc",
+    "id": "custom_bashrc",
+    "version": "0.0.1",
+    "description": "Custom .bashrc installation",
+    "options": {}
+}

@@ -1,0 +1,11 @@
+{
+    "name": "UV",
+    "id": "uv",
+    "version": "0.0.1",
+    "description": "Custom UV installation",
+    "options": {},
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers/features/python"
+    ]
+}

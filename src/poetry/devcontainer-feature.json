@@ -1,0 +1,17 @@
+{
+    "name": "Poetry",
+    "id": "poetry",
+    "version": "0.0.1",
+    "description": "Custom Poetry installation",
+    "options": {
+        "version": {
+            "type": "string",
+            "default": "1.8.4",
+            "description": "Select a version to install"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers/features/python"
+    ]
+}
