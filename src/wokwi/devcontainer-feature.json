@@ -1,0 +1,17 @@
+{
+    "name": "Wokwi",
+    "id": "wokwi",
+    "version": "1.0.0",
+    "description": "Installs the Wokwi CLI and adds the Wokwi VSCode extension",
+    "options": {},
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "wokwi.wokwi-vscode"
+            ]
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "wokwi": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "wokwi": {}
+        }
+    }
+}
