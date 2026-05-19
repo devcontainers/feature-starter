@@ -1,0 +1,39 @@
+{
+    "id": "iac-terraform",
+    "version": "1.0.0",
+    "name": "IaC Tools (Terraform/OpenTofu & Terragrunt)",
+    "description": "Installs Terraform or OpenTofu, tfswitch, and optionally Terragrunt.",
+    "options": {
+        "tool": {
+            "type": "string",
+            "enum": ["terraform", "opentofu"],
+            "default": "terraform",
+            "description": "Choose between Terraform or OpenTofu"
+        },
+        "version": {
+            "type": "string",
+            "proposals": ["latest", "none"],
+            "default": "latest",
+            "description": "Version of the selected tool to install (use 'none' to skip)"
+        },
+        "installTfswitch": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install tfswitch"
+        },
+        "installTerragrunt": {
+            "type": "boolean",
+            "default": false,
+            "description": "Install Terragrunt"
+        },
+        "terragruntVersion": {
+            "type": "string",
+            "proposals": ["latest", "none"],
+            "default": "latest",
+            "description": "Version of Terragrunt to install"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

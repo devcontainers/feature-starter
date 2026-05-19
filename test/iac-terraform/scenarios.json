@@ -1,0 +1,11 @@
+{
+    "install_opentofu_and_terragrunt": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "iac-terraform": {
+                "tool": "opentofu",
+                "installTerragrunt": true
+            }
+        }
+    }
+}
