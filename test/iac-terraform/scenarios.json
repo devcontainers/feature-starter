@@ -7,5 +7,15 @@
                 "installTerragrunt": true
             }
         }
+    },
+    "install_all_tools_including_infracost": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "iac-terraform": {
+                "tool": "terraform",
+                "installTerragrunt": true,
+                "installInfracost": true
+            }
+        }
     }
 }

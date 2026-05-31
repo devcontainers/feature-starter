@@ -31,6 +31,83 @@
             "proposals": ["latest", "none"],
             "default": "latest",
             "description": "Version of Terragrunt to install"
+        },
+        "installTflint": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install TFLint"
+        },
+        "tflintVersion": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "Version of TFLint to install"
+        },
+        "installTerraformDocs": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install terraform-docs"
+        },
+        "terraformDocsVersion": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "Version of terraform-docs to install"
+        },
+        "installTerrascan": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install Terrascan"
+        },
+        "terrascanVersion": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "Version of Terrascan to install"
+        },
+        "installTrivy": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install Trivy"
+        },
+        "trivyVersion": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "Version of Trivy to install"
+        },
+        "installCheckov": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install Checkov"
+        },
+        "checkovVersion": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "Version of Checkov to install"
+        },
+        "installPrecommit": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install pre-commit"
+        },
+        "precommitVersion": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "Version of pre-commit to install"
+        },
+        "installInfracost": {
+            "type": "boolean",
+            "default": false,
+            "description": "Install Infracost (optional)"
+        },
+        "infracostVersion": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "Version of Infracost to install"
         }
     },
     "installsAfter": [
