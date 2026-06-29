@@ -1,0 +1,47 @@
+{
+    "name": "Claude Code Ollama Backend",
+    "id": "claude-code-ollama",
+    "version": "1.0.0",
+    "description": "Configures Claude Code to use an Ollama backend for model requests",
+    "options": {
+        "baseUrl": {
+            "type": "string",
+            "default": "http://localhost:11434",
+            "description": "Ollama API base URL"
+        },
+        "authToken": {
+            "type": "string",
+            "default": "ollama",
+            "description": "Auth token for the Ollama backend"
+        },
+        "haikuModel": {
+            "type": "string",
+            "default": "minimax-m2.5:cloud",
+            "description": "Default Haiku model identifier"
+        },
+        "opusModel": {
+            "type": "string",
+            "default": "glm-5.2:cloud",
+            "description": "Default Opus model identifier"
+        },
+        "sonnetModel": {
+            "type": "string",
+            "default": "kimi-k2.6:cloud",
+            "description": "Default Sonnet model identifier"
+        },
+        "subagentModel": {
+            "type": "string",
+            "default": "kimi-k2.7-code:cloud",
+            "description": "Subagent model identifier"
+        },
+        "logLevel": {
+            "type": "string",
+            "enum": ["error", "warn", "info", "debug"],
+            "default": "error",
+            "description": "Anthropic client log level"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
