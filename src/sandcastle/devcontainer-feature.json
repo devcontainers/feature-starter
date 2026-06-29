@@ -1,0 +1,22 @@
+{
+    "name": "Sandcastle",
+    "id": "sandcastle",
+    "version": "1.0.0",
+    "description": "Installs Sandcastle for orchestrating AI coding agents in isolated sandboxes",
+    "options": {
+        "version": {
+            "type": "string",
+            "default": "latest",
+            "description": "Version of @ai-hero/sandcastle to install"
+        },
+        "providerCheck": {
+            "type": "boolean",
+            "default": true,
+            "description": "Fail installation if no sandbox provider (Docker, Podman, or Vercel CLI) is detected"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers/features/node"
+    ]
+}
