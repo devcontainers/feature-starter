@@ -1,0 +1,22 @@
+{
+    "testVersion": "1.0.0",
+    "scenarios": {
+        "specific_version": {
+            "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+            "features": {
+                "ghcr.io/devcontainers/features/docker-in-docker:4.0.0": {},
+                "./src/sandcastle": {
+                    "version": "0.1.0"
+                }
+            }
+        },
+        "no_provider_check": {
+            "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+            "features": {
+                "./src/sandcastle": {
+                    "providerCheck": false
+                }
+            }
+        }
+    }
+}
