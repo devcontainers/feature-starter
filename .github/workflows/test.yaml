@@ -15,6 +15,10 @@ jobs:
         features:
           - color
           - hello
+          - sandcastle
+          - claude-code-ollama
+          - claude-code-privacy
+          - claude-code-hooks
         baseImage:
           - debian:latest
           - ubuntu:latest
@@ -36,6 +40,10 @@ jobs:
         features:
           - color
           - hello
+          - sandcastle
+          - claude-code-ollama
+          - claude-code-privacy
+          - claude-code-hooks
     steps:
       - uses: actions/checkout@v4
 
