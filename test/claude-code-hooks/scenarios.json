@@ -1,0 +1,13 @@
+{
+    "testVersion": "1.0.0",
+    "scenarios": {
+        "no_statusline": {
+            "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+            "features": {
+                "./src/claude-code-hooks": {
+                    "installStatusLine": false
+                }
+            }
+        }
+    }
+}
