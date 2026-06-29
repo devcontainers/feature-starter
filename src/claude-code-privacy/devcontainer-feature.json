@@ -1,0 +1,51 @@
+{
+    "name": "Claude Code Privacy",
+    "id": "claude-code-privacy",
+    "version": "1.0.0",
+    "description": "Configures Claude Code with privacy-hardened defaults",
+    "options": {
+        "disableTelemetry": {
+            "type": "boolean",
+            "default": true,
+            "description": "Disable telemetry collection"
+        },
+        "disableErrorReporting": {
+            "type": "boolean",
+            "default": true,
+            "description": "Disable automatic error reporting"
+        },
+        "disableFeedbackCommand": {
+            "type": "boolean",
+            "default": true,
+            "description": "Disable the /feedback command"
+        },
+        "disableUpdates": {
+            "type": "boolean",
+            "default": true,
+            "description": "Disable automatic updates"
+        },
+        "disableNonessentialTraffic": {
+            "type": "boolean",
+            "default": true,
+            "description": "Disable non-essential network traffic"
+        },
+        "disableFeedbackSurvey": {
+            "type": "boolean",
+            "default": true,
+            "description": "Disable feedback surveys"
+        },
+        "skipPromptHistory": {
+            "type": "boolean",
+            "default": false,
+            "description": "Skip saving prompt history"
+        },
+        "cleanupPeriodDays": {
+            "type": "string",
+            "default": "30",
+            "description": "Number of days before cleaning up old sessions"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
