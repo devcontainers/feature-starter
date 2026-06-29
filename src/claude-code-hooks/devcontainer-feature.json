@@ -1,27 +1,27 @@
 {
-    "name": "Claude Code Hooks",
-    "id": "claude-code-hooks",
-    "version": "1.0.0",
-    "description": "Installs bash hooks for Claude Code lifecycle telemetry, state tracking, and policy enforcement",
-    "options": {
-        "repository": {
-            "type": "string",
-            "default": "https://github.com/mrrobot0985/claude-code-hooks.git",
-            "description": "Git repository URL containing the hooks"
-        },
-        "branch": {
-            "type": "string",
-            "default": "main",
-            "description": "Git branch, tag, or commit to checkout"
-        },
-        "installStatusLine": {
-            "type": "boolean",
-            "default": true,
-            "description": "Also install the status line hook configuration"
-        }
+  "name": "Claude Code Hooks",
+  "id": "claude-code-hooks",
+  "version": "0.1.0",
+  "description": "Installs bash hooks for Claude Code lifecycle telemetry, state tracking, and policy enforcement",
+  "options": {
+    "repository": {
+      "type": "string",
+      "default": "https://github.com/mrrobot0985/claude-code-hooks.git",
+      "description": "Git repository URL containing the hooks"
     },
-    "installsAfter": [
-        "ghcr.io/devcontainers/features/common-utils",
-        "ghcr.io/devcontainers/features/git"
-    ]
+    "branch": {
+      "type": "string",
+      "default": "main",
+      "description": "Git branch, tag, or commit to checkout"
+    },
+    "installStatusLine": {
+      "type": "boolean",
+      "default": true,
+      "description": "Also install the status line hook configuration"
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils",
+    "ghcr.io/devcontainers/features/git"
+  ]
 }

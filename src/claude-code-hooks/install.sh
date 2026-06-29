@@ -16,7 +16,8 @@ SETTINGS_FILE="${CLAUDE_DIR}/settings.json"
 if ! command -v git >/dev/null 2>&1; then
     echo "Installing git..."
     if command -v apt-get >/dev/null 2>&1; then
-        apt-get update && apt-get install -y git jq
+        apt-get update && apt-get install -y --no-install-recommends git jq
+        apt-get clean && rm -rf /var/lib/apt/lists/*
     elif command -v apk >/dev/null 2>&1; then
         apk add --no-cache git jq
     elif command -v yum >/dev/null 2>&1; then
@@ -25,6 +26,23 @@ if ! command -v git >/dev/null 2>&1; then
         dnf install -y git jq
     else
         echo "WARNING: Could not install git/jq automatically. Ensure they are available."
+    fi
+fi
+
+if ! command -v python3 >/dev/null 2>&1; then
+    echo "Installing python3..."
+    if command -v apt-get >/dev/null 2>&1; then
+        apt-get update && apt-get install -y --no-install-recommends python3
+        apt-get clean && rm -rf /var/lib/apt/lists/*
+    elif command -v apk >/dev/null 2>&1; then
+        apk add --no-cache python3
+    elif command -v yum >/dev/null 2>&1; then
+        yum install -y python3
+    elif command -v dnf >/dev/null 2>&1; then
+        dnf install -y python3
+    else
+        echo "ERROR: python3 is required but could not be installed"
+        exit 1
     fi
 fi
 
@@ -62,7 +80,7 @@ with open('$HOOKS_DIR/config/settings.hooks.json', 'r') as f:
     hooks_config = json.load(f)
 
 # Remove schema key if present, it belongs at root
-hooks_config.pop('$schema', None)
+hooks_config.pop('\$schema', None)
 
 if os.path.exists(settings_path):
     with open(settings_path, 'r') as f:
@@ -97,7 +115,7 @@ settings_path = '$SETTINGS_FILE'
 with open('$HOOKS_DIR/config/settings.statusline.json', 'r') as f:
     statusline_config = json.load(f)
 
-statusline_config.pop('$schema', None)
+statusline_config.pop('\$schema', None)
 
 with open(settings_path, 'r') as f:
     settings = json.load(f)

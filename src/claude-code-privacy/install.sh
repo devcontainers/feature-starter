@@ -3,6 +3,24 @@ set -e
 
 echo "Activating feature 'claude-code-privacy'"
 
+# Ensure python3 is available
+if ! command -v python3 >/dev/null 2>&1; then
+    echo "Installing python3..."
+    if command -v apt-get >/dev/null 2>&1; then
+        apt-get update && apt-get install -y --no-install-recommends python3
+        apt-get clean && rm -rf /var/lib/apt/lists/*
+    elif command -v apk >/dev/null 2>&1; then
+        apk add --no-cache python3
+    elif command -v yum >/dev/null 2>&1; then
+        yum install -y python3
+    elif command -v dnf >/dev/null 2>&1; then
+        dnf install -y python3
+    else
+        echo "ERROR: python3 is required but could not be installed"
+        exit 1
+    fi
+fi
+
 # Convert boolean options to string values for env vars
 bool_to_str() {
     if [ "$1" = "true" ]; then

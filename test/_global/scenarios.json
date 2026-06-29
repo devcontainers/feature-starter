@@ -9,5 +9,16 @@
                 "greeting": "Greetings"
             }
         }
+    },
+    "claude_ollama_and_privacy": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "claude-code-ollama": {
+                "baseUrl": "http://ollama:11434"
+            },
+            "claude-code-privacy": {
+                "cleanupPeriodDays": 14
+            }
+        }
     }
 }
